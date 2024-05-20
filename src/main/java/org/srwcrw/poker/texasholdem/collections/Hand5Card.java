@@ -1,5 +1,6 @@
 package org.srwcrw.poker.texasholdem.collections;
 
+import jakarta.validation.constraints.NotNull;
 import org.srwcrw.poker.texasholdem.entities.Card;
 
 import java.util.*;
@@ -8,7 +9,7 @@ import java.util.concurrent.ThreadLocalRandom;
 public final class Hand5Card implements IPack {
     private final SortedSet<Card> cards;
 
-    public Hand5Card(SortedSet<Card> cards) {
+    public Hand5Card(@NotNull SortedSet<Card> cards) {
         if (cards.size() != 5) {
             throw  new RuntimeException("Hand5Card can only be constructed from 5 cards");
         }

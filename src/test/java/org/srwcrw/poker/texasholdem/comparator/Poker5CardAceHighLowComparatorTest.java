@@ -7,7 +7,7 @@ import org.srwcrw.poker.texasholdem.collections.Hand5Card;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class Poker5CardAceHighLowComparatorTest {
-    private TestUtils testUtils = new TestUtils();
+    private final TestUtils testUtils = new TestUtils();
     private Poker5CardAceHighLowComparator poker5CardAceHighLowComparator = new Poker5CardAceHighLowComparator();
 
     @Test

@@ -12,10 +12,12 @@ import java.util.Set;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class HandGeneratorTest {
+    private final TestUtils testUtils = new TestUtils();
+
     @Test
     void testGenerateHandAndRemoveImmutable() {
         HandGenerator handGenerator = new HandGenerator();
-        IPack fullPack = TestUtils.createPack();
+        IPack fullPack = testUtils.createPack();
 
         AbstractMap.SimpleEntry<IPack, IPack> packHandPair = handGenerator.generateHandAndRemoveImmutable(fullPack, 5);
 
@@ -25,7 +27,7 @@ class HandGeneratorTest {
     @Test
     void testGenerateHandAndRemoveMutable() {
         HandGenerator handGenerator = new HandGenerator();
-        IPack fullPack = TestUtils.createPack();
+        IPack fullPack = testUtils.createPack();
 
         IPack hand = handGenerator.generateHandAndRemoveMutable(fullPack, 5);
 

@@ -14,13 +14,14 @@ import java.util.TreeSet;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class SortedSetComparatorTest {
+    private final TestUtils testUtils = new TestUtils();
 
     @Test
     void testCompareA() {
         SortedSetComparator<Card> setComparator = new SortedSetComparator<>();
 
-        SortedSet<Card> set1 = TestUtils.createStraightFlushAceHigh().getCards();
-        SortedSet<Card> set2 = TestUtils.createStraightFlushAceLow().getCards();
+        SortedSet<Card> set1 = testUtils.createStraightFlushAceHigh().getCards();
+        SortedSet<Card> set2 = testUtils.createStraightFlushAceLow().getCards();
 
         assertThat(setComparator.compare(set1, set2)).isGreaterThan(0);
         assertThat(setComparator.compare(set2, set1)).isLessThan(0);

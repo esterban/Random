@@ -11,11 +11,13 @@ import java.util.Set;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class CollectionUtilsTest {
+    private final TestUtils testUtils = new TestUtils();
+
     @Test
     void testGenerateCardListFromPack() {
         CollectionUtils collectionUtils = new CollectionUtils();
 
-        IPack pack = TestUtils.createPack();
+        IPack pack = testUtils.createPack();
 
         List<Card> handCardList = collectionUtils.generateCardListFromPack(pack, 2);
         Set<Card> handCardSet = new HashSet<>(handCardList);

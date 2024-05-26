@@ -9,10 +9,10 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class HandTest {
-
+    private final TestUtils testUtils = new TestUtils();
     @Test
     void testGetCardAtRandom() {
-        Hand hand = (Hand) TestUtils.createPack();
+        Hand hand = (Hand) testUtils.createPack();
 
         List<Card> cardList = hand.getCardListAtRandom(5);
 

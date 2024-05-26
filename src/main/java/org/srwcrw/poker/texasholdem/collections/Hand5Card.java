@@ -57,6 +57,7 @@ public final class Hand5Card implements IPack {
         return Collections.unmodifiableSortedSet(cards);
     }
 
+    @SuppressWarnings("unused")
     public AbstractMap.SimpleEntry<Card, IPack> removeRandomCardImmutable() {
         Hand newHand = new Hand(cards);
         Card card = getCardAtRandom();

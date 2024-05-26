@@ -1,9 +1,11 @@
 package org.srwcrw.poker.texasholdem.test;
 
 import org.srwcrw.poker.texasholdem.collections.Hand5Card;
+import org.srwcrw.poker.texasholdem.collections.IPack;
 import org.srwcrw.poker.texasholdem.entities.Card;
 import org.srwcrw.poker.texasholdem.entities.Suit;
 import org.srwcrw.poker.texasholdem.entities.Value;
+import org.srwcrw.poker.texasholdem.generators.PackGenerator;
 
 import java.util.SortedSet;
 import java.util.TreeSet;
@@ -37,7 +39,33 @@ public class TestUtils {
         return hand5Card;
     }
 
-    public static Hand5Card createFourOfAKind() {
+    public static Hand5Card createStraightFlushAceA() {
+        Card card1 = new Card(Suit.Clubs, Value.Ace);
+        Card card2 = new Card(Suit.Clubs, Value.Ten);
+        Card card3 = new Card(Suit.Clubs, Value.Jack);
+        Card card4 = new Card(Suit.Clubs, Value.Queen);
+        Card card5 = new Card(Suit.Clubs, Value.King);
+        SortedSet handSet = Stream.of(card1, card2, card3, card4, card5).collect(Collectors.toCollection(TreeSet::new));
+
+        Hand5Card hand5Card = new Hand5Card(handSet);
+
+        return hand5Card;
+    }
+
+    public static Hand5Card createStraightFlushAceB() {
+        Card card1 = new Card(Suit.Clubs, Value.Nine);
+        Card card2 = new Card(Suit.Clubs, Value.Ten);
+        Card card3 = new Card(Suit.Clubs, Value.Jack);
+        Card card4 = new Card(Suit.Clubs, Value.Queen);
+        Card card5 = new Card(Suit.Clubs, Value.King);
+        SortedSet handSet = Stream.of(card1, card2, card3, card4, card5).collect(Collectors.toCollection(TreeSet::new));
+
+        Hand5Card hand5Card = new Hand5Card(handSet);
+
+        return hand5Card;
+    }
+
+    public static Hand5Card createFourOfAKindA() {
         Card card1 = new Card(Suit.Clubs, Value.Ace);
         Card card2 = new Card(Suit.Hearts, Value.Ace);
         Card card3 = new Card(Suit.Spades, Value.Ace);
@@ -50,7 +78,33 @@ public class TestUtils {
         return hand5Card;
     }
 
-    public static Hand5Card createFullHouse() {
+    public static Hand5Card createFourOfAKindB() {
+        Card card1 = new Card(Suit.Clubs, Value.Two);
+        Card card2 = new Card(Suit.Hearts, Value.Two);
+        Card card3 = new Card(Suit.Spades, Value.Two);
+        Card card4 = new Card(Suit.Diamonds, Value.Two);
+        Card card5 = new Card(Suit.Clubs, Value.Seven);
+        SortedSet handSet = Stream.of(card1, card2, card3, card4, card5).collect(Collectors.toCollection(TreeSet::new));
+
+        Hand5Card hand5Card = new Hand5Card(handSet);
+
+        return hand5Card;
+    }
+
+    public static Hand5Card createFullHouseA() {
+        Card card1 = new Card(Suit.Clubs, Value.Ace);
+        Card card2 = new Card(Suit.Hearts, Value.Ace);
+        Card card3 = new Card(Suit.Spades, Value.Six);
+        Card card4 = new Card(Suit.Clubs, Value.Six);
+        Card card5 = new Card(Suit.Diamonds, Value.Six);
+        SortedSet handSet = Stream.of(card1, card2, card3, card4, card5).collect(Collectors.toCollection(TreeSet::new));
+
+        Hand5Card hand5Card = new Hand5Card(handSet);
+
+        return hand5Card;
+    }
+
+    public static Hand5Card createFullHouseB() {
         Card card1 = new Card(Suit.Clubs, Value.Ace);
         Card card2 = new Card(Suit.Hearts, Value.Ace);
         Card card3 = new Card(Suit.Spades, Value.Ace);
@@ -303,5 +357,9 @@ public class TestUtils {
         return hand5Card;
     }
 
+    public static IPack createPack() {
+        PackGenerator packGenerator = new PackGenerator();
+        return packGenerator.generateFullPack();
+    }
 
 }

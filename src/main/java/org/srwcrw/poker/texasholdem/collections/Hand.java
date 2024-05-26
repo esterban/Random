@@ -6,10 +6,16 @@ import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
 
 public final class Hand implements IPack {
-    private final Set<Card> cards;
 
-    public Hand(Set<Card> cards) {
+    private final SortedSet<Card> cards;
+    private final CollectionUtils collectionUtils = new CollectionUtils();
+
+    public Hand(SortedSet<Card> cards) {
         this.cards = cards;
+    }
+
+    public Hand(IPack otherPack) {
+        this.cards = new TreeSet<>(otherPack.getCards());
     }
 
     @Override
@@ -36,6 +42,11 @@ public final class Hand implements IPack {
     }
 
     @Override
+    public List<Card> getCardListAtRandom(int cardCount) {
+        return collectionUtils.generateCardListFromPack(this, cardCount);
+    }
+
+    @Override
     public IPack removeCard(Card card) {
         cards.remove(card);
         return this;
@@ -43,7 +54,7 @@ public final class Hand implements IPack {
 
     @Override
     public SortedSet<Card> getCards() {
-        return new TreeSet<>(cards);
+        return Collections.unmodifiableSortedSet(cards);
     }
 
     public AbstractMap.SimpleEntry<Card, IPack> removeRandomCardImmutable() {

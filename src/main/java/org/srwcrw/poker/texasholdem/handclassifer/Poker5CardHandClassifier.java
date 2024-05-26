@@ -17,8 +17,8 @@ public class Poker5CardHandClassifier implements PokerCardClassifier<Hand5Card> 
 
     public HandType5Cards classify(Hand5Card hand5Card) {
         int pairsCount = handUtils.countPairs(hand5Card);
-        int threesCount = countThrees(hand5Card);
-        int foursCount = countFours(hand5Card);
+        int threesCount = handUtils.countThrees(hand5Card);
+        int foursCount = handUtils.countFours(hand5Card);
         boolean isStraight = isStraight(hand5Card);
         boolean isFlush = isFlush(hand5Card);
 
@@ -61,42 +61,6 @@ public class Poker5CardHandClassifier implements PokerCardClassifier<Hand5Card> 
         }
 
         return HandType5Cards.HighestCard;
-    }
-
-    private int countThrees(Hand5Card hand5Card) {
-        int threesCount = 0;
-
-        Map<Value, Integer> valueCounts = new HashMap<>();
-
-        for (Card card : hand5Card.getCards()) {
-            valueCounts.compute(card.getValue(), (k, v) -> v == null ? 1 : v + 1);
-        }
-
-        for (Map.Entry<Value, Integer> cardCount : valueCounts.entrySet()) {
-            if (cardCount.getValue() == 3) {
-                ++threesCount;
-            }
-        }
-
-        return threesCount;
-    }
-
-    private int countFours(Hand5Card hand5Card) {
-        int foursCount = 0;
-
-        Map<Value, Integer> valueCounts = new HashMap<>();
-
-        for (Card card : hand5Card.getCards()) {
-            valueCounts.compute(card.getValue(), (k, v) -> v == null ? 1 : v + 1);
-        }
-
-        for (Map.Entry<Value, Integer> cardCount : valueCounts.entrySet()) {
-            if (cardCount.getValue() == 4) {
-                ++foursCount;
-            }
-        }
-
-        return foursCount;
     }
 
     private boolean isFlush(Hand5Card hand5Card) {

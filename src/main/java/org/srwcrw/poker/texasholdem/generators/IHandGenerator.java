@@ -6,5 +6,6 @@ import java.util.AbstractMap;
 
 public interface IHandGenerator {
     AbstractMap.SimpleEntry<IPack, IPack> generateHandAndRemoveImmutable(IPack pack, int numberOfCards);
-//    IPack generateFullPack();
+    IPack generateHandAndRemoveMutable(IPack pack, int numberOfCards);
+    IPack generateHandPackNoModify(IPack pack, int numberOfCards);
 }

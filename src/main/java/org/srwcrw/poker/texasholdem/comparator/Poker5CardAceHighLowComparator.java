@@ -2,7 +2,6 @@ package org.srwcrw.poker.texasholdem.comparator;
 
 import org.srwcrw.comparator.SortedSetComparator;
 import org.srwcrw.poker.texasholdem.collections.Hand5Card;
-import org.srwcrw.poker.texasholdem.entities.Card;
 import org.srwcrw.poker.texasholdem.entities.HandType5Cards;
 import org.srwcrw.poker.texasholdem.entities.Value;
 import org.srwcrw.poker.texasholdem.handclassifer.Poker5CardHandClassifier;
@@ -14,9 +13,9 @@ import java.util.Set;
 import java.util.SortedSet;
 
 public class Poker5CardAceHighLowComparator implements Comparator<Hand5Card> {
-    private static Poker5CardHandClassifier poker5CardHandClassifier = new Poker5CardHandClassifier();
-    private static HandUtils handUtils = new HandUtils();
-    private static SortedSetComparator<Value> valueSortedSetComparator = new SortedSetComparator<>();
+    private static final Poker5CardHandClassifier poker5CardHandClassifier = new Poker5CardHandClassifier();
+    private static final HandUtils handUtils = new HandUtils();
+    private static final SortedSetComparator<Value> valueSortedSetComparator = new SortedSetComparator<>();
 
     @Override
     public int compare(Hand5Card o1, Hand5Card o2) {
@@ -42,6 +41,15 @@ public class Poker5CardAceHighLowComparator implements Comparator<Hand5Card> {
 
             case Flush:
                 return compareFlush(o1, o2);
+
+            case FullHouse:
+                return compareFullHouse(o1, o2);
+
+            case FourOfAKind:
+                return compareFourOfAKind(o1, o2);
+
+            case StraightFlush:
+                return compareStraightFlush(o1, o2);
         }
 
         return 0;
@@ -104,8 +112,8 @@ public class Poker5CardAceHighLowComparator implements Comparator<Hand5Card> {
             throw new RuntimeException("Hand is not of three of a kind, A = " + hand1 + " , B = " + hand2);
         }
 
-        Set<Value> hand1Values = handUtils.getThreeOfKindValues(hand1);
-        Set<Value> hand2Values = handUtils.getThreeOfKindValues(hand2);
+        Set<Value> hand1Values = handUtils.getThreeOfAKindValues(hand1);
+        Set<Value> hand2Values = handUtils.getThreeOfAKindValues(hand2);
 
         Iterator<Value> hand1Iterator = hand1Values.iterator();
         Iterator<Value> hand2Iterator = hand2Values.iterator();
@@ -125,7 +133,7 @@ public class Poker5CardAceHighLowComparator implements Comparator<Hand5Card> {
 
     private int compareStraight(Hand5Card hand1, Hand5Card hand2) {
         if (poker5CardHandClassifier.classify(hand1) != HandType5Cards.Straight || poker5CardHandClassifier.classify(hand2) != HandType5Cards.Straight) {
-            throw new RuntimeException("Hand is not of three of a kind, A = " + hand1 + " , B = " + hand2);
+            throw new RuntimeException("Hand is not a straight, A = " + hand1 + " , B = " + hand2);
         }
 
         SortedSet<Value> hand1Values = handUtils.getSingleCards(hand1);
@@ -141,7 +149,7 @@ public class Poker5CardAceHighLowComparator implements Comparator<Hand5Card> {
 
     private int compareFlush(Hand5Card hand1, Hand5Card hand2) {
         if (poker5CardHandClassifier.classify(hand1) != HandType5Cards.Flush || poker5CardHandClassifier.classify(hand2) != HandType5Cards.Flush) {
-            throw new RuntimeException("Hand is not of three of a kind, A = " + hand1 + " , B = " + hand2);
+            throw new RuntimeException("Hand is not a flush, A = " + hand1 + " , B = " + hand2);
         }
 
         SortedSet<Value> hand1Values = handUtils.getSingleCards(hand1);
@@ -151,15 +159,48 @@ public class Poker5CardAceHighLowComparator implements Comparator<Hand5Card> {
     }
 
     private int compareFullHouse(Hand5Card hand1, Hand5Card hand2) {
-
         if (poker5CardHandClassifier.classify(hand1) != HandType5Cards.FullHouse || poker5CardHandClassifier.classify(hand2) != HandType5Cards.FullHouse) {
-            throw new RuntimeException("Hand is not of three of a kind, A = " + hand1 + " , B = " + hand2);
+            throw new RuntimeException("Hand is not a full house, A = " + hand1 + " , B = " + hand2);
+        }
+
+        Set<Value> hand1Values = handUtils.getPairValues(hand1);
+        Set<Value> hand2Values = handUtils.getPairValues(hand2);
+
+        if (hand1Values.size() != 1 || hand2Values.size() != 1) {
+            throw new RuntimeException("Internal Error - either hand does not contain a single pair, A = " + hand1 + " , B = " + hand2);
+        }
+
+        return hand1Values.iterator().next().compareTo(hand2Values.iterator().next());
+    }
+
+    private int compareFourOfAKind(Hand5Card hand1, Hand5Card hand2) {
+        if (poker5CardHandClassifier.classify(hand1) != HandType5Cards.FourOfAKind || poker5CardHandClassifier.classify(hand2) != HandType5Cards.FourOfAKind) {
+            throw new RuntimeException("Hand is not four of a kind, A = " + hand1 + " , B = " + hand2);
+        }
+
+        Set<Value> hand1Values = handUtils.getFourOfAKindValues(hand1);
+        Set<Value> hand2Values = handUtils.getFourOfAKindValues(hand2);
+
+        if (hand1Values.size() != 1 || hand2Values.size() != 1) {
+            throw new RuntimeException("Internal Error - either hand does not contain four of a kind, A = " + hand1 + " , B = " + hand2);
+        }
+
+        return hand1Values.iterator().next().compareTo(hand2Values.iterator().next());
+    }
+
+    private int compareStraightFlush(Hand5Card hand1, Hand5Card hand2) {
+        if (poker5CardHandClassifier.classify(hand1) != HandType5Cards.StraightFlush || poker5CardHandClassifier.classify(hand2) != HandType5Cards.StraightFlush) {
+            throw new RuntimeException("Hand is not a straight flush, A = " + hand1 + " , B = " + hand2);
         }
 
         SortedSet<Value> hand1Values = handUtils.getSingleCards(hand1);
+        Iterator<Value> hand1Iterator = hand1Values.iterator();
+        hand1Iterator.next();
 
         SortedSet<Value> hand2Values = handUtils.getSingleCards(hand2);
+        Iterator<Value> hand2Iterator = hand2Values.iterator();
+        hand2Iterator.next();
 
-        return valueSortedSetComparator.compare(hand1Values, hand2Values);
+        return hand1Iterator.next().compareTo(hand2Iterator.next());
     }
 }

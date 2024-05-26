@@ -2,13 +2,12 @@ package org.srwcrw.poker.texasholdem.collections;
 
 import org.srwcrw.poker.texasholdem.entities.Card;
 
-import java.util.AbstractMap;
-import java.util.Objects;
-import java.util.SortedSet;
-import java.util.TreeSet;
+import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
 
 public final class Hand7Card implements IPack {
+    private final CollectionUtils collectionUtils = new CollectionUtils();
+
     private final SortedSet<Card> cards;
 
     public Hand7Card(SortedSet<Card> cards) {
@@ -43,15 +42,18 @@ public final class Hand7Card implements IPack {
     }
 
     @Override
+    public List<Card> getCardListAtRandom(int cardCount) {
+        return collectionUtils.generateCardListFromPack(this, cardCount);
+    }
+
+    @Override
     public IPack removeCard(Card card) {
         throw new RuntimeException("Immutable hand cannot change");
     }
 
     @Override
     public SortedSet<Card> getCards() {
-        SortedSet<Card> newTreeSet = new TreeSet<>(cards.comparator());
-        newTreeSet.addAll(cards);
-        return newTreeSet;
+        return Collections.unmodifiableSortedSet(cards);
     }
 
     public AbstractMap.SimpleEntry<Card, IPack> removeRandomCardImmutable() {

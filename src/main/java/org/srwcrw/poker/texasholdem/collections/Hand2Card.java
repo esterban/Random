@@ -2,11 +2,14 @@ package org.srwcrw.poker.texasholdem.collections;
 
 import org.srwcrw.poker.texasholdem.entities.Card;
 
+import java.util.List;
 import java.util.SortedSet;
 import java.util.TreeSet;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class Hand2Card implements IPack {
+    private final CollectionUtils collectionUtils = new CollectionUtils();
+
     private final SortedSet<Card> cards;
 
     public Hand2Card(SortedSet<Card> cards) {
@@ -38,6 +41,11 @@ public class Hand2Card implements IPack {
         }
 
         return cards.iterator().next();
+    }
+
+    @Override
+    public List<Card> getCardListAtRandom(int cardCount) {
+        return collectionUtils.generateCardListFromPack(this, cardCount);
     }
 
     @Override

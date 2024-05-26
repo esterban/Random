@@ -23,8 +23,9 @@ public class Main {
     private static final Poker5CardHandClassifier poker5CardHandClassifier = new Poker5CardHandClassifier();
     private static final ConverterHand5Card converterHand5Card = new ConverterHand5Card();
 
+    private final int iterationCount = 1000;
 //    private final int iterationCount = 1000 * 1000;
-    private final int iterationCount = 10 * 1000 * 1000;
+//    private final int iterationCount = 5 * 1000 * 1000;
 
 
     public static void main(String[] args) {
@@ -52,7 +53,7 @@ public class Main {
         long onePairCount = 0;
 
         for (int counter = 1; counter < iterationCount; ++counter) {
-            handPair = handGenerator.generateHandAndRemoveImmutable(fullPack, numberOfCards).getValue();
+            handPair = handGenerator.generateHandPackNoModify(fullPack, numberOfCards);
 
             T hands = converter.convert(handPair);
             HandType5Cards handType5Cards = cardClassifier.classify(hands);

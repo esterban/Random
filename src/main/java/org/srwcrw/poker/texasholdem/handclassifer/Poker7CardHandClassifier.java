@@ -13,9 +13,12 @@ import org.srwcrw.poker.texasholdem.utils.HandUtils;
 import java.util.*;
 
 public class Poker7CardHandClassifier implements PokerCardClassifier<Hand7Card> {
+    private static final ThreadLocal<Map<Value, Integer>> tripleMapThreadLocal = ThreadLocal.withInitial(HashMap::new);
+    private static final ThreadLocal<Map<Suit, Integer>> tripleSuitMapThreadLocal = ThreadLocal.withInitial(HashMap::new);
+
     private HandUtils handUtils = new HandUtils();
 
-    // TODO 2024-05-15 swright create a HandType7Cards
+    // TODO 2024-05-15 swright create a HandType7Cards enum
     public HandType5Cards classify(Hand7Card hand7Card) {
         int pairsCount = handUtils.countPairs(hand7Card);
         int tripleCount = countThrees(hand7Card);
@@ -36,7 +39,8 @@ public class Poker7CardHandClassifier implements PokerCardClassifier<Hand7Card> 
     private int countThrees(Hand7Card hand7Card) {
         int threesCount = 0;
 
-        Map<Value, Integer> valueCounts = new HashMap<>();
+        Map<Value, Integer> valueCounts = tripleMapThreadLocal.get();
+        zeroMapCounts(valueCounts);
 
         for (Card card : hand7Card.getCards()) {
             valueCounts.compute(card.getValue(), (k, v) -> v == null ? 1 : v + 1);
@@ -51,10 +55,19 @@ public class Poker7CardHandClassifier implements PokerCardClassifier<Hand7Card> 
         return threesCount;
     }
 
+    private <T> void zeroMapCounts(Map<T, Integer> map) {
+        for (T key : map.keySet()) {
+            map.put(key, Integer.valueOf(0));
+        }
+    }
+
     private int countFours(Hand7Card hand7Card) {
         int foursCount = 0;
 
-        Map<Value, Integer> valueCounts = new HashMap<>();
+        // 2024-05-26 SWright - Switched ThreadLocalMap as an optimisation over allocating memory
+        // does this give any improvement on performance?
+        Map<Value, Integer> valueCounts = tripleMapThreadLocal.get();
+        zeroMapCounts(valueCounts);
 
         for (Card card : hand7Card.getCards()) {
             valueCounts.compute(card.getValue(), (k, v) -> v == null ? 1 : v + 1);
@@ -70,7 +83,10 @@ public class Poker7CardHandClassifier implements PokerCardClassifier<Hand7Card> 
     }
 
     private boolean isFlush(Hand7Card hand5Card) {
-        Map<Suit, Integer> uniqueSuits = new HashMap<>();
+        // 2024-05-26 SWright - Switched ThreadLocalMap as an optimisation over allocating memory
+        // does this give any improvement on performance?
+        Map<Suit, Integer> uniqueSuits = tripleSuitMapThreadLocal.get();
+        zeroMapCounts(uniqueSuits);
 
         for (Card card : hand5Card.getCards()) {
             uniqueSuits.compute(card.getSuit(), (k, v) -> v == null ? 1 : v + 1);

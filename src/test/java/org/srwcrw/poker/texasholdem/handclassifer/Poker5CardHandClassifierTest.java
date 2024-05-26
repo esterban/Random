@@ -31,7 +31,7 @@ class Poker5CardHandClassifierTest {
 
     @Test
     public void testClassifyFourOfAKind() {
-        Hand5Card fourOfAKind = TestUtils.createFourOfAKind();
+        Hand5Card fourOfAKind = TestUtils.createFourOfAKindA();
 
         HandType5Cards handType5Cards = poker5CardHandClassifier.classify(fourOfAKind);
 
@@ -53,7 +53,7 @@ class Poker5CardHandClassifierTest {
 
     @Test
     public void testClassifyFullHouse() {
-        Hand5Card fullHouseHand = TestUtils.createFullHouse();
+        Hand5Card fullHouseHand = TestUtils.createFullHouseA();
 
         HandType5Cards handType5CardsA = poker5CardHandClassifier.classify(fullHouseHand);
 

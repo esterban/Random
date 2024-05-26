@@ -16,9 +16,10 @@ public class Poker7CardHandClassifier implements PokerCardClassifier<Hand7Card> 
     private static final ThreadLocal<Map<Value, Integer>> tripleMapThreadLocal = ThreadLocal.withInitial(HashMap::new);
     private static final ThreadLocal<Map<Suit, Integer>> tripleSuitMapThreadLocal = ThreadLocal.withInitial(HashMap::new);
 
-    private HandUtils handUtils = new HandUtils();
+    private final HandUtils handUtils = new HandUtils();
 
-    // TODO 2024-05-15 swright create a HandType7Cards enum
+    // TODO 2024-05-15 SWright create a HandType7Cards enum
+    // TODO 2024-05-26 SWright - finish method, does not cover all hand types
     public HandType5Cards classify(Hand7Card hand7Card) {
         int pairsCount = handUtils.countPairs(hand7Card);
         int tripleCount = countThrees(hand7Card);
@@ -56,9 +57,7 @@ public class Poker7CardHandClassifier implements PokerCardClassifier<Hand7Card> 
     }
 
     private <T> void zeroMapCounts(Map<T, Integer> map) {
-        for (T key : map.keySet()) {
-            map.put(key, Integer.valueOf(0));
-        }
+        map.replaceAll((k, v) -> 0);
     }
 
     private int countFours(Hand7Card hand7Card) {
@@ -92,7 +91,7 @@ public class Poker7CardHandClassifier implements PokerCardClassifier<Hand7Card> 
             uniqueSuits.compute(card.getSuit(), (k, v) -> v == null ? 1 : v + 1);
         }
 
-        return uniqueSuits.entrySet().stream().filter(e -> e.getValue() >= 5).count() > 0;
+        return uniqueSuits.entrySet().stream().anyMatch(e -> e.getValue() >= 5);
     }
 
     private boolean isStraight(Hand5Card hand5Card) {
@@ -108,11 +107,7 @@ public class Poker7CardHandClassifier implements PokerCardClassifier<Hand7Card> 
 
         cards = handUtils.getValueSetSorted(hand5Card, new ValueComparatorAceHigh());
 
-        if (handUtils.areValuesConsecutive(cards)) {
-            return true;
-        }
-
-        return false;
+        return handUtils.areValuesConsecutive(cards);
     }
 
 

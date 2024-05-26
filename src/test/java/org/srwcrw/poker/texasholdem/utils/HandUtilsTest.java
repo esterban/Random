@@ -57,4 +57,22 @@ class HandUtilsTest {
 
         assertThat(handUtils.areValuesConsecutive(onePairValues)).isFalse();
     }
+
+    @Test
+    void testGetHighestSingleCardA() {
+        Hand5Card hand = testUtils.createOnePair();
+
+        Value highestValue = handUtils.getHighestSingleCardAceHigh(hand);
+
+        assertThat(highestValue).isEqualTo(Value.King);
+    }
+
+    @Test
+    void testGetHighestSingleCardB() {
+        Hand5Card hand = testUtils.createHighestCardA();
+
+        Value highestValue = handUtils.getHighestSingleCardAceHigh(hand);
+
+        assertThat(highestValue).isEqualTo(Value.Ace);
+    }
 }

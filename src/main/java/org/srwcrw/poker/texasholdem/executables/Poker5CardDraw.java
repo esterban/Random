@@ -24,8 +24,8 @@ public class Poker5CardDraw {
 
     public int onePairCount = 0;
 
-    private static final int iterationCount = 100 * 1000 * 1000;
-//    private static final int iterationCount = 10 * 1000 * 1000;
+//    private static final int iterationCount = 100 * 1000 * 1000;
+    private static final int iterationCount = 10 * 1000 * 1000;
 //    private static final int iterationCount = 1 * 1000 * 1000;
 //    private static final int iterationCount = 100 * 1000;
 //    private static final int iterationCount = 10 * 1000;

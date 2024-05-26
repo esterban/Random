@@ -14,14 +14,10 @@ public class HandUtils implements IHandUtils {
 
     @Override
     public SortedSet<Value> getValueSetSorted(IPack hand, Comparator<Value> valueComparator) {
-        Supplier<SortedSet<Value>> treeSetSupplier = new Supplier<SortedSet<Value>>() {
-            @Override
-            public SortedSet<Value> get() {
-                return new TreeSet<>(valueComparator);
-            }
-        };
+        Supplier<SortedSet<Value>> treeSetSupplier = () -> new TreeSet<>(valueComparator);
 
-        SortedSet<Value> values = hand.getCards().stream().map(c -> c.getValue()).collect(Collectors.toCollection(treeSetSupplier));
+        @SuppressWarnings("UnnecessaryLocalVariable")
+        SortedSet<Value> values = hand.getCards().stream().map(Card::getValue).collect(Collectors.toCollection(treeSetSupplier));
         return values;
     }
 
@@ -116,9 +112,7 @@ public class HandUtils implements IHandUtils {
     }
 
     private void zeroValueCounts() {
-        for (Value value : valueCounts.keySet()) {
-            valueCounts.put(value, Integer.valueOf(0));
-        }
+        valueCounts.replaceAll((k, v) -> 0);
     }
 
     public Set<Value> getPairValues(IPack hand) {
@@ -137,28 +131,33 @@ public class HandUtils implements IHandUtils {
     }
 
     public Set<Value> getPairValues(Map<Value, Integer> valueMap) {
-        Set<Value> pairValues = valueMap.entrySet().stream().filter(e -> e.getValue() == 2).map(e -> e.getKey()).collect(Collectors.toSet());
+        @SuppressWarnings("UnnecessaryLocalVariable")
+        var pairValues = valueMap.entrySet().stream().filter(e -> e.getValue() == 2).map(Map.Entry::getKey).collect(Collectors.toSet());
         return pairValues;
     }
 
     public Set<Value> getThreeOfAKindValues(Map<Value, Integer> valueMap) {
-        Set<Value> pairValues = valueMap.entrySet().stream().filter(e -> e.getValue() == 3).map(e -> e.getKey()).collect(Collectors.toSet());
+        @SuppressWarnings("UnnecessaryLocalVariable")
+        Set<Value> pairValues = valueMap.entrySet().stream().filter(e -> e.getValue() == 3).map(Map.Entry::getKey).collect(Collectors.toSet());
         return pairValues;
     }
 
     public Set<Value> getFourOfAKindValues(Map<Value, Integer> valueMap) {
-        Set<Value> pairValues = valueMap.entrySet().stream().filter(e -> e.getValue() == 4).map(e -> e.getKey()).collect(Collectors.toSet());
+        @SuppressWarnings("UnnecessaryLocalVariable")
+        Set<Value> pairValues = valueMap.entrySet().stream().filter(e -> e.getValue() == 4).map(Map.Entry::getKey).collect(Collectors.toSet());
         return pairValues;
     }
 
 
-    public Value getHighestSingleCard(IPack hand) {
+    public Value getHighestSingleCardAceHigh(IPack hand) {
         Value highestValue = Value.Two;
 
         Map<Value, Integer> valueMap = countMatchingValues(hand);
 
+        ValueComparatorAceHigh valueComparatorAceHigh = new ValueComparatorAceHigh();
+
         for (Map.Entry<Value, Integer> entry : valueMap.entrySet()) {
-            if (entry.getValue() == 1 && entry.getKey().compareTo(highestValue) > 1) {
+            if (entry.getValue() == 1 && valueComparatorAceHigh.compare(entry.getKey(), highestValue) > 0) {
                 highestValue = entry.getKey();
             }
         }
@@ -169,7 +168,7 @@ public class HandUtils implements IHandUtils {
     public SortedSet<Value> getSingleCards(IPack hand) {
         Map<Value, Integer> valueMap = countMatchingValues(hand);
 
-        Set<Value> singleCards = valueMap.entrySet().stream().filter(e -> e.getValue() == 1).map(e -> e.getKey()).collect(Collectors.toSet());
+        Set<Value> singleCards = valueMap.entrySet().stream().filter(e -> e.getValue() == 1).map(Map.Entry::getKey).collect(Collectors.toSet());
         SortedSet<Value> sortedSingleCards = new TreeSet<>(new ValueComparatorAceHigh());
         sortedSingleCards.addAll(singleCards);
 

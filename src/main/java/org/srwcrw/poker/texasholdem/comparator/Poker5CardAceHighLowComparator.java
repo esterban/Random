@@ -119,8 +119,8 @@ public class Poker5CardAceHighLowComparator implements Comparator<Hand5Card> {
             return secondPair1Value.compareTo(secondPair2Value);
         }
 
-        Value highestValue1 = handUtils.getHighestSingleCard(hand1);
-        Value highestValue2 = handUtils.getHighestSingleCard(hand2);
+        Value highestValue1 = handUtils.getHighestSingleCardAceHigh(hand1);
+        Value highestValue2 = handUtils.getHighestSingleCardAceHigh(hand2);
 
         return highestValue1.compareTo(highestValue2);
     }

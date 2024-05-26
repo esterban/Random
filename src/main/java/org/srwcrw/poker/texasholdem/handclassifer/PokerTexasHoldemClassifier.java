@@ -3,20 +3,18 @@ package org.srwcrw.poker.texasholdem.handclassifer;
 import org.srwcrw.poker.texasholdem.collections.Hand2Card;
 import org.srwcrw.poker.texasholdem.collections.Hand5Card;
 import org.srwcrw.poker.texasholdem.entities.HandType5Cards;
-import org.srwcrw.poker.texasholdem.utils.HandUtils;
 import org.srwcrw.poker.texasholdem.utils.PokerTexasHoldemUtils;
 
 import java.util.List;
 
+// TODO 2024-05-26 SWright create unit test
 public class PokerTexasHoldemClassifier implements PokerCardClassifier<Hand2Card> {
     private final Hand5Card communityCards;
-    private final HandUtils handUtils;
     private final PokerTexasHoldemUtils pokerTexasHoldemUtils;
     private final Poker5CardHandClassifier poker5CardHandClassifier;
 
     public PokerTexasHoldemClassifier(Hand5Card communityCards) {
         this.communityCards = communityCards;
-        this.handUtils = new HandUtils();
         pokerTexasHoldemUtils = new PokerTexasHoldemUtils();
         poker5CardHandClassifier = new Poker5CardHandClassifier();
     }

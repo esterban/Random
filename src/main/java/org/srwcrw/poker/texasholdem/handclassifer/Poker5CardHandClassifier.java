@@ -1,7 +1,6 @@
 package org.srwcrw.poker.texasholdem.handclassifer;
 
 import org.srwcrw.poker.texasholdem.collections.Hand5Card;
-import org.srwcrw.poker.texasholdem.collections.Hand7Card;
 import org.srwcrw.poker.texasholdem.comparator.ValueComparatorAceHigh;
 import org.srwcrw.poker.texasholdem.comparator.ValueComparatorAceLow;
 import org.srwcrw.poker.texasholdem.entities.Card;
@@ -10,10 +9,12 @@ import org.srwcrw.poker.texasholdem.entities.Suit;
 import org.srwcrw.poker.texasholdem.entities.Value;
 import org.srwcrw.poker.texasholdem.utils.HandUtils;
 
-import java.util.*;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.SortedSet;
 
 public class Poker5CardHandClassifier implements PokerCardClassifier<Hand5Card> {
-    private HandUtils handUtils = new HandUtils();
+    private final HandUtils handUtils = new HandUtils();
 
     public HandType5Cards classify(Hand5Card hand5Card) {
         int pairsCount = handUtils.countPairs(hand5Card);
@@ -86,11 +87,7 @@ public class Poker5CardHandClassifier implements PokerCardClassifier<Hand5Card> 
 
         cards = handUtils.getValueSetSorted(hand5Card, new ValueComparatorAceHigh());
 
-        if (handUtils.areValuesConsecutive(cards)) {
-            return true;
-        }
-
-        return false;
+        return handUtils.areValuesConsecutive(cards);
     }
 
 

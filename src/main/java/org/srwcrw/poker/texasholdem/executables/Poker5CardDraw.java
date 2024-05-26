@@ -8,7 +8,6 @@ import org.srwcrw.poker.texasholdem.generators.HandGenerator;
 import org.srwcrw.poker.texasholdem.generators.PackGenerator;
 import org.srwcrw.poker.texasholdem.handclassifer.Poker5CardHandClassifier;
 
-import java.util.AbstractMap;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -25,7 +24,7 @@ public class Poker5CardDraw {
 
     public int onePairCount = 0;
 
-        private static final int iterationCount = 100 * 1000 * 1000;
+    private static final int iterationCount = 100 * 1000 * 1000;
 //    private static final int iterationCount = 10 * 1000 * 1000;
 //    private static final int iterationCount = 1 * 1000 * 1000;
 //    private static final int iterationCount = 100 * 1000;
@@ -64,7 +63,7 @@ public class Poker5CardDraw {
 
         System.out.printf("Duration = %10.3f seconds", durationSeconds);
 
-        // 2024-05-22 12:16 - Swright - Duration (Laptop) - 1e7 iterations Duration = 54.6492517 , 55.0566367 , 58.1787818 , 54.3512108 seconds
+        // 2024-05-22 12:16 - SWright - Duration (Laptop) - 1e7 iterations Duration = 54.6492517 , 55.0566367 , 58.1787818 , 54.3512108 seconds
         // 2024-05-26 20:50 - SWright - Sample size = 4, Average = 40.32240485
 
         double onePairRatio = (double) handType5CardsCount.get(OnePair) / (double) iterationCount;

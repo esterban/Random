@@ -1,11 +1,8 @@
 package org.srwcrw.poker.texasholdem.executables;
 
-import org.srwcrw.poker.texasholdem.collections.Hand5Card;
 import org.srwcrw.poker.texasholdem.collections.IPack;
-import org.srwcrw.poker.texasholdem.entities.HandType5Cards;
 import org.srwcrw.poker.texasholdem.generators.ConverterHand5Card;
 import org.srwcrw.poker.texasholdem.generators.HandGenerator;
-import org.srwcrw.poker.texasholdem.generators.IHandGenerator;
 import org.srwcrw.poker.texasholdem.generators.PackGenerator;
 import org.srwcrw.poker.texasholdem.handclassifer.Poker5CardHandClassifier;
 
@@ -14,10 +11,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TexasHoldemMain {
-    private static PackGenerator packGenerator = new PackGenerator();
-    private static HandGenerator handGenerator = new HandGenerator();
-    private static Poker5CardHandClassifier poker5CardHandClassifier = new Poker5CardHandClassifier();
-    private static ConverterHand5Card converterHand5Card = new ConverterHand5Card();
+    private static final PackGenerator packGenerator = new PackGenerator();
+    private static final HandGenerator handGenerator = new HandGenerator();
+    private static final Poker5CardHandClassifier poker5CardHandClassifier = new Poker5CardHandClassifier();
+    private static final ConverterHand5Card converterHand5Card = new ConverterHand5Card();
 
     public static void main(String[] args) {
         IPack fullPack = packGenerator.generateFullPack();

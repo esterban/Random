@@ -13,6 +13,32 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class TestUtils {
+    public static Hand5Card createRoyalFlushA() {
+        Card card1 = new Card(Suit.Diamonds, Value.Ten);
+        Card card2 = new Card(Suit.Diamonds, Value.Jack);
+        Card card3 = new Card(Suit.Diamonds, Value.Queen);
+        Card card4 = new Card(Suit.Diamonds, Value.King);
+        Card card5 = new Card(Suit.Diamonds, Value.Ace);
+        SortedSet handSet = Stream.of(card1, card2, card3, card4, card5).collect(Collectors.toCollection(TreeSet::new));
+
+        Hand5Card hand5Card = new Hand5Card(handSet);
+
+        return hand5Card;
+    }
+
+    public static Hand5Card createRoyalFlushB() {
+        Card card1 = new Card(Suit.Clubs, Value.Ten);
+        Card card2 = new Card(Suit.Clubs, Value.Jack);
+        Card card3 = new Card(Suit.Clubs, Value.Queen);
+        Card card4 = new Card(Suit.Clubs, Value.King);
+        Card card5 = new Card(Suit.Clubs, Value.Ace);
+        SortedSet handSet = Stream.of(card1, card2, card3, card4, card5).collect(Collectors.toCollection(TreeSet::new));
+
+        Hand5Card hand5Card = new Hand5Card(handSet);
+
+        return hand5Card;
+    }
+
     public static Hand5Card createStraightFlushAceLow() {
         Card card1 = new Card(Suit.Clubs, Value.Ace);
         Card card2 = new Card(Suit.Clubs, Value.Two);
@@ -39,8 +65,8 @@ public class TestUtils {
         return hand5Card;
     }
 
-    public static Hand5Card createStraightFlushAceA() {
-        Card card1 = new Card(Suit.Clubs, Value.Ace);
+    public static Hand5Card createStraightFlushA() {
+        Card card1 = new Card(Suit.Clubs, Value.Nine);
         Card card2 = new Card(Suit.Clubs, Value.Ten);
         Card card3 = new Card(Suit.Clubs, Value.Jack);
         Card card4 = new Card(Suit.Clubs, Value.Queen);
@@ -52,12 +78,12 @@ public class TestUtils {
         return hand5Card;
     }
 
-    public static Hand5Card createStraightFlushAceB() {
+    public static Hand5Card createStraightFlushB() {
+        Card card5 = new Card(Suit.Clubs, Value.Eight);
         Card card1 = new Card(Suit.Clubs, Value.Nine);
         Card card2 = new Card(Suit.Clubs, Value.Ten);
         Card card3 = new Card(Suit.Clubs, Value.Jack);
         Card card4 = new Card(Suit.Clubs, Value.Queen);
-        Card card5 = new Card(Suit.Clubs, Value.King);
         SortedSet handSet = Stream.of(card1, card2, card3, card4, card5).collect(Collectors.toCollection(TreeSet::new));
 
         Hand5Card hand5Card = new Hand5Card(handSet);
@@ -317,7 +343,7 @@ public class TestUtils {
         return hand5Card;
     }
 
-    public static Hand5Card createHighestCard() {
+    public static Hand5Card createHighestCardA() {
         Card card1 = new Card(Suit.Clubs, Value.Ace);
         Card card2 = new Card(Suit.Clubs, Value.Ten);
         Card card3 = new Card(Suit.Hearts, Value.Nine);
@@ -330,6 +356,18 @@ public class TestUtils {
         return hand5Card;
     }
 
+    public static Hand5Card createHighestCardB() {
+        Card card1 = new Card(Suit.Clubs, Value.Two);
+        Card card2 = new Card(Suit.Clubs, Value.Ten);
+        Card card3 = new Card(Suit.Hearts, Value.Nine);
+        Card card4 = new Card(Suit.Hearts, Value.Queen);
+        Card card5 = new Card(Suit.Hearts, Value.King);
+        SortedSet handSet = Stream.of(card1, card2, card3, card4, card5).collect(Collectors.toCollection(TreeSet::new));
+
+        Hand5Card hand5Card = new Hand5Card(handSet);
+
+        return hand5Card;
+    }
 
     public static Hand5Card createOnePairA() {
         Card card1 = new Card(Suit.Clubs, Value.Ace);

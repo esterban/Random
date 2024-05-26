@@ -108,7 +108,7 @@ class Poker5CardHandClassifierTest {
 
     @Test
     public void testClassifyHighestCard() {
-        Hand5Card highestCardHand = TestUtils.createHighestCard();
+        Hand5Card highestCardHand = TestUtils.createHighestCardA();
 
         HandType5Cards handType5CardsA = poker5CardHandClassifier.classify(highestCardHand);
 

@@ -27,6 +27,9 @@ public class Poker5CardAceHighLowComparator implements Comparator<Hand5Card> {
         }
 
         switch (handType1) {
+            case HighestCard:
+                return compareHighestCard(o1, o2);
+
             case OnePair:
                 return compareOnePair(o1, o2);
 
@@ -49,10 +52,25 @@ public class Poker5CardAceHighLowComparator implements Comparator<Hand5Card> {
                 return compareFourOfAKind(o1, o2);
 
             case StraightFlush:
+            case RoyalFlush:
                 return compareStraightFlush(o1, o2);
+
+            default:
+                throw new RuntimeException("Internal error - Hand5CardsType unrecognised = " + handType1);
+        }
+    }
+
+    private int compareHighestCard(Hand5Card hand1, Hand5Card hand2) {
+        if (poker5CardHandClassifier.classify(hand1) != HandType5Cards.HighestCard || poker5CardHandClassifier.classify(hand2) != HandType5Cards.HighestCard) {
+            throw new RuntimeException("Hand is highest card, A = " + hand1 + " , B = " + hand2);
         }
 
-        return 0;
+        Value highestValue1 = handUtils.getSingleCards(hand1).last();
+        Value highestValue2 = handUtils.getSingleCards(hand2).last();
+
+        ValueComparatorAceHigh valueComparatorAceHigh = new ValueComparatorAceHigh();
+
+        return valueComparatorAceHigh.compare(highestValue1, highestValue2);
     }
 
     private int compareOnePair(Hand5Card hand1, Hand5Card hand2) {
@@ -189,7 +207,11 @@ public class Poker5CardAceHighLowComparator implements Comparator<Hand5Card> {
     }
 
     private int compareStraightFlush(Hand5Card hand1, Hand5Card hand2) {
-        if (poker5CardHandClassifier.classify(hand1) != HandType5Cards.StraightFlush || poker5CardHandClassifier.classify(hand2) != HandType5Cards.StraightFlush) {
+        HandType5Cards hand1Type = poker5CardHandClassifier.classify(hand1);
+        HandType5Cards hand2Type = poker5CardHandClassifier.classify(hand2);
+
+        if (!(hand1Type == HandType5Cards.StraightFlush || hand1Type == HandType5Cards.RoyalFlush) ||
+                !(hand2Type == HandType5Cards.StraightFlush || hand2Type == HandType5Cards.RoyalFlush)) {
             throw new RuntimeException("Hand is not a straight flush, A = " + hand1 + " , B = " + hand2);
         }
 

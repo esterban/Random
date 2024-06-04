@@ -13,8 +13,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import static org.srwcrw.poker.texasholdem.entities.HandType5Cards.OnePair;
-
 public class Poker5CardDraw {
     public final PackGenerator packGenerator = new PackGenerator();
     public final HandGenerator handGenerator = new HandGenerator();

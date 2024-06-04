@@ -1,7 +1,6 @@
 package org.srwcrw.poker.texasholdem.handclassifer;
 
 import org.srwcrw.poker.texasholdem.collections.Hand5Card;
-import org.srwcrw.poker.texasholdem.collections.Hand7Card;
 import org.srwcrw.poker.texasholdem.comparator.ValueComparatorAceHigh;
 import org.srwcrw.poker.texasholdem.comparator.ValueComparatorAceLow;
 import org.srwcrw.poker.texasholdem.entities.Card;
@@ -10,15 +9,17 @@ import org.srwcrw.poker.texasholdem.entities.Suit;
 import org.srwcrw.poker.texasholdem.entities.Value;
 import org.srwcrw.poker.texasholdem.utils.HandUtils;
 
-import java.util.*;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.SortedSet;
 
 public class Poker5CardHandClassifier implements PokerCardClassifier<Hand5Card> {
-    private HandUtils handUtils = new HandUtils();
+    private final HandUtils handUtils = new HandUtils();
 
     public HandType5Cards classify(Hand5Card hand5Card) {
         int pairsCount = handUtils.countPairs(hand5Card);
-        int threesCount = countThrees(hand5Card);
-        int foursCount = countFours(hand5Card);
+        int threesCount = handUtils.countThrees(hand5Card);
+        int foursCount = handUtils.countFours(hand5Card);
         boolean isStraight = isStraight(hand5Card);
         boolean isFlush = isFlush(hand5Card);
 
@@ -63,42 +64,6 @@ public class Poker5CardHandClassifier implements PokerCardClassifier<Hand5Card> 
         return HandType5Cards.HighestCard;
     }
 
-    private int countThrees(Hand5Card hand5Card) {
-        int threesCount = 0;
-
-        Map<Value, Integer> valueCounts = new HashMap<>();
-
-        for (Card card : hand5Card.getCards()) {
-            valueCounts.compute(card.getValue(), (k, v) -> v == null ? 1 : v + 1);
-        }
-
-        for (Map.Entry<Value, Integer> cardCount : valueCounts.entrySet()) {
-            if (cardCount.getValue() == 3) {
-                ++threesCount;
-            }
-        }
-
-        return threesCount;
-    }
-
-    private int countFours(Hand5Card hand5Card) {
-        int foursCount = 0;
-
-        Map<Value, Integer> valueCounts = new HashMap<>();
-
-        for (Card card : hand5Card.getCards()) {
-            valueCounts.compute(card.getValue(), (k, v) -> v == null ? 1 : v + 1);
-        }
-
-        for (Map.Entry<Value, Integer> cardCount : valueCounts.entrySet()) {
-            if (cardCount.getValue() == 4) {
-                ++foursCount;
-            }
-        }
-
-        return foursCount;
-    }
-
     private boolean isFlush(Hand5Card hand5Card) {
         Set<Suit> uniqueSuits = new HashSet<>();
 
@@ -122,11 +87,7 @@ public class Poker5CardHandClassifier implements PokerCardClassifier<Hand5Card> 
 
         cards = handUtils.getValueSetSorted(hand5Card, new ValueComparatorAceHigh());
 
-        if (handUtils.areValuesConsecutive(cards)) {
-            return true;
-        }
-
-        return false;
+        return handUtils.areValuesConsecutive(cards);
     }
 
 

@@ -1,9 +1,11 @@
 package org.srwcrw.poker.texasholdem.test;
 
 import org.srwcrw.poker.texasholdem.collections.Hand5Card;
+import org.srwcrw.poker.texasholdem.collections.IPack;
 import org.srwcrw.poker.texasholdem.entities.Card;
 import org.srwcrw.poker.texasholdem.entities.Suit;
 import org.srwcrw.poker.texasholdem.entities.Value;
+import org.srwcrw.poker.texasholdem.generators.PackGenerator;
 
 import java.util.SortedSet;
 import java.util.TreeSet;
@@ -11,7 +13,33 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class TestUtils {
-    public static Hand5Card createStraightFlushAceLow() {
+    public Hand5Card createRoyalFlushA() {
+        Card card1 = new Card(Suit.Diamonds, Value.Ten);
+        Card card2 = new Card(Suit.Diamonds, Value.Jack);
+        Card card3 = new Card(Suit.Diamonds, Value.Queen);
+        Card card4 = new Card(Suit.Diamonds, Value.King);
+        Card card5 = new Card(Suit.Diamonds, Value.Ace);
+        SortedSet handSet = Stream.of(card1, card2, card3, card4, card5).collect(Collectors.toCollection(TreeSet::new));
+
+        Hand5Card hand5Card = new Hand5Card(handSet);
+
+        return hand5Card;
+    }
+
+    public Hand5Card createRoyalFlushB() {
+        Card card1 = new Card(Suit.Clubs, Value.Ten);
+        Card card2 = new Card(Suit.Clubs, Value.Jack);
+        Card card3 = new Card(Suit.Clubs, Value.Queen);
+        Card card4 = new Card(Suit.Clubs, Value.King);
+        Card card5 = new Card(Suit.Clubs, Value.Ace);
+        SortedSet handSet = Stream.of(card1, card2, card3, card4, card5).collect(Collectors.toCollection(TreeSet::new));
+
+        Hand5Card hand5Card = new Hand5Card(handSet);
+
+        return hand5Card;
+    }
+
+    public Hand5Card createStraightFlushAceLow() {
         Card card1 = new Card(Suit.Clubs, Value.Ace);
         Card card2 = new Card(Suit.Clubs, Value.Two);
         Card card3 = new Card(Suit.Clubs, Value.Three);
@@ -24,7 +52,7 @@ public class TestUtils {
         return hand5Card;
     }
 
-    public static Hand5Card createStraightFlushAceHigh() {
+    public Hand5Card createStraightFlushAceHigh() {
         Card card1 = new Card(Suit.Clubs, Value.Ace);
         Card card2 = new Card(Suit.Clubs, Value.Ten);
         Card card3 = new Card(Suit.Clubs, Value.Jack);
@@ -37,7 +65,33 @@ public class TestUtils {
         return hand5Card;
     }
 
-    public static Hand5Card createFourOfAKind() {
+    public Hand5Card createStraightFlushA() {
+        Card card1 = new Card(Suit.Clubs, Value.Nine);
+        Card card2 = new Card(Suit.Clubs, Value.Ten);
+        Card card3 = new Card(Suit.Clubs, Value.Jack);
+        Card card4 = new Card(Suit.Clubs, Value.Queen);
+        Card card5 = new Card(Suit.Clubs, Value.King);
+        SortedSet handSet = Stream.of(card1, card2, card3, card4, card5).collect(Collectors.toCollection(TreeSet::new));
+
+        Hand5Card hand5Card = new Hand5Card(handSet);
+
+        return hand5Card;
+    }
+
+    public Hand5Card createStraightFlushB() {
+        Card card5 = new Card(Suit.Clubs, Value.Eight);
+        Card card1 = new Card(Suit.Clubs, Value.Nine);
+        Card card2 = new Card(Suit.Clubs, Value.Ten);
+        Card card3 = new Card(Suit.Clubs, Value.Jack);
+        Card card4 = new Card(Suit.Clubs, Value.Queen);
+        SortedSet handSet = Stream.of(card1, card2, card3, card4, card5).collect(Collectors.toCollection(TreeSet::new));
+
+        Hand5Card hand5Card = new Hand5Card(handSet);
+
+        return hand5Card;
+    }
+
+    public Hand5Card createFourOfAKindA() {
         Card card1 = new Card(Suit.Clubs, Value.Ace);
         Card card2 = new Card(Suit.Hearts, Value.Ace);
         Card card3 = new Card(Suit.Spades, Value.Ace);
@@ -50,7 +104,33 @@ public class TestUtils {
         return hand5Card;
     }
 
-    public static Hand5Card createFullHouse() {
+    public Hand5Card createFourOfAKindB() {
+        Card card1 = new Card(Suit.Clubs, Value.Two);
+        Card card2 = new Card(Suit.Hearts, Value.Two);
+        Card card3 = new Card(Suit.Spades, Value.Two);
+        Card card4 = new Card(Suit.Diamonds, Value.Two);
+        Card card5 = new Card(Suit.Clubs, Value.Seven);
+        SortedSet handSet = Stream.of(card1, card2, card3, card4, card5).collect(Collectors.toCollection(TreeSet::new));
+
+        Hand5Card hand5Card = new Hand5Card(handSet);
+
+        return hand5Card;
+    }
+
+    public Hand5Card createFullHouseA() {
+        Card card1 = new Card(Suit.Clubs, Value.Ace);
+        Card card2 = new Card(Suit.Hearts, Value.Ace);
+        Card card3 = new Card(Suit.Spades, Value.Six);
+        Card card4 = new Card(Suit.Clubs, Value.Six);
+        Card card5 = new Card(Suit.Diamonds, Value.Six);
+        SortedSet handSet = Stream.of(card1, card2, card3, card4, card5).collect(Collectors.toCollection(TreeSet::new));
+
+        Hand5Card hand5Card = new Hand5Card(handSet);
+
+        return hand5Card;
+    }
+
+    public Hand5Card createFullHouseB() {
         Card card1 = new Card(Suit.Clubs, Value.Ace);
         Card card2 = new Card(Suit.Hearts, Value.Ace);
         Card card3 = new Card(Suit.Spades, Value.Ace);
@@ -63,7 +143,7 @@ public class TestUtils {
         return hand5Card;
     }
 
-    public static Hand5Card createFlushA() {
+    public Hand5Card createFlushA() {
         Card card1 = new Card(Suit.Clubs, Value.Ace);
         Card card2 = new Card(Suit.Clubs, Value.Three);
         Card card3 = new Card(Suit.Clubs, Value.Five);
@@ -76,7 +156,7 @@ public class TestUtils {
         return hand5Card;
     }
 
-    public static Hand5Card createFlushB() {
+    public Hand5Card createFlushB() {
         Card card1 = new Card(Suit.Hearts, Value.Ten);
         Card card2 = new Card(Suit.Hearts, Value.Three);
         Card card3 = new Card(Suit.Hearts, Value.Jack);
@@ -89,7 +169,7 @@ public class TestUtils {
         return hand5Card;
     }
 
-    public static Hand5Card createStraight() {
+    public Hand5Card createStraight() {
         Card card1 = new Card(Suit.Clubs, Value.Four);
         Card card2 = new Card(Suit.Hearts, Value.Three);
         Card card3 = new Card(Suit.Hearts, Value.Five);
@@ -102,7 +182,7 @@ public class TestUtils {
         return hand5Card;
     }
 
-    public static Hand5Card createStraightAceLow() {
+    public Hand5Card createStraightAceLow() {
         Card card1 = new Card(Suit.Clubs, Value.Ace);
         Card card2 = new Card(Suit.Hearts, Value.Two);
         Card card3 = new Card(Suit.Hearts, Value.Three);
@@ -115,7 +195,7 @@ public class TestUtils {
         return hand5Card;
     }
 
-    public static Hand5Card createStraightAceHigh() {
+    public Hand5Card createStraightAceHigh() {
         Card card1 = new Card(Suit.Clubs, Value.Ten);
         Card card2 = new Card(Suit.Hearts, Value.Jack);
         Card card3 = new Card(Suit.Hearts, Value.Queen);
@@ -130,7 +210,7 @@ public class TestUtils {
 
 
 
-    public static Hand5Card createThreeOfAKind() {
+    public Hand5Card createThreeOfAKind() {
         Card card1 = new Card(Suit.Hearts, Value.Ten);
         Card card2 = new Card(Suit.Diamonds, Value.Ten);
         Card card3 = new Card(Suit.Clubs, Value.Ten);
@@ -143,7 +223,7 @@ public class TestUtils {
         return hand5Card;
     }
 
-    public static Hand5Card createThreeOfAKindA() {
+    public Hand5Card createThreeOfAKindA() {
         Card card1 = new Card(Suit.Hearts, Value.Ten);
         Card card2 = new Card(Suit.Diamonds, Value.Ten);
         Card card3 = new Card(Suit.Clubs, Value.Ten);
@@ -156,7 +236,7 @@ public class TestUtils {
         return hand5Card;
     }
 
-    public static Hand5Card createThreeOfAKindB() {
+    public Hand5Card createThreeOfAKindB() {
         Card card1 = new Card(Suit.Hearts, Value.Ten);
         Card card2 = new Card(Suit.Diamonds, Value.Ten);
         Card card3 = new Card(Suit.Clubs, Value.Ten);
@@ -170,7 +250,7 @@ public class TestUtils {
     }
 
 
-    public static Hand5Card createThreeOfAKindC() {
+    public Hand5Card createThreeOfAKindC() {
         Card card1 = new Card(Suit.Hearts, Value.Five);
         Card card2 = new Card(Suit.Diamonds, Value.Five);
         Card card3 = new Card(Suit.Clubs, Value.Five);
@@ -183,8 +263,7 @@ public class TestUtils {
         return hand5Card;
     }
 
-
-    public static Hand5Card createTwoPairA() {
+    public Hand5Card createTwoPairA() {
         Card card1 = new Card(Suit.Hearts, Value.Ten);
         Card card2 = new Card(Suit.Clubs, Value.Ten);
         Card card3 = new Card(Suit.Diamonds, Value.Three);
@@ -197,7 +276,7 @@ public class TestUtils {
         return hand5Card;
     }
 
-    public static Hand5Card createTwoPairBKickerTen() {
+    public Hand5Card createTwoPairBKickerTen() {
         Card card1 = new Card(Suit.Hearts, Value.Queen);
         Card card2 = new Card(Suit.Clubs, Value.Queen);
         Card card3 = new Card(Suit.Diamonds, Value.Jack);
@@ -210,7 +289,7 @@ public class TestUtils {
         return hand5Card;
     }
 
-    public static Hand5Card createTwoPairBKickerSeven() {
+    public Hand5Card createTwoPairBKickerSeven() {
         Card card1 = new Card(Suit.Hearts, Value.Queen);
         Card card2 = new Card(Suit.Clubs, Value.Queen);
         Card card3 = new Card(Suit.Diamonds, Value.Jack);
@@ -223,8 +302,7 @@ public class TestUtils {
         return hand5Card;
     }
 
-
-    public static Hand5Card createOnePair() {
+    public Hand5Card createOnePair() {
         Card card1 = new Card(Suit.Clubs, Value.Ace);
         Card card2 = new Card(Suit.Clubs, Value.Ten);
         Card card3 = new Card(Suit.Hearts, Value.Ace);
@@ -237,7 +315,7 @@ public class TestUtils {
         return hand5Card;
     }
 
-    public static Hand5Card createOnePairRank1KickerTen() {
+    public Hand5Card createOnePairRank1KickerTen() {
         Card card1 = new Card(Suit.Clubs, Value.Ace);
         Card card3 = new Card(Suit.Hearts, Value.Ace);
         Card card5 = new Card(Suit.Hearts, Value.King);
@@ -250,7 +328,7 @@ public class TestUtils {
         return hand5Card;
     }
 
-    public static Hand5Card createOnePairRank1KickerNine() {
+    public Hand5Card createOnePairRank1KickerNine() {
         Card card1 = new Card(Suit.Clubs, Value.Ace);
         Card card3 = new Card(Suit.Hearts, Value.Ace);
         Card card4 = new Card(Suit.Hearts, Value.King);
@@ -263,7 +341,7 @@ public class TestUtils {
         return hand5Card;
     }
 
-    public static Hand5Card createHighestCard() {
+    public Hand5Card createHighestCardA() {
         Card card1 = new Card(Suit.Clubs, Value.Ace);
         Card card2 = new Card(Suit.Clubs, Value.Ten);
         Card card3 = new Card(Suit.Hearts, Value.Nine);
@@ -276,8 +354,20 @@ public class TestUtils {
         return hand5Card;
     }
 
+    public Hand5Card createHighestCardB() {
+        Card card1 = new Card(Suit.Clubs, Value.Two);
+        Card card2 = new Card(Suit.Clubs, Value.Ten);
+        Card card3 = new Card(Suit.Hearts, Value.Nine);
+        Card card4 = new Card(Suit.Hearts, Value.Queen);
+        Card card5 = new Card(Suit.Hearts, Value.King);
+        SortedSet handSet = Stream.of(card1, card2, card3, card4, card5).collect(Collectors.toCollection(TreeSet::new));
 
-    public static Hand5Card createOnePairA() {
+        Hand5Card hand5Card = new Hand5Card(handSet);
+
+        return hand5Card;
+    }
+
+    public Hand5Card createOnePairA() {
         Card card1 = new Card(Suit.Clubs, Value.Ace);
         Card card3 = new Card(Suit.Hearts, Value.Ace);
         Card card2 = new Card(Suit.Clubs, Value.Ten);
@@ -290,7 +380,7 @@ public class TestUtils {
         return hand5Card;
     }
 
-    public static Hand5Card createOnePairB() {
+    public Hand5Card createOnePairB() {
         Card card1 = new Card(Suit.Clubs, Value.Ace);
         Card card3 = new Card(Suit.Hearts, Value.Ace);
         Card card2 = new Card(Suit.Clubs, Value.Ten);
@@ -303,5 +393,9 @@ public class TestUtils {
         return hand5Card;
     }
 
+    public IPack createPack() {
+        PackGenerator packGenerator = new PackGenerator();
+        return packGenerator.generateFullPack();
+    }
 
 }

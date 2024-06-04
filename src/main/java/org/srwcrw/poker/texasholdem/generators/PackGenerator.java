@@ -6,27 +6,11 @@ import org.srwcrw.poker.texasholdem.entities.Card;
 import org.srwcrw.poker.texasholdem.entities.Suit;
 import org.srwcrw.poker.texasholdem.entities.Value;
 
-import java.util.AbstractMap;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 public class PackGenerator {
-//    public AbstractMap.SimpleEntry<IPack, IPack> generateHandAndRemoveImmutable(IPack pack, int numberOfCards) {
-//        Set<Card> cardSet = new HashSet<>();
-//
-//        for (Suit suit : Suit.values()) {
-//            for (Value value : Value.values()) {
-//                Card card = new Card(suit, value);
-//                cardSet.add(card);
-//            }
-//        }
-//
-//        return new AbstractMap.SimpleEntry<>(new Hand(cardSet), null);
-////        return new AbstractMap.SimpleEntry<>(null, null);
-//    }
-
     public IPack generateFullPack() {
-        Set<Card> cardSet = new HashSet<>();
+        SortedSet<Card> cardSet = new TreeSet<>();
 
         for (Suit suit : Suit.values()) {
             for (Value value : Value.values()) {

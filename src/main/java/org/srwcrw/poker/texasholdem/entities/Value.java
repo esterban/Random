@@ -13,5 +13,5 @@ public enum Value {
     Jack,
     Queen,
     King,
-    Ace;
+    Ace
 }

@@ -45,10 +45,6 @@ public class Poker5CardDraw {
             Hand5Card hand5Card = poker5CardDraw.converterHand5Card.convert(packAndHand5.getValue());
             HandType5Cards handType5Cards = poker5CardDraw.poker5CardHandClassifier.classify(hand5Card);
 
-//            if (OnePair.equals(handType5Cards)) {
-//                ++poker5CardDraw.onePairCount;
-//            }
-
             handType5CardsCount.compute(handType5Cards, (k, v) -> v == null ? 1 : v + 1);
         }
 
@@ -64,12 +60,8 @@ public class Poker5CardDraw {
             double ratio = (double) count / iterationCount * 100;
 
             System.out.printf(handType5Cards + " percentage = %10.3f\n" , ratio);
-            System.out.println();
-
         }
 
-//        System.out.printf("One Pair ratio %10.2f\n" , onePairRatio);
-//        System.out.println();
         System.out.println("Duration = " + durationSeconds + " seconds");
     }
 }

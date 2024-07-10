@@ -38,7 +38,7 @@ class PokerTexasHoldemUtilsTest {
     }
 
     @Test
-    public void testFindBestHand() {
+    public void testFindBestHandA() {
         PokerTexasHoldemUtils pokerTexasHoldemUtils = new PokerTexasHoldemUtils();
         Map.Entry<Hand5Card, Hand2Card> onePairAllCards = testUtilsTexasHoldem.createOnePairA();
 
@@ -51,6 +51,24 @@ class PokerTexasHoldemUtilsTest {
                 new Card(Suit.Hearts, Value.Six),
                 new Card(Suit.Clubs, Value.Ten),
                 new Card(Suit.Spades, Value.Queen),
+                new Card(Suit.Hearts, Value.Ace),
+                new Card(Suit.Clubs, Value.Ace));
+    }
+
+    @Test
+    public void testFindBestHandB() {
+        PokerTexasHoldemUtils pokerTexasHoldemUtils = new PokerTexasHoldemUtils();
+        Map.Entry<Hand5Card, Hand2Card> twoPairAllCards = testUtilsTexasHoldem.createTwoPairA();
+
+        List<Hand5Card> hand5CardList = pokerTexasHoldemUtils.generateAllPossibleHands(twoPairAllCards.getKey(), twoPairAllCards.getValue());
+
+        Hand5Card bestHand = pokerTexasHoldemUtils.findBestHand(hand5CardList);
+
+        assertThat(bestHand.getCards()).hasSize(5);
+        assertThat(bestHand.getCards()).containsOnly(
+                new Card(Suit.Spades, Value.Queen),
+                new Card(Suit.Hearts, Value.Five),
+                new Card(Suit.Diamonds, Value.Five),
                 new Card(Suit.Hearts, Value.Ace),
                 new Card(Suit.Clubs, Value.Ace));
     }

@@ -8,6 +8,7 @@ import org.srwcrw.poker.texasholdem.comparator.ValueComparatorAceLow;
 import org.srwcrw.poker.texasholdem.test.TestUtils;
 
 import java.util.Comparator;
+import java.util.Set;
 import java.util.SortedSet;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -75,4 +76,19 @@ class HandUtilsTest {
 
         assertThat(highestValue).isEqualTo(Value.Ace);
     }
+
+    @Test
+    void testGetPairValuesArray() {
+        int[] valueCounts = {
+                0,0,0,0,
+                3,0,0,0,
+                0,0,0,0,
+                2};
+
+        Set<Value> valueSet = handUtils.getPairValuesArray(valueCounts);
+
+        assertThat(valueSet.size()).isEqualTo(1);
+        assertThat(valueSet).containsOnly(Value.Ace);
+    }
+
 }

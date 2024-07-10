@@ -17,3 +17,6 @@
 /build/
 /out/
 /*.jfr
+/src/main/java/org/srwcrw/poker/texasholdem/executables/Dummy.java
+/src/main/java/org/srwcrw/poker/texasholdem/executables/Dummy2.java
+/mysettings.jfc

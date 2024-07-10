@@ -116,8 +116,9 @@ public class HandUtils implements IHandUtils {
     }
 
     public Set<Value> getPairValues(IPack hand) {
-        Map<Value, Integer> valueMap = countMatchingValues(hand);
-        return getPairValues(valueMap);
+//        Map<Value, Integer> valueMap = countMatchingValues(hand);
+        int[] valueCounts = countMatchingValuesArray(hand);
+        return getPairValuesArray(valueCounts);
     }
 
     public Set<Value> getThreeOfAKindValues(IPack hand) {
@@ -130,9 +131,14 @@ public class HandUtils implements IHandUtils {
         return getFourOfAKindValues(valueMap);
     }
 
-    public Set<Value> getPairValues(Map<Value, Integer> valueMap) {
+//    public Set<Value> getPairValues(Map<Value, Integer> valueMap) {
+//        @SuppressWarnings("UnnecessaryLocalVariable")
+//        var pairValues = valueMap.entrySet().stream().filter(e -> e.getValue() == 2).map(Map.Entry::getKey).collect(Collectors.toSet());
+//        return pairValues;
+//    }
+    public Set<Value> getPairValuesArray(int[] valueCounts) {
         @SuppressWarnings("UnnecessaryLocalVariable")
-        var pairValues = valueMap.entrySet().stream().filter(e -> e.getValue() == 2).map(Map.Entry::getKey).collect(Collectors.toSet());
+        var pairValues = Arrays.stream(valueCounts).boxed().map(e -> Value.values()[e]).collect(Collectors.toSet());
         return pairValues;
     }
 

@@ -1,10 +1,14 @@
 package org.srwcrw.poker.texasholdem.executables;
 
+import org.srwcrw.poker.texasholdem.collections.Hand5Card;
 import org.srwcrw.poker.texasholdem.collections.IPack;
+import org.srwcrw.poker.texasholdem.entities.HandType5Cards;
+import org.srwcrw.poker.texasholdem.generators.ConverterHand2Card;
 import org.srwcrw.poker.texasholdem.generators.ConverterHand5Card;
 import org.srwcrw.poker.texasholdem.generators.HandGenerator;
 import org.srwcrw.poker.texasholdem.generators.PackGenerator;
 import org.srwcrw.poker.texasholdem.handclassifer.Poker5CardHandClassifier;
+import org.srwcrw.poker.texasholdem.handclassifer.PokerTexasHoldemClassifier;
 
 import java.util.AbstractMap;
 import java.util.ArrayList;
@@ -15,6 +19,7 @@ public class TexasHoldemMain {
     private static final HandGenerator handGenerator = new HandGenerator();
     private static final Poker5CardHandClassifier poker5CardHandClassifier = new Poker5CardHandClassifier();
     private static final ConverterHand5Card converterHand5Card = new ConverterHand5Card();
+    private static final ConverterHand2Card converterHand2Card = new ConverterHand2Card();
 
     public static void main(String[] args) {
         IPack fullPack = packGenerator.generateFullPack();
@@ -32,16 +37,22 @@ public class TexasHoldemMain {
             fullPack = handPair.getKey();
 
             playerHandList.add(handPair.getValue());
-
-//            Hand5Card hand5Card = converterHand5Card.convert(handPair.getValue());
-//            HandType5Cards handType5Cards = poker5CardHandClassifier.classify(hand5Card);
-
-//            System.out.println("Hand of " + handPair.getValue() + " , -> type is = " + handType5Cards);
         }
 
-        System.out.println("Player hands are = " + playerHandList);
+//        System.out.println("Player hands are = " + playerHandList);
 
         IPack communityCards = handGenerator.generateHandAndRemoveImmutable(fullPack, 5).getValue();
+        Hand5Card communityCardsHand = converterHand5Card.convert(communityCards);
+
+        System.out.println("Player 1 cards = " + playerHandList.get(0));
+        System.out.println("Community cards = " + communityCards);
+
+        PokerTexasHoldemClassifier pokerTexasHoldemClassifier = new PokerTexasHoldemClassifier(communityCardsHand);
+
+        HandType5Cards handType5Cards1 = pokerTexasHoldemClassifier.classify(converterHand2Card.convert(playerHandList.get(0)));
+
+        System.out.println("handType5Cards1 = " + handType5Cards1);
+
 
     }
 }

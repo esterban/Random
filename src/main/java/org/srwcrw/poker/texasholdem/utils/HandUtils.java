@@ -8,6 +8,7 @@ import org.srwcrw.poker.texasholdem.entities.Value;
 import java.util.*;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class HandUtils implements IHandUtils {
     private final Map<Value, Integer> valueCounts = new HashMap<>();
@@ -138,7 +139,11 @@ public class HandUtils implements IHandUtils {
 //    }
     public Set<Value> getPairValuesArray(int[] valueCounts) {
         @SuppressWarnings("UnnecessaryLocalVariable")
-        var pairValues = Arrays.stream(valueCounts).boxed().map(e -> Value.values()[e]).collect(Collectors.toSet());
+        var pairValues = IntStream.range(0, 13).boxed()
+                .filter(e -> valueCounts[e] == 2)
+                .map(e -> Value.values()[e])
+                    .collect(Collectors.toSet());
+
         return pairValues;
     }
 

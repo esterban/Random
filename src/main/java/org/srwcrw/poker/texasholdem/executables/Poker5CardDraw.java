@@ -58,7 +58,7 @@ public class Poker5CardDraw {
             Integer count = handType5CardsCount.get(handType5Cards);
             double ratio = (double) count / iterationCount * 100;
 
-            System.out.printf(handType5Cards + " percentage = %10.3f\n", ratio);
+            System.out.printf(handType5Cards + " percentage = %10.5f\n", ratio);
         }
 
         System.out.printf("Duration = %10.3f seconds", durationSeconds);

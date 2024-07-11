@@ -100,7 +100,7 @@ public class Dummy2 {
 
 //        stringList.stream().reduce( )
 
-        Integer n1 = new Integer(1);
+        Integer n1 = 1;
         Integer n2 = n1;
         n1+=1;
 

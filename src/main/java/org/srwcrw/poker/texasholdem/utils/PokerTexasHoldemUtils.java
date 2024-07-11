@@ -58,6 +58,14 @@ public class PokerTexasHoldemUtils {
         return allPossibleHandList;
     }
 
+    public Hand5Card findBestHandWithCommunityCards(Hand5Card communityCards, Hand2Card hand2Card) {
+        List<Hand5Card> possibleHands = generateAllPossibleHands(communityCards, hand2Card);
+        Hand5Card bestHand = findBestHand(possibleHands);
+
+        return bestHand;
+    }
+
+
     public Hand5Card findBestHand(List<Hand5Card> hand5CardList) {
         SortedSet<Hand5Card> hand5CardSet = new TreeSet<>(new Poker5CardAceHighLowComparator());
         hand5CardSet.addAll(hand5CardList);

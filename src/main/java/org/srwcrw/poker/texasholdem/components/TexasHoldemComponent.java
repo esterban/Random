@@ -40,32 +40,33 @@ public class TexasHoldemComponent {
 
         final int opponentCount = 1;
 
-        final int handCount = 1000 * 1000;
+//        final int handCount = 1000 * 1000;
 //        final int handCount = 300 * 1000;
 //        final int handCount = 100 * 1000;
-//        final int handCount = 10 * 1000;
+        final int handCount = 10 * 1000;
 //        final int handCount = 100;
 
         int handsWonCount = 0;
         int handsDrawnCount = 0;
 
+        IPack fullPack = PACK_GENERATOR.generateFullPack();
+        Map.Entry<IPack, Hand2Card> packPlayerHandPair = createPlayerHand2(fullPack);
+        IPack pack50 = packPlayerHandPair.getKey();
+
         for (int handCounter = 1; handCounter <= handCount; ++handCounter) {
             List<IPack> opponentHandList = new ArrayList<>();
-            IPack fullPack = PACK_GENERATOR.generateFullPack();
-
-            Map.Entry<IPack, Hand2Card> packPlayerHandPair = createPlayerHand2(fullPack);
-            fullPack = packPlayerHandPair.getKey();
 
             Hand2Card playerHand2Card = packPlayerHandPair.getValue();
+            IPack pack48 = null;
 
             for (int counter = 1; counter <= opponentCount; ++counter) {
-                handPair = HAND_GENERATOR.generateHandAndRemoveImmutable(fullPack, 2);
-                fullPack = handPair.getKey();
+                handPair = HAND_GENERATOR.generateHandAndRemoveImmutable(pack50, 2);
+                pack48 = handPair.getKey();
 
                 opponentHandList.add(handPair.getValue());
             }
 
-            IPack communityCards = HAND_GENERATOR.generateHandAndRemoveImmutable(fullPack, 5).getValue();
+            IPack communityCards = HAND_GENERATOR.generateHandAndRemoveImmutable(pack48, 5).getValue();
             Hand5Card communityCardsHand = CONVERTER_HAND_5_CARD.convert(communityCards);
 
             Hand5Card playerBestHand = POKER_TEXAS_HOLDEM_UTILS.findBestHandWithCommunityCards(communityCardsHand, playerHand2Card);
@@ -122,6 +123,7 @@ public class TexasHoldemComponent {
         // SWright - 2024/07/11 - @1e6 iterations - error is still too high, execution time =  416.105s :/ NOT GOOD
 //        Player win/draw/lose percentages = 53.9% / 1.7% / 44.4%
 //        Player win/draw/lose percentages = 54.1% / 1.7% / 44.2%
+//        Player win/draw/lose percentages = 51.4% / 2.0% / 46.6%
         Card playerCard1 = new Card(Suit.Hearts, Value.Three);
         Card playerCard2 = new Card(Suit.Clubs, Value.Three);
 
@@ -129,7 +131,6 @@ public class TexasHoldemComponent {
 //        Player win/draw/lose percentages = 81.973% / 0.671% / 17.356%
 //        Card playerCard1 = new Card(Suit.Hearts, Value.King);
 //        Card playerCard2 = new Card(Suit.Clubs, Value.King);
-
 
         fullPack = fullPack.removeCard(playerCard1);
         fullPack = fullPack.removeCard(playerCard2);

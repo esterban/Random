@@ -119,10 +119,9 @@ public class TexasHoldemComponent {
 //        Card playerCard1 = new Card(Suit.Hearts, Value.Two);
 //        Card playerCard2 = new Card(Suit.Clubs, Value.Two);
 
-//        Player win/draw/lose percentages = 53.5% / 1.7% / 44.7%
-//        Player win/draw/lose percentages = 53.8% / 1.7% / 44.5%
+        // SWright - 2024/07/11 - @1e6 iterations - error is still too high, execution time =  416.105s :/ NOT GOOD
 //        Player win/draw/lose percentages = 53.9% / 1.7% / 44.4%
-
+//        Player win/draw/lose percentages = 54.1% / 1.7% / 44.2%
         Card playerCard1 = new Card(Suit.Hearts, Value.Three);
         Card playerCard2 = new Card(Suit.Clubs, Value.Three);
 
@@ -130,8 +129,6 @@ public class TexasHoldemComponent {
 //        Player win/draw/lose percentages = 81.973% / 0.671% / 17.356%
 //        Card playerCard1 = new Card(Suit.Hearts, Value.King);
 //        Card playerCard2 = new Card(Suit.Clubs, Value.King);
-
-
 
 
         fullPack = fullPack.removeCard(playerCard1);

@@ -1,18 +1,26 @@
 package org.srwcrw.poker.texasholdem.test;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.srwcrw.poker.texasholdem.collections.Hand5Card;
 import org.srwcrw.poker.texasholdem.collections.IPack;
+import org.srwcrw.poker.texasholdem.components.PackGenerator;
 import org.srwcrw.poker.texasholdem.entities.Card;
 import org.srwcrw.poker.texasholdem.entities.Suit;
 import org.srwcrw.poker.texasholdem.entities.Value;
-import org.srwcrw.poker.texasholdem.generators.PackGenerator;
 
 import java.util.SortedSet;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+@Component
 public class TestUtils {
+    @Autowired
+    private PackGenerator packGenerator;
+
+    private TestUtils() {}
+
     public Hand5Card createRoyalFlushA() {
         Card card1 = new Card(Suit.Diamonds, Value.Ten);
         Card card2 = new Card(Suit.Diamonds, Value.Jack);
@@ -208,8 +216,6 @@ public class TestUtils {
         return hand5Card;
     }
 
-
-
     public Hand5Card createThreeOfAKind() {
         Card card1 = new Card(Suit.Hearts, Value.Ten);
         Card card2 = new Card(Suit.Diamonds, Value.Ten);
@@ -248,7 +254,6 @@ public class TestUtils {
 
         return hand5Card;
     }
-
 
     public Hand5Card createThreeOfAKindC() {
         Card card1 = new Card(Suit.Hearts, Value.Five);
@@ -394,7 +399,6 @@ public class TestUtils {
     }
 
     public IPack createPack() {
-        PackGenerator packGenerator = new PackGenerator();
         return packGenerator.generateFullPack();
     }
 

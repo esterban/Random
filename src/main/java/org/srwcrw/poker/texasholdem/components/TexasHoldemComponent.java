@@ -1,6 +1,7 @@
 package org.srwcrw.poker.texasholdem.components;
 
 import org.aspectj.lang.annotation.Aspect;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StopWatch;
 import org.srwcrw.poker.texasholdem.collections.Hand2Card;
@@ -13,7 +14,6 @@ import org.srwcrw.poker.texasholdem.entities.Value;
 import org.srwcrw.poker.texasholdem.generators.ConverterHand2Card;
 import org.srwcrw.poker.texasholdem.generators.ConverterHand5Card;
 import org.srwcrw.poker.texasholdem.generators.HandGenerator;
-import org.srwcrw.poker.texasholdem.generators.PackGenerator;
 import org.srwcrw.poker.texasholdem.utils.PokerTexasHoldemUtils;
 
 import java.util.*;
@@ -21,9 +21,14 @@ import java.util.*;
 @Aspect
 @Component
 public class TexasHoldemComponent {
+    @Autowired
+    private CardFactoryImmutable cardFactoryImmutable;
+
     private static final Poker5CardAceHighLowComparator POKER_5_CARD_ACE_HIGH_LOW_COMPARATOR = new Poker5CardAceHighLowComparator();
 
-    private static final PackGenerator PACK_GENERATOR = new PackGenerator();
+    @Autowired
+    private PackGenerator packGenerator;
+
     private static final HandGenerator HAND_GENERATOR = new HandGenerator();
     //    private static final Poker5CardHandClassifier poker5CardHandClassifier = new Poker5CardHandClassifier();
     private static final PokerTexasHoldemUtils POKER_TEXAS_HOLDEM_UTILS = new PokerTexasHoldemUtils();
@@ -40,16 +45,16 @@ public class TexasHoldemComponent {
 
         final int opponentCount = 1;
 
-//        final int handCount = 1000 * 1000;
+        final int handCount = 1000 * 1000;
 //        final int handCount = 300 * 1000;
 //        final int handCount = 100 * 1000;
-        final int handCount = 10 * 1000;
+//        final int handCount = 10 * 1000;
 //        final int handCount = 100;
 
         int handsWonCount = 0;
         int handsDrawnCount = 0;
 
-        IPack fullPack = PACK_GENERATOR.generateFullPack();
+        IPack fullPack = packGenerator.generateFullPack();
         Map.Entry<IPack, Hand2Card> packPlayerHandPair = createPlayerHand2(fullPack);
         IPack pack50 = packPlayerHandPair.getKey();
 
@@ -122,10 +127,9 @@ public class TexasHoldemComponent {
 
         // SWright - 2024/07/11 - @1e6 iterations - error is still too high, execution time =  416.105s :/ NOT GOOD
 //        Player win/draw/lose percentages = 53.9% / 1.7% / 44.4%
-//        Player win/draw/lose percentages = 54.1% / 1.7% / 44.2%
-//        Player win/draw/lose percentages = 51.4% / 2.0% / 46.6%
-        Card playerCard1 = new Card(Suit.Hearts, Value.Three);
-        Card playerCard2 = new Card(Suit.Clubs, Value.Three);
+//        Player win/draw/lose percentages = 53.2% / 1.7% / 45.0%
+        Card playerCard1 = cardFactoryImmutable.createCard(Suit.Hearts, Value.Three);
+        Card playerCard2 = cardFactoryImmutable.createCard(Suit.Clubs, Value.Three);
 
 
 //        Player win/draw/lose percentages = 81.973% / 0.671% / 17.356%

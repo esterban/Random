@@ -1,11 +1,12 @@
 package org.srwcrw.poker.texasholdem.executables;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.srwcrw.poker.texasholdem.collections.Hand5Card;
 import org.srwcrw.poker.texasholdem.collections.IPack;
 import org.srwcrw.poker.texasholdem.entities.HandType5Cards;
 import org.srwcrw.poker.texasholdem.generators.ConverterHand5Card;
 import org.srwcrw.poker.texasholdem.generators.HandGenerator;
-import org.srwcrw.poker.texasholdem.generators.PackGenerator;
+import org.srwcrw.poker.texasholdem.components.PackGenerator;
 import org.srwcrw.poker.texasholdem.handclassifer.Poker5CardHandClassifier;
 
 import java.util.HashMap;
@@ -15,7 +16,8 @@ import java.util.stream.Collectors;
 import static org.srwcrw.poker.texasholdem.entities.HandType5Cards.OnePair;
 
 public class Poker5CardDraw {
-    public final PackGenerator packGenerator = new PackGenerator();
+    @Autowired
+    public PackGenerator packGenerator;
     public final HandGenerator handGenerator = new HandGenerator();
 
     public final Poker5CardHandClassifier poker5CardHandClassifier = new Poker5CardHandClassifier();

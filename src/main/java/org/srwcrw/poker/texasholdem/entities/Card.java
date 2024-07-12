@@ -34,11 +34,11 @@ public final class Card implements Comparable<Card> {
 
     @Override
     public int compareTo(Card o) {
-        if (this.value.compareTo(o.value) != 0) {
-            return this.value.compareTo(o.value);
+        if (this.value.compareTo(o.getValue()) != 0) {
+            return this.value.compareTo(o.getValue());
         }
 
-        return this.suit.compareTo(o.suit);
+        return this.suit.compareTo(o.getSuit());
     }
 
     @Override

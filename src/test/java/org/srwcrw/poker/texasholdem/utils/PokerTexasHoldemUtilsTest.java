@@ -2,8 +2,11 @@ package org.srwcrw.poker.texasholdem.utils;
 
 import org.junit.jupiter.api.Test;
 import org.powermock.core.classloader.annotations.PrepareForTest;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.srwcrw.poker.texasholdem.collections.Hand2Card;
 import org.srwcrw.poker.texasholdem.collections.Hand5Card;
+import org.srwcrw.poker.texasholdem.components.CardFactoryImmutable;
 import org.srwcrw.poker.texasholdem.entities.Card;
 import org.srwcrw.poker.texasholdem.entities.Suit;
 import org.srwcrw.poker.texasholdem.entities.Value;
@@ -21,8 +24,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 // the private method from PokerTexasHoldemClassifier to PokerTexasHoldemUtils as public utility method??!? (I don't like moving the implementation out.
 // Will leave for the time being.
 @PrepareForTest(PokerTexasHoldemUtils.class)
+@SpringBootTest(classes = {CardFactoryImmutable.class, TestUtilsTexasHoldem.class})
 class PokerTexasHoldemUtilsTest {
-    private TestUtilsTexasHoldem testUtilsTexasHoldem = new TestUtilsTexasHoldem();
+    @Autowired
+    private TestUtilsTexasHoldem testUtilsTexasHoldem;
 
     @Test
     public void testCreateHand5From3CommunityCards() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {

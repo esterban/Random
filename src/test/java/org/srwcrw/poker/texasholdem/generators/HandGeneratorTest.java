@@ -1,9 +1,14 @@
 package org.srwcrw.poker.texasholdem.generators;
 
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.srwcrw.poker.texasholdem.collections.IPack;
+import org.srwcrw.poker.texasholdem.components.CardFactoryImmutable;
+import org.srwcrw.poker.texasholdem.components.PackGenerator;
 import org.srwcrw.poker.texasholdem.entities.Card;
 import org.srwcrw.poker.texasholdem.test.TestUtils;
+import org.srwcrw.poker.texasholdem.test.TestUtilsTexasHoldem;
 
 import java.util.AbstractMap;
 import java.util.HashSet;
@@ -11,8 +16,10 @@ import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+@SpringBootTest(classes = {CardFactoryImmutable.class, TestUtilsTexasHoldem.class, TestUtils.class, PackGenerator.class})
 class HandGeneratorTest {
-    private final TestUtils testUtils = new TestUtils();
+    @Autowired
+    private TestUtils testUtils;
 
     @Test
     void testGenerateHandAndRemoveImmutable() {

@@ -1,13 +1,21 @@
 package org.srwcrw.poker.texasholdem.comparator;
 
 import org.junit.jupiter.api.Test;
-import org.srwcrw.poker.texasholdem.test.TestUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.srwcrw.poker.texasholdem.collections.Hand5Card;
+import org.srwcrw.poker.texasholdem.components.CardFactoryImmutable;
+import org.srwcrw.poker.texasholdem.components.PackGenerator;
+import org.srwcrw.poker.texasholdem.test.TestUtils;
+import org.srwcrw.poker.texasholdem.test.TestUtilsTexasHoldem;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+@SpringBootTest(classes = {CardFactoryImmutable.class, TestUtilsTexasHoldem.class, TestUtils.class, PackGenerator.class})
 class Poker5CardAceHighLowComparatorTest {
-    private final TestUtils testUtils = new TestUtils();
+    @Autowired
+    private TestUtils testUtils;
+
     private Poker5CardAceHighLowComparator poker5CardAceHighLowComparator = new Poker5CardAceHighLowComparator();
 
     @Test

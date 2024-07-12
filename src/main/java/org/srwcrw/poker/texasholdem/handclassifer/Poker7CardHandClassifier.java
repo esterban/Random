@@ -10,7 +10,9 @@ import org.srwcrw.poker.texasholdem.entities.Suit;
 import org.srwcrw.poker.texasholdem.entities.Value;
 import org.srwcrw.poker.texasholdem.utils.HandUtils;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.SortedSet;
 
 public class Poker7CardHandClassifier implements PokerCardClassifier<Hand7Card> {
     private static final ThreadLocal<Map<Value, Integer>> tripleMapThreadLocal = ThreadLocal.withInitial(HashMap::new);

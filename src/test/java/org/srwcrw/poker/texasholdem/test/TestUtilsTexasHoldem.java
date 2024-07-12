@@ -1,8 +1,11 @@
 package org.srwcrw.poker.texasholdem.test;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.srwcrw.poker.texasholdem.collections.Hand2Card;
 import org.srwcrw.poker.texasholdem.collections.Hand5Card;
 import org.srwcrw.poker.texasholdem.entities.Card;
+import org.srwcrw.poker.texasholdem.entities.ICardFactory;
 import org.srwcrw.poker.texasholdem.entities.Suit;
 import org.srwcrw.poker.texasholdem.entities.Value;
 
@@ -11,12 +14,16 @@ import java.util.Map;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
-@SuppressWarnings("UnnecessaryLocalVariable")
+@Component
 public class TestUtilsTexasHoldem {
+    @Autowired
+    private ICardFactory cardFactory;
+
     public Map.Entry<Hand5Card, Hand2Card> createOnePairA() {
         SortedSet<Card> hand5CardSet = new TreeSet<>();
 
-        hand5CardSet.add(new Card(Suit.Hearts, Value.Ace));
+//        hand5CardSet.add(new Card(Suit.Hearts, Value.Ace));
+        hand5CardSet.add(cardFactory.createCard(Suit.Hearts, Value.Ace));
         hand5CardSet.add(new Card(Suit.Hearts, Value.Three));
         hand5CardSet.add(new Card(Suit.Hearts, Value.Six));
         hand5CardSet.add(new Card(Suit.Clubs, Value.Ten));

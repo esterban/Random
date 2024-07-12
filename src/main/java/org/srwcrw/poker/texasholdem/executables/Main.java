@@ -1,9 +1,14 @@
 package org.srwcrw.poker.texasholdem.executables;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.srwcrw.poker.texasholdem.Statistics;
 import org.srwcrw.poker.texasholdem.collections.IPack;
+import org.srwcrw.poker.texasholdem.components.PackGenerator;
 import org.srwcrw.poker.texasholdem.entities.HandType5Cards;
-import org.srwcrw.poker.texasholdem.generators.*;
+import org.srwcrw.poker.texasholdem.generators.Converter;
+import org.srwcrw.poker.texasholdem.generators.ConverterHand5Card;
+import org.srwcrw.poker.texasholdem.generators.ConverterHand7Card;
+import org.srwcrw.poker.texasholdem.generators.HandGenerator;
 import org.srwcrw.poker.texasholdem.handclassifer.Poker5CardHandClassifier;
 import org.srwcrw.poker.texasholdem.handclassifer.Poker7CardHandClassifier;
 import org.srwcrw.poker.texasholdem.handclassifer.PokerCardClassifier;
@@ -14,7 +19,9 @@ import static org.srwcrw.poker.texasholdem.entities.HandType5Cards.HighestCard;
 import static org.srwcrw.poker.texasholdem.entities.HandType5Cards.OnePair;
 
 public class Main {
-    private static final PackGenerator packGenerator = new PackGenerator();
+    @Autowired
+    private PackGenerator packGenerator;
+
     private static final HandGenerator handGenerator = new HandGenerator();
 
     private static final Poker7CardHandClassifier poker7CardHandClassifier = new Poker7CardHandClassifier();
@@ -33,7 +40,7 @@ public class Main {
 
         double startNanos = System.nanoTime();
 
-        IPack fullPack = packGenerator.generateFullPack();
+        IPack fullPack = main.packGenerator.generateFullPack();
 
         AbstractMap.SimpleEntry<IPack, IPack> handPair = handGenerator.generateHandAndRemoveImmutable(fullPack, 2);
 

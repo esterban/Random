@@ -1,6 +1,5 @@
 package org.srwcrw.poker.texasholdem.collections;
 
-import jakarta.validation.constraints.NotNull;
 import org.srwcrw.poker.texasholdem.components.Card;
 
 import java.util.*;
@@ -28,20 +27,16 @@ public final class Hand5Card implements IPack {
         ThreadLocalRandom threadLocalRandom = ThreadLocalRandom.current();
         int randomCounter = threadLocalRandom.nextInt(5) + 1;
 
-        switch (randomCounter) {
-            case 1:
-                return card1;
-            case 2:
-                return card2;
-            case 3:
-                return card3;
-            case 4:
-                return card4;
-            case 5:
-                return card5;
-        }
+        return switch (randomCounter) {
+            case 1 -> card1;
+            case 2 -> card2;
+            case 3 -> card3;
+            case 4 -> card4;
+            case 5 -> card5;
+            default ->
+                    throw new RuntimeException("Should not be reached, should always return a card --- INTERNAL ERROR");
+        };
 
-        throw new RuntimeException("Should not be reached, should always return a card --- INTERNAL ERROR");
     }
 
     @Override
@@ -56,7 +51,7 @@ public final class Hand5Card implements IPack {
 
     @Override
     public SortedSet<Card> getCards() {
-        SortedSet cardsCopy = new TreeSet<>(List.of(card1, card2, card3, card4, card5));
+        SortedSet<Card> cardsCopy = new TreeSet<>(List.of(card1, card2, card3, card4, card5));
 
         return Collections.unmodifiableSortedSet(cardsCopy);
     }
@@ -103,19 +98,15 @@ public final class Hand5Card implements IPack {
 
     @Override
     public Card getNthCard(int index) {
-        switch (index) {
-            case 0:
-                return card1;
-            case 1:
-                return card2;
-            case 2:
-                return card3;
-            case 3:
-                return card4;
-            case 4:
-                return card5;
-        }
+        return switch (index) {
+            case 0 -> card1;
+            case 1 -> card2;
+            case 2 -> card3;
+            case 3 -> card4;
+            case 4 -> card5;
+            default ->
+                    throw new RuntimeException("Should not be reached, should always return a card --- INTERNAL ERROR");
+        };
 
-        throw new RuntimeException("Should not be reached, should always return a card --- INTERNAL ERROR");
     }
 }

@@ -1,7 +1,7 @@
 package org.srwcrw.poker.texasholdem.collections;
 
 import jakarta.validation.constraints.NotNull;
-import org.srwcrw.poker.texasholdem.entities.Card;
+import org.srwcrw.poker.texasholdem.components.Card;
 
 import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
@@ -9,37 +9,39 @@ import java.util.concurrent.ThreadLocalRandom;
 public final class Hand5Card implements IPack {
     private final CollectionUtils collectionUtils = new CollectionUtils();
 
-    private final SortedSet<Card> cards;
+    private final Card card1;
+    private final Card card2;
+    private final Card card3;
+    private final Card card4;
+    private final Card card5;
 
-    public Hand5Card(@NotNull SortedSet<Card> cards) {
-        if (cards.size() != 5) {
-            throw  new RuntimeException("Hand5Card can only be constructed from 5 cards");
-        }
-
-        this.cards = new TreeSet<>(cards);
+    public Hand5Card(Card card1, Card card2, Card card3, Card card4, Card card5) {
+        this.card1 = card1;
+        this.card2 = card2;
+        this.card3 = card3;
+        this.card4 = card4;
+        this.card5 = card5;
     }
 
     @Override
     public Card getCardAtRandom() {
-        if (cards == null || cards.isEmpty()) {
-            return null;
-        }
-
         ThreadLocalRandom threadLocalRandom = ThreadLocalRandom.current();
+        int randomCounter = threadLocalRandom.nextInt(5) + 1;
 
-        int randomIndex = threadLocalRandom.nextInt(cards.size());
-
-        int counter = 0;
-
-        for (Card card : cards) {
-            if (counter == randomIndex) {
-                return card;
-            }
-
-            ++counter;
+        switch (randomCounter) {
+            case 1:
+                return card1;
+            case 2:
+                return card2;
+            case 3:
+                return card3;
+            case 4:
+                return card4;
+            case 5:
+                return card5;
         }
 
-        return cards.iterator().next();
+        throw new RuntimeException("Should not be reached, should always return a card --- INTERNAL ERROR");
     }
 
     @Override
@@ -54,12 +56,15 @@ public final class Hand5Card implements IPack {
 
     @Override
     public SortedSet<Card> getCards() {
-        return Collections.unmodifiableSortedSet(cards);
+        SortedSet cardsCopy = new TreeSet<>(List.of(card1, card2, card3, card4, card5));
+
+        return Collections.unmodifiableSortedSet(cardsCopy);
     }
 
     @SuppressWarnings("unused")
     public AbstractMap.SimpleEntry<Card, IPack> removeRandomCardImmutable() {
-        Hand newHand = new Hand(cards);
+        SortedSet<Card> cardSortedSet = new TreeSet<>(List.of(card1, card2, card3, card4, card5));
+        Hand newHand = new Hand(cardSortedSet);
         Card card = getCardAtRandom();
 
         newHand.removeCard(card);
@@ -71,19 +76,46 @@ public final class Hand5Card implements IPack {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Hand5Card hand = (Hand5Card) o;
-        return Objects.equals(cards, hand.cards);
+        Hand5Card hand5Card = (Hand5Card) o;
+
+        return  Objects.equals(card1, hand5Card.card1) &&
+                Objects.equals(card2, hand5Card.card2) &&
+                Objects.equals(card3, hand5Card.card3) &&
+                Objects.equals(card4, hand5Card.card4) &&
+                Objects.equals(card5, hand5Card.card5);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(cards);
+        return Objects.hash(card1, card2, card3, card4, card5);
     }
 
     @Override
     public String toString() {
-        return "Hand{" +
-                "cards=" + cards +
+        return "Hand5Card{" +
+                "card1=" + card1 +
+                ", card2=" + card2 +
+                ", card3=" + card3 +
+                ", card4=" + card4 +
+                ", card5=" + card5 +
                 '}';
+    }
+
+    @Override
+    public Card getNthCard(int index) {
+        switch (index) {
+            case 0:
+                return card1;
+            case 1:
+                return card2;
+            case 2:
+                return card3;
+            case 3:
+                return card4;
+            case 4:
+                return card5;
+        }
+
+        throw new RuntimeException("Should not be reached, should always return a card --- INTERNAL ERROR");
     }
 }

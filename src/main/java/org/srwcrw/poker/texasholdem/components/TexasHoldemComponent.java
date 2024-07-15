@@ -8,7 +8,6 @@ import org.srwcrw.poker.texasholdem.collections.Hand2Card;
 import org.srwcrw.poker.texasholdem.collections.Hand5Card;
 import org.srwcrw.poker.texasholdem.collections.IPack;
 import org.srwcrw.poker.texasholdem.comparator.Poker5CardAceHighLowComparator;
-import org.srwcrw.poker.texasholdem.entities.Card;
 import org.srwcrw.poker.texasholdem.entities.Suit;
 import org.srwcrw.poker.texasholdem.entities.Value;
 import org.srwcrw.poker.texasholdem.generators.ConverterHand2Card;
@@ -45,9 +44,9 @@ public class TexasHoldemComponent {
 
         final int opponentCount = 1;
 
-        final int handCount = 1000 * 1000;
+//        final int handCount = 1000 * 1000;
 //        final int handCount = 300 * 1000;
-//        final int handCount = 100 * 1000;
+        final int handCount = 100 * 1000;
 //        final int handCount = 10 * 1000;
 //        final int handCount = 100;
 

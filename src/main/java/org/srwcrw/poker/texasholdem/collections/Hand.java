@@ -1,18 +1,33 @@
 package org.srwcrw.poker.texasholdem.collections;
 
-import org.srwcrw.poker.texasholdem.entities.Card;
+import org.apache.commons.collections4.IteratorUtils;
+import org.srwcrw.poker.texasholdem.components.Card;
 
 import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
 
 public final class Hand implements IPack {
 
-    private final SortedSet<Card> cards;
+        private final SortedSet<Card> cards;
+//    private final Card card1;
+//    private final Card card2;
+//    private final Card card3;
+//    private final Card card4;
+//    private final Card card5;
+
     private final CollectionUtils collectionUtils = new CollectionUtils();
 
     public Hand(SortedSet<Card> cards) {
         this.cards = cards;
     }
+
+//    public Hand(Card card1, Card card2, Card card3, Card card4, Card card5) {
+//        this.card1 = card1;
+//        this.card2 = card2;
+//        this.card3 = card3;
+//        this.card4 = card4;
+//        this.card5 = card5;
+//    }
 
     @Override
     public Card getCardAtRandom() {
@@ -55,12 +70,12 @@ public final class Hand implements IPack {
 
     @SuppressWarnings("unused")
     public AbstractMap.SimpleEntry<Card, IPack> removeRandomCardImmutable() {
-          Hand newHand = new Hand(cards);
-          Card card = getCardAtRandom();
+        Hand newHand = new Hand(cards);
+        Card card = getCardAtRandom();
 
-          newHand.removeCard(card);
+        newHand.removeCard(card);
 
-          return new AbstractMap.SimpleEntry<>(card, newHand);
+        return new AbstractMap.SimpleEntry<>(card, newHand);
     }
 
     @Override
@@ -81,5 +96,14 @@ public final class Hand implements IPack {
         return "Hand{" +
                 "cards=" + cards +
                 '}';
+    }
+
+    @Override
+    public Card getNthCard(int index) {
+        if (index >= cards.size()) {
+            throw new RuntimeException("size = " + cards.size() +" , index out of bounds " + index);
+        }
+
+        return IteratorUtils.get(cards.iterator(), index);
     }
 }

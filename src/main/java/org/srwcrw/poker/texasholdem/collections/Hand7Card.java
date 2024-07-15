@@ -1,6 +1,7 @@
 package org.srwcrw.poker.texasholdem.collections;
 
-import org.srwcrw.poker.texasholdem.entities.Card;
+import org.apache.commons.collections4.IteratorUtils;
+import org.srwcrw.poker.texasholdem.components.Card;
 
 import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
@@ -84,5 +85,14 @@ public final class Hand7Card implements IPack {
         return "Hand{" +
                 "cards=" + cards +
                 '}';
+    }
+
+    @Override
+    public Card getNthCard(int index) {
+        if (index >= cards.size()) {
+            throw new RuntimeException("size = " + cards.size() +" , index out of bounds " + index);
+        }
+
+        return IteratorUtils.get(cards.iterator(), index);
     }
 }

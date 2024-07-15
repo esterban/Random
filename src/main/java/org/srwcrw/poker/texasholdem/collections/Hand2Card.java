@@ -1,10 +1,8 @@
 package org.srwcrw.poker.texasholdem.collections;
 
-import org.srwcrw.poker.texasholdem.entities.Card;
+import org.srwcrw.poker.texasholdem.components.Card;
 
-import java.util.List;
-import java.util.SortedSet;
-import java.util.TreeSet;
+import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class Hand2Card implements IPack {
@@ -55,9 +53,7 @@ public class Hand2Card implements IPack {
 
     @Override
     public SortedSet<Card> getCards() {
-        SortedSet<Card> newTreeSet = new TreeSet<>(cards.comparator());
-        newTreeSet.addAll(cards);
-        return newTreeSet;
+        return Collections.unmodifiableSortedSet(cards);
     }
 
     @Override
@@ -65,5 +61,22 @@ public class Hand2Card implements IPack {
         return "Hand2Card{" +
                 "cards=" + cards +
                 '}';
+    }
+
+    @Override
+    public Card getNthCard(int index) {
+        if (index >= 2) {
+            throw new RuntimeException("index out of bounds " + index);
+        }
+
+        Iterator<Card> cardIterator = cards.iterator();
+
+        if (index == 0) {
+            return cardIterator.next();
+        }
+
+        cardIterator.next();
+
+        return cardIterator.next();
     }
 }

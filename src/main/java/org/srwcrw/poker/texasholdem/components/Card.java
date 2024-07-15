@@ -1,4 +1,7 @@
-package org.srwcrw.poker.texasholdem.entities;
+package org.srwcrw.poker.texasholdem.components;
+
+import org.srwcrw.poker.texasholdem.entities.Suit;
+import org.srwcrw.poker.texasholdem.entities.Value;
 
 import java.util.Objects;
 
@@ -6,7 +9,7 @@ public final class Card implements Comparable<Card> {
     private final Suit suit;
     private final Value value;
 
-    public Card(Suit suit, Value value) {
+    Card(Suit suit, Value value) {
         this.suit = suit;
         this.value = value;
     }

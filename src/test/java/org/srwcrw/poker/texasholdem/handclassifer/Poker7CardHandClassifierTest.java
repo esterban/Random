@@ -1,18 +1,28 @@
 package org.srwcrw.poker.texasholdem.handclassifer;
 
 import org.junit.jupiter.api.Test;
-import org.srwcrw.poker.texasholdem.test.TestUtils7Card;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.srwcrw.poker.texasholdem.collections.Hand7Card;
+import org.srwcrw.poker.texasholdem.components.CardFactoryImmutable;
+import org.srwcrw.poker.texasholdem.components.PackGenerator;
 import org.srwcrw.poker.texasholdem.entities.HandType5Cards;
+import org.srwcrw.poker.texasholdem.test.TestUtils;
+import org.srwcrw.poker.texasholdem.test.TestUtils7Card;
+import org.srwcrw.poker.texasholdem.test.TestUtilsTexasHoldem;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+@SpringBootTest(classes = {CardFactoryImmutable.class, TestUtilsTexasHoldem.class, TestUtils.class, PackGenerator.class, TestUtils7Card.class})
 class Poker7CardHandClassifierTest {
     private Poker7CardHandClassifier poker7CardHandClassifier = new Poker7CardHandClassifier();
 
+    @Autowired
+    private TestUtils7Card testUtils7Card;
+
     @Test
     public void testClassifyOnePair() {
-        Hand7Card onePairHand = TestUtils7Card.createOnePairA();
+        Hand7Card onePairHand = testUtils7Card.createOnePairA();
 
         HandType5Cards handType5CardsA = poker7CardHandClassifier.classify(onePairHand);
 
@@ -21,7 +31,7 @@ class Poker7CardHandClassifierTest {
 
     @Test
     public void testClassifyNotOnePair() {
-        Hand7Card highCardHand = TestUtils7Card.createHighCardA();
+        Hand7Card highCardHand = testUtils7Card.createHighCardA();
 
         HandType5Cards handType5CardsA = poker7CardHandClassifier.classify(highCardHand);
 

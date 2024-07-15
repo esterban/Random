@@ -2,7 +2,7 @@ package org.srwcrw.poker.texasholdem.generators;
 
 import org.srwcrw.poker.texasholdem.collections.Hand;
 import org.srwcrw.poker.texasholdem.collections.IPack;
-import org.srwcrw.poker.texasholdem.entities.Card;
+import org.srwcrw.poker.texasholdem.components.Card;
 
 import java.util.AbstractMap;
 import java.util.List;

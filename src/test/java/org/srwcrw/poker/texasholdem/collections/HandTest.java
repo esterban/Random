@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.srwcrw.poker.texasholdem.components.CardFactoryImmutable;
 import org.srwcrw.poker.texasholdem.components.PackGenerator;
-import org.srwcrw.poker.texasholdem.entities.Card;
+import org.srwcrw.poker.texasholdem.components.Card;
 import org.srwcrw.poker.texasholdem.test.TestUtils;
 
 import java.util.List;

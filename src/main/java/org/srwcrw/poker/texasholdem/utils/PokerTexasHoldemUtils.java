@@ -4,7 +4,7 @@ import org.apache.commons.collections4.IteratorUtils;
 import org.srwcrw.poker.texasholdem.collections.Hand2Card;
 import org.srwcrw.poker.texasholdem.collections.Hand5Card;
 import org.srwcrw.poker.texasholdem.comparator.Poker5CardAceHighLowComparator;
-import org.srwcrw.poker.texasholdem.entities.Card;
+import org.srwcrw.poker.texasholdem.components.Card;
 
 import java.util.*;
 
@@ -31,7 +31,15 @@ public class PokerTexasHoldemUtils {
                     permutationCardSet.add(cardToAdd);
                 }
 
-                Hand5Card permutationHand = new Hand5Card(permutationCardSet);
+                Iterator<Card> permutationCardSetIterator = permutationCardSet.iterator();
+
+                Hand5Card permutationHand = new Hand5Card(
+                        permutationCardSetIterator.next(),
+                        permutationCardSetIterator.next(),
+                        permutationCardSetIterator.next(),
+                        permutationCardSetIterator.next(),
+                        permutationCardSetIterator.next());
+
                 possibleHandList.add(permutationHand);
             }
         }
@@ -42,7 +50,15 @@ public class PokerTexasHoldemUtils {
     public List<Hand5Card> generateAllPossibleHands(Hand5Card communityCards, Hand2Card hand2Card) {
         List<Hand5Card> allPossibleHandList = new ArrayList<>();
 
-        Hand5Card hand5Card = new Hand5Card(communityCards.getCards());
+        Iterator<Card> communityCardIterator = communityCards.getCards().iterator();
+
+        Hand5Card hand5Card = new Hand5Card(
+                communityCardIterator.next(),
+                communityCardIterator.next(),
+                communityCardIterator.next(),
+                communityCardIterator.next(),
+                communityCardIterator.next());
+
         allPossibleHandList.add(hand5Card);
 
         List<Hand5Card> firstCardHand5Permutations = createHand5From4CommunityCards(communityCards, hand2Card.getCards().first());
@@ -91,7 +107,15 @@ public class PokerTexasHoldemUtils {
                 permutationCardSet.add(cardToAdd);
             }
 
-            Hand5Card permutationHand = new Hand5Card(permutationCardSet);
+            Iterator<Card> permutationCardSetIterator = permutationCardSet.iterator();
+
+            Hand5Card permutationHand = new Hand5Card(
+                    permutationCardSetIterator.next(),
+                    permutationCardSetIterator.next(),
+                    permutationCardSetIterator.next(),
+                    permutationCardSetIterator.next(),
+                    permutationCardSetIterator.next());
+
             possibleHandList.add(permutationHand);
         }
 

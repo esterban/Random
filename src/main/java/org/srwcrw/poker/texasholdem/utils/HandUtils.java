@@ -2,7 +2,7 @@ package org.srwcrw.poker.texasholdem.utils;
 
 import org.srwcrw.poker.texasholdem.collections.IPack;
 import org.srwcrw.poker.texasholdem.comparator.ValueComparatorAceHigh;
-import org.srwcrw.poker.texasholdem.entities.Card;
+import org.srwcrw.poker.texasholdem.components.Card;
 import org.srwcrw.poker.texasholdem.entities.Value;
 
 import java.util.*;

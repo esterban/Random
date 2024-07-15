@@ -4,7 +4,7 @@ import org.srwcrw.poker.texasholdem.collections.Hand5Card;
 import org.srwcrw.poker.texasholdem.collections.Hand7Card;
 import org.srwcrw.poker.texasholdem.comparator.ValueComparatorAceHigh;
 import org.srwcrw.poker.texasholdem.comparator.ValueComparatorAceLow;
-import org.srwcrw.poker.texasholdem.entities.Card;
+import org.srwcrw.poker.texasholdem.components.Card;
 import org.srwcrw.poker.texasholdem.entities.HandType5Cards;
 import org.srwcrw.poker.texasholdem.entities.Suit;
 import org.srwcrw.poker.texasholdem.entities.Value;

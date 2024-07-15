@@ -7,7 +7,7 @@ import org.srwcrw.poker.texasholdem.comparator.ValueComparatorAceHigh;
 import org.srwcrw.poker.texasholdem.comparator.ValueComparatorAceLow;
 import org.srwcrw.poker.texasholdem.components.CardFactoryImmutable;
 import org.srwcrw.poker.texasholdem.components.PackGenerator;
-import org.srwcrw.poker.texasholdem.entities.Card;
+import org.srwcrw.poker.texasholdem.components.Card;
 import org.srwcrw.poker.texasholdem.entities.Value;
 import org.srwcrw.poker.texasholdem.test.TestUtils;
 import org.srwcrw.poker.texasholdem.test.TestUtilsTexasHoldem;

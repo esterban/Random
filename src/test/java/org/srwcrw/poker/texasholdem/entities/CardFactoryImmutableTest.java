@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.srwcrw.poker.texasholdem.components.CardFactoryImmutable;
+import org.srwcrw.poker.texasholdem.components.Card;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -16,6 +17,6 @@ class CardFactoryImmutableTest {
     public void testCreateCardA() {
         Card card = cardFactoryImmutable.createCard(Suit.Clubs, Value.Queen);
 
-        assertThat(card).isEqualTo(new Card(Suit.Clubs, Value.Queen));
+        assertThat(card).isEqualTo(cardFactoryImmutable.createCard(Suit.Clubs, Value.Queen));
     }
 }

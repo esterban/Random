@@ -10,6 +10,9 @@ import org.srwcrw.poker.texasholdem.components.PackGenerator;
 import org.srwcrw.poker.texasholdem.entities.Suit;
 import org.srwcrw.poker.texasholdem.entities.Value;
 
+import java.util.SortedSet;
+import java.util.TreeSet;
+
 @Component
 public class TestUtils {
     @Autowired
@@ -370,6 +373,16 @@ public class TestUtils {
 
     public IPack createPack() {
         return packGenerator.generateFullPack();
+    }
+
+    public SortedSet<Card> convertHand5ToSortedSet(Hand5Card hand5Card) {
+        SortedSet<Card> sortedSet = new TreeSet<>();
+
+        for (int index = 0; index < 5; ++index) {
+            sortedSet.add(hand5Card.getNthCard(index));
+        }
+
+        return sortedSet;
     }
 
 }

@@ -5,9 +5,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.srwcrw.poker.texasholdem.comparator.ValueComparatorAceHigh;
 import org.srwcrw.poker.texasholdem.comparator.ValueComparatorAceLow;
+import org.srwcrw.poker.texasholdem.components.Card;
 import org.srwcrw.poker.texasholdem.components.CardFactoryImmutable;
 import org.srwcrw.poker.texasholdem.components.PackGenerator;
-import org.srwcrw.poker.texasholdem.components.Card;
 import org.srwcrw.poker.texasholdem.entities.Value;
 import org.srwcrw.poker.texasholdem.test.TestUtils;
 import org.srwcrw.poker.texasholdem.test.TestUtilsTexasHoldem;
@@ -27,8 +27,12 @@ class SortedSetComparatorTest {
     void testCompareA() {
         SortedSetComparator<Card> setComparator = new SortedSetComparator<>();
 
-        SortedSet<Card> set1 = testUtils.createStraightFlushAceHigh().getCards();
-        SortedSet<Card> set2 = testUtils.createStraightFlushAceLow().getCards();
+//        SortedSet<Card> set1 = testUtils.createStraightFlushAceHigh().getCards();
+//        SortedSet<Card> set2 = testUtils.createStraightFlushAceLow().getCards();
+
+        SortedSet<Card> set1 = testUtils.convertHand5ToSortedSet(testUtils.createStraightFlushAceHigh());
+        SortedSet<Card> set2 = testUtils.convertHand5ToSortedSet(testUtils.createStraightFlushAceLow());
+
 
         assertThat(setComparator.compare(set1, set2)).isGreaterThan(0);
         assertThat(setComparator.compare(set2, set1)).isLessThan(0);

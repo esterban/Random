@@ -1,17 +1,10 @@
 package org.srwcrw.poker.texasholdem.handclassifer;
 
 import org.srwcrw.poker.texasholdem.collections.Hand5Card;
-import org.srwcrw.poker.texasholdem.comparator.ValueComparatorAceHigh;
-import org.srwcrw.poker.texasholdem.comparator.ValueComparatorAceLow;
 import org.srwcrw.poker.texasholdem.components.Card;
 import org.srwcrw.poker.texasholdem.entities.HandType5Cards;
 import org.srwcrw.poker.texasholdem.entities.Suit;
-import org.srwcrw.poker.texasholdem.entities.Value;
 import org.srwcrw.poker.texasholdem.utils.HandUtils;
-
-import java.util.HashSet;
-import java.util.Set;
-import java.util.SortedSet;
 
 public class Poker5CardHandClassifier implements PokerCardClassifier<Hand5Card> {
     private final HandUtils handUtils = new HandUtils();
@@ -24,11 +17,11 @@ public class Poker5CardHandClassifier implements PokerCardClassifier<Hand5Card> 
         boolean isFlush = isFlush(hand5Card);
 
         if (isFlush && isStraight) {
-            Set<Value> handValues = handUtils.getValueSetSorted(hand5Card, new ValueComparatorAceHigh());
-
-            if (handValues.contains(Value.Ace) && handValues.contains(Value.King)) {
-                return HandType5Cards.RoyalFlush;
-            }
+//            Set<Value> handValues = handUtils.getValueSetSorted(hand5Card, new ValueComparatorAceHigh());
+//
+//            if (handValues.contains(Value.Ace) && handValues.contains(Value.King)) {
+//                return HandType5Cards.RoyalFlush;
+//            }
 
             return HandType5Cards.StraightFlush;
         }
@@ -65,29 +58,43 @@ public class Poker5CardHandClassifier implements PokerCardClassifier<Hand5Card> 
     }
 
     private boolean isFlush(Hand5Card hand5Card) {
-        Set<Suit> uniqueSuits = new HashSet<>();
+//        Set<Suit> uniqueSuits = new HashSet<>();
 
-        for (Card card : hand5Card.getCards()) {
-            uniqueSuits.add(card.getSuit());
+        Suit firstSuit = null;
+
+        for (int index =0; index < 5; ++index) {
+            Card card = hand5Card.getNthCard(index);
+
+//        for (Card card : hand5Card.getCards()) {
+            if (firstSuit == null) {
+                firstSuit = card.getSuit();
+            } else {
+                if (firstSuit != card.getSuit()) {
+                    return false;
+                }
+
+
+            }
         }
 
-        return uniqueSuits.size() == 1;
+//        return uniqueSuits.size() == 1;
+        return true;
     }
 
     private boolean isStraight(Hand5Card hand5Card) {
-        SortedSet<Value> cards = handUtils.getValueSetSorted(hand5Card, new ValueComparatorAceLow());
+//        SortedSet<Value> cards = handUtils.getValueSetSorted(hand5Card, new ValueComparatorAceLow());
+//
+//        if (cards.size() < 5) {
+//            return false;
+//        }
 
-        if (cards.size() < 5) {
-            return false;
-        }
-
-        if (handUtils.areValuesConsecutive(cards)) {
+        if (handUtils.areValuesConsecutive(hand5Card)) {
             return true;
         }
 
-        cards = handUtils.getValueSetSorted(hand5Card, new ValueComparatorAceHigh());
+//        cards = handUtils.getValueSetSorted(hand5Card, new ValueComparatorAceHigh());
 
-        return handUtils.areValuesConsecutive(cards);
+        return handUtils.areValuesConsecutiveAceHigh(hand5Card);
     }
 
 

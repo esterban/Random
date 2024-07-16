@@ -6,7 +6,8 @@ import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
 
 public final class Hand5Card implements IPack {
-    private final CollectionUtils collectionUtils = new CollectionUtils();
+//    private final CollectionUtils collectionUtils = new CollectionUtils();
+    private static final CollectionUtils collectionUtils = new CollectionUtils();
 
     private final Card card1;
     private final Card card2;
@@ -51,9 +52,10 @@ public final class Hand5Card implements IPack {
 
     @Override
     public SortedSet<Card> getCards() {
-        SortedSet<Card> cardsCopy = new TreeSet<>(List.of(card1, card2, card3, card4, card5));
+        throw new RuntimeException("Not supported");
 
-        return Collections.unmodifiableSortedSet(cardsCopy);
+//        SortedSet<Card> cardsCopy = new TreeSet<>(List.of(card1, card2, card3, card4, card5));
+//        return Collections.unmodifiableSortedSet(cardsCopy);
     }
 
     @SuppressWarnings("unused")
@@ -107,6 +109,5 @@ public final class Hand5Card implements IPack {
             default ->
                     throw new RuntimeException("Should not be reached, should always return a card --- INTERNAL ERROR");
         };
-
     }
 }

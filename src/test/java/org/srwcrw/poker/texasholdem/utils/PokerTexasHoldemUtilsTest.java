@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.srwcrw.poker.texasholdem.collections.Hand2Card;
 import org.srwcrw.poker.texasholdem.collections.Hand5Card;
-import org.srwcrw.poker.texasholdem.components.CardFactoryImmutable;
 import org.srwcrw.poker.texasholdem.components.Card;
+import org.srwcrw.poker.texasholdem.components.CardFactoryImmutable;
 import org.srwcrw.poker.texasholdem.components.PackGenerator;
 import org.srwcrw.poker.texasholdem.entities.Suit;
 import org.srwcrw.poker.texasholdem.entities.Value;
@@ -16,9 +16,10 @@ import org.srwcrw.poker.texasholdem.test.TestUtilsTexasHoldem;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
+import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -57,13 +58,28 @@ class PokerTexasHoldemUtilsTest {
 
         Hand5Card bestHand = pokerTexasHoldemUtils.findBestHand(hand5CardList);
 
-        assertThat(bestHand.getCards()).hasSize(5);
-        assertThat(bestHand.getCards()).containsExactly(
+//        assertThat(bestHand.getCards()).hasSize(5);
+//        Set<Card> cardSet = new HashSet<>();
+//
+//        for (int index = 0; index < 5; ++index) {
+//            cardSet.add(bestHand.getNthCard(index));
+//        }
+//
+//        assertThat(cardSet).contains(
+//                cardFactoryImmutable.createCard(Suit.Hearts, Value.Six),
+//                cardFactoryImmutable.createCard(Suit.Clubs, Value.Ten),
+//                cardFactoryImmutable.createCard(Suit.Spades, Value.Queen),
+//                cardFactoryImmutable.createCard(Suit.Hearts, Value.Ace),
+//                cardFactoryImmutable.createCard(Suit.Clubs, Value.Ace)
+//        );
+
+        assertHandMatchesExpectedOutput( bestHand,
                 cardFactoryImmutable.createCard(Suit.Hearts, Value.Six),
                 cardFactoryImmutable.createCard(Suit.Clubs, Value.Ten),
                 cardFactoryImmutable.createCard(Suit.Spades, Value.Queen),
                 cardFactoryImmutable.createCard(Suit.Hearts, Value.Ace),
-                cardFactoryImmutable.createCard(Suit.Clubs, Value.Ace));
+                cardFactoryImmutable.createCard(Suit.Clubs, Value.Ace)
+        );
     }
 
     @Test
@@ -75,8 +91,9 @@ class PokerTexasHoldemUtilsTest {
 
         Hand5Card bestHand = pokerTexasHoldemUtils.findBestHand(hand5CardList);
 
-        assertThat(bestHand.getCards()).hasSize(5);
-        assertThat(bestHand.getCards()).containsOnly(
+//        assertThat(bestHand.getCards()).hasSize(5);
+//        assertThat(bestHand.getCards()).containsOnly(
+        assertHandMatchesExpectedOutput( bestHand,
                 cardFactoryImmutable.createCard(Suit.Spades, Value.Queen),
                 cardFactoryImmutable.createCard(Suit.Hearts, Value.Five),
                 cardFactoryImmutable.createCard(Suit.Diamonds, Value.Five),
@@ -93,13 +110,21 @@ class PokerTexasHoldemUtilsTest {
 
         Hand5Card bestHand = pokerTexasHoldemUtils.findBestHand(hand5CardList);
 
-        assertThat(bestHand.getCards()).hasSize(5);
-        assertThat(bestHand.getCards()).containsOnly(
+        assertHandMatchesExpectedOutput(bestHand,
                 cardFactoryImmutable.createCard(Suit.Spades, Value.Queen),
                 cardFactoryImmutable.createCard(Suit.Clubs, Value.Ten),
                 cardFactoryImmutable.createCard(Suit.Diamonds, Value.Ace),
                 cardFactoryImmutable.createCard(Suit.Hearts, Value.Ace),
                 cardFactoryImmutable.createCard(Suit.Clubs, Value.Ace));
+
+
+//        assertThat(bestHand.getCards()).hasSize(5);
+//        assertThat(bestHand.getCards()).containsOnly(
+//                cardFactoryImmutable.createCard(Suit.Spades, Value.Queen),
+//                cardFactoryImmutable.createCard(Suit.Clubs, Value.Ten),
+//                cardFactoryImmutable.createCard(Suit.Diamonds, Value.Ace),
+//                cardFactoryImmutable.createCard(Suit.Hearts, Value.Ace),
+//                cardFactoryImmutable.createCard(Suit.Clubs, Value.Ace));
     }
 
     @Test
@@ -111,17 +136,25 @@ class PokerTexasHoldemUtilsTest {
 
         Hand5Card bestHand = pokerTexasHoldemUtils.findBestHand(hand5CardList);
 
-        assertThat(bestHand.getCards()).hasSize(5);
-        assertThat(bestHand.getCards()).containsOnly(
+        assertHandMatchesExpectedOutput(bestHand,
                 cardFactoryImmutable.createCard(Suit.Hearts, Value.Ace),
                 cardFactoryImmutable.createCard(Suit.Clubs, Value.King),
                 cardFactoryImmutable.createCard(Suit.Spades, Value.Queen),
                 cardFactoryImmutable.createCard(Suit.Diamonds, Value.Jack),
                 cardFactoryImmutable.createCard(Suit.Clubs, Value.Ten));
 
-        List<Value> valueList = bestHand.getCards().stream().map(e -> e.getValue()).collect(Collectors.toUnmodifiableList());
+//
+//        assertThat(bestHand.getCards()).hasSize(5);
+//        assertThat(bestHand.getCards()).containsOnly(
+//                cardFactoryImmutable.createCard(Suit.Hearts, Value.Ace),
+//                cardFactoryImmutable.createCard(Suit.Clubs, Value.King),
+//                cardFactoryImmutable.createCard(Suit.Spades, Value.Queen),
+//                cardFactoryImmutable.createCard(Suit.Diamonds, Value.Jack),
+//                cardFactoryImmutable.createCard(Suit.Clubs, Value.Ten));
 
-        assertThat(valueList).containsOnly(Value.Ace, Value.King, Value.Queen, Value.Jack, Value.Ten);
+//        List<Value> valueList = bestHand.getCards().stream().map(e -> e.getValue()).collect(Collectors.toUnmodifiableList());
+//
+//        assertThat(valueList).containsOnly(Value.Ace, Value.King, Value.Queen, Value.Jack, Value.Ten);
     }
 
     @Test
@@ -133,17 +166,19 @@ class PokerTexasHoldemUtilsTest {
 
         Hand5Card bestHand = pokerTexasHoldemUtils.findBestHand(hand5CardList);
 
-        assertThat(bestHand.getCards()).hasSize(5);
-        assertThat(bestHand.getCards()).containsOnly(
+//        assertThat(bestHand.getCards()).hasSize(5);
+//        assertThat(bestHand.getCards()).containsOnly(
+        assertHandMatchesExpectedOutput(bestHand,
+
                 cardFactoryImmutable.createCard(Suit.Hearts, Value.Ace),
                 cardFactoryImmutable.createCard(Suit.Hearts, Value.King),
                 cardFactoryImmutable.createCard(Suit.Hearts, Value.Queen),
                 cardFactoryImmutable.createCard(Suit.Hearts, Value.Ten),
                 cardFactoryImmutable.createCard(Suit.Hearts, Value.Six));
 
-        List<Suit> suitList = bestHand.getCards().stream().map(e -> e.getSuit()).collect(Collectors.toUnmodifiableList());
-
-        assertThat(suitList).containsOnly(Suit.Hearts, Suit.Hearts, Suit.Hearts, Suit.Hearts, Suit.Hearts);
+//        List<Suit> suitList = bestHand.getCards().stream().map(e -> e.getSuit()).collect(Collectors.toUnmodifiableList());
+//
+//        assertThat(suitList).containsOnly(Suit.Hearts, Suit.Hearts, Suit.Hearts, Suit.Hearts, Suit.Hearts);
     }
 
     @Test
@@ -155,17 +190,18 @@ class PokerTexasHoldemUtilsTest {
 
         Hand5Card bestHand = pokerTexasHoldemUtils.findBestHand(hand5CardList);
 
-        assertThat(bestHand.getCards()).hasSize(5);
-        assertThat(bestHand.getCards()).containsOnly(
+//        assertThat(bestHand.getCards()).hasSize(5);
+//        assertThat(bestHand.getCards()).containsOnly(
+        assertHandMatchesExpectedOutput(bestHand,
                 cardFactoryImmutable.createCard(Suit.Hearts, Value.Six),
                 cardFactoryImmutable.createCard(Suit.Diamonds, Value.Six),
                 cardFactoryImmutable.createCard(Suit.Clubs, Value.Six),
                 cardFactoryImmutable.createCard(Suit.Hearts, Value.Ten),
                 cardFactoryImmutable.createCard(Suit.Clubs, Value.Ten));
 
-        List<Value> valueList = bestHand.getCards().stream().map(e -> e.getValue()).collect(Collectors.toUnmodifiableList());
-
-        assertThat(valueList).containsOnly(Value.Six, Value.Six, Value.Six, Value.Ten, Value.Ten);
+//        List<Value> valueList = bestHand.getCards().stream().map(e -> e.getValue()).collect(Collectors.toUnmodifiableList());
+//
+//        assertThat(valueList).containsOnly(Value.Six, Value.Six, Value.Six, Value.Ten, Value.Ten);
     }
 
     @Test
@@ -177,17 +213,18 @@ class PokerTexasHoldemUtilsTest {
 
         Hand5Card bestHand = pokerTexasHoldemUtils.findBestHand(hand5CardList);
 
-        assertThat(bestHand.getCards()).hasSize(5);
-        assertThat(bestHand.getCards()).containsOnly(
+//        assertThat(bestHand.getCards()).hasSize(5);
+//        assertThat(bestHand.getCards()).containsOnly(
+        assertHandMatchesExpectedOutput(bestHand,
                 cardFactoryImmutable.createCard(Suit.Hearts, Value.King),
                 cardFactoryImmutable.createCard(Suit.Diamonds, Value.King),
                 cardFactoryImmutable.createCard(Suit.Clubs, Value.King),
                 cardFactoryImmutable.createCard(Suit.Spades, Value.King),
                 cardFactoryImmutable.createCard(Suit.Spades, Value.Queen));
 
-        List<Value> valueList = bestHand.getCards().stream().map(e -> e.getValue()).collect(Collectors.toUnmodifiableList());
-
-        assertThat(valueList).containsOnly(Value.King, Value.King, Value.King, Value.King, Value.Queen);
+//        List<Value> valueList = bestHand.getCards().stream().map(e -> e.getValue()).collect(Collectors.toUnmodifiableList());
+//
+//        assertThat(valueList).containsOnly(Value.King, Value.King, Value.King, Value.King, Value.Queen);
     }
 
     @Test
@@ -199,20 +236,22 @@ class PokerTexasHoldemUtilsTest {
 
         Hand5Card bestHand = pokerTexasHoldemUtils.findBestHand(hand5CardList);
 
-        assertThat(bestHand.getCards()).hasSize(5);
-        assertThat(bestHand.getCards()).containsOnly(
+//        assertThat(bestHand.getCards()).hasSize(5);
+//        assertThat(bestHand.getCards()).containsOnly(
+        assertHandMatchesExpectedOutput(bestHand,
+
                 cardFactoryImmutable.createCard(Suit.Hearts, Value.Ace),
                 cardFactoryImmutable.createCard(Suit.Hearts, Value.King),
                 cardFactoryImmutable.createCard(Suit.Hearts, Value.Queen),
                 cardFactoryImmutable.createCard(Suit.Hearts, Value.Jack),
                 cardFactoryImmutable.createCard(Suit.Hearts, Value.Ten));
 
-        List<Suit> suitList = bestHand.getCards().stream().map(e -> e.getSuit()).collect(Collectors.toUnmodifiableList());
-        assertThat(suitList).containsOnly(Suit.Hearts, Suit.Hearts, Suit.Hearts, Suit.Hearts, Suit.Hearts);
-
-
-        List<Value> valueList = bestHand.getCards().stream().map(e -> e.getValue()).collect(Collectors.toUnmodifiableList());
-        assertThat(valueList).containsOnly(Value.Ace, Value.King, Value.Queen, Value.Jack, Value.Ten);
+//        List<Suit> suitList = bestHand.getCards().stream().map(e -> e.getSuit()).collect(Collectors.toUnmodifiableList());
+//        assertThat(suitList).containsOnly(Suit.Hearts, Suit.Hearts, Suit.Hearts, Suit.Hearts, Suit.Hearts);
+//
+//
+//        List<Value> valueList = bestHand.getCards().stream().map(e -> e.getValue()).collect(Collectors.toUnmodifiableList());
+//        assertThat(valueList).containsOnly(Value.Ace, Value.King, Value.Queen, Value.Jack, Value.Ten);
     }
 
     @Test
@@ -223,5 +262,29 @@ class PokerTexasHoldemUtilsTest {
         List<Hand5Card> hand5CardList = pokerTexasHoldemUtils.createHand5From4CommunityCards(onePairAllCards.getKey(), onePairAllCards.getValue().getCards().first());
 
         assertThat(hand5CardList).hasSize(5);
+    }
+
+    private void assertHandMatchesExpectedOutput(Hand5Card hand5Card, Card expectedCard1,Card expectedCard2,Card expectedCard3,Card expectedCard4,Card expectedCard5) {
+        Set<Card> cardSet = new HashSet<>();
+
+        for (int index = 0; index < 5; ++index) {
+            cardSet.add(hand5Card.getNthCard(index));
+        }
+
+//        assertThat(cardSet).contains(
+//                cardFactoryImmutable.createCard(Suit.Hearts, Value.Six),
+//                cardFactoryImmutable.createCard(Suit.Clubs, Value.Ten),
+//                cardFactoryImmutable.createCard(Suit.Spades, Value.Queen),
+//                cardFactoryImmutable.createCard(Suit.Hearts, Value.Ace),
+//                cardFactoryImmutable.createCard(Suit.Clubs, Value.Ace)
+//        );
+
+        assertThat(cardSet).contains(
+                expectedCard1,
+                expectedCard2,
+                expectedCard3,
+                expectedCard4,
+                expectedCard5
+        );
     }
 }

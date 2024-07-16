@@ -26,9 +26,11 @@ public class PokerTexasHoldemUtils {
                         continue;
                     }
 
-                    Iterator<Card> communityCardIterator = communityCards.getCards().iterator();
-                    Card cardToAdd = IteratorUtils.get(communityCardIterator, communityCardIndex);
+//                    for (int index = 0; index < 5; ++index) {
+                    Card cardToAdd = communityCards.getNthCard(communityCardIndex);
                     permutationCardSet.add(cardToAdd);
+//                    }
+
                 }
 
                 Iterator<Card> permutationCardSetIterator = permutationCardSet.iterator();
@@ -50,16 +52,18 @@ public class PokerTexasHoldemUtils {
     public List<Hand5Card> generateAllPossibleHands(Hand5Card communityCards, Hand2Card hand2Card) {
         List<Hand5Card> allPossibleHandList = new ArrayList<>();
 
-        Iterator<Card> communityCardIterator = communityCards.getCards().iterator();
+//        Iterator<Card> communityCardIterator = communityCards.getCards().iterator();
+//
+//        Hand5Card hand5Card = new Hand5Card(
+//                communityCardIterator.next(),
+//                communityCardIterator.next(),
+//                communityCardIterator.next(),
+//                communityCardIterator.next(),
+//                communityCardIterator.next());
 
-        Hand5Card hand5Card = new Hand5Card(
-                communityCardIterator.next(),
-                communityCardIterator.next(),
-                communityCardIterator.next(),
-                communityCardIterator.next(),
-                communityCardIterator.next());
+//        allPossibleHandList.add(hand5Card);
 
-        allPossibleHandList.add(hand5Card);
+        allPossibleHandList.add(communityCards);
 
         List<Hand5Card> firstCardHand5Permutations = createHand5From4CommunityCards(communityCards, hand2Card.getCards().first());
         List<Hand5Card> secondCardHand5Permutations = createHand5From4CommunityCards(communityCards, IteratorUtils.get(hand2Card.getCards().iterator(), 1));
@@ -102,8 +106,7 @@ public class PokerTexasHoldemUtils {
                     continue;
                 }
 
-                Iterator<Card> communityCardIterator = communityCards.getCards().iterator();
-                Card cardToAdd = IteratorUtils.get(communityCardIterator, communityCardIndex);
+                Card cardToAdd = communityCards.getNthCard(communityCardIndex);
                 permutationCardSet.add(cardToAdd);
             }
 

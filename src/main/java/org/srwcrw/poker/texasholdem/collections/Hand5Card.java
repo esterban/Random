@@ -8,6 +8,7 @@ import java.util.concurrent.ThreadLocalRandom;
 public final class Hand5Card implements IPack {
 //    private final CollectionUtils collectionUtils = new CollectionUtils();
     private static final CollectionUtils collectionUtils = new CollectionUtils();
+    private static final Hand5OrdinalFactory HAND_5_ORDINAL_FACTORY = new Hand5OrdinalFactoryFast();
 
     private final Card card1;
     private final Card card2;
@@ -23,6 +24,8 @@ public final class Hand5Card implements IPack {
         this.card3 = card3;
         this.card4 = card4;
         this.card5 = card5;
+
+        this.hand5Ordinal = HAND_5_ORDINAL_FACTORY.create(card1, card2, card3, card4, card5);
     }
 
     @Override
@@ -39,7 +42,6 @@ public final class Hand5Card implements IPack {
             default ->
                     throw new RuntimeException("Should not be reached, should always return a card --- INTERNAL ERROR");
         };
-
     }
 
     @Override
@@ -120,9 +122,5 @@ public final class Hand5Card implements IPack {
 
     public Hand5Ordinal getHand5Ordinal() {
         return hand5Ordinal;
-    }
-
-    private Hand5Ordinal calculateHand5Ordinal() {
-
     }
 }

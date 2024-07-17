@@ -79,4 +79,9 @@ public class Hand2Card implements IPack {
 
         return cardIterator.next();
     }
+
+    @Override
+    public int getSize() {
+        return cards.size();
+    }
 }

@@ -32,6 +32,7 @@ class HandUtilsTest {
         Hand5Card straightFlushAceLow = testUtils.createStraightFlushAceLow();
         SortedSet<Value> straightFlushAceLowValues = handUtils.getValueSetSorted(straightFlushAceLow, valueComparatorAceLow);
 
+        assertThat(handUtils.areValuesConsecutive(straightFlushAceLow));
         assertThat(handUtils.areValuesConsecutive(straightFlushAceLowValues)).isTrue();
     }
 

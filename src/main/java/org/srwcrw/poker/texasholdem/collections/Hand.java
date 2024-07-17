@@ -106,4 +106,9 @@ public final class Hand implements IPack {
 
         return IteratorUtils.get(cards.iterator(), index);
     }
+
+    @Override
+    public int getSize() {
+        return cards.size();
+    }
 }

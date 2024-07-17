@@ -15,6 +15,8 @@ public final class Hand5Card implements IPack {
     private final Card card4;
     private final Card card5;
 
+    private final Hand5Ordinal hand5Ordinal;
+
     public Hand5Card(Card card1, Card card2, Card card3, Card card4, Card card5) {
         this.card1 = card1;
         this.card2 = card2;
@@ -109,5 +111,18 @@ public final class Hand5Card implements IPack {
             default ->
                     throw new RuntimeException("Should not be reached, should always return a card --- INTERNAL ERROR");
         };
+    }
+
+    @Override
+    public int getSize() {
+        return 5;
+    }
+
+    public Hand5Ordinal getHand5Ordinal() {
+        return hand5Ordinal;
+    }
+
+    private Hand5Ordinal calculateHand5Ordinal() {
+
     }
 }

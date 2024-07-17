@@ -12,6 +12,9 @@ import org.srwcrw.poker.texasholdem.test.TestUtils;
 import org.srwcrw.poker.texasholdem.test.TestUtilsTexasHoldem;
 
 import java.util.SortedSet;
+import java.util.TreeSet;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -25,11 +28,18 @@ class ConverterHand5CardTest {
     public void testConvertA() {
         ConverterHand5Card converterHand5Card = new ConverterHand5Card();
 
-        SortedSet<Card> cardSortedSet = testUtils.createStraight().getCards();
+        SortedSet<Card> cardSortedSet = convertHandToSortedSet(testUtils.createStraight());
         Hand hand = new Hand(cardSortedSet);
 
-        Hand5Card hand5Card = converterHand5Card.convert(hand);
+        Hand5Card hand5CardConverted = converterHand5Card.convert(hand);
+        SortedSet<Card> cardSortedSetConverted = convertHandToSortedSet(hand5CardConverted);
 
-        assertThat(hand5Card.getCards()).containsOnly(cardSortedSet.toArray(new Card[]{}));
+        assertThat(cardSortedSetConverted).containsOnly(cardSortedSet.toArray(new Card[]{}));
+    }
+
+    private SortedSet<Card> convertHandToSortedSet(Hand5Card hand5Card) {
+        SortedSet<Card> cardSortedSetConverted = IntStream.range(0, 5).boxed().map(e -> hand5Card.getNthCard(e)).collect(Collectors.toCollection(TreeSet::new));
+
+        return cardSortedSetConverted;
     }
 }

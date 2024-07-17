@@ -19,7 +19,7 @@ public class HandUtils implements IHandUtils {
         Supplier<SortedSet<Value>> treeSetSupplier = () -> new TreeSet<>(valueComparator);
 
         @SuppressWarnings("UnnecessaryLocalVariable")
-        SortedSet<Value> values = hand.getCards().stream().map(Card::getValue).collect(Collectors.toCollection(treeSetSupplier));
+        SortedSet<Value> values = IntStream.range(0, 5).boxed().map(e -> hand.getNthCard(e)).map(e -> e.getValue()).collect(Collectors.toCollection(treeSetSupplier));
         return values;
     }
 
@@ -55,77 +55,19 @@ public class HandUtils implements IHandUtils {
     }
 
     public boolean areValuesConsecutive(Hand5Card hand5Card) {
-        boolean firstValueIsAnAce = false;
-        boolean haveCheckedFirstCard = false;
-        Value lastValue = null;
+        SortedSet<Value> sortedSet = IntStream.range(0,5).boxed()
+                .map(e -> hand5Card.getNthCard(e))
+                .map(e -> e.getValue())
+                .collect(Collectors.toCollection(TreeSet::new));
 
-//        for (Value value : values) {
-//        SortedSet<Card>
-
-        for (int index = 0; index < 5; ++index) {
-            Card card = hand5Card.getNthCard(index);
-            Value value = card.getValue();
-
-            if (lastValue == null) {
-                lastValue = value;
-
-                if (value == Value.Ace) {
-                    firstValueIsAnAce = true;
-                }
-
-                continue;
-            }
-
-            if (firstValueIsAnAce && !haveCheckedFirstCard) {
-                if (value != Value.Two) {
-                    return false;
-                }
-            } else if (Math.abs(value.ordinal() - lastValue.ordinal()) != 1) {
-                return false;
-            }
-
-            haveCheckedFirstCard = true;
-            lastValue = value;
-        }
-
-        return true;
+        return areValuesConsecutive(sortedSet);
     }
 
     public boolean areValuesConsecutiveAceHigh(Hand5Card hand5Card) {
-        boolean firstValueIsAnAce = false;
-        boolean haveCheckedFirstCard = false;
-        Value lastValue = null;
+        SortedSet<Value> valueSortedSet = getValueSetSorted(hand5Card, new ValueComparatorAceHigh());
 
-//        for (Value value : values) {
-        for (int index = 0; index < 5; ++index) {
-            Card card = hand5Card.getNthCard(index);
-            Value value = card.getValue();
-
-            if (lastValue == null) {
-                lastValue = value;
-
-//                if (value == Value.Ace) {
-//                    firstValueIsAnAce = true;
-//                }
-
-                continue;
-            }
-
-            if (firstValueIsAnAce && !haveCheckedFirstCard) {
-                if (value != Value.Two) {
-                    return false;
-                }
-            } else if (Math.abs(value.ordinal() - lastValue.ordinal()) != 1) {
-                return false;
-            }
-
-            haveCheckedFirstCard = true;
-            lastValue = value;
-        }
-
-        return true;
+        return areValuesConsecutive(valueSortedSet);
     }
-
 
     public int countPairs(IPack hand) {
         int pairCount = 0;
@@ -234,7 +176,7 @@ public class HandUtils implements IHandUtils {
         int[] counts = new int[Value.values().length];
 
 //        for (Card card : hand.getCards()) {
-        for (int index = 0; index < 5; ++index) {
+        for (int index = 0; index < hand.getSize(); ++index) {
             Card card = hand.getNthCard(index);
             ++counts[card.getValue().ordinal()];
         }

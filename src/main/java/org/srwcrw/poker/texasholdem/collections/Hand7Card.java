@@ -95,4 +95,9 @@ public final class Hand7Card implements IPack {
 
         return IteratorUtils.get(cards.iterator(), index);
     }
+
+    @Override
+    public int getSize() {
+        return cards.size();
+    }
 }

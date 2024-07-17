@@ -7,10 +7,14 @@ import java.util.SortedSet;
 
 public interface IPack {
     Card getCardAtRandom();
+
     List<Card> getCardListAtRandom(int cardCount);
+
     IPack removeCard(Card card);
+
     SortedSet<Card> getCards();
+
     Card getNthCard(int index);
 
-
+    int getSize();
 }

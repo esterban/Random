@@ -8,10 +8,13 @@ import java.util.Objects;
 public final class Card implements Comparable<Card> {
     private final Suit suit;
     private final Value value;
+    private final CardOrdinal cardOrdinal;
 
     Card(Suit suit, Value value) {
         this.suit = suit;
         this.value = value;
+
+        cardOrdinal = new CardOrdinal(suit, value);
     }
 
     public Suit getSuit() {
@@ -50,5 +53,9 @@ public final class Card implements Comparable<Card> {
                 "suit=" + suit +
                 ", value=" + value +
                 '}';
+    }
+
+    public CardOrdinal getCardOrdinal() {
+        return cardOrdinal;
     }
 }

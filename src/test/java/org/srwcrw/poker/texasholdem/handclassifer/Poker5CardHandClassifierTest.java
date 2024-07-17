@@ -78,6 +78,15 @@ class Poker5CardHandClassifierTest {
     }
 
     @Test
+    public void testClassifyStraightAceLow() {
+        Hand5Card hand5CardStraightAceLow = testUtils.createStraightAceLow();
+
+        HandType5Cards handType5CardsA = poker5CardHandClassifier.classify(hand5CardStraightAceLow);
+
+        assertThat(handType5CardsA).isEqualTo(HandType5Cards.Straight);
+    }
+
+    @Test
     public void testClassifyThreeOfAKind() {
         Hand5Card threeOfAKindHand = testUtils.createThreeOfAKind();
 

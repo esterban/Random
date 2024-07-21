@@ -15,7 +15,6 @@ import org.srwcrw.poker.texasholdem.entities.Value;
 import org.srwcrw.poker.texasholdem.generators.ConverterHand2Card;
 import org.srwcrw.poker.texasholdem.generators.ConverterHand5Card;
 import org.srwcrw.poker.texasholdem.generators.HandGenerator;
-import org.srwcrw.poker.texasholdem.handclassifer.Poker5CardHandClassifier;
 import org.srwcrw.poker.texasholdem.utils.PokerTexasHoldemUtils;
 
 import java.util.*;
@@ -32,7 +31,7 @@ public class TexasHoldemComponent {
     private PackGenerator packGenerator;
 
     private static final HandGenerator HAND_GENERATOR = new HandGenerator();
-    private static final Poker5CardHandClassifier POKER_5_CARD_HAND_CLASSIFIER = new Poker5CardHandClassifier();
+//    private static final Poker5CardHandClassifier POKER_5_CARD_HAND_CLASSIFIER = new Poker5CardHandClassifier();
     private static final PokerTexasHoldemUtils POKER_TEXAS_HOLDEM_UTILS = new PokerTexasHoldemUtils();
     private static final ConverterHand5Card CONVERTER_HAND_5_CARD = new ConverterHand5Card();
     private static final ConverterHand2Card CONVERTER_HAND_2_CARD = new ConverterHand2Card();
@@ -158,6 +157,7 @@ public class TexasHoldemComponent {
         return new AbstractMap.SimpleEntry<>(fullPack, playerHand2Card);
     }
 
+    @SuppressWarnings("unused")
     private Value getBestCardFromHand5(Hand5Card hand5Card) {
         Value highestValue = Value.Two;
 
@@ -172,6 +172,7 @@ public class TexasHoldemComponent {
         return highestValue;
     }
 
+    @SuppressWarnings("unused")
     private String formatHandTypePercentageString(double playerPercentage, Double opponentPercentage, HandType5Cards handType5Card) {
         Formatter formatter = new Formatter();
         String playerPercentageString = formatter.format("%2.2f", playerPercentage).toString();
@@ -188,6 +189,7 @@ public class TexasHoldemComponent {
         }
 
         formatter = new Formatter();
+        //noinspection UnnecessaryLocalVariable
         String result = formatter.format("%20s Player = %s%% %5s %s",
                 handType5Card,
                 StringUtils.leftPad(playerPercentageString, 5),

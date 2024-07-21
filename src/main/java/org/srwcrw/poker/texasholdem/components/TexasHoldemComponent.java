@@ -129,10 +129,51 @@ public class TexasHoldemComponent {
 
 
     private Map.Entry<IPack, Hand2Card> createPlayerHand2(IPack fullPack) {
+//        Execution time = 12.430
+//        Player win/draw/lose percentages = 56.95% / 5.49% / 37.56% (100000 iterators)
+//        Player win/draw/lose count = 56952 / 5491 / 37557
+        Card playerCard1 = new Card(Suit.Hearts, Value.King);
+        Card playerCard2 = new Card(Suit.Diamonds, Value.Queen);
+
+
+//        Player win/draw/lose percentages = 40.62% / 8.87% / 50.51% (100000 iterators)
+//        Player win/draw/lose count = 40623 / 8865 / 50512
+//        Card playerCard1 = new Card(Suit.Hearts, Value.Ten);
+//        Card playerCard2 = new Card(Suit.Hearts, Value.Two);
+
+
+//        Execution time = 12.196
+//        Player win/draw/lose percentages = 58.45% / 4.10% / 37.46% (100000 iterators)
+//        Player win/draw/lose count = 58448 / 4097 / 37455
+//        Card playerCard1 = new Card(Suit.Hearts, Value.Ace);
+//        Card playerCard2 = new Card(Suit.Diamonds, Value.Nine);
+
+
+
+        //        Player win/draw/lose percentages = 41.95% / 9.16% / 48.89% (100000 iterators)
+//        Player win/draw/lose count = 41953 / 9161 / 48886
+//        Player win/draw/lose percentages = 42.10% / 9.11% / 48.79% (100000 iterators)
+//        Player win/draw/lose count = 42102 / 9108 / 48790
+//        Card playerCard1 = new Card(Suit.Hearts, Value.Jack);
+//        Card playerCard2 = new Card(Suit.Diamonds, Value.Five);
+
+
+//        Player win/draw/lose percentages = 45.00% / 8.46% / 46.54% (100000 iterators)
+//        Player win/draw/lose count = 44997 / 8461 / 46542
+//        Card playerCard1 = new Card(Suit.Hearts, Value.Ten);
+//        Card playerCard2 = new Card(Suit.Diamonds, Value.Eight);
+
+
         // *** POCKET PAIRS *** POCKET PAIRS *** POCKET PAIRS *** POCKET PAIRS *** POCKET PAIRS *** POCKET PAIRS *** POCKET PAIRS *** POCKET PAIRS ***
         // *** POCKET PAIRS *** POCKET PAIRS *** POCKET PAIRS *** POCKET PAIRS *** POCKET PAIRS *** POCKET PAIRS *** POCKET PAIRS *** POCKET PAIRS ***
         // *** POCKET PAIRS *** POCKET PAIRS *** POCKET PAIRS *** POCKET PAIRS *** POCKET PAIRS *** POCKET PAIRS *** POCKET PAIRS *** POCKET PAIRS ***
-        //        Player win/draw/lose percentages = 49.44% / 1.95% / 48.60% (3e6 iterations)
+//        Player win/draw/lose percentages = 49.52% / 1.98% / 48.51% (100000 iterators)
+//        Player win/draw/lose count = 49515 / 1979 / 48506
+//        Player win/draw/lose percentages = 49.55% / 1.88% / 48.56% (100000 iterators)
+//        Player win/draw/lose count = 49554 / 1883 / 48563
+//        Player win/draw/lose percentages = 49.56% / 1.91% / 48.53% (100000 iterators)
+//        Player win/draw/lose count = 49561 / 1909 / 48530
+
 //        Card playerCard2 = new Card(Suit.Spades, Value.Two);
 //        Card playerCard1 = new Card(Suit.Hearts, Value.Two);
 
@@ -142,8 +183,10 @@ public class TexasHoldemComponent {
 //        Player win/draw/lose count = 52947 / 1759 / 45294
 //        Player win/draw/lose percentages = 52.98% / 1.78% / 45.24% (300000 iterators)
 //        Player win/draw/lose count = 158950 / 5330 / 135720
-        Card playerCard2 = new Card(Suit.Spades, Value.Three);
-        Card playerCard1 = new Card(Suit.Hearts, Value.Three);
+//        Player win/draw/lose percentages = 53.03% / 1.77% / 45.19% (600000 iterators)
+//        Player win/draw/lose count = 318198 / 10634 / 271168
+//        Card playerCard2 = new Card(Suit.Spades, Value.Three);
+//        Card playerCard1 = new Card(Suit.Hearts, Value.Three);
 
         fullPack = fullPack.removeCard(playerCard1);
         fullPack = fullPack.removeCard(playerCard2);

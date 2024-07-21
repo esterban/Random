@@ -1,5 +1,6 @@
 package org.srwcrw.poker.texasholdem.components;
 
+import org.apache.commons.lang3.StringUtils;
 import org.aspectj.lang.annotation.Aspect;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -8,11 +9,13 @@ import org.srwcrw.poker.texasholdem.collections.Hand2Card;
 import org.srwcrw.poker.texasholdem.collections.Hand5Card;
 import org.srwcrw.poker.texasholdem.collections.IPack;
 import org.srwcrw.poker.texasholdem.comparator.Poker5CardAceHighLowComparator;
+import org.srwcrw.poker.texasholdem.entities.HandType5Cards;
 import org.srwcrw.poker.texasholdem.entities.Suit;
 import org.srwcrw.poker.texasholdem.entities.Value;
 import org.srwcrw.poker.texasholdem.generators.ConverterHand2Card;
 import org.srwcrw.poker.texasholdem.generators.ConverterHand5Card;
 import org.srwcrw.poker.texasholdem.generators.HandGenerator;
+import org.srwcrw.poker.texasholdem.handclassifer.Poker5CardHandClassifier;
 import org.srwcrw.poker.texasholdem.utils.PokerTexasHoldemUtils;
 
 import java.util.*;
@@ -20,16 +23,16 @@ import java.util.*;
 @Aspect
 @Component
 public class TexasHoldemComponent {
-    @Autowired
-    private CardFactoryImmutable cardFactoryImmutable;
-
     private static final Poker5CardAceHighLowComparator POKER_5_CARD_ACE_HIGH_LOW_COMPARATOR = new Poker5CardAceHighLowComparator();
+
+    @org.springframework.beans.factory.annotation.Value("#{${texasholdemcomponent.handCount}}")
+    private Integer handCount;
 
     @Autowired
     private PackGenerator packGenerator;
 
     private static final HandGenerator HAND_GENERATOR = new HandGenerator();
-    //    private static final Poker5CardHandClassifier poker5CardHandClassifier = new Poker5CardHandClassifier();
+    private static final Poker5CardHandClassifier POKER_5_CARD_HAND_CLASSIFIER = new Poker5CardHandClassifier();
     private static final PokerTexasHoldemUtils POKER_TEXAS_HOLDEM_UTILS = new PokerTexasHoldemUtils();
     private static final ConverterHand5Card CONVERTER_HAND_5_CARD = new ConverterHand5Card();
     private static final ConverterHand2Card CONVERTER_HAND_2_CARD = new ConverterHand2Card();
@@ -44,18 +47,22 @@ public class TexasHoldemComponent {
 
         final int opponentCount = 1;
 
-//        final int handCount = 1000 * 1000;
-//        final int handCount = 300 * 1000;
-        final int handCount = 100 * 1000;
-//        final int handCount = 10 * 1000;
-//        final int handCount = 100;
-
         int handsWonCount = 0;
         int handsDrawnCount = 0;
+        int handsLostCount = 0;
 
         IPack fullPack = packGenerator.generateFullPack();
         Map.Entry<IPack, Hand2Card> packPlayerHandPair = createPlayerHand2(fullPack);
         IPack pack50 = packPlayerHandPair.getKey();
+
+        Map<HandType5Cards, Integer> playerHandTypeCounts = new TreeMap<>();
+        Map<HandType5Cards, Integer> opponentHandTypeCounts = new TreeMap<>();
+
+        Map<HandType5Cards, Integer> playerDrawnHandTypeCounts = new TreeMap<>();
+        Map<HandType5Cards, Integer> opponentDrawnHandTypeCounts = new TreeMap<>();
+
+        Map<Value, Integer> playerHighCardCount = new TreeMap<>();
+        Map<Value, Integer> opponentHighCardCount = new TreeMap<>();
 
         for (int handCounter = 1; handCounter <= handCount; ++handCounter) {
             List<IPack> opponentHandList = new ArrayList<>();
@@ -65,9 +72,18 @@ public class TexasHoldemComponent {
 
             for (int counter = 1; counter <= opponentCount; ++counter) {
                 handPair = HAND_GENERATOR.generateHandAndRemoveImmutable(pack50, 2);
+
+                if (pack50.getSize() != 50) {
+                    throw new RuntimeException("EEEKKKK!! remaining pack size is not 50");
+                }
+
                 pack48 = handPair.getKey();
 
                 opponentHandList.add(handPair.getValue());
+
+                if (pack48.getSize() != 48) {
+                    throw new RuntimeException("EEEKKKK!! remaining pack size is not 48");
+                }
             }
 
             IPack communityCards = HAND_GENERATOR.generateHandAndRemoveImmutable(pack48, 5).getValue();
@@ -82,58 +98,53 @@ public class TexasHoldemComponent {
                 ++handsWonCount;
             } else if (winLoseComparison == 0) {
                 ++handsDrawnCount;
+            } else {
+                ++handsLostCount;
             }
         }
 
         stopWatch.stop();
         System.out.printf("Execution time = %4.3f \n", stopWatch.getTotalTimeSeconds());
 
-        double handsWonRatio = (double) handsWonCount / handCount;
-        double handsDrawnRatio = (double) handsDrawnCount / handCount;
-        double handsLostRatio = 1.0 - handsDrawnRatio - handsWonRatio;
+        double handsWonRatio = (double) handsWonCount / ((double) handCount);
+        double handsDrawnRatio = (double) handsDrawnCount / ((double) handCount);
+        double handsLostRatio = (double) handsLostCount / ((double) handCount);
+
+        if (handsWonCount + handsDrawnCount + handsLostCount != handCount) {
+            throw new RuntimeException("EEEEKKEKEKKEK!!!!");
+        }
 
         double handsWonPercentage = handsWonRatio * 100;
         double handsDrawnPercentage = handsDrawnRatio * 100;
         double handsLostPercentage = handsLostRatio * 100;
 
-        System.out.printf("Player win/draw/lose percentages = %2.1f%% / %2.1f%% / %2.1f%%  \n", handsWonPercentage, handsDrawnPercentage, handsLostPercentage);
+        System.out.println();
+        System.out.println();
+
+        System.out.printf("Player win/draw/lose percentages = %2.2f%% / %2.2f%% / %2.2f%% (%d iterators) \n", handsWonPercentage, handsDrawnPercentage, handsLostPercentage, handCount);
+        System.out.printf("Player win/draw/lose count = %d / %d / %d  \n", handsWonCount, handsDrawnCount, handsLostCount);
+
+        System.out.println();
+        System.out.println();
     }
 
 
     private Map.Entry<IPack, Hand2Card> createPlayerHand2(IPack fullPack) {
-//        Player win/draw/lose percentages = 53.046% / 6.486% / 40.468%
-//        Card playerCard1 = new Card(Suit.Hearts, Value.Jack);
-//        Card playerCard2 = new Card(Suit.Clubs, Value.Queen);
-
-//        Player win/draw/lose percentages = 49.211% / 7.367% / 43.422%
-//        Card playerCard1 = new Card(Suit.Hearts, Value.Six);
-//        Card playerCard2 = new Card(Suit.Clubs, Value.King);
-
-//        Player win/draw/lose percentages = 55.032% / 5.899% / 39.069%
-//        Card playerCard1 = new Card(Suit.Hearts, Value.Ten);
-//        Card playerCard2 = new Card(Suit.Clubs, Value.King);
-
-//        Player win/draw/lose percentages = 57.777% / 5.464% / 36.759%
-//        Card playerCard1 = new Card(Suit.Hearts, Value.Ten);
-//        Card playerCard2 = new Card(Suit.Hearts, Value.King);
-
         // *** POCKET PAIRS *** POCKET PAIRS *** POCKET PAIRS *** POCKET PAIRS *** POCKET PAIRS *** POCKET PAIRS *** POCKET PAIRS *** POCKET PAIRS ***
         // *** POCKET PAIRS *** POCKET PAIRS *** POCKET PAIRS *** POCKET PAIRS *** POCKET PAIRS *** POCKET PAIRS *** POCKET PAIRS *** POCKET PAIRS ***
         // *** POCKET PAIRS *** POCKET PAIRS *** POCKET PAIRS *** POCKET PAIRS *** POCKET PAIRS *** POCKET PAIRS *** POCKET PAIRS *** POCKET PAIRS ***
-//        Player win/draw/lose percentages = 50.188% / 1.800% / 48.012%
+        //        Player win/draw/lose percentages = 49.44% / 1.95% / 48.60% (3e6 iterations)
+//        Card playerCard2 = new Card(Suit.Spades, Value.Two);
 //        Card playerCard1 = new Card(Suit.Hearts, Value.Two);
-//        Card playerCard2 = new Card(Suit.Clubs, Value.Two);
 
-        // SWright - 2024/07/11 - @1e6 iterations - error is still too high, execution time =  416.105s :/ NOT GOOD
-//        Player win/draw/lose percentages = 53.9% / 1.7% / 44.4%
-//        Player win/draw/lose percentages = 53.2% / 1.7% / 45.0%
-        Card playerCard1 = cardFactoryImmutable.createCard(Suit.Hearts, Value.Three);
-        Card playerCard2 = cardFactoryImmutable.createCard(Suit.Clubs, Value.Three);
-
-
-//        Player win/draw/lose percentages = 81.973% / 0.671% / 17.356%
-//        Card playerCard1 = new Card(Suit.Hearts, Value.King);
-//        Card playerCard2 = new Card(Suit.Clubs, Value.King);
+//        Player win/draw/lose percentages = 52.94% / 1.50% / 45.56% (10000 iterators)
+//        Player win/draw/lose count = 5294 / 150 / 4556
+//        Player win/draw/lose percentages = 52.95% / 1.76% / 45.29% (100000 iterators)
+//        Player win/draw/lose count = 52947 / 1759 / 45294
+//        Player win/draw/lose percentages = 52.98% / 1.78% / 45.24% (300000 iterators)
+//        Player win/draw/lose count = 158950 / 5330 / 135720
+        Card playerCard2 = new Card(Suit.Spades, Value.Three);
+        Card playerCard1 = new Card(Suit.Hearts, Value.Three);
 
         fullPack = fullPack.removeCard(playerCard1);
         fullPack = fullPack.removeCard(playerCard2);
@@ -145,5 +156,45 @@ public class TexasHoldemComponent {
         Hand2Card playerHand2Card = new Hand2Card(playerCardSortedSet);
 
         return new AbstractMap.SimpleEntry<>(fullPack, playerHand2Card);
+    }
+
+    private Value getBestCardFromHand5(Hand5Card hand5Card) {
+        Value highestValue = Value.Two;
+
+        for (int index = 0; index < 5; ++index) {
+            Card card = hand5Card.getNthCard(index);
+
+            if (card.getValue().ordinal() > highestValue.ordinal()) {
+                highestValue = card.getValue();
+            }
+        }
+
+        return highestValue;
+    }
+
+    private String formatHandTypePercentageString(double playerPercentage, Double opponentPercentage, HandType5Cards handType5Card) {
+        Formatter formatter = new Formatter();
+        String playerPercentageString = formatter.format("%2.2f", playerPercentage).toString();
+
+        String opponentPercentageString = "";
+
+        if (opponentPercentage != null) {
+            formatter = new Formatter();
+            String opponentPercentageStringTemp = formatter.format("%2.2f", opponentPercentage).toString();
+            opponentPercentageString = StringUtils.leftPad(opponentPercentageStringTemp, 5);
+
+            formatter = new Formatter();
+            opponentPercentageString = formatter.format("Opponent %s%% ", opponentPercentageString).toString();
+        }
+
+        formatter = new Formatter();
+        String result = formatter.format("%20s Player = %s%% %5s %s",
+                handType5Card,
+                StringUtils.leftPad(playerPercentageString, 5),
+                " ",
+                opponentPercentageString
+        ).toString();
+
+        return result;
     }
 }

@@ -3,3 +3,5 @@
 /out/
 /*.jfr
 /mysettings.jfc
+/gradlew
+/gradlew.bat

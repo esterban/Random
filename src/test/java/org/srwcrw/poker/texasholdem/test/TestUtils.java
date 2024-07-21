@@ -263,6 +263,31 @@ public class TestUtils {
         return hand5Card;
     }
 
+    public Hand5Card createTwoPairBKickerTwo() {
+        Card card1 = cardFactoryImmutable.createCard(Suit.Hearts, Value.Queen);
+        Card card2 = cardFactoryImmutable.createCard(Suit.Clubs, Value.Queen);
+        Card card3 = cardFactoryImmutable.createCard(Suit.Diamonds, Value.Jack);
+        Card card4 = cardFactoryImmutable.createCard(Suit.Spades, Value.Jack);
+        Card card5 = cardFactoryImmutable.createCard(Suit.Hearts, Value.Two);
+
+        Hand5Card hand5Card = new Hand5Card(card1, card2, card3, card4, card5);
+
+        return hand5Card;
+    }
+
+
+    public Hand5Card createTwoPairBKickerAce() {
+        Card card1 = cardFactoryImmutable.createCard(Suit.Hearts, Value.Queen);
+        Card card2 = cardFactoryImmutable.createCard(Suit.Clubs, Value.Queen);
+        Card card3 = cardFactoryImmutable.createCard(Suit.Diamonds, Value.Jack);
+        Card card4 = cardFactoryImmutable.createCard(Suit.Spades, Value.Jack);
+        Card card5 = cardFactoryImmutable.createCard(Suit.Hearts, Value.Ace);
+
+        Hand5Card hand5Card = new Hand5Card(card1, card2, card3, card4, card5);
+
+        return hand5Card;
+    }
+
     public Hand5Card createTwoPairBKickerTen() {
         Card card1 = cardFactoryImmutable.createCard(Suit.Hearts, Value.Queen);
         Card card2 = cardFactoryImmutable.createCard(Suit.Clubs, Value.Queen);

@@ -16,10 +16,10 @@ import org.srwcrw.poker.texasholdem.test.TestUtilsTexasHoldem;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.TreeSet;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -29,6 +29,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 @PrepareForTest(PokerTexasHoldemUtils.class)
 @SpringBootTest(classes = {CardFactoryImmutable.class, TestUtilsTexasHoldem.class, TestUtils.class, PackGenerator.class})
 class PokerTexasHoldemUtilsTest {
+    private final PokerTexasHoldemUtils pokerTexasHoldemUtils = new PokerTexasHoldemUtils();
+
     @Autowired
     private TestUtilsTexasHoldem testUtilsTexasHoldem;
 
@@ -36,44 +38,59 @@ class PokerTexasHoldemUtilsTest {
     private CardFactoryImmutable cardFactoryImmutable;
 
     @Test
-    public void testCreateHand5From3CommunityCards() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
-        PokerTexasHoldemUtils pokerTexasHoldemUtils = new PokerTexasHoldemUtils();
-
+    public void testCreateHand5From3CommunityCardsA() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
         Map.Entry<Hand5Card, Hand2Card> onePairAllCards = testUtilsTexasHoldem.createOnePairA();
 
         Method method = pokerTexasHoldemUtils.getClass().getDeclaredMethod("createHand5From3CommunityCards", Hand5Card.class, Hand2Card.class);
         method.setAccessible(true);
 
-        List<Hand5Card> hand5Card = (List<Hand5Card>) method.invoke(pokerTexasHoldemUtils, onePairAllCards.getKey(), onePairAllCards.getValue());
+        List<Hand5Card> hand5CardList = (List<Hand5Card>) method.invoke(pokerTexasHoldemUtils, onePairAllCards.getKey(), onePairAllCards.getValue());
 
-        assertThat(hand5Card).hasSize(10);
+        assertThat(hand5CardList).hasSize(10);
+
+        Hand5Card bestHand5Card = testUtilsTexasHoldem.getBestHand(hand5CardList);
+
+        assertHandMatchesExpectedOutput(bestHand5Card,
+                cardFactoryImmutable.createCard(Suit.Diamonds, Value.Five),
+                cardFactoryImmutable.createCard(Suit.Clubs, Value.Ten),
+                cardFactoryImmutable.createCard(Suit.Spades, Value.Queen),
+                cardFactoryImmutable.createCard(Suit.Clubs, Value.Ace),
+                cardFactoryImmutable.createCard(Suit.Hearts, Value.Ace)
+        );
+
+    }
+
+    @Test
+    public void testCreateHand5From3CommunityCardsB() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+        Map.Entry<Hand5Card, Hand2Card> onePairAllCards = testUtilsTexasHoldem.createOnePairB();
+
+        Method method = pokerTexasHoldemUtils.getClass().getDeclaredMethod("createHand5From3CommunityCards", Hand5Card.class, Hand2Card.class);
+        method.setAccessible(true);
+
+        List<Hand5Card> hand5CardList = (List<Hand5Card>) method.invoke(pokerTexasHoldemUtils, onePairAllCards.getKey(), onePairAllCards.getValue());
+
+        assertThat(hand5CardList).hasSize(10);
+
+        Hand5Card bestHand5Card = testUtilsTexasHoldem.getBestHand(hand5CardList);
+
+        assertHandMatchesExpectedOutput(bestHand5Card,
+                cardFactoryImmutable.createCard(Suit.Diamonds, Value.Five),
+                cardFactoryImmutable.createCard(Suit.Hearts, Value.Six),
+                cardFactoryImmutable.createCard(Suit.Clubs, Value.Six),
+                cardFactoryImmutable.createCard(Suit.Spades, Value.Queen),
+                cardFactoryImmutable.createCard(Suit.Hearts, Value.Ace)
+        );
     }
 
     @Test
     public void testFindBestHandA() {
-        PokerTexasHoldemUtils pokerTexasHoldemUtils = new PokerTexasHoldemUtils();
         Map.Entry<Hand5Card, Hand2Card> onePairAllCards = testUtilsTexasHoldem.createOnePairA();
 
         List<Hand5Card> hand5CardList = pokerTexasHoldemUtils.generateAllPossibleHands(onePairAllCards.getKey(), onePairAllCards.getValue());
 
         Hand5Card bestHand = pokerTexasHoldemUtils.findBestHand(hand5CardList);
 
-//        assertThat(bestHand.getCards()).hasSize(5);
-//        Set<Card> cardSet = new HashSet<>();
-//
-//        for (int index = 0; index < 5; ++index) {
-//            cardSet.add(bestHand.getNthCard(index));
-//        }
-//
-//        assertThat(cardSet).contains(
-//                cardFactoryImmutable.createCard(Suit.Hearts, Value.Six),
-//                cardFactoryImmutable.createCard(Suit.Clubs, Value.Ten),
-//                cardFactoryImmutable.createCard(Suit.Spades, Value.Queen),
-//                cardFactoryImmutable.createCard(Suit.Hearts, Value.Ace),
-//                cardFactoryImmutable.createCard(Suit.Clubs, Value.Ace)
-//        );
-
-        assertHandMatchesExpectedOutput( bestHand,
+        assertHandMatchesExpectedOutput(bestHand,
                 cardFactoryImmutable.createCard(Suit.Hearts, Value.Six),
                 cardFactoryImmutable.createCard(Suit.Clubs, Value.Ten),
                 cardFactoryImmutable.createCard(Suit.Spades, Value.Queen),
@@ -84,16 +101,13 @@ class PokerTexasHoldemUtilsTest {
 
     @Test
     public void testFindBestHandB() {
-        PokerTexasHoldemUtils pokerTexasHoldemUtils = new PokerTexasHoldemUtils();
         Map.Entry<Hand5Card, Hand2Card> twoPairAllCards = testUtilsTexasHoldem.createTwoPairA();
 
         List<Hand5Card> hand5CardList = pokerTexasHoldemUtils.generateAllPossibleHands(twoPairAllCards.getKey(), twoPairAllCards.getValue());
 
         Hand5Card bestHand = pokerTexasHoldemUtils.findBestHand(hand5CardList);
 
-//        assertThat(bestHand.getCards()).hasSize(5);
-//        assertThat(bestHand.getCards()).containsOnly(
-        assertHandMatchesExpectedOutput( bestHand,
+        assertHandMatchesExpectedOutput(bestHand,
                 cardFactoryImmutable.createCard(Suit.Spades, Value.Queen),
                 cardFactoryImmutable.createCard(Suit.Hearts, Value.Five),
                 cardFactoryImmutable.createCard(Suit.Diamonds, Value.Five),
@@ -103,7 +117,6 @@ class PokerTexasHoldemUtilsTest {
 
     @Test
     public void testFindBestHandC() {
-        PokerTexasHoldemUtils pokerTexasHoldemUtils = new PokerTexasHoldemUtils();
         Map.Entry<Hand5Card, Hand2Card> twoPairAllCards = testUtilsTexasHoldem.createThreeAcesA();
 
         List<Hand5Card> hand5CardList = pokerTexasHoldemUtils.generateAllPossibleHands(twoPairAllCards.getKey(), twoPairAllCards.getValue());
@@ -116,20 +129,10 @@ class PokerTexasHoldemUtilsTest {
                 cardFactoryImmutable.createCard(Suit.Diamonds, Value.Ace),
                 cardFactoryImmutable.createCard(Suit.Hearts, Value.Ace),
                 cardFactoryImmutable.createCard(Suit.Clubs, Value.Ace));
-
-
-//        assertThat(bestHand.getCards()).hasSize(5);
-//        assertThat(bestHand.getCards()).containsOnly(
-//                cardFactoryImmutable.createCard(Suit.Spades, Value.Queen),
-//                cardFactoryImmutable.createCard(Suit.Clubs, Value.Ten),
-//                cardFactoryImmutable.createCard(Suit.Diamonds, Value.Ace),
-//                cardFactoryImmutable.createCard(Suit.Hearts, Value.Ace),
-//                cardFactoryImmutable.createCard(Suit.Clubs, Value.Ace));
     }
 
     @Test
     public void testFindBestHandD() {
-        PokerTexasHoldemUtils pokerTexasHoldemUtils = new PokerTexasHoldemUtils();
         Map.Entry<Hand5Card, Hand2Card> twoPairAllCards = testUtilsTexasHoldem.createStraightA();
 
         List<Hand5Card> hand5CardList = pokerTexasHoldemUtils.generateAllPossibleHands(twoPairAllCards.getKey(), twoPairAllCards.getValue());
@@ -142,32 +145,16 @@ class PokerTexasHoldemUtilsTest {
                 cardFactoryImmutable.createCard(Suit.Spades, Value.Queen),
                 cardFactoryImmutable.createCard(Suit.Diamonds, Value.Jack),
                 cardFactoryImmutable.createCard(Suit.Clubs, Value.Ten));
-
-//
-//        assertThat(bestHand.getCards()).hasSize(5);
-//        assertThat(bestHand.getCards()).containsOnly(
-//                cardFactoryImmutable.createCard(Suit.Hearts, Value.Ace),
-//                cardFactoryImmutable.createCard(Suit.Clubs, Value.King),
-//                cardFactoryImmutable.createCard(Suit.Spades, Value.Queen),
-//                cardFactoryImmutable.createCard(Suit.Diamonds, Value.Jack),
-//                cardFactoryImmutable.createCard(Suit.Clubs, Value.Ten));
-
-//        List<Value> valueList = bestHand.getCards().stream().map(e -> e.getValue()).collect(Collectors.toUnmodifiableList());
-//
-//        assertThat(valueList).containsOnly(Value.Ace, Value.King, Value.Queen, Value.Jack, Value.Ten);
     }
 
     @Test
     public void testFindBestHandE() {
-        PokerTexasHoldemUtils pokerTexasHoldemUtils = new PokerTexasHoldemUtils();
         Map.Entry<Hand5Card, Hand2Card> twoPairAllCards = testUtilsTexasHoldem.createFlushA();
 
         List<Hand5Card> hand5CardList = pokerTexasHoldemUtils.generateAllPossibleHands(twoPairAllCards.getKey(), twoPairAllCards.getValue());
 
         Hand5Card bestHand = pokerTexasHoldemUtils.findBestHand(hand5CardList);
 
-//        assertThat(bestHand.getCards()).hasSize(5);
-//        assertThat(bestHand.getCards()).containsOnly(
         assertHandMatchesExpectedOutput(bestHand,
 
                 cardFactoryImmutable.createCard(Suit.Hearts, Value.Ace),
@@ -175,109 +162,163 @@ class PokerTexasHoldemUtilsTest {
                 cardFactoryImmutable.createCard(Suit.Hearts, Value.Queen),
                 cardFactoryImmutable.createCard(Suit.Hearts, Value.Ten),
                 cardFactoryImmutable.createCard(Suit.Hearts, Value.Six));
-
-//        List<Suit> suitList = bestHand.getCards().stream().map(e -> e.getSuit()).collect(Collectors.toUnmodifiableList());
-//
-//        assertThat(suitList).containsOnly(Suit.Hearts, Suit.Hearts, Suit.Hearts, Suit.Hearts, Suit.Hearts);
     }
 
     @Test
     public void testFindBestHandF() {
-        PokerTexasHoldemUtils pokerTexasHoldemUtils = new PokerTexasHoldemUtils();
         Map.Entry<Hand5Card, Hand2Card> twoPairAllCards = testUtilsTexasHoldem.createFullhouseA();
 
         List<Hand5Card> hand5CardList = pokerTexasHoldemUtils.generateAllPossibleHands(twoPairAllCards.getKey(), twoPairAllCards.getValue());
 
         Hand5Card bestHand = pokerTexasHoldemUtils.findBestHand(hand5CardList);
 
-//        assertThat(bestHand.getCards()).hasSize(5);
-//        assertThat(bestHand.getCards()).containsOnly(
         assertHandMatchesExpectedOutput(bestHand,
                 cardFactoryImmutable.createCard(Suit.Hearts, Value.Six),
                 cardFactoryImmutable.createCard(Suit.Diamonds, Value.Six),
                 cardFactoryImmutable.createCard(Suit.Clubs, Value.Six),
                 cardFactoryImmutable.createCard(Suit.Hearts, Value.Ten),
                 cardFactoryImmutable.createCard(Suit.Clubs, Value.Ten));
-
-//        List<Value> valueList = bestHand.getCards().stream().map(e -> e.getValue()).collect(Collectors.toUnmodifiableList());
-//
-//        assertThat(valueList).containsOnly(Value.Six, Value.Six, Value.Six, Value.Ten, Value.Ten);
     }
 
     @Test
     public void testFindBestHandG() {
-        PokerTexasHoldemUtils pokerTexasHoldemUtils = new PokerTexasHoldemUtils();
         Map.Entry<Hand5Card, Hand2Card> twoPairAllCards = testUtilsTexasHoldem.createFourKings();
 
         List<Hand5Card> hand5CardList = pokerTexasHoldemUtils.generateAllPossibleHands(twoPairAllCards.getKey(), twoPairAllCards.getValue());
 
         Hand5Card bestHand = pokerTexasHoldemUtils.findBestHand(hand5CardList);
 
-//        assertThat(bestHand.getCards()).hasSize(5);
-//        assertThat(bestHand.getCards()).containsOnly(
         assertHandMatchesExpectedOutput(bestHand,
                 cardFactoryImmutable.createCard(Suit.Hearts, Value.King),
                 cardFactoryImmutable.createCard(Suit.Diamonds, Value.King),
                 cardFactoryImmutable.createCard(Suit.Clubs, Value.King),
                 cardFactoryImmutable.createCard(Suit.Spades, Value.King),
                 cardFactoryImmutable.createCard(Suit.Spades, Value.Queen));
-
-//        List<Value> valueList = bestHand.getCards().stream().map(e -> e.getValue()).collect(Collectors.toUnmodifiableList());
-//
-//        assertThat(valueList).containsOnly(Value.King, Value.King, Value.King, Value.King, Value.Queen);
     }
 
     @Test
     public void testFindBestHandH() {
-        PokerTexasHoldemUtils pokerTexasHoldemUtils = new PokerTexasHoldemUtils();
         Map.Entry<Hand5Card, Hand2Card> twoPairAllCards = testUtilsTexasHoldem.createStraightFlush();
 
         List<Hand5Card> hand5CardList = pokerTexasHoldemUtils.generateAllPossibleHands(twoPairAllCards.getKey(), twoPairAllCards.getValue());
 
         Hand5Card bestHand = pokerTexasHoldemUtils.findBestHand(hand5CardList);
 
-//        assertThat(bestHand.getCards()).hasSize(5);
-//        assertThat(bestHand.getCards()).containsOnly(
         assertHandMatchesExpectedOutput(bestHand,
-
                 cardFactoryImmutable.createCard(Suit.Hearts, Value.Ace),
                 cardFactoryImmutable.createCard(Suit.Hearts, Value.King),
                 cardFactoryImmutable.createCard(Suit.Hearts, Value.Queen),
                 cardFactoryImmutable.createCard(Suit.Hearts, Value.Jack),
                 cardFactoryImmutable.createCard(Suit.Hearts, Value.Ten));
-
-//        List<Suit> suitList = bestHand.getCards().stream().map(e -> e.getSuit()).collect(Collectors.toUnmodifiableList());
-//        assertThat(suitList).containsOnly(Suit.Hearts, Suit.Hearts, Suit.Hearts, Suit.Hearts, Suit.Hearts);
-//
-//
-//        List<Value> valueList = bestHand.getCards().stream().map(e -> e.getValue()).collect(Collectors.toUnmodifiableList());
-//        assertThat(valueList).containsOnly(Value.Ace, Value.King, Value.Queen, Value.Jack, Value.Ten);
     }
 
     @Test
-    void testCreateHand5From4CommunityCards() {
-        PokerTexasHoldemUtils pokerTexasHoldemUtils = new PokerTexasHoldemUtils();
+    void testCreateHand5From4CommunityCardsA() {
         Map.Entry<Hand5Card, Hand2Card> onePairAllCards = testUtilsTexasHoldem.createOnePairA();
 
-        List<Hand5Card> hand5CardList = pokerTexasHoldemUtils.createHand5From4CommunityCards(onePairAllCards.getKey(), onePairAllCards.getValue().getCards().first());
+        Card handCard = cardFactoryImmutable.createCard(Suit.Diamonds, Value.Five);
+
+        List<Hand5Card> hand5CardList = pokerTexasHoldemUtils.createHand5From4CommunityCards(onePairAllCards.getKey(), handCard);
+
+        Hand5Card bestHand5Card = testUtilsTexasHoldem.getBestHand(hand5CardList);
 
         assertThat(hand5CardList).hasSize(5);
+
+        assertHandMatchesExpectedOutput(bestHand5Card,
+                cardFactoryImmutable.createCard(Suit.Diamonds, Value.Five),
+                cardFactoryImmutable.createCard(Suit.Hearts, Value.Six),
+                cardFactoryImmutable.createCard(Suit.Clubs, Value.Ten),
+                cardFactoryImmutable.createCard(Suit.Spades, Value.Queen),
+                cardFactoryImmutable.createCard(Suit.Hearts, Value.Ace));
     }
 
-    private void assertHandMatchesExpectedOutput(Hand5Card hand5Card, Card expectedCard1,Card expectedCard2,Card expectedCard3,Card expectedCard4,Card expectedCard5) {
-        Set<Card> cardSet = new HashSet<>();
+    @Test
+    void testCreateHand5From4CommunityCardsB() {
+        Map.Entry<Hand5Card, Hand2Card> onePairAllCards = testUtilsTexasHoldem.createOnePairC();
+
+        Card handCard = cardFactoryImmutable.createCard(Suit.Diamonds, Value.Two);
+
+        List<Hand5Card> hand5CardList = pokerTexasHoldemUtils.createHand5From4CommunityCards(onePairAllCards.getKey(), handCard);
+
+        Hand5Card bestHand5Card = testUtilsTexasHoldem.getBestHand(hand5CardList);
+
+        assertThat(hand5CardList).hasSize(5);
+
+        assertHandMatchesExpectedOutput(bestHand5Card,
+                cardFactoryImmutable.createCard(Suit.Diamonds, Value.Two),
+                cardFactoryImmutable.createCard(Suit.Hearts, Value.Two),
+                cardFactoryImmutable.createCard(Suit.Hearts, Value.Six),
+                cardFactoryImmutable.createCard(Suit.Clubs, Value.Ten),
+                cardFactoryImmutable.createCard(Suit.Spades, Value.Queen));
+    }
+
+    @Test
+    void testCreateHand5From4CommunityCardsTwoPairA() {
+        Map.Entry<Hand5Card, Hand2Card> onePairAllCards = testUtilsTexasHoldem.createTwoPairB();
+
+        Card handCard = cardFactoryImmutable.createCard(Suit.Clubs, Value.Three);
+
+        List<Hand5Card> hand5CardList = pokerTexasHoldemUtils.createHand5From4CommunityCards(onePairAllCards.getKey(), handCard);
+
+        Hand5Card bestHand5Card = testUtilsTexasHoldem.getBestHand(hand5CardList);
+
+        assertThat(hand5CardList).hasSize(5);
+
+        assertHandMatchesExpectedOutput(bestHand5Card,
+                cardFactoryImmutable.createCard(Suit.Hearts, Value.Six),
+                cardFactoryImmutable.createCard(Suit.Hearts, Value.Three),
+                cardFactoryImmutable.createCard(Suit.Clubs, Value.Three),
+                cardFactoryImmutable.createCard(Suit.Clubs, Value.Queen),
+                cardFactoryImmutable.createCard(Suit.Spades, Value.Queen));
+    }
+
+    @Test
+    void testCreateHand5From4CommunityCardsTwoPairMultiA() {
+        Map.Entry<Hand5Card, Hand2Card> onePairAllCards = testUtilsTexasHoldem.createTwoPairB();
+
+
+        for (Value value : Value.values()) {
+
+            Card handCard = cardFactoryImmutable.createCard(Suit.Diamonds, value);
+            List<Hand5Card> hand5CardList = pokerTexasHoldemUtils.createHand5From4CommunityCards(onePairAllCards.getKey(), handCard);
+
+            Hand5Card bestHand5Card = testUtilsTexasHoldem.getBestHand(hand5CardList);
+
+            assertThat(hand5CardList).hasSize(5);
+
+            if (value == Value.Queen) {
+                assertHandMatchesExpectedOutput(bestHand5Card,
+                        cardFactoryImmutable.createCard(Suit.Hearts, Value.Three),
+                        cardFactoryImmutable.createCard(Suit.Hearts, Value.Six),
+                        cardFactoryImmutable.createCard(Suit.Clubs, Value.Queen),
+                        cardFactoryImmutable.createCard(Suit.Diamonds, Value.Queen),
+                        cardFactoryImmutable.createCard(Suit.Spades, Value.Queen));
+
+            } else if (value == Value.Two) {
+                assertHandMatchesExpectedOutput(bestHand5Card,
+                        cardFactoryImmutable.createCard(Suit.Hearts, Value.Two),
+                        cardFactoryImmutable.createCard(Suit.Diamonds, Value.Two),
+                        cardFactoryImmutable.createCard(Suit.Hearts, Value.Six),
+                        cardFactoryImmutable.createCard(Suit.Clubs, Value.Queen),
+                        cardFactoryImmutable.createCard(Suit.Spades, Value.Queen));
+
+            } else {
+                assertHandMatchesExpectedOutput(bestHand5Card,
+                        cardFactoryImmutable.createCard(Suit.Diamonds, value),
+                        cardFactoryImmutable.createCard(Suit.Hearts, Value.Three),
+                        cardFactoryImmutable.createCard(Suit.Hearts, Value.Six),
+                        cardFactoryImmutable.createCard(Suit.Clubs, Value.Queen),
+                        cardFactoryImmutable.createCard(Suit.Spades, Value.Queen));
+            }
+        }
+    }
+
+    private void assertHandMatchesExpectedOutput(Hand5Card hand5Card, Card expectedCard1, Card expectedCard2, Card expectedCard3, Card expectedCard4, Card expectedCard5) {
+        Set<Card> cardSet = new TreeSet<>();
 
         for (int index = 0; index < 5; ++index) {
             cardSet.add(hand5Card.getNthCard(index));
         }
-
-//        assertThat(cardSet).contains(
-//                cardFactoryImmutable.createCard(Suit.Hearts, Value.Six),
-//                cardFactoryImmutable.createCard(Suit.Clubs, Value.Ten),
-//                cardFactoryImmutable.createCard(Suit.Spades, Value.Queen),
-//                cardFactoryImmutable.createCard(Suit.Hearts, Value.Ace),
-//                cardFactoryImmutable.createCard(Suit.Clubs, Value.Ace)
-//        );
 
         assertThat(cardSet).contains(
                 expectedCard1,

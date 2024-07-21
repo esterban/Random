@@ -4,15 +4,15 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.srwcrw.poker.texasholdem.collections.IPack;
+import org.srwcrw.poker.texasholdem.components.Card;
 import org.srwcrw.poker.texasholdem.components.CardFactoryImmutable;
 import org.srwcrw.poker.texasholdem.components.PackGenerator;
-import org.srwcrw.poker.texasholdem.components.Card;
 import org.srwcrw.poker.texasholdem.test.TestUtils;
 import org.srwcrw.poker.texasholdem.test.TestUtilsTexasHoldem;
 
 import java.util.AbstractMap;
-import java.util.HashSet;
 import java.util.Set;
+import java.util.TreeSet;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -41,7 +41,7 @@ class HandGeneratorTest {
         assertThat(hand.getCards()).hasSize(5);
         assertThat(fullPack.getCards()).hasSize(47);
 
-        Set<Card> handCardSetCopy = new HashSet<>(hand.getCards());
+        Set<Card> handCardSetCopy = new TreeSet<>(hand.getCards());
         handCardSetCopy.retainAll(fullPack.getCards());
 
         assertThat(handCardSetCopy).isEmpty();

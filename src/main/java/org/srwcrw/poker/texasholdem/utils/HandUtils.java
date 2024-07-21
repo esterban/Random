@@ -243,20 +243,27 @@ public class HandUtils implements IHandUtils {
         var pairValues = IntStream.range(0, 13).boxed()
                 .filter(e -> valueCounts[e] == 2)
                 .map(e -> Value.values()[e])
-                    .collect(Collectors.toSet());
+                    .collect(Collectors.toCollection(TreeSet::new));
 
         return pairValues;
     }
 
     public Set<Value> getThreeOfAKindValues(Map<Value, Integer> valueMap) {
         @SuppressWarnings("UnnecessaryLocalVariable")
-        Set<Value> pairValues = valueMap.entrySet().stream().filter(e -> e.getValue() == 3).map(Map.Entry::getKey).collect(Collectors.toSet());
+        Set<Value> pairValues = valueMap.entrySet().stream()
+                .filter(e -> e.getValue() == 3)
+                .map(Map.Entry::getKey)
+                            .collect(Collectors.toCollection(TreeSet::new));
+
         return pairValues;
     }
 
     public Set<Value> getFourOfAKindValues(Map<Value, Integer> valueMap) {
         @SuppressWarnings("UnnecessaryLocalVariable")
-        Set<Value> pairValues = valueMap.entrySet().stream().filter(e -> e.getValue() == 4).map(Map.Entry::getKey).collect(Collectors.toSet());
+        Set<Value> pairValues = valueMap.entrySet().stream()
+                .filter(e -> e.getValue() == 4)
+                .map(Map.Entry::getKey)
+                    .collect(Collectors.toCollection(TreeSet::new));
         return pairValues;
     }
 
@@ -282,7 +289,11 @@ public class HandUtils implements IHandUtils {
     public SortedSet<Value> getSingleCards(Hand5Card hand) {
         Map<Value, Integer> valueMap = countMatchingValues(hand);
 
-        Set<Value> singleCards = valueMap.entrySet().stream().filter(e -> e.getValue() == 1).map(Map.Entry::getKey).collect(Collectors.toSet());
+        Set<Value> singleCards = valueMap.entrySet().stream()
+                .filter(e -> e.getValue() == 1)
+                .map(Map.Entry::getKey)
+                            .collect(Collectors.toCollection(TreeSet::new));
+
         SortedSet<Value> sortedSingleCards = new TreeSet<>(new ValueComparatorAceHigh());
         sortedSingleCards.addAll(singleCards);
 

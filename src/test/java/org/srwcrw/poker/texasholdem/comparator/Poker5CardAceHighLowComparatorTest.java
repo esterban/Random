@@ -43,6 +43,18 @@ class Poker5CardAceHighLowComparatorTest {
     }
 
     @Test
+    void testCompareTwoPairB() {
+        Hand5Card hand5CardA = testUtils.createTwoPairBKickerTwo();
+        Hand5Card hand5CardB = testUtils.createTwoPairBKickerAce();
+
+        assertThat(poker5CardAceHighLowComparator.compare(hand5CardB, hand5CardA)).isGreaterThan(0);
+        assertThat(poker5CardAceHighLowComparator.compare(hand5CardA, hand5CardB)).isLessThan(0);
+
+        assertThat(poker5CardAceHighLowComparator.compare(hand5CardA, hand5CardA)).isEqualTo(0);
+        assertThat(poker5CardAceHighLowComparator.compare(hand5CardB, hand5CardB)).isEqualTo(0);
+    }
+
+    @Test
     void testCompareThreeOfAKindA() {
         Hand5Card hand5CardA = testUtils.createThreeOfAKindA();
         Hand5Card hand5CardB = testUtils.createThreeOfAKindB();
@@ -92,6 +104,10 @@ class Poker5CardAceHighLowComparatorTest {
 
         assertThat(poker5CardAceHighLowComparator.compare(hand5CardStraight, hand5CardStraightAceHigh)).isLessThan(0);
         assertThat(poker5CardAceHighLowComparator.compare(hand5CardStraightAceLow, hand5CardStraight)).isLessThan(0);
+
+        assertThat(poker5CardAceHighLowComparator.compare(hand5CardStraight, hand5CardStraight)).isEqualTo(0);
+        assertThat(poker5CardAceHighLowComparator.compare(hand5CardStraightAceLow, hand5CardStraightAceLow)).isEqualTo(0);
+        assertThat(poker5CardAceHighLowComparator.compare(hand5CardStraightAceHigh, hand5CardStraightAceHigh)).isEqualTo(0);
     }
 
     @Test
@@ -102,7 +118,7 @@ class Poker5CardAceHighLowComparatorTest {
         Hand5Card hand5CardOnePair = testUtils.createOnePair();
 
         assertThat(poker5CardAceHighLowComparator.compare(hand5CardFlushA, hand5CardOnePair)).isGreaterThan(0);
-        assertThat(poker5CardAceHighLowComparator.compare(hand5CardFlushA, hand5CardOnePair)).isGreaterThan(0);
+        assertThat(poker5CardAceHighLowComparator.compare(hand5CardFlushB, hand5CardOnePair)).isGreaterThan(0);
 
         assertThat(poker5CardAceHighLowComparator.compare(hand5CardFlushA, hand5CardFlushB)).isGreaterThan(0);
         assertThat(poker5CardAceHighLowComparator.compare(hand5CardFlushB, hand5CardFlushA)).isLessThan(0);

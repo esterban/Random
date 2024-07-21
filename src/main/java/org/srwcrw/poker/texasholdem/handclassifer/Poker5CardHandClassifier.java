@@ -1,7 +1,6 @@
 package org.srwcrw.poker.texasholdem.handclassifer;
 
 import org.srwcrw.poker.texasholdem.collections.Hand5Card;
-import org.srwcrw.poker.texasholdem.comparator.ValueComparatorAceHigh;
 import org.srwcrw.poker.texasholdem.comparator.ValueComparatorAceLow;
 import org.srwcrw.poker.texasholdem.components.Card;
 import org.srwcrw.poker.texasholdem.entities.HandType5Cards;
@@ -9,7 +8,6 @@ import org.srwcrw.poker.texasholdem.entities.Suit;
 import org.srwcrw.poker.texasholdem.entities.Value;
 import org.srwcrw.poker.texasholdem.utils.HandUtils;
 
-import java.util.Set;
 import java.util.SortedSet;
 
 public class Poker5CardHandClassifier implements PokerCardClassifier<Hand5Card> {
@@ -23,13 +21,20 @@ public class Poker5CardHandClassifier implements PokerCardClassifier<Hand5Card> 
         boolean isFlush = isFlush(hand5Card);
 
         if (isFlush && isStraight) {
-            Set<Value> handValues = handUtils.getValueSetSorted(hand5Card, new ValueComparatorAceHigh());
+            boolean hasAce = false;
+            boolean hasKing = false;
 
-            if (handValues.contains(Value.Ace) && handValues.contains(Value.King)) {
-                return HandType5Cards.RoyalFlush;
+            for (int index = 0; index < 5; ++index) {
+                Card card = hand5Card.getNthCard(index);
+
+                if (card.getValue().equals(Value.Ace)) {
+                    hasAce = true;
+                } else if (card.getValue().equals(Value.King)) {
+                    hasKing = true;
+                }
             }
 
-            return HandType5Cards.StraightFlush;
+            return hasAce && hasKing ? HandType5Cards.RoyalFlush : HandType5Cards.StraightFlush;
         }
 
         if (foursCount == 1) {
@@ -64,14 +69,11 @@ public class Poker5CardHandClassifier implements PokerCardClassifier<Hand5Card> 
     }
 
     private boolean isFlush(Hand5Card hand5Card) {
-//        Set<Suit> uniqueSuits = new HashSet<>();
-
         Suit firstSuit = null;
 
         for (int index =0; index < 5; ++index) {
             Card card = hand5Card.getNthCard(index);
 
-//        for (Card card : hand5Card.getCards()) {
             if (firstSuit == null) {
                 firstSuit = card.getSuit();
             } else {
@@ -83,7 +85,6 @@ public class Poker5CardHandClassifier implements PokerCardClassifier<Hand5Card> 
             }
         }
 
-//        return uniqueSuits.size() == 1;
         return true;
     }
 
@@ -100,6 +101,4 @@ public class Poker5CardHandClassifier implements PokerCardClassifier<Hand5Card> 
 
         return handUtils.areValuesConsecutiveAceHigh(hand5Card);
     }
-
-
 }

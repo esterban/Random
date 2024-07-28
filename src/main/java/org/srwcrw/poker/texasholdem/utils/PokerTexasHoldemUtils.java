@@ -5,11 +5,15 @@ import org.srwcrw.poker.texasholdem.collections.Hand2Card;
 import org.srwcrw.poker.texasholdem.collections.Hand5Card;
 import org.srwcrw.poker.texasholdem.comparator.Poker5CardAceHighLowComparator;
 import org.srwcrw.poker.texasholdem.components.Card;
+import org.srwcrw.poker.texasholdem.handclassifer.Poker5CardHandClassifier;
 
 import java.util.*;
 
 public class PokerTexasHoldemUtils {
     private static Poker5CardAceHighLowComparator poker5CardAceHighLowComparator = new Poker5CardAceHighLowComparator();
+
+//    @Autowired
+    private Poker5CardHandClassifier poker5CardHandClassifier = new Poker5CardHandClassifier();
 
     public List<Hand5Card> createHand5From3CommunityCards(Hand5Card communityCards, Hand2Card hand2Card) {
         List<Hand5Card> possibleHandList = new ArrayList<>();
@@ -69,6 +73,10 @@ public class PokerTexasHoldemUtils {
     public Hand5Card findBestHandWithCommunityCards(Hand5Card communityCards, Hand2Card hand2Card) {
         List<Hand5Card> possibleHands = generateAllPossibleHands(communityCards, hand2Card);
         Hand5Card bestHand = findBestHand(possibleHands);
+
+//        if (poker5CardHandClassifier.classify(bestHand) == HandType5Cards.HighestCard) {
+//            System.out.println("Highest card h");
+//        }
 
         return bestHand;
     }

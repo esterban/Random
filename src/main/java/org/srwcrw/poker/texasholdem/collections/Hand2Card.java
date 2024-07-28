@@ -18,6 +18,11 @@ public class Hand2Card implements IPack {
         this.cards = cards;
     }
 
+    public Hand2Card(Card card1, Card card2) {
+        this.cards = new TreeSet<>(List.of(card1, card2));
+    }
+
+
     @Override
     public Card getCardAtRandom() {
         if (cards == null || cards.isEmpty()) {

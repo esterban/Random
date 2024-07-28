@@ -155,6 +155,19 @@ public class TestUtils {
         return hand5Card;
     }
 
+    public Hand5Card createFlushAA() {
+        Card card1 = cardFactoryImmutable.createCard(Suit.Clubs, Value.Ace);
+        Card card2 = cardFactoryImmutable.createCard(Suit.Clubs, Value.Three);
+        Card card3 = cardFactoryImmutable.createCard(Suit.Clubs, Value.Four);
+        Card card4 = cardFactoryImmutable.createCard(Suit.Clubs, Value.Six);
+        Card card5 = cardFactoryImmutable.createCard(Suit.Clubs, Value.Seven);
+
+        Hand5Card hand5Card = new Hand5Card(card1, card2, card3, card4, card5);
+
+        return hand5Card;
+    }
+
+
     public Hand5Card createFlushB() {
         Card card1 = cardFactoryImmutable.createCard(Suit.Hearts, Value.Ten);
         Card card2 = cardFactoryImmutable.createCard(Suit.Hearts, Value.Three);
@@ -216,6 +229,18 @@ public class TestUtils {
     }
 
     public Hand5Card createThreeOfAKindA() {
+        Card card1 = cardFactoryImmutable.createCard(Suit.Hearts, Value.Ten);
+        Card card2 = cardFactoryImmutable.createCard(Suit.Diamonds, Value.Ten);
+        Card card3 = cardFactoryImmutable.createCard(Suit.Clubs, Value.Ten);
+        Card card4 = cardFactoryImmutable.createCard(Suit.Hearts, Value.Ace);
+        Card card5 = cardFactoryImmutable.createCard(Suit.Hearts, Value.Three);
+
+        Hand5Card hand5Card = new Hand5Card(card1, card2, card3, card4, card5);
+
+        return hand5Card;
+    }
+
+    public Hand5Card createThreeOfAKindAA() {
         Card card1 = cardFactoryImmutable.createCard(Suit.Hearts, Value.Ten);
         Card card2 = cardFactoryImmutable.createCard(Suit.Diamonds, Value.Ten);
         Card card3 = cardFactoryImmutable.createCard(Suit.Clubs, Value.Ten);
@@ -360,12 +385,37 @@ public class TestUtils {
         return hand5Card;
     }
 
+    public Hand5Card createHighestCardAA() {
+        Card card1 = cardFactoryImmutable.createCard(Suit.Clubs, Value.Ace);
+        Card card5 = cardFactoryImmutable.createCard(Suit.Hearts, Value.Two);
+        Card card2 = cardFactoryImmutable.createCard(Suit.Clubs, Value.Ten);
+        Card card3 = cardFactoryImmutable.createCard(Suit.Hearts, Value.Nine);
+        Card card4 = cardFactoryImmutable.createCard(Suit.Hearts, Value.Queen);
+
+        Hand5Card hand5Card = new Hand5Card(card1, card2, card3, card4, card5);
+
+        return hand5Card;
+    }
+
+
     public Hand5Card createHighestCardB() {
         Card card1 = cardFactoryImmutable.createCard(Suit.Clubs, Value.Two);
         Card card2 = cardFactoryImmutable.createCard(Suit.Clubs, Value.Ten);
         Card card3 = cardFactoryImmutable.createCard(Suit.Hearts, Value.Nine);
         Card card4 = cardFactoryImmutable.createCard(Suit.Hearts, Value.Queen);
         Card card5 = cardFactoryImmutable.createCard(Suit.Hearts, Value.King);
+
+        Hand5Card hand5Card = new Hand5Card(card1, card2, card3, card4, card5);
+
+        return hand5Card;
+    }
+
+    public Hand5Card createHighestCardC() {
+        Card card1 = cardFactoryImmutable.createCard(Suit.Clubs, Value.Two);
+        Card card2 = cardFactoryImmutable.createCard(Suit.Hearts, Value.Three);
+        Card card3 = cardFactoryImmutable.createCard(Suit.Hearts, Value.Five);
+        Card card4 = cardFactoryImmutable.createCard(Suit.Hearts, Value.Six);
+        Card card5 = cardFactoryImmutable.createCard(Suit.Hearts, Value.Seven);
 
         Hand5Card hand5Card = new Hand5Card(card1, card2, card3, card4, card5);
 

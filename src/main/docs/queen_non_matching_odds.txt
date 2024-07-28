@@ -1,0 +1,38 @@
+Player hand = Card{suit=Spades, value=Queen} , Card{suit=Clubs, value=Two}
+Player win/draw/lose percentages = 44.88% / 4.41% / 50.70% (100000 iterators)
+
+Player hand = Card{suit=Spades, value=Queen} , Card{suit=Clubs, value=Three}
+Player win/draw/lose percentages = 45.96% / 4.46% / 49.59% (100000 iterators)
+
+Player hand = Card{suit=Spades, value=Queen} , Card{suit=Clubs, value=Four}
+Player win/draw/lose percentages = 46.76% / 4.40% / 48.84% (100000 iterators)
+
+Player hand = Card{suit=Spades, value=Queen} , Card{suit=Clubs, value=Five}
+Player win/draw/lose percentages = 48.06% / 4.38% / 47.57% (100000 iterators)
+
+Player hand = Card{suit=Spades, value=Queen} , Card{suit=Clubs, value=Six}
+Player win/draw/lose percentages = 48.99% / 4.09% / 46.92% (100000 iterators)
+
+Player hand = Card{suit=Spades, value=Queen} , Card{suit=Clubs, value=Seven}
+Player win/draw/lose percentages = 49.98% / 3.76% / 46.26% (100000 iterators)
+
+Player hand = Card{suit=Spades, value=Queen} , Card{suit=Clubs, value=Eight}
+Player win/draw/lose percentages = 51.70% / 3.40% / 44.91% (100000 iterators)
+
+Player hand = Card{suit=Spades, value=Queen} , Card{suit=Clubs, value=Nine}
+Player win/draw/lose percentages = 53.70% / 3.05% / 43.25% (100000 iterators)
+
+Player hand = Card{suit=Spades, value=Queen} , Card{suit=Clubs, value=Ten}
+Player win/draw/lose percentages = 55.93% / 2.77% / 41.30% (100000 iterators)
+
+Player hand = Card{suit=Spades, value=Queen} , Card{suit=Clubs, value=Jack}
+Player win/draw/lose percentages = 56.63% / 2.51% / 40.86% (100000 iterators)
+
+Player hand = Card{suit=Spades, value=Queen} , Card{suit=Clubs, value=Queen}
+Player win/draw/lose percentages = 79.44% / 0.65% / 19.91% (100000 iterators)
+
+Player hand = Card{suit=Spades, value=Queen} , Card{suit=Clubs, value=King}
+Player win/draw/lose percentages = 60.31% / 2.14% / 37.55% (100000 iterators)
+
+Player hand = Card{suit=Spades, value=Queen} , Card{suit=Clubs, value=Ace}
+Player win/draw/lose percentages = 63.37% / 1.92% / 34.72% (100000 iterators)

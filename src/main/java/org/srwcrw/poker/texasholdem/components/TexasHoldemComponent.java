@@ -15,6 +15,7 @@ import org.srwcrw.poker.texasholdem.entities.Value;
 import org.srwcrw.poker.texasholdem.generators.ConverterHand2Card;
 import org.srwcrw.poker.texasholdem.generators.ConverterHand5Card;
 import org.srwcrw.poker.texasholdem.generators.HandGenerator;
+import org.srwcrw.poker.texasholdem.handclassifer.Poker5CardHandClassifier;
 import org.srwcrw.poker.texasholdem.utils.PokerTexasHoldemUtils;
 
 import java.util.*;
@@ -31,162 +32,171 @@ public class TexasHoldemComponent {
     private PackGenerator packGenerator;
 
     private static final HandGenerator HAND_GENERATOR = new HandGenerator();
-//    private static final Poker5CardHandClassifier POKER_5_CARD_HAND_CLASSIFIER = new Poker5CardHandClassifier();
+    private static final Poker5CardHandClassifier POKER_5_CARD_HAND_CLASSIFIER = new Poker5CardHandClassifier();
     private static final PokerTexasHoldemUtils POKER_TEXAS_HOLDEM_UTILS = new PokerTexasHoldemUtils();
     private static final ConverterHand5Card CONVERTER_HAND_5_CARD = new ConverterHand5Card();
     private static final ConverterHand2Card CONVERTER_HAND_2_CARD = new ConverterHand2Card();
 
+    private static final int countByHandValues = 5;
+    private final int handLoopCounter = 0;
+
 
     @SuppressWarnings("unused")
     public void monteCarloOneOpponent() {
-        final StopWatch stopWatch = new StopWatch();
-        stopWatch.start();
-
         AbstractMap.SimpleEntry<IPack, IPack> handPair;
 
         final int opponentCount = 1;
+//        final int opponentCount = 2;
 
-        int handsWonCount = 0;
-        int handsDrawnCount = 0;
-        int handsLostCount = 0;
+//        Value firstPlayerCard = Value.Two;
+//        Value firstPlayerCard = Value.Nine;
+//        Value firstPlayerCard = Value.Ten;
+        Value firstPlayerCard = Value.Jack;
+//        Value firstPlayerCard = Value.Queen;
+//        Value firstPlayerCard = Value.King;
+//        Value firstPlayerCard = Value.Ace;
 
-        IPack fullPack = packGenerator.generateFullPack();
-        Map.Entry<IPack, Hand2Card> packPlayerHandPair = createPlayerHand2(fullPack);
-        IPack pack50 = packPlayerHandPair.getKey();
+        boolean matchingSuit = false;
+//        boolean matchingSuit = true;
 
-        Map<HandType5Cards, Integer> playerHandTypeCounts = new TreeMap<>();
-        Map<HandType5Cards, Integer> opponentHandTypeCounts = new TreeMap<>();
+        List<Value> valueList = List.of(Value.values());
+//        List<Value> valueList = List.of(Value.Two);
 
-        Map<HandType5Cards, Integer> playerDrawnHandTypeCounts = new TreeMap<>();
-        Map<HandType5Cards, Integer> opponentDrawnHandTypeCounts = new TreeMap<>();
+        List<Hand5Card> twoPairDrawCommunityList = new ArrayList<>();
+        List<List<Hand2Card>> twoPairDrawPlayerList = new ArrayList<>();
+        List<List<Hand5Card>> twoPairDrawList = new ArrayList<>();
 
-        Map<Value, Integer> playerHighCardCount = new TreeMap<>();
-        Map<Value, Integer> opponentHighCardCount = new TreeMap<>();
+        System.out.println();
+        System.out.println("Number of opponents = " + opponentCount);
 
-        for (int handCounter = 1; handCounter <= handCount; ++handCounter) {
-            List<IPack> opponentHandList = new ArrayList<>();
+        for (Value kickerValue : valueList) {
+            for (int loopCounter = 1; loopCounter <= 5; ++loopCounter) {
 
-            Hand2Card playerHand2Card = packPlayerHandPair.getValue();
-            IPack pack48 = null;
+                int handsWonCount = 0;
+                int handsDrawnCount = 0;
+                int handsLostCount = 0;
 
-            for (int counter = 1; counter <= opponentCount; ++counter) {
-                handPair = HAND_GENERATOR.generateHandAndRemoveImmutable(pack50, 2);
+                final StopWatch stopWatch = new StopWatch();
+                stopWatch.start();
 
-                if (pack50.getSize() != 50) {
-                    throw new RuntimeException("EEEKKKK!! remaining pack size is not 50");
+                IPack fullPack = packGenerator.generateFullPack();
+                Map.Entry<IPack, Hand2Card> packPlayerHandPair = createPlayerHand2(fullPack, firstPlayerCard, kickerValue, matchingSuit);
+
+                if (packPlayerHandPair == null) {
+                    continue;
                 }
 
-                pack48 = handPair.getKey();
+                IPack pack50 = packPlayerHandPair.getKey();
 
-                opponentHandList.add(handPair.getValue());
+                Map<HandType5Cards, Integer> playerHandTypeCounts = new TreeMap<>();
+                Map<HandType5Cards, Integer> opponentHandTypeCounts = new TreeMap<>();
 
-                if (pack48.getSize() != 48) {
-                    throw new RuntimeException("EEEKKKK!! remaining pack size is not 48");
+                Map<HandType5Cards, Integer> playerDrawnHandTypeCounts = new TreeMap<>();
+                Map<HandType5Cards, Integer> opponentDrawnHandTypeCounts = new TreeMap<>();
+
+                Map<Value, Integer> playerHighCardCount = new TreeMap<>();
+                Map<Value, Integer> opponentHighCardCount = new TreeMap<>();
+
+                for (int handCounter = 1; handCounter <= handCount; ++handCounter) {
+                    List<IPack> opponentHandList = new ArrayList<>();
+
+                    Hand2Card playerHand2Card = packPlayerHandPair.getValue();
+
+                    handPair = HAND_GENERATOR.generateHandAndRemoveImmutable(pack50, 2);
+                    opponentHandList.add(handPair.getValue());
+                    IPack pack48 = handPair.getKey();
+
+                    for (int counter = 2; counter <= opponentCount; ++counter) {
+                        handPair = HAND_GENERATOR.generateHandAndRemoveImmutable(pack48, 2);
+                        pack48 = handPair.getKey();
+
+                        opponentHandList.add(handPair.getValue());
+
+//                    if (pack50.getSize() != 50) {
+//                        throw new RuntimeException("EEEKKKK!! remaining pack size is not 50");
+//                    }
+
+//                    pack48 = handPair.getKey();
+//                    if (pack48.getSize() != 48) {
+//                        throw new RuntimeException("EEEKKKK!! remaining pack size is not 48");
+//                    }
+                    }
+
+                    if (pack48.getSize() != 50 - (opponentCount * 2)) {
+                        throw new RuntimeException("EEEKKKK!! remaining pack size is not " + (50 - (opponentCount * 2)));
+                    }
+
+                    IPack communityCards = HAND_GENERATOR.generateHandAndRemoveImmutable(pack48, 5).getValue();
+                    Hand5Card communityCardsHand = CONVERTER_HAND_5_CARD.convert(communityCards);
+
+                    List<Hand5Card> playerAllPossibleHands = POKER_TEXAS_HOLDEM_UTILS.generateAllPossibleHands(communityCardsHand, playerHand2Card);
+
+                    Hand5Card playerBestHand = POKER_TEXAS_HOLDEM_UTILS.findBestHandWithCommunityCards(communityCardsHand, playerHand2Card);
+
+                    int winLoseComparison = 0;
+
+                    for (int opponentIndex = 0; opponentIndex < opponentCount; ++opponentIndex) {
+                        Hand5Card opponentBestHand = POKER_TEXAS_HOLDEM_UTILS.findBestHandWithCommunityCards(communityCardsHand, CONVERTER_HAND_2_CARD.convert(opponentHandList.get(opponentIndex)));
+                        winLoseComparison = POKER_5_CARD_ACE_HIGH_LOW_COMPARATOR.compare(playerBestHand, opponentBestHand);
+
+                        if (winLoseComparison < 0) {
+                            break;
+                        }
+                    }
+
+                    if (winLoseComparison > 0) {
+                        ++handsWonCount;
+                    } else if (winLoseComparison == 0) {
+                        ++handsDrawnCount;
+
+                        debugInfo();
+                    } else {
+                        ++handsLostCount;
+                    }
                 }
-            }
 
-            IPack communityCards = HAND_GENERATOR.generateHandAndRemoveImmutable(pack48, 5).getValue();
-            Hand5Card communityCardsHand = CONVERTER_HAND_5_CARD.convert(communityCards);
+                stopWatch.stop();
+//            System.out.printf("Execution time = %4.3f \n", stopWatch.getTotalTimeSeconds());
 
-            Hand5Card playerBestHand = POKER_TEXAS_HOLDEM_UTILS.findBestHandWithCommunityCards(communityCardsHand, playerHand2Card);
-            Hand5Card opponentBestHand = POKER_TEXAS_HOLDEM_UTILS.findBestHandWithCommunityCards(communityCardsHand, CONVERTER_HAND_2_CARD.convert(opponentHandList.get(0)));
+                double handsWonRatio = (double) handsWonCount / ((double) handCount);
+                double handsDrawnRatio = (double) handsDrawnCount / ((double) handCount);
+                double handsLostRatio = (double) handsLostCount / ((double) handCount);
 
-            int winLoseComparison = POKER_5_CARD_ACE_HIGH_LOW_COMPARATOR.compare(playerBestHand, opponentBestHand);
+                if (handsWonCount + handsDrawnCount + handsLostCount != handCount) {
+                    throw new RuntimeException("EEEEKKEKEKKEK!!!!");
+                }
 
-            if (winLoseComparison > 0) {
-                ++handsWonCount;
-            } else if (winLoseComparison == 0) {
-                ++handsDrawnCount;
-            } else {
-                ++handsLostCount;
+                double handsWonPercentage = handsWonRatio * 100;
+                double handsDrawnPercentage = handsDrawnRatio * 100;
+                double handsLostPercentage = handsLostRatio * 100;
+
+//            System.out.println();
+
+//            System.out.println("Player hand = " + packPlayerHandPair.getValue());
+//            System.out.printf("Player win/draw/lose percentages = %2.2f%% / %2.2f%% / %2.2f%% (%d iterations) \n", handsWonPercentage, handsDrawnPercentage, handsLostPercentage, handCount);
+                System.out.printf("Player win/draw/lose percentages = %2.1f%% / %2.1f%% / %2.1f%% (%d iterations) \n", handsWonPercentage, handsDrawnPercentage, handsLostPercentage, handCount);
+//            System.out.printf("Player win/draw/lose count = %d / %d / %d  \n", handsWonCount, handsDrawnCount, handsLostCount);
+
+                System.out.println();
+//            System.out.println();
             }
         }
-
-        stopWatch.stop();
-        System.out.printf("Execution time = %4.3f \n", stopWatch.getTotalTimeSeconds());
-
-        double handsWonRatio = (double) handsWonCount / ((double) handCount);
-        double handsDrawnRatio = (double) handsDrawnCount / ((double) handCount);
-        double handsLostRatio = (double) handsLostCount / ((double) handCount);
-
-        if (handsWonCount + handsDrawnCount + handsLostCount != handCount) {
-            throw new RuntimeException("EEEEKKEKEKKEK!!!!");
-        }
-
-        double handsWonPercentage = handsWonRatio * 100;
-        double handsDrawnPercentage = handsDrawnRatio * 100;
-        double handsLostPercentage = handsLostRatio * 100;
-
-        System.out.println();
-        System.out.println();
-
-        System.out.printf("Player win/draw/lose percentages = %2.2f%% / %2.2f%% / %2.2f%% (%d iterators) \n", handsWonPercentage, handsDrawnPercentage, handsLostPercentage, handCount);
-        System.out.printf("Player win/draw/lose count = %d / %d / %d  \n", handsWonCount, handsDrawnCount, handsLostCount);
-
-        System.out.println();
-        System.out.println();
     }
 
 
-    private Map.Entry<IPack, Hand2Card> createPlayerHand2(IPack fullPack) {
-//        Execution time = 12.430
-//        Player win/draw/lose percentages = 56.95% / 5.49% / 37.56% (100000 iterators)
-//        Player win/draw/lose count = 56952 / 5491 / 37557
-        Card playerCard1 = new Card(Suit.Hearts, Value.King);
-        Card playerCard2 = new Card(Suit.Diamonds, Value.Queen);
+    private Map.Entry<IPack, Hand2Card> createPlayerHand2(IPack fullPack, Value firstPlayerCardValue, Value kickerValue, boolean matchingSuit) {
+        if (matchingSuit && firstPlayerCardValue.equals(kickerValue)) {
+            return null;
+        }
 
+        Card playerCard1 = new Card(Suit.Spades, firstPlayerCardValue);
+        Card playerCard2 = new Card(Suit.Clubs, kickerValue);
 
-//        Player win/draw/lose percentages = 40.62% / 8.87% / 50.51% (100000 iterators)
-//        Player win/draw/lose count = 40623 / 8865 / 50512
-//        Card playerCard1 = new Card(Suit.Hearts, Value.Ten);
-//        Card playerCard2 = new Card(Suit.Hearts, Value.Two);
+        if (matchingSuit) {
+            playerCard2 = new Card(Suit.Spades, kickerValue);
+        }
 
-
-//        Execution time = 12.196
-//        Player win/draw/lose percentages = 58.45% / 4.10% / 37.46% (100000 iterators)
-//        Player win/draw/lose count = 58448 / 4097 / 37455
-//        Card playerCard1 = new Card(Suit.Hearts, Value.Ace);
-//        Card playerCard2 = new Card(Suit.Diamonds, Value.Nine);
-
-
-
-        //        Player win/draw/lose percentages = 41.95% / 9.16% / 48.89% (100000 iterators)
-//        Player win/draw/lose count = 41953 / 9161 / 48886
-//        Player win/draw/lose percentages = 42.10% / 9.11% / 48.79% (100000 iterators)
-//        Player win/draw/lose count = 42102 / 9108 / 48790
-//        Card playerCard1 = new Card(Suit.Hearts, Value.Jack);
-//        Card playerCard2 = new Card(Suit.Diamonds, Value.Five);
-
-
-//        Player win/draw/lose percentages = 45.00% / 8.46% / 46.54% (100000 iterators)
-//        Player win/draw/lose count = 44997 / 8461 / 46542
-//        Card playerCard1 = new Card(Suit.Hearts, Value.Ten);
-//        Card playerCard2 = new Card(Suit.Diamonds, Value.Eight);
-
-
-        // *** POCKET PAIRS *** POCKET PAIRS *** POCKET PAIRS *** POCKET PAIRS *** POCKET PAIRS *** POCKET PAIRS *** POCKET PAIRS *** POCKET PAIRS ***
-        // *** POCKET PAIRS *** POCKET PAIRS *** POCKET PAIRS *** POCKET PAIRS *** POCKET PAIRS *** POCKET PAIRS *** POCKET PAIRS *** POCKET PAIRS ***
-        // *** POCKET PAIRS *** POCKET PAIRS *** POCKET PAIRS *** POCKET PAIRS *** POCKET PAIRS *** POCKET PAIRS *** POCKET PAIRS *** POCKET PAIRS ***
-//        Player win/draw/lose percentages = 49.52% / 1.98% / 48.51% (100000 iterators)
-//        Player win/draw/lose count = 49515 / 1979 / 48506
-//        Player win/draw/lose percentages = 49.55% / 1.88% / 48.56% (100000 iterators)
-//        Player win/draw/lose count = 49554 / 1883 / 48563
-//        Player win/draw/lose percentages = 49.56% / 1.91% / 48.53% (100000 iterators)
-//        Player win/draw/lose count = 49561 / 1909 / 48530
-
-//        Card playerCard2 = new Card(Suit.Spades, Value.Two);
-//        Card playerCard1 = new Card(Suit.Hearts, Value.Two);
-
-//        Player win/draw/lose percentages = 52.94% / 1.50% / 45.56% (10000 iterators)
-//        Player win/draw/lose count = 5294 / 150 / 4556
-//        Player win/draw/lose percentages = 52.95% / 1.76% / 45.29% (100000 iterators)
-//        Player win/draw/lose count = 52947 / 1759 / 45294
-//        Player win/draw/lose percentages = 52.98% / 1.78% / 45.24% (300000 iterators)
-//        Player win/draw/lose count = 158950 / 5330 / 135720
-//        Player win/draw/lose percentages = 53.03% / 1.77% / 45.19% (600000 iterators)
-//        Player win/draw/lose count = 318198 / 10634 / 271168
-//        Card playerCard2 = new Card(Suit.Spades, Value.Three);
-//        Card playerCard1 = new Card(Suit.Hearts, Value.Three);
+        System.out.println("Player hand = " + playerCard1 + " , " + playerCard2);
 
         fullPack = fullPack.removeCard(playerCard1);
         fullPack = fullPack.removeCard(playerCard2);
@@ -241,5 +251,35 @@ public class TexasHoldemComponent {
         ).toString();
 
         return result;
+    }
+
+    private void debugInfo() {
+        //                    HandType5Cards playerHandType5Cards = POKER_5_CARD_HAND_CLASSIFIER.classify(playerBestHand);
+//
+//                    if (playerHandType5Cards == HandType5Cards.ThreeOfAKind && opponentHandList.get(0).getNthCard(0).getValue() != Value.King && opponentHandList.get(0).getNthCard(1).getValue() != Value.King) {
+//                    if (playerHandType5Cards == HandType5Cards.Flush && playerBestHand.getNthCard (0).getSuit() == Suit.Clubs && (opponentHandList.get(0).getNthCard(0).getSuit() == Suit.Clubs || opponentHandList.get(0).getNthCard(1).getSuit() == Suit.Clubs)) {
+//                    if (playerHandType5Cards == HandType5Cards.Flush && playerBestHand.getNthCard(0).getSuit() == Suit.Spades && (opponentHandList.get(0).getNthCard(0).getSuit() == Suit.Spades || opponentHandList.get(0).getNthCard(1).getSuit() == Suit.Spades)) {
+//                    if (playerHandType5Cards == HandType5Cards.Flush && playerBestHand.getNthCard(0).getSuit() == Suit.Spades) {
+//                        System.out.println("*** DRAWING HAND *** DRAWING HAND *** - Player / Opponent hole cards are : " + playerHand2Card + " -> " + opponentHandList.get(0));
+//                        System.out.println("*** DRAWING HAND *** DRAWING HAND *** - Community cards are : " + communityCards);
+//                        System.out.println("*** DRAWING HAND *** DRAWING HAND *** - Hand type = " + playerHandType5Cards);
+//                        System.out.println();
+//                    }
+//
+//                    if (playerHandType5Cards == HandType5Cards.ThreeOfAKind) {
+//                        List<Hand5Card> handsPair = new ArrayList<>();
+//                        handsPair.add(playerBestHand);
+//                        handsPair.add(opponentBestHand);
+//
+//                        twoPairDrawList.add(handsPair);
+//
+//                        List<Hand2Card> playerHoleCards = new ArrayList<>();
+//                        playerHoleCards.add(playerHand2Card);
+//                        playerHoleCards.add(CONVERTER_HAND_2_CARD.convert(opponentHandList.get(0)));
+//
+//                        twoPairDrawPlayerList.add(playerHoleCards);
+//
+//                        twoPairDrawCommunityList.add(communityCardsHand);
+//                    }
     }
 }

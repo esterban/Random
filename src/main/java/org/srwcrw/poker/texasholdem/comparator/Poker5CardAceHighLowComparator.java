@@ -65,12 +65,26 @@ public class Poker5CardAceHighLowComparator implements Comparator<Hand5Card> {
             throw new RuntimeException("Hand is highest card, A = " + hand1 + " , B = " + hand2);
         }
 
-        Value highestValue1 = handUtils.getSingleCards(hand1).last();
-        Value highestValue2 = handUtils.getSingleCards(hand2).last();
+//        Value highestValue1 = handUtils.getSingleCards(hand1).last();
+//        Value highestValue2 = handUtils.getSingleCards(hand2).last();
 
-        ValueComparatorAceHigh valueComparatorAceHigh = new ValueComparatorAceHigh();
+//        ValueComparatorAceHigh valueComparatorAceHigh = new ValueComparatorAceHigh();
+//
+//        for (int cardIndex = 0; cardIndex < 5; ++cardIndex) {
+//            Value hand1CardValue = hand1.getNthCard(cardIndex).getValue();
+//            Value hand2CardValue = hand2.getNthCard(cardIndex).getValue();
+//
+//            if (valueComparatorAceHigh.compare(hand1CardValue, hand2CardValue) != 0) {
+//                return valueComparatorAceHigh.compare(hand1CardValue, hand2CardValue);
+//            }
+//        }
+//
+//        return 0;
 
-        return valueComparatorAceHigh.compare(highestValue1, highestValue2);
+        SortedSet<Value> highestValue1 = handUtils.getSingleCards(hand1);
+        SortedSet<Value> highestValue2 = handUtils.getSingleCards(hand2);
+
+        return valueSortedSetComparator.compare(highestValue1, highestValue2);
     }
 
     private int compareOnePair(Hand5Card hand1, Hand5Card hand2) {

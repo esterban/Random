@@ -140,7 +140,7 @@ public class TestUtilsTexasHoldem {
         return result;
     }
 
-    public Map.Entry<Hand5Card, Hand2Card> createTwoPairB() {
+    public Map.Entry<Hand5Card, Hand2Card> createOnePairD() {
         // SWright TODO - Remove using a SortedSet in Hand5Card constructor,
         List<Card> hand5CardSet = new ArrayList<>();
 
@@ -158,7 +158,6 @@ public class TestUtilsTexasHoldem {
                 hand5Iterator.next(),
                 hand5Iterator.next(),
                 hand5Iterator.next());
-
 
         SortedSet<Card> hand2CardSet = new TreeSet<>();
 

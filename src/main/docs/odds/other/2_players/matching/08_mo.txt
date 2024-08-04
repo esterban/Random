@@ -17,6 +17,9 @@ Player win/draw/lose percentages = 43.8% / 5.0% / 51.2% (1000000 iterations)
 Player hand = Card{suit=Spades, value=Eight} , Card{suit=Spades, value=Seven}
 Player win/draw/lose percentages = 45.7% / 4.5% / 49.7% (1000000 iterations)
 
+
+
+
 Player hand = Card{suit=Spades, value=Eight} , Card{suit=Spades, value=Nine}
 Player win/draw/lose percentages = 49.0% / 4.0% / 47.1% (1000000 iterations)
 

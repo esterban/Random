@@ -1,0 +1,38 @@
+Number of opponents = 1
+Player hand = Card{suit=Spades, value=Three} , Card{suit=Spades, value=Two}
+Player win/draw/lose percentages = 33.2% / 5.8% / 61.0% (1000000 iterations)
+
+Player hand = Card{suit=Spades, value=Three} , Card{suit=Spades, value=Four}
+Player win/draw/lose percentages = 35.8% / 5.9% / 58.3% (1000000 iterations)
+
+Player hand = Card{suit=Spades, value=Three} , Card{suit=Spades, value=Five}
+Player win/draw/lose percentages = 36.8% / 5.9% / 57.3% (1000000 iterations)
+
+Player hand = Card{suit=Spades, value=Three} , Card{suit=Spades, value=Six}
+Player win/draw/lose percentages = 36.6% / 5.9% / 57.5% (1000000 iterations)
+
+Player hand = Card{suit=Spades, value=Three} , Card{suit=Spades, value=Seven}
+Player win/draw/lose percentages = 37.5% / 5.5% / 57.1% (1000000 iterations)
+
+Player hand = Card{suit=Spades, value=Three} , Card{suit=Spades, value=Eight}
+Player win/draw/lose percentages = 38.3% / 5.2% / 56.5% (1000000 iterations)
+
+Player hand = Card{suit=Spades, value=Three} , Card{suit=Spades, value=Nine}
+Player win/draw/lose percentages = 40.8% / 4.9% / 54.3% (1000000 iterations)
+
+Player hand = Card{suit=Spades, value=Three} , Card{suit=Spades, value=Ten}
+Player win/draw/lose percentages = 43.3% / 4.6% / 52.1% (1000000 iterations)
+
+Player hand = Card{suit=Spades, value=Three} , Card{suit=Spades, value=Jack}
+Player win/draw/lose percentages = 46.0% / 4.4% / 49.6% (1000000 iterations)
+
+Player hand = Card{suit=Spades, value=Three} , Card{suit=Spades, value=Queen}
+Player win/draw/lose percentages = 48.9% / 4.2% / 46.9% (1000000 iterations)
+
+Player hand = Card{suit=Spades, value=Three} , Card{suit=Spades, value=King}
+Player win/draw/lose percentages = 52.0% / 4.0% / 44.0% (1000000 iterations)
+
+Player hand = Card{suit=Spades, value=Three} , Card{suit=Spades, value=Ace}
+Player win/draw/lose percentages = 56.2% / 3.9% / 40.0% (1000000 iterations)
+
+2024-08-04T19:16:27.348+01:00  INFO 14532 --- [           main] o.s.p.t.executables.TexasHoldemMain      : Started TexasHoldemMain in 1574.026 seconds (process running for 1574.463)

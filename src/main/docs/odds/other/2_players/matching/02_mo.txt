@@ -1,0 +1,38 @@
+Number of opponents = 1
+Player hand = Card{suit=Spades, value=Two} , Card{suit=Spades, value=Three}
+Player win/draw/lose percentages = 33.1% / 5.8% / 61.1% (1000000 iterations)
+
+Player hand = Card{suit=Spades, value=Two} , Card{suit=Spades, value=Four}
+Player win/draw/lose percentages = 34.0% / 5.8% / 60.2% (1000000 iterations)
+
+Player hand = Card{suit=Spades, value=Two} , Card{suit=Spades, value=Five}
+Player win/draw/lose percentages = 35.0% / 5.9% / 59.1% (1000000 iterations)
+
+Player hand = Card{suit=Spades, value=Two} , Card{suit=Spades, value=Six}
+Player win/draw/lose percentages = 34.7% / 5.8% / 59.5% (1000000 iterations)
+
+Player hand = Card{suit=Spades, value=Two} , Card{suit=Spades, value=Seven}
+Player win/draw/lose percentages = 35.5% / 5.4% / 59.1% (1000000 iterations)
+
+Player hand = Card{suit=Spades, value=Two} , Card{suit=Spades, value=Eight}
+Player win/draw/lose percentages = 37.7% / 5.2% / 57.1% (1000000 iterations)
+
+Player hand = Card{suit=Spades, value=Two} , Card{suit=Spades, value=Nine}
+Player win/draw/lose percentages = 40.0% / 4.9% / 55.1% (1000000 iterations)
+
+Player hand = Card{suit=Spades, value=Two} , Card{suit=Spades, value=Ten}
+Player win/draw/lose percentages = 42.5% / 4.6% / 52.9% (1000000 iterations)
+
+Player hand = Card{suit=Spades, value=Two} , Card{suit=Spades, value=Jack}
+Player win/draw/lose percentages = 45.1% / 4.4% / 50.5% (1000000 iterations)
+
+Player hand = Card{suit=Spades, value=Two} , Card{suit=Spades, value=Queen}
+Player win/draw/lose percentages = 48.1% / 4.2% / 47.8% (1000000 iterations)
+
+Player hand = Card{suit=Spades, value=Two} , Card{suit=Spades, value=King}
+Player win/draw/lose percentages = 51.1% / 4.0% / 44.9% (1000000 iterations)
+
+Player hand = Card{suit=Spades, value=Two} , Card{suit=Spades, value=Ace}
+Player win/draw/lose percentages = 55.4% / 3.9% / 40.8% (1000000 iterations)
+
+2024-08-04T19:43:33.948+01:00  INFO 15108 --- [           main] o.s.p.t.executables.TexasHoldemMain      : Started TexasHoldemMain in 1636.629 seconds (process running for 1637.062)

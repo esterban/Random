@@ -50,12 +50,13 @@ public class TexasHoldemComponent {
 
 //        Value firstPlayerCard = Value.Two;
 //        Value firstPlayerCard = Value.Three;
+//        Value firstPlayerCard = Value.Four;
 //        Value firstPlayerCard = Value.Eight;
 //        Value firstPlayerCard = Value.Nine;
 //        Value firstPlayerCard = Value.Ten;
-        Value firstPlayerCard = Value.Jack;
+//        Value firstPlayerCard = Value.Jack;
 //        Value firstPlayerCard = Value.Queen;
-//        Value firstPlayerCard = Value.King;
+        Value firstPlayerCard = Value.King;
 //        Value firstPlayerCard = Value.Ace;
 
 //        boolean matchingSuit = false;

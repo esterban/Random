@@ -1,0 +1,41 @@
+Number of opponents = 1
+Player hand = Card{suit=Spades, value=Nine} , Card{suit=Clubs, value=Two}
+Player win/draw/lose percentages = 36.5% / 5.2% / 58.3% (1000000 iterations)
+
+Player hand = Card{suit=Spades, value=Nine} , Card{suit=Clubs, value=Three}
+Player win/draw/lose percentages = 37.4% / 5.2% / 57.4% (1000000 iterations)
+
+Player hand = Card{suit=Spades, value=Nine} , Card{suit=Clubs, value=Four}
+Player win/draw/lose percentages = 38.0% / 5.2% / 56.7% (1000000 iterations)
+
+Player hand = Card{suit=Spades, value=Nine} , Card{suit=Clubs, value=Five}
+Player win/draw/lose percentages = 40.2% / 5.1% / 54.7% (1000000 iterations)
+
+Player hand = Card{suit=Spades, value=Nine} , Card{suit=Clubs, value=Six}
+Player win/draw/lose percentages = 42.1% / 4.9% / 53.1% (1000000 iterations)
+
+Player hand = Card{suit=Spades, value=Nine} , Card{suit=Clubs, value=Seven}
+Player win/draw/lose percentages = 44.1% / 4.5% / 51.4% (1000000 iterations)
+
+Player hand = Card{suit=Spades, value=Nine} , Card{suit=Clubs, value=Eight}
+Player win/draw/lose percentages = 46.2% / 4.1% / 49.7% (1000000 iterations)
+
+Player hand = Card{suit=Spades, value=Nine} , Card{suit=Clubs, value=Nine}
+Player win/draw/lose percentages = 71.6% / 0.9% / 27.6% (1000000 iterations)
+
+Player hand = Card{suit=Spades, value=Nine} , Card{suit=Clubs, value=Ten}
+Player win/draw/lose percentages = 49.9% / 3.4% / 46.7% (1000000 iterations)
+
+Player hand = Card{suit=Spades, value=Nine} , Card{suit=Clubs, value=Jack}
+Player win/draw/lose percentages = 51.7% / 3.2% / 45.0% (1000000 iterations)
+
+Player hand = Card{suit=Spades, value=Nine} , Card{suit=Clubs, value=Queen}
+Player win/draw/lose percentages = 53.9% / 3.1% / 43.1% (1000000 iterations)
+
+Player hand = Card{suit=Spades, value=Nine} , Card{suit=Clubs, value=King}
+Player win/draw/lose percentages = 56.4% / 2.8% / 40.8% (1000000 iterations)
+
+Player hand = Card{suit=Spades, value=Nine} , Card{suit=Clubs, value=Ace}
+Player win/draw/lose percentages = 59.4% / 2.7% / 37.9% (1000000 iterations)
+
+2024-07-31T23:37:44.787+01:00  INFO 6824 --- [           main] o.s.p.t.executables.TexasHoldemMain      : Started TexasHoldemMain in 1588.226 seconds (process running for 1588.607)

@@ -1,0 +1,200 @@
+Number of opponents = 1
+Player win/draw/lose percentages 
+------------------------------------------------------------------------------------------------------------------------------------------------
+
+Player hand = Card{suit=Spades, value=Nine} , Card{suit=Clubs, value=Two}
+36.5% / 5.2% / 58.3% 
+Player hand = Card{suit=Spades, value=Ten} , Card{suit=Clubs, value=Two}
+39.2% / 4.9% / 55.8% 
+Player hand = Card{suit=Spades, value=Jack} , Card{suit=Clubs, value=Two}
+42.0% / 4.6% / 53.4% 
+Player hand = Card{suit=Spades, value=Queen} , Card{suit=Clubs, value=Two}
+45.0% / 4.4% / 50.6% 
+Player hand = Card{suit=Spades, value=King} , Card{suit=Clubs, value=Two}
+48.3% / 4.2% / 47.5%  
+Player hand = Card{suit=Spades, value=Ace} , Card{suit=Clubs, value=Two}
+52.7% / 4.0% / 43.2%
+
+------------------------------------------------------------------------------------------------------------------------------------------------
+
+Player hand = Card{suit=Spades, value=Nine} , Card{suit=Clubs, value=Three}
+37.4% / 5.2% / 57.4% 
+Player hand = Card{suit=Spades, value=Ten} , Card{suit=Clubs, value=Three}
+40.2% / 4.9% / 54.9% 
+Player hand = Card{suit=Spades, value=Jack} , Card{suit=Clubs, value=Three}
+43.0% / 4.6% / 52.4% 
+Player hand = Card{suit=Spades, value=Queen} , Card{suit=Clubs, value=Three}
+45.9% / 4.4% / 49.7% 
+Player hand = Card{suit=Spades, value=King} , Card{suit=Clubs, value=Three}
+49.2% / 4.2% / 46.6%  
+Player hand = Card{suit=Spades, value=Ace} , Card{suit=Clubs, value=Three}
+53.7% / 4.1% / 42.2%
+
+------------------------------------------------------------------------------------------------------------------------------------------------
+
+Player hand = Card{suit=Spades, value=Nine} , Card{suit=Clubs, value=Four}
+38.0% / 5.2% / 56.7% 
+Player hand = Card{suit=Spades, value=Ten} , Card{suit=Clubs, value=Four}
+41.0% / 4.9% / 54.0% 
+Player hand = Card{suit=Spades, value=Jack} , Card{suit=Clubs, value=Four}
+43.9% / 4.6% / 51.5% 
+Player hand = Card{suit=Spades, value=Queen} , Card{suit=Clubs, value=Four}
+46.9% / 4.5% / 48.6% 
+Player hand = Card{suit=Spades, value=King} , Card{suit=Clubs, value=Four}
+50.2% / 4.2% / 45.6%  
+Player hand = Card{suit=Spades, value=Ace} , Card{suit=Clubs, value=Four}
+54.6% / 4.1% / 41.3%
+
+------------------------------------------------------------------------------------------------------------------------------------------------
+
+Player hand = Card{suit=Spades, value=Nine} , Card{suit=Clubs, value=Five}
+40.2% / 5.1% / 54.7% 
+Player hand = Card{suit=Spades, value=Ten} , Card{suit=Clubs, value=Five}
+41.9% / 4.8% / 53.2% 
+Player hand = Card{suit=Spades, value=Jack} , Card{suit=Clubs, value=Five}
+44.9% / 4.6% / 50.5% 
+Player hand = Card{suit=Spades, value=Queen} , Card{suit=Clubs, value=Five}
+47.9% / 4.4% / 47.8% 
+Player hand = Card{suit=Spades, value=King} , Card{suit=Clubs, value=Five}
+51.2% / 4.1% / 44.7%  
+Player hand = Card{suit=Spades, value=Ace} , Card{suit=Clubs, value=Five}
+55.5% / 4.0% / 40.5%
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------
+
+Player hand = Card{suit=Spades, value=Nine} , Card{suit=Clubs, value=Six}
+42.1% / 4.9% / 53.1% 
+Player hand = Card{suit=Spades, value=Ten} , Card{suit=Clubs, value=Six}
+43.8% / 4.6% / 51.6% 
+Player hand = Card{suit=Spades, value=Jack} , Card{suit=Clubs, value=Six}
+45.6% / 4.4% / 50.0% 
+Player hand = Card{suit=Spades, value=Queen} , Card{suit=Clubs, value=Six}
+48.9% / 4.2% / 46.9% 
+Player hand = Card{suit=Spades, value=King} , Card{suit=Clubs, value=Six}
+52.1% / 4.0% / 43.9%  
+Player hand = Card{suit=Spades, value=Ace} , Card{suit=Clubs, value=Six}
+55.7% / 3.7% / 40.6%
+
+------------------------------------------------------------------------------------------------------------------------------------------------
+
+Player hand = Card{suit=Spades, value=Nine} , Card{suit=Clubs, value=Seven}
+44.1% / 4.5% / 51.4% 
+Player hand = Card{suit=Spades, value=Ten} , Card{suit=Clubs, value=Seven}
+45.9% / 4.2% / 49.9% 
+Player hand = Card{suit=Spades, value=Jack} , Card{suit=Clubs, value=Seven}
+47.8% / 3.9% / 48.3% 
+Player hand = Card{suit=Spades, value=Queen} , Card{suit=Clubs, value=Seven}
+49.8% / 3.7% / 46.5% 
+Player hand = Card{suit=Spades, value=King} , Card{suit=Clubs, value=Seven}
+53.4% / 3.6% / 43.1%  
+Player hand = Card{suit=Spades, value=Ace} , Card{suit=Clubs, value=Seven}
+57.0% / 3.4% / 39.6%
+
+------------------------------------------------------------------------------------------------------------------------------------------------
+
+Player hand = Card{suit=Spades, value=Nine} , Card{suit=Clubs, value=Eight}
+46.2% / 4.1% / 49.7% 
+Player hand = Card{suit=Spades, value=Ten} , Card{suit=Clubs, value=Eight}
+47.9% / 3.9% / 48.3% 
+Player hand = Card{suit=Spades, value=Jack} , Card{suit=Clubs, value=Eight}
+49.7% / 3.6% / 46.7% 
+Player hand = Card{suit=Spades, value=Queen} , Card{suit=Clubs, value=Eight}
+52.0% / 3.4% / 44.7% 
+Player hand = Card{suit=Spades, value=King} , Card{suit=Clubs, value=Eight}
+54.4% / 3.2% / 42.4%  
+Player hand = Card{suit=Spades, value=Ace} , Card{suit=Clubs, value=Eight}
+58.3% / 3.1% / 38.6%
+
+------------------------------------------------------------------------------------------------------------------------------------------------
+
+Player hand = Card{suit=Spades, value=Nine} , Card{suit=Clubs, value=Nine}
+71.6% / 0.9% / 27.6% 
+Player hand = Card{suit=Spades, value=Ten} , Card{suit=Clubs, value=Nine}
+49.8% / 3.5% / 46.7% 
+Player hand = Card{suit=Spades, value=Jack} , Card{suit=Clubs, value=Nine}
+51.6% / 3.2% / 45.1% 
+Player hand = Card{suit=Spades, value=Queen} , Card{suit=Clubs, value=Nine}
+53.8% / 3.0% / 43.2% 
+Player hand = Card{suit=Spades, value=King} , Card{suit=Clubs, value=Nine}
+56.3% / 2.9% / 40.8%  
+Player hand = Card{suit=Spades, value=Ace} , Card{suit=Clubs, value=Nine}
+59.3% / 2.7% / 37.9%
+
+------------------------------------------------------------------------------------------------------------------------------------------------
+
+Player hand = Card{suit=Spades, value=Nine} , Card{suit=Clubs, value=Ten}
+49.9% / 3.4% / 46.7% 
+Player hand = Card{suit=Spades, value=Ten} , Card{suit=Clubs, value=Ten}
+74.4% / 0.8% / 24.8% 
+Player hand = Card{suit=Spades, value=Jack} , Card{suit=Clubs, value=Ten}
+53.9% / 2.9% / 43.2% 
+Player hand = Card{suit=Spades, value=Queen} , Card{suit=Clubs, value=Ten}
+55.9% / 2.7% / 41.4% 
+Player hand = Card{suit=Spades, value=King} , Card{suit=Clubs, value=Ten}
+58.4% / 2.5% / 39.1%
+Player hand = Card{suit=Spades, value=Ace} , Card{suit=Clubs, value=Ten}
+61.4% / 2.4% / 36.2%
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------
+
+Player hand = Card{suit=Spades, value=Nine} , Card{suit=Clubs, value=Jack}
+51.7% / 3.2% / 45.0% 
+Player hand = Card{suit=Spades, value=Ten} , Card{suit=Clubs, value=Jack}
+54.0% / 2.9% / 43.2% 
+Player hand = Card{suit=Spades, value=Jack} , Card{suit=Clubs, value=Jack}
+76.9% / 0.7% / 22.4% 
+Player hand = Card{suit=Spades, value=Queen} , Card{suit=Clubs, value=Jack}
+56.9% / 2.5% / 40.6% 
+Player hand = Card{suit=Spades, value=King} , Card{suit=Clubs, value=Jack}
+59.4% / 2.3% / 38.4%
+Player hand = Card{suit=Spades, value=Ace} , Card{suit=Clubs, value=Jack}
+62.4% / 2.1% / 35.5%
+
+------------------------------------------------------------------------------------------------------------------------------------------------
+
+Player hand = Card{suit=Spades, value=Nine} , Card{suit=Clubs, value=Queen}
+53.9% / 3.1% / 43.1% 
+Player hand = Card{suit=Spades, value=Ten} , Card{suit=Clubs, value=Queen}
+55.9% / 2.7% / 41.4% 
+Player hand = Card{suit=Spades, value=Jack} , Card{suit=Clubs, value=Queen}
+57.0% / 2.5% / 40.5% 
+Player hand = Card{suit=Spades, value=Queen} , Card{suit=Clubs, value=Queen}
+79.4% / 0.7% / 20.0% 
+Player hand = Card{suit=Spades, value=King} , Card{suit=Clubs, value=Queen}
+60.3% / 2.1% / 37.6%
+Player hand = Card{suit=Spades, value=Ace} , Card{suit=Clubs, value=Queen}
+63.4% / 1.9% / 34.7%
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------
+
+Player hand = Card{suit=Spades, value=Nine} , Card{suit=Clubs, value=King}
+56.4% / 2.8% / 40.8% 
+Player hand = Card{suit=Spades, value=Ten} , Card{suit=Clubs, value=King}
+58.5% / 2.5% / 39.0% 
+Player hand = Card{suit=Spades, value=Jack} , Card{suit=Clubs, value=King}
+59.4% / 2.3% / 38.3% 
+Player hand = Card{suit=Spades, value=Queen} , Card{suit=Clubs, value=King}
+60.4% / 2.1% / 37.5% 
+Player hand = Card{suit=Spades, value=King} , Card{suit=Clubs, value=King}
+81.8% / 0.6% / 17.6%
+Player hand = Card{suit=Spades, value=Ace} , Card{suit=Clubs, value=King}
+64.3% / 1.8% / 33.9%
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------
+
+Player hand = Card{suit=Spades, value=Nine} , Card{suit=Clubs, value=Ace}
+59.4% / 2.7% / 37.9% 
+Player hand = Card{suit=Spades, value=Ten} , Card{suit=Clubs, value=Ace}
+61.5% / 2.4% / 36.1% 
+Player hand = Card{suit=Spades, value=Jack} , Card{suit=Clubs, value=Ace}
+62.4% / 2.2% / 35.4% 
+Player hand = Card{suit=Spades, value=Queen} , Card{suit=Clubs, value=Ace}
+63.4% / 1.9% / 34.7% 
+Player hand = Card{suit=Spades, value=King} , Card{suit=Clubs, value=Ace}
+64.4% / 1.8% / 33.8%
+Player hand = Card{suit=Spades, value=Ace} , Card{suit=Clubs, value=Ace}
+84.5% / 0.7% / 14.9%

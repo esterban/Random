@@ -49,6 +49,8 @@ public class TexasHoldemComponent {
 //        final int opponentCount = 2;
 
 //        Value firstPlayerCard = Value.Two;
+//        Value firstPlayerCard = Value.Three;
+//        Value firstPlayerCard = Value.Eight;
 //        Value firstPlayerCard = Value.Nine;
 //        Value firstPlayerCard = Value.Ten;
         Value firstPlayerCard = Value.Jack;
@@ -56,8 +58,8 @@ public class TexasHoldemComponent {
 //        Value firstPlayerCard = Value.King;
 //        Value firstPlayerCard = Value.Ace;
 
-        boolean matchingSuit = false;
-//        boolean matchingSuit = true;
+//        boolean matchingSuit = false;
+        boolean matchingSuit = true;
 
         List<Value> valueList = List.of(Value.values());
 //        List<Value> valueList = List.of(Value.Two);
@@ -70,7 +72,12 @@ public class TexasHoldemComponent {
         System.out.println("Number of opponents = " + opponentCount);
 
         for (Value kickerValue : valueList) {
-            for (int loopCounter = 1; loopCounter <= 5; ++loopCounter) {
+//            if (kickerValue == Value.Two) {
+//                continue;
+//            }
+
+//            for (int loopCounter = 1; loopCounter <= 2; ++loopCounter) {
+            for (int loopCounter = 1; loopCounter <= 1; ++loopCounter) {
 
                 int handsWonCount = 0;
                 int handsDrawnCount = 0;

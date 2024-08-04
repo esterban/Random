@@ -7,7 +7,8 @@ import java.util.*;
 
 public final class Hand implements IPack {
 
-    private static final Random random = new Random(0L);
+//    private static final Random random = new Random(0L);
+    private static final Random random = new Random();
 
     private final SortedSet<Card> cards;
 

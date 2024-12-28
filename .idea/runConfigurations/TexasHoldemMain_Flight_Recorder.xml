@@ -2,7 +2,7 @@
   <configuration default="false" name="TexasHoldemMain Flight Recorder" type="Application" factoryName="Application">
     <option name="MAIN_CLASS_NAME" value="org.srwcrw.poker.texasholdem.executables.TexasHoldemMain" />
     <module name="Random.main" />
-    <option name="VM_PARAMETERS" value="-XX:+FlightRecorder -XX:StartFlightRecording=duration=200s,filename=texasHoldemNext.jfr" />
+    <option name="VM_PARAMETERS" value="-XX:+FlightRecorder -XX:StartFlightRecording=duration=200s,filename=texasHoldemNext2.jfr" />
     <extension name="coverage">
       <pattern>
         <option name="PATTERN" value="org.srwcrw.poker.texasholdem.executables.*" />

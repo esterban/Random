@@ -30,7 +30,7 @@ class HandUtilsTest {
     @Test
     void areValuesConsecutiveAceLowA() {
         Hand5Card straightFlushAceLow = testUtils.createStraightFlushAceLow();
-        SortedSet<Value> straightFlushAceLowValues = handUtils.getValueSetSorted(straightFlushAceLow, valueComparatorAceLow);
+        Value[] straightFlushAceLowValues = handUtils.getValueSetSorted(straightFlushAceLow, valueComparatorAceLow);
 
         assertThat(handUtils.areValuesConsecutive(straightFlushAceLow));
         assertThat(handUtils.areValuesConsecutive(straightFlushAceLowValues)).isTrue();
@@ -39,7 +39,7 @@ class HandUtilsTest {
     @Test
     void areValuesConsecutiveAceLowB() {
         Hand5Card straightFlushAceLow = testUtils.createStraightFlushAceHigh();
-        SortedSet<Value> straightFlushAceLowValues = handUtils.getValueSetSorted(straightFlushAceLow, valueComparatorAceLow);
+        Value[] straightFlushAceLowValues = handUtils.getValueSetSorted(straightFlushAceLow, valueComparatorAceLow);
 
         assertThat(handUtils.areValuesConsecutive(straightFlushAceLowValues)).isFalse();
     }
@@ -47,7 +47,7 @@ class HandUtilsTest {
     @Test
     void areValuesConsecutiveAceHighA() {
         Hand5Card straightFlushAceHigh = testUtils.createStraightFlushAceLow();
-        SortedSet<Value> straightFlushAceHighValues = handUtils.getValueSetSorted(straightFlushAceHigh, valueComparatorAceHigh);
+        Value[] straightFlushAceHighValues = handUtils.getValueSetSorted(straightFlushAceHigh, valueComparatorAceHigh);
 
         assertThat(handUtils.areValuesConsecutive(straightFlushAceHighValues)).isFalse();
     }
@@ -55,15 +55,15 @@ class HandUtilsTest {
     @Test
     void areValuesConsecutiveAceHighB() {
         Hand5Card straightFlushAceHigh = testUtils.createStraightFlushAceHigh();
-        SortedSet<Value> straightFlushAceHighValues = handUtils.getValueSetSorted(straightFlushAceHigh, valueComparatorAceHigh);
+        Value[] straightFlushAceLowValues = handUtils.getValueSetSorted(straightFlushAceHigh, valueComparatorAceHigh);
 
-        assertThat(handUtils.areValuesConsecutive(straightFlushAceHighValues)).isTrue();
+        assertThat(handUtils.areValuesConsecutive(straightFlushAceLowValues)).isTrue();
     }
 
     @Test
     void areValuesNotConsecutive() {
         Hand5Card onePairHand = testUtils.createOnePair();
-        SortedSet<Value> onePairValues = handUtils.getValueSetSorted(onePairHand, valueComparatorAceLow);
+        Value[] onePairValues = handUtils.getValueSetSorted(onePairHand, valueComparatorAceLow);
 
         assertThat(handUtils.areValuesConsecutive(onePairValues)).isFalse();
     }
@@ -99,5 +99,18 @@ class HandUtilsTest {
         assertThat(valueSet.size()).isEqualTo(1);
         assertThat(valueSet).containsOnly(Value.Ace);
     }
+
+    @Test
+    void testCountThrees() {
+//        Hand5Card hand = testUtils.createHighestCardA();
+//
+//        Value highestValue = handUtils.getHighestSingleCardAceHigh(hand);
+//
+//        assertThat(highestValue).isEqualTo(Value.Ace);
+
+        assertThat(true).isFalse();
+    }
+
+
 
 }

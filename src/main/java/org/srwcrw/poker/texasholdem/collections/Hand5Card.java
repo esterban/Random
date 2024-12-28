@@ -15,6 +15,7 @@ public final class Hand5Card implements IPack {
     private final Card card3;
     private final Card card4;
     private final Card card5;
+    private final Card[] cardArray = new Card[5];
 
     private final Hand5Ordinal hand5Ordinal;
 
@@ -24,6 +25,12 @@ public final class Hand5Card implements IPack {
         this.card3 = card3;
         this.card4 = card4;
         this.card5 = card5;
+
+        cardArray[0] = card1;
+        cardArray[1] = card2;
+        cardArray[2] = card3;
+        cardArray[3] = card4;
+        cardArray[4] = card5;
 
         this.hand5Ordinal = HAND_5_ORDINAL_FACTORY.create(card1, card2, card3, card4, card5);
     }
@@ -60,6 +67,12 @@ public final class Hand5Card implements IPack {
 
 //        SortedSet<Card> cardsCopy = new TreeSet<>(List.of(card1, card2, card3, card4, card5));
 //        return Collections.unmodifiableSortedSet(cardsCopy);
+    }
+
+    @Override
+    public Card[] getCardsArray() {
+//        return new Card[0];
+        return cardArray;
     }
 
     @SuppressWarnings("unused")

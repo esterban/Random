@@ -45,6 +45,12 @@ public final class Hand implements IPack {
         return Collections.unmodifiableSortedSet(cards);
     }
 
+    @Override
+    public Card[] getCardsArray() {
+        throw new RuntimeException("Not implemented");
+//        return new Card[0];
+    }
+
     @SuppressWarnings("unused")
     public AbstractMap.SimpleEntry<Card, IPack> removeRandomCardImmutable() {
         Hand newHand = new Hand(cards);

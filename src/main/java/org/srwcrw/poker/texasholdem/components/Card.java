@@ -10,11 +10,15 @@ public final class Card implements Comparable<Card> {
     private final Value value;
     private final CardOrdinal cardOrdinal;
 
+    public static long constructorCount = 0;
+
     Card(Suit suit, Value value) {
         this.suit = suit;
         this.value = value;
 
         cardOrdinal = new CardOrdinal(suit, value);
+
+        ++constructorCount;
     }
 
     public Suit getSuit() {

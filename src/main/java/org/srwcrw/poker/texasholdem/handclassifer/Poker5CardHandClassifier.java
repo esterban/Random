@@ -89,9 +89,9 @@ public class Poker5CardHandClassifier implements PokerCardClassifier<Hand5Card> 
     }
 
     private boolean isStraight(Hand5Card hand5Card) {
-        SortedSet<Value> cards = handUtils.getValueSetSorted(hand5Card, new ValueComparatorAceLow());
+        Value[] cards = handUtils.getValueSetSorted(hand5Card, new ValueComparatorAceLow());
 
-        if (cards.size() < 5) {
+        if (cards.length < 5) {
             return false;
         }
 

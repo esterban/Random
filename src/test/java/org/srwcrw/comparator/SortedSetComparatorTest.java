@@ -33,7 +33,6 @@ class SortedSetComparatorTest {
         SortedSet<Card> set1 = testUtils.convertHand5ToSortedSet(testUtils.createStraightFlushAceHigh());
         SortedSet<Card> set2 = testUtils.convertHand5ToSortedSet(testUtils.createStraightFlushAceLow());
 
-
         assertThat(setComparator.compare(set1, set2)).isGreaterThan(0);
         assertThat(setComparator.compare(set2, set1)).isLessThan(0);
     }
@@ -69,5 +68,4 @@ class SortedSetComparatorTest {
 
         assertThat(setComparator.compare(values1, values2)).isGreaterThan(0);
     }
-
 }

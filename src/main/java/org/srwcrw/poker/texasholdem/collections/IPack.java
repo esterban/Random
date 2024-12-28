@@ -13,6 +13,7 @@ public interface IPack {
     IPack removeCard(Card card);
 
     SortedSet<Card> getCards();
+    Card[] getCardsArray();
 
     Card getNthCard(int index);
 

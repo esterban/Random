@@ -1,7 +1,11 @@
 package org.srwcrw.poker.texasholdem.components;
 
+import org.apache.commons.csv.CSVFormat;
+import org.apache.commons.csv.CSVPrinter;
 import org.apache.commons.lang3.StringUtils;
 import org.aspectj.lang.annotation.Aspect;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StopWatch;
@@ -18,11 +22,15 @@ import org.srwcrw.poker.texasholdem.generators.HandGenerator;
 import org.srwcrw.poker.texasholdem.handclassifer.Poker5CardHandClassifier;
 import org.srwcrw.poker.texasholdem.utils.PokerTexasHoldemUtils;
 
+import java.io.IOException;
+import java.io.StringWriter;
 import java.util.*;
 
 @Aspect
 @Component
 public class TexasHoldemComponent {
+    private static final Logger LOGGER = LoggerFactory.getLogger(TexasHoldemComponent.class);
+
     private static final Poker5CardAceHighLowComparator POKER_5_CARD_ACE_HIGH_LOW_COMPARATOR = new Poker5CardAceHighLowComparator();
 
     @org.springframework.beans.factory.annotation.Value("#{${texasholdemcomponent.handCount}}")
@@ -42,42 +50,25 @@ public class TexasHoldemComponent {
 
 
     @SuppressWarnings("unused")
-    public void monteCarloOneOpponent() {
+    public double monteCarloOneOpponent() {
+        Double durationMs = null;
+
         AbstractMap.SimpleEntry<IPack, IPack> handPair;
 
         final int opponentCount = 1;
-//        final int opponentCount = 2;
 
-//        Value firstPlayerCard = Value.Two;
-//        Value firstPlayerCard = Value.Three;
-//        Value firstPlayerCard = Value.Four;
-//        Value firstPlayerCard = Value.Eight;
-//        Value firstPlayerCard = Value.Nine;
-//        Value firstPlayerCard = Value.Ten;
-//        Value firstPlayerCard = Value.Jack;
-//        Value firstPlayerCard = Value.Queen;
-        Value firstPlayerCard = Value.King;
-//        Value firstPlayerCard = Value.Ace;
+        Value firstPlayerCard = Value.Four;
 
-//        boolean matchingSuit = false;
-        boolean matchingSuit = true;
-
+        boolean matchingSuit = false;
         List<Value> valueList = List.of(Value.values());
-//        List<Value> valueList = List.of(Value.Two);
 
         List<Hand5Card> twoPairDrawCommunityList = new ArrayList<>();
         List<List<Hand2Card>> twoPairDrawPlayerList = new ArrayList<>();
         List<List<Hand5Card>> twoPairDrawList = new ArrayList<>();
 
-        System.out.println();
-        System.out.println("Number of opponents = " + opponentCount);
+        LOGGER.info("Number of opponents = " + opponentCount);
 
         for (Value kickerValue : valueList) {
-//            if (kickerValue == Value.Two) {
-//                continue;
-//            }
-
-//            for (int loopCounter = 1; loopCounter <= 2; ++loopCounter) {
             for (int loopCounter = 1; loopCounter <= 1; ++loopCounter) {
 
                 int handsWonCount = 0;
@@ -164,7 +155,10 @@ public class TexasHoldemComponent {
                 }
 
                 stopWatch.stop();
-//            System.out.printf("Execution time = %4.3f \n", stopWatch.getTotalTimeSeconds());
+
+                durationMs = stopWatch.getTotalTimeSeconds();
+//                LOGGER.info(String.format("Execution time = %4.3f", stopWatch.getTotalTimeSeconds()));
+//                LOGGER.warn(String.format("Execution time = %4.3f", durationMs));
 
                 double handsWonRatio = (double) handsWonCount / ((double) handCount);
                 double handsDrawnRatio = (double) handsDrawnCount / ((double) handCount);
@@ -174,21 +168,17 @@ public class TexasHoldemComponent {
                     throw new RuntimeException("EEEEKKEKEKKEK!!!!");
                 }
 
-                double handsWonPercentage = handsWonRatio * 100;
-                double handsDrawnPercentage = handsDrawnRatio * 100;
-                double handsLostPercentage = handsLostRatio * 100;
+                Double handsWonPercentage = handsWonRatio * 100;
+                Double handsDrawnPercentage = handsDrawnRatio * 100;
+                Double handsLostPercentage = handsLostRatio * 100;
 
-//            System.out.println();
+                LOGGER.info(String.format("Player win/draw/lose percentages = %2.1f%% / %2.1f%% / %2.1f%% (%d iterations)", handsWonPercentage, handsDrawnPercentage, handsLostPercentage, handCount));
 
-//            System.out.println("Player hand = " + packPlayerHandPair.getValue());
-//            System.out.printf("Player win/draw/lose percentages = %2.2f%% / %2.2f%% / %2.2f%% (%d iterations) \n", handsWonPercentage, handsDrawnPercentage, handsLostPercentage, handCount);
-                System.out.printf("Player win/draw/lose percentages = %2.1f%% / %2.1f%% / %2.1f%% (%d iterations) \n", handsWonPercentage, handsDrawnPercentage, handsLostPercentage, handCount);
-//            System.out.printf("Player win/draw/lose count = %d / %d / %d  \n", handsWonCount, handsDrawnCount, handsLostCount);
-
-                System.out.println();
-//            System.out.println();
+                LOGGER.info("Card constructor count = {} ", Card.constructorCount);
             }
         }
+
+        return durationMs;
     }
 
 
@@ -204,7 +194,7 @@ public class TexasHoldemComponent {
             playerCard2 = new Card(Suit.Spades, kickerValue);
         }
 
-        System.out.println("Player hand = " + playerCard1 + " , " + playerCard2);
+        LOGGER.info("Player hand = " + playerCard1 + " , " + playerCard2);
 
         fullPack = fullPack.removeCard(playerCard1);
         fullPack = fullPack.removeCard(playerCard2);
@@ -268,10 +258,10 @@ public class TexasHoldemComponent {
 //                    if (playerHandType5Cards == HandType5Cards.Flush && playerBestHand.getNthCard (0).getSuit() == Suit.Clubs && (opponentHandList.get(0).getNthCard(0).getSuit() == Suit.Clubs || opponentHandList.get(0).getNthCard(1).getSuit() == Suit.Clubs)) {
 //                    if (playerHandType5Cards == HandType5Cards.Flush && playerBestHand.getNthCard(0).getSuit() == Suit.Spades && (opponentHandList.get(0).getNthCard(0).getSuit() == Suit.Spades || opponentHandList.get(0).getNthCard(1).getSuit() == Suit.Spades)) {
 //                    if (playerHandType5Cards == HandType5Cards.Flush && playerBestHand.getNthCard(0).getSuit() == Suit.Spades) {
-//                        System.out.println("*** DRAWING HAND *** DRAWING HAND *** - Player / Opponent hole cards are : " + playerHand2Card + " -> " + opponentHandList.get(0));
-//                        System.out.println("*** DRAWING HAND *** DRAWING HAND *** - Community cards are : " + communityCards);
-//                        System.out.println("*** DRAWING HAND *** DRAWING HAND *** - Hand type = " + playerHandType5Cards);
-//                        System.out.println();
+//                        LOGGER.info("*** DRAWING HAND *** DRAWING HAND *** - Player / Opponent hole cards are : " + playerHand2Card + " -> " + opponentHandList.get(0));
+//                        LOGGER.info("*** DRAWING HAND *** DRAWING HAND *** - Community cards are : " + communityCards);
+//                        LOGGER.info("*** DRAWING HAND *** DRAWING HAND *** - Hand type = " + playerHandType5Cards);
+//                        LOGGER.info();
 //                    }
 //
 //                    if (playerHandType5Cards == HandType5Cards.ThreeOfAKind) {
@@ -289,5 +279,35 @@ public class TexasHoldemComponent {
 //
 //                        twoPairDrawCommunityList.add(communityCardsHand);
 //                    }
+    }
+
+    private void outputCSV() {
+        Map<String, String> AUTHOR_BOOK_MAP = new HashMap<>() {
+            {
+                put("Dan Simmons", "Hyperion");
+                put("Douglas Adams", "The Hitchhiker's Guide to the Galaxy");
+            }
+        };
+
+//        String[] HEADERS = { "author", "title"};
+        String[] HEADERS = { "Your card", "Opponent Card 1", "Win", "Draw", "Lose"};
+
+        StringWriter sw = new StringWriter();
+
+        CSVFormat csvFormat = CSVFormat.DEFAULT.builder()
+                .setHeader(HEADERS)
+                .build();
+
+        try (final CSVPrinter printer = new CSVPrinter(sw, csvFormat)) {
+            AUTHOR_BOOK_MAP.forEach((author, title) -> {
+                try {
+                    printer.printRecord(author, title);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            });
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

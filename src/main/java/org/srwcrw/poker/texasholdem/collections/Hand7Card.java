@@ -13,7 +13,7 @@ public final class Hand7Card implements IPack {
 
     public Hand7Card(SortedSet<Card> cards) {
         if (cards.size() != 7) {
-            throw  new RuntimeException("Hand7Card can only be constructed from 7 cards");
+            throw new RuntimeException("Hand7Card can only be constructed from 7 cards");
         }
 
         this.cards = cards;
@@ -57,6 +57,11 @@ public final class Hand7Card implements IPack {
         return Collections.unmodifiableSortedSet(cards);
     }
 
+    @Override
+    public Card[] getCardsArray() {
+        throw new RuntimeException("Not implemented");
+    }
+
     @SuppressWarnings("unused")
     public AbstractMap.SimpleEntry<Card, IPack> removeRandomCardImmutable() {
         Hand newHand = new Hand(cards);
@@ -90,7 +95,7 @@ public final class Hand7Card implements IPack {
     @Override
     public Card getNthCard(int index) {
         if (index >= cards.size()) {
-            throw new RuntimeException("size = " + cards.size() +" , index out of bounds " + index);
+            throw new RuntimeException("size = " + cards.size() + " , index out of bounds " + index);
         }
 
         return IteratorUtils.get(cards.iterator(), index);

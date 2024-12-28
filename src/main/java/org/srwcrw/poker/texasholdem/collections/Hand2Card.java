@@ -62,6 +62,11 @@ public class Hand2Card implements IPack {
     }
 
     @Override
+    public Card[] getCardsArray() {
+        throw new RuntimeException("Not implemented");
+    }
+
+    @Override
     public String toString() {
         return "Hand2Card{" +
                 "cards=" + cards +

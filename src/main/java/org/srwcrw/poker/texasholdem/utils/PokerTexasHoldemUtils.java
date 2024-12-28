@@ -7,7 +7,9 @@ import org.srwcrw.poker.texasholdem.comparator.Poker5CardAceHighLowComparator;
 import org.srwcrw.poker.texasholdem.components.Card;
 import org.srwcrw.poker.texasholdem.handclassifer.Poker5CardHandClassifier;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 public class PokerTexasHoldemUtils {
     private static Poker5CardAceHighLowComparator poker5CardAceHighLowComparator = new Poker5CardAceHighLowComparator();
@@ -20,7 +22,7 @@ public class PokerTexasHoldemUtils {
 
         for (int communityIgnoreIndexA = 0; communityIgnoreIndexA < 4; ++communityIgnoreIndexA) {
             for (int communityIgnoreIndexB = communityIgnoreIndexA + 1; communityIgnoreIndexB < 5; ++communityIgnoreIndexB) {
-                SortedSet<Card> permutationCardSet = new TreeSet<>();
+                List<Card> permutationCardSet = new ArrayList<>();
 
                 Iterator<Card> hand2CardIterator = hand2Card.getCards().iterator();
 
@@ -100,7 +102,7 @@ public class PokerTexasHoldemUtils {
         List<Hand5Card> possibleHandList = new ArrayList<>();
 
         for (int communityIgnoreIndex = 0; communityIgnoreIndex < 5; ++communityIgnoreIndex) {
-            SortedSet<Card> permutationCardSet = new TreeSet<>();
+            List<Card> permutationCardSet = new ArrayList<>();
 
             permutationCardSet.add(otherCard);
 

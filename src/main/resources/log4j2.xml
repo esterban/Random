@@ -1,0 +1,13 @@
+<!--<Configuration status="ERROR" monitorInterval="5">-->
+<Configuration status="DEBUG" monitorInterval="5">
+    <Appenders>
+        <Console name="Out">
+            <PatternLayout pattern="%d %c [%t] %m%n"/>
+        </Console>
+    </Appenders>
+    <Loggers>
+        <Root level="info">
+            <AppenderRef ref="Out"/>
+        </Root>
+    </Loggers>
+</Configuration>

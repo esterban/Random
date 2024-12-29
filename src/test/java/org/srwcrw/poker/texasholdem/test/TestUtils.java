@@ -241,10 +241,10 @@ public class TestUtils {
     }
 
     public Hand5Card createThreeOfAKindAA() {
-        Card card1 = cardFactoryImmutable.createCard(Suit.Hearts, Value.Ten);
-        Card card2 = cardFactoryImmutable.createCard(Suit.Diamonds, Value.Ten);
-        Card card3 = cardFactoryImmutable.createCard(Suit.Clubs, Value.Ten);
-        Card card4 = cardFactoryImmutable.createCard(Suit.Hearts, Value.Ace);
+        Card card1 = cardFactoryImmutable.createCard(Suit.Hearts, Value.Ace);
+        Card card2 = cardFactoryImmutable.createCard(Suit.Hearts, Value.Ten);
+        Card card3 = cardFactoryImmutable.createCard(Suit.Diamonds, Value.Ten);
+        Card card4 = cardFactoryImmutable.createCard(Suit.Clubs, Value.Ten);
         Card card5 = cardFactoryImmutable.createCard(Suit.Hearts, Value.Two);
 
         Hand5Card hand5Card = new Hand5Card(card1, card2, card3, card4, card5);
@@ -255,8 +255,8 @@ public class TestUtils {
     public Hand5Card createThreeOfAKindB() {
         Card card1 = cardFactoryImmutable.createCard(Suit.Hearts, Value.Ten);
         Card card2 = cardFactoryImmutable.createCard(Suit.Diamonds, Value.Ten);
-        Card card3 = cardFactoryImmutable.createCard(Suit.Clubs, Value.Ten);
-        Card card4 = cardFactoryImmutable.createCard(Suit.Hearts, Value.King);
+        Card card3 = cardFactoryImmutable.createCard(Suit.Hearts, Value.King);
+        Card card4 = cardFactoryImmutable.createCard(Suit.Clubs, Value.Ten);
         Card card5 = cardFactoryImmutable.createCard(Suit.Hearts, Value.Two);
 
         Hand5Card hand5Card = new Hand5Card(card1, card2, card3, card4, card5);
@@ -266,9 +266,9 @@ public class TestUtils {
 
     public Hand5Card createThreeOfAKindC() {
         Card card1 = cardFactoryImmutable.createCard(Suit.Hearts, Value.Five);
-        Card card2 = cardFactoryImmutable.createCard(Suit.Diamonds, Value.Five);
-        Card card3 = cardFactoryImmutable.createCard(Suit.Clubs, Value.Five);
-        Card card4 = cardFactoryImmutable.createCard(Suit.Hearts, Value.King);
+        Card card2 = cardFactoryImmutable.createCard(Suit.Hearts, Value.King);
+        Card card3 = cardFactoryImmutable.createCard(Suit.Diamonds, Value.Five);
+        Card card4 = cardFactoryImmutable.createCard(Suit.Clubs, Value.Five);
         Card card5 = cardFactoryImmutable.createCard(Suit.Hearts, Value.Two);
 
         Hand5Card hand5Card = new Hand5Card(card1, card2, card3, card4, card5);

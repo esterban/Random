@@ -149,6 +149,14 @@ public class HandUtils implements IHandUtils {
         Value value4 = hand5Card.getCardsArray()[3].getValue();
         Value value5 = hand5Card.getCardsArray()[4].getValue();
 
+        if (value1.equals(value2) && value1.equals(value3) && value1.equals(value4)) {
+            return 0;
+        }
+
+        if (value2.equals(value3) && value3.equals(value4) && value4.equals(value5)) {
+            return 0;
+        }
+
         if (value1.equals(value2)) {
             if (value2.equals(value3)) {
                 return 1;

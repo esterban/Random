@@ -102,15 +102,22 @@ class HandUtilsTest {
 
     @Test
     void testCountThrees() {
-//        Hand5Card hand = testUtils.createHighestCardA();
-//
-//        Value highestValue = handUtils.getHighestSingleCardAceHigh(hand);
-//
-//        assertThat(highestValue).isEqualTo(Value.Ace);
+        Hand5Card handA = testUtils.createThreeOfAKindA();
+        Hand5Card handAA = testUtils.createThreeOfAKindAA();
+        Hand5Card handB = testUtils.createThreeOfAKindB();
+        Hand5Card handC = testUtils.createThreeOfAKindC();
+        Hand5Card hand4OfKind = testUtils.createFourOfAKindA();
 
-        assertThat(true).isFalse();
+        int threeOfKindCountA = handUtils.countThrees(handA);
+        int threeOfKindCountAA = handUtils.countThrees(handAA);
+        int threeOfKindCountB = handUtils.countThrees(handB);
+        int threeOfKindCountC = handUtils.countThrees(handC);
+        int fourOfAKingCount = handUtils.countThrees(hand4OfKind);
+
+        assertThat(threeOfKindCountA).isEqualTo(1);
+        assertThat(threeOfKindCountAA).isEqualTo(1);
+        assertThat(threeOfKindCountB).isEqualTo(1);
+        assertThat(threeOfKindCountC).isEqualTo(1);
+        assertThat(fourOfAKingCount).isEqualTo(0);
     }
-
-
-
 }

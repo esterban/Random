@@ -1,39 +1,39 @@
 Number of opponents = 1
 Player hand = Card{suit=Spades, value=Jack} , Card{suit=Clubs, value=Two}
-Player win/draw/lose percentages = 42.0% / 4.6% / 53.4% (1000000 iterations)
+42.0% / 4.6% / 53.4% (1000000 iterations)
 
 Player hand = Card{suit=Spades, value=Jack} , Card{suit=Clubs, value=Three}
-Player win/draw/lose percentages = 43.0% / 4.6% / 52.4% (1000000 iterations)
+43.0% / 4.6% / 52.4% (1000000 iterations)
 
 Player hand = Card{suit=Spades, value=Jack} , Card{suit=Clubs, value=Four}
-Player win/draw/lose percentages = 43.9% / 4.6% / 51.5% (1000000 iterations)
+43.9% / 4.6% / 51.5% (1000000 iterations)
 
 Player hand = Card{suit=Spades, value=Jack} , Card{suit=Clubs, value=Five}
-Player win/draw/lose percentages = 44.9% / 4.6% / 50.5% (1000000 iterations)
+44.9% / 4.6% / 50.5% (1000000 iterations)
 
 Player hand = Card{suit=Spades, value=Jack} , Card{suit=Clubs, value=Six}
-Player win/draw/lose percentages = 45.6% / 4.4% / 50.0% (1000000 iterations)
+45.6% / 4.4% / 50.0% (1000000 iterations)
 
 Player hand = Card{suit=Spades, value=Jack} , Card{suit=Clubs, value=Seven}
-Player win/draw/lose percentages = 47.8% / 3.9% / 48.3% (1000000 iterations)
+47.8% / 3.9% / 48.3% (1000000 iterations)
 
 Player hand = Card{suit=Spades, value=Jack} , Card{suit=Clubs, value=Eight}
-Player win/draw/lose percentages = 49.7% / 3.6% / 46.7% (1000000 iterations)
+49.7% / 3.6% / 46.7% (1000000 iterations)
 
 Player hand = Card{suit=Spades, value=Jack} , Card{suit=Clubs, value=Nine}
-Player win/draw/lose percentages = 51.6% / 3.2% / 45.1% (1000000 iterations)
+51.6% / 3.2% / 45.1% (1000000 iterations)
 
 Player hand = Card{suit=Spades, value=Jack} , Card{suit=Clubs, value=Ten}
-Player win/draw/lose percentages = 53.9% / 2.9% / 43.2% (1000000 iterations)
+53.9% / 2.9% / 43.2% (1000000 iterations)
 
 Player hand = Card{suit=Spades, value=Jack} , Card{suit=Clubs, value=Jack}
-Player win/draw/lose percentages = 76.9% / 0.7% / 22.4% (1000000 iterations)
+76.9% / 0.7% / 22.4% (1000000 iterations)
 
 Player hand = Card{suit=Spades, value=Jack} , Card{suit=Clubs, value=Queen}
-Player win/draw/lose percentages = 57.0% / 2.5% / 40.5% (1000000 iterations)
+57.0% / 2.5% / 40.5% (1000000 iterations)
 
 Player hand = Card{suit=Spades, value=Jack} , Card{suit=Clubs, value=King}
-Player win/draw/lose percentages = 59.4% / 2.3% / 38.3% (1000000 iterations)
+59.4% / 2.3% / 38.3% (1000000 iterations)
 
 Player hand = Card{suit=Spades, value=Jack} , Card{suit=Clubs, value=Ace}
-Player win/draw/lose percentages = 62.4% / 2.2% / 35.4% (1000000 iterations)
+62.4% / 2.2% / 35.4% (1000000 iterations)

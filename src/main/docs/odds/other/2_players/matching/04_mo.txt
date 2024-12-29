@@ -1,0 +1,38 @@
+Number of opponents = 1
+Player hand = Card{suit=Spades, value=Four} , Card{suit=Spades, value=Two}
+34.0% / 5.8% / 60.2% (1000000 iterations)
+ 
+Player hand = Card{suit=Spades, value=Four} , Card{suit=Spades, value=Three}
+35.9% / 5.8% / 58.3% (1000000 iterations)
+
+
+
+Player hand = Card{suit=Spades, value=Four} , Card{suit=Spades, value=Five}
+38.6% / 5.8% / 55.5% (1000000 iterations)
+
+Player hand = Card{suit=Spades, value=Four} , Card{suit=Spades, value=Six}
+38.4% / 5.8% / 55.8% (1000000 iterations)
+ 
+Player hand = Card{suit=Spades, value=Four} , Card{suit=Spades, value=Seven}
+39.2% / 5.5% / 55.3% (1000000 iterations)
+ 
+Player hand = Card{suit=Spades, value=Four} , Card{suit=Spades, value=Eight}
+40.1% / 5.2% / 54.7% (1000000 iterations)
+ 
+Player hand = Card{suit=Spades, value=Four} , Card{suit=Spades, value=Nine}
+41.5% / 5.0% / 53.5% (1000000 iterations)
+ 
+Player hand = Card{suit=Spades, value=Four} , Card{suit=Spades, value=Ten}
+44.2% / 4.7% / 51.2% (1000000 iterations)
+ 
+Player hand = Card{suit=Spades, value=Four} , Card{suit=Spades, value=Jack}
+46.9% / 4.5% / 48.7% (1000000 iterations)
+ 
+Player hand = Card{suit=Spades, value=Four} , Card{suit=Spades, value=Queen}
+49.7% / 4.2% / 46.0% (1000000 iterations)
+ 
+Player hand = Card{suit=Spades, value=Four} , Card{suit=Spades, value=King}
+52.9% / 4.0% / 43.1% (1000000 iterations)
+ 
+Player hand = Card{suit=Spades, value=Four} , Card{suit=Spades, value=Ace}
+56.9% / 3.9% / 39.1% (1000000 iterations)

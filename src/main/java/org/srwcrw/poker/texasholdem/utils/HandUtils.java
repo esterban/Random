@@ -116,18 +116,18 @@ public class HandUtils implements IHandUtils {
     }
 
 
-//    public int countThrees(IPack hand5Card) {
-//        int threesCount = 0;
-//        int[] valueCounts = countMatchingValuesArray(hand5Card);
-//
-//        for (int cardCount : valueCounts) {
-//            if (cardCount == 3) {
-//                ++threesCount;
-//            }
-//        }
-//
-//        return threesCount;
-//    }
+    public int countThrees(IPack hand5Card) {
+        int threesCount = 0;
+        int[] valueCounts = countMatchingValuesArray(hand5Card);
+
+        for (int cardCount : valueCounts) {
+            if (cardCount == 3) {
+                ++threesCount;
+            }
+        }
+
+        return threesCount;
+    }
 
 //    public int countThrees(Hand5Card hand5Card) {
 //        int threesCount = 0;
@@ -189,6 +189,26 @@ public class HandUtils implements IHandUtils {
 
         return 0;
     }
+
+    // SWright 2024-12-29 Note : The implementation of countThrees below DOES allocate memory on heap, not sure why
+    // as the allocated memory doesn't escape
+//    public int countThrees(Hand5Card hand5Card) {
+//        Card[] cardArray = hand5Card.getCardsArray();
+//
+//        int[] valueCounts = new int[Value.values().length];
+//
+//        for (Card card : cardArray) {
+//            ++valueCounts[card.getValue().ordinal()];
+//        }
+//
+//        for (int valueCount : valueCounts) {
+//            if (valueCount == 3) {
+//                return 1;
+//            }
+//        }
+//
+//        return 0;
+//    }
 
 
 //    public int countFours(IPack pack) {

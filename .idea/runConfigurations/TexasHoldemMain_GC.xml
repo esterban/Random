@@ -1,8 +1,8 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="TexasHoldemMain Flight Recorder" type="Application" factoryName="Application">
+  <configuration default="false" name="TexasHoldemMain GC" type="Application" factoryName="Application" singleton="false">
     <option name="MAIN_CLASS_NAME" value="org.srwcrw.poker.texasholdem.executables.TexasHoldemMain" />
     <module name="Random.main" />
-    <option name="VM_PARAMETERS" value="-XX:+FlightRecorder -XX:StartFlightRecording=duration=200s,filename=texasHoldemNext3.jfr  -Dspring.profiles.active=flightRecorder -Xms128m -Xmx128m" />
+    <option name="VM_PARAMETERS" value="-ea -Xlog:gc -Dspring.profiles.active=optimisationRun -Xms128m -Xmx128m" />
     <extension name="coverage">
       <pattern>
         <option name="PATTERN" value="org.srwcrw.poker.texasholdem.executables.*" />

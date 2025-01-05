@@ -1,0 +1,40 @@
+Number of opponents = 2
+Player hand = Card{suit=Spades, value=Two} , Card{suit=Spades, value=Three}
+23.5% / 2.2% / 74.3% (1000000 iterations)
+ 
+Player hand = Card{suit=Spades, value=Two} , Card{suit=Spades, value=Four}
+24.3% / 2.3% / 73.4% (1000000 iterations)
+ 
+Player hand = Card{suit=Spades, value=Two} , Card{suit=Spades, value=Five}
+25.2% / 2.3% / 72.5% (1000000 iterations)
+ 
+Player hand = Card{suit=Spades, value=Two} , Card{suit=Spades, value=Six}
+24.3% / 2.4% / 73.3% (1000000 iterations)
+ 
+Player hand = Card{suit=Spades, value=Two} , Card{suit=Spades, value=Seven}
+24.3% / 2.3% / 73.4% (1000000 iterations)
+ 
+Player hand = Card{suit=Spades, value=Two} , Card{suit=Spades, value=Eight}
+25.6% / 2.3% / 72.1% (1000000 iterations)
+ 
+Player hand = Card{suit=Spades, value=Two} , Card{suit=Spades, value=Nine}
+26.7% / 2.3% / 71.0% (1000000 iterations)
+ 
+Player hand = Card{suit=Spades, value=Two} , Card{suit=Spades, value=Ten}
+28.3% / 2.3% / 69.4% (1000000 iterations)
+ 
+Player hand = Card{suit=Spades, value=Two} , Card{suit=Spades, value=Jack}
+30.0% / 2.3% / 67.7% (1000000 iterations)
+ 
+Player hand = Card{suit=Spades, value=Two} , Card{suit=Spades, value=Queen}
+32.0% / 2.3% / 65.7% (1000000 iterations)
+ 
+Player hand = Card{suit=Spades, value=Two} , Card{suit=Spades, value=King}
+34.5% / 2.3% / 63.2% (1000000 iterations)
+ 
+Player hand = Card{suit=Spades, value=Two} , Card{suit=Spades, value=Ace}
+38.4% / 2.4% / 59.2% (1000000 iterations)
+ 
+2024-12-29 16:38:22,025 org.srwcrw.poker.texasholdem.executables.TexasHoldemMain [main] Number of outer iterations 1, inner iterations 1000000
+2024-12-29 16:38:22,025 org.srwcrw.poker.texasholdem.executables.TexasHoldemMain [main] Mean exection Execution time = 61.831 , standard deviation Execution time = 0.000
+2024-12-29 16:38:22,595 org.srwcrw.poker.texasholdem.executables.TexasHoldemMain [main] Started TexasHoldemMain in 690.877 seconds (process running for 692.089)

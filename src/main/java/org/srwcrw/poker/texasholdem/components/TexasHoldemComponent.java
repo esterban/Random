@@ -51,15 +51,16 @@ public class TexasHoldemComponent {
 
     @SuppressWarnings("unused")
     public double monteCarloOneOpponent() {
-        Double durationMs = null;
+        Double durationMs;
 
         AbstractMap.SimpleEntry<IPack, IPack> handPair;
 
-        final int opponentCount = 1;
+        final int opponentCount = 4;
 
-        Value firstPlayerCard = Value.Four;
+        Value firstPlayerCard = Value.Two;
 
         boolean matchingSuit = false;
+//        boolean matchingSuit = true;
         List<Value> valueList = List.of(Value.values());
 
         List<Hand5Card> twoPairDrawCommunityList = new ArrayList<>();
@@ -68,6 +69,9 @@ public class TexasHoldemComponent {
 
         LOGGER.info("Number of opponents = " + opponentCount);
 
+        final StopWatch stopWatch = new StopWatch();
+        stopWatch.start();
+
         for (Value kickerValue : valueList) {
             for (int loopCounter = 1; loopCounter <= 1; ++loopCounter) {
 
@@ -75,8 +79,6 @@ public class TexasHoldemComponent {
                 int handsDrawnCount = 0;
                 int handsLostCount = 0;
 
-                final StopWatch stopWatch = new StopWatch();
-                stopWatch.start();
 
                 IPack fullPack = packGenerator.generateFullPack();
                 Map.Entry<IPack, Hand2Card> packPlayerHandPair = createPlayerHand2(fullPack, firstPlayerCard, kickerValue, matchingSuit);
@@ -154,9 +156,7 @@ public class TexasHoldemComponent {
                     }
                 }
 
-                stopWatch.stop();
 
-                durationMs = stopWatch.getTotalTimeSeconds();
 //                LOGGER.info(String.format("Execution time = %4.3f", stopWatch.getTotalTimeSeconds()));
 //                LOGGER.warn(String.format("Execution time = %4.3f", durationMs));
 
@@ -177,6 +177,9 @@ public class TexasHoldemComponent {
                 LOGGER.info("Card constructor count = {} ", Card.constructorCount);
             }
         }
+
+        stopWatch.stop();
+        durationMs = stopWatch.getTotalTimeSeconds();
 
         return durationMs;
     }
@@ -290,7 +293,7 @@ public class TexasHoldemComponent {
         };
 
 //        String[] HEADERS = { "author", "title"};
-        String[] HEADERS = { "Your card", "Opponent Card 1", "Win", "Draw", "Lose"};
+        String[] HEADERS = {"Your card", "Opponent Card 1", "Win", "Draw", "Lose"};
 
         StringWriter sw = new StringWriter();
 

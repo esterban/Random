@@ -1,5 +1,6 @@
 package org.srwcrw.poker.texasholdem.comparator;
 
+import org.apache.commons.lang3.ArrayUtils;
 import org.srwcrw.comparator.SortedSetComparator;
 import org.srwcrw.poker.texasholdem.collections.Hand5Card;
 import org.srwcrw.poker.texasholdem.entities.HandType5Cards;
@@ -7,10 +8,7 @@ import org.srwcrw.poker.texasholdem.entities.Value;
 import org.srwcrw.poker.texasholdem.handclassifer.Poker5CardHandClassifier;
 import org.srwcrw.poker.texasholdem.utils.HandUtils;
 
-import java.util.Comparator;
-import java.util.Iterator;
-import java.util.Set;
-import java.util.SortedSet;
+import java.util.*;
 
 public class Poker5CardAceHighLowComparator implements Comparator<Hand5Card> {
     private static final Poker5CardHandClassifier poker5CardHandClassifier = new Poker5CardHandClassifier();
@@ -65,26 +63,10 @@ public class Poker5CardAceHighLowComparator implements Comparator<Hand5Card> {
             throw new RuntimeException("Hand is highest card, A = " + hand1 + " , B = " + hand2);
         }
 
-//        Value highestValue1 = handUtils.getSingleCards(hand1).last();
-//        Value highestValue2 = handUtils.getSingleCards(hand2).last();
+        Value[] highestValue1 = handUtils.getSingleCards(hand1);
+        Value[] highestValue2 = handUtils.getSingleCards(hand2);
 
-//        ValueComparatorAceHigh valueComparatorAceHigh = new ValueComparatorAceHigh();
-//
-//        for (int cardIndex = 0; cardIndex < 5; ++cardIndex) {
-//            Value hand1CardValue = hand1.getNthCard(cardIndex).getValue();
-//            Value hand2CardValue = hand2.getNthCard(cardIndex).getValue();
-//
-//            if (valueComparatorAceHigh.compare(hand1CardValue, hand2CardValue) != 0) {
-//                return valueComparatorAceHigh.compare(hand1CardValue, hand2CardValue);
-//            }
-//        }
-//
-//        return 0;
-
-        SortedSet<Value> highestValue1 = handUtils.getSingleCards(hand1);
-        SortedSet<Value> highestValue2 = handUtils.getSingleCards(hand2);
-
-        return valueSortedSetComparator.compare(highestValue1, highestValue2);
+        return Arrays.compare(highestValue1, highestValue2);
     }
 
     private int compareOnePair(Hand5Card hand1, Hand5Card hand2) {
@@ -92,20 +74,20 @@ public class Poker5CardAceHighLowComparator implements Comparator<Hand5Card> {
             throw new RuntimeException("Hand is not of one pair, A = " + hand1 + " , B = " + hand2);
         }
 
-        Set<Value> hand1Values = handUtils.getPairValues(hand1);
-        Set<Value> hand2Values = handUtils.getPairValues(hand2);
+        Value[] hand1Values = handUtils.getPairValues(hand1);
+        Value[] hand2Values = handUtils.getPairValues(hand2);
 
-        Value pair1Value = hand1Values.iterator().next();
-        Value pair2Value = hand2Values.iterator().next();
+        Value pair1Value = hand1Values[0];
+        Value pair2Value = hand2Values[0];
 
         if (pair1Value != pair2Value) {
             return pair1Value.compareTo(pair2Value);
         }
 
-        SortedSet<Value> highestValue1 = handUtils.getSingleCards(hand1);
-        SortedSet<Value> highestValue2 = handUtils.getSingleCards(hand2);
+        Value[] highestValue1 = handUtils.getSingleCards(hand1);
+        Value[] highestValue2 = handUtils.getSingleCards(hand2);
 
-        return valueSortedSetComparator.compare(highestValue1, highestValue2);
+        return Arrays.compare(highestValue1, highestValue2);
     }
 
     private int compareTwoPair(Hand5Card hand1, Hand5Card hand2) {
@@ -113,21 +95,18 @@ public class Poker5CardAceHighLowComparator implements Comparator<Hand5Card> {
             throw new RuntimeException("Hand is not of one pair, A = " + hand1 + " , B = " + hand2);
         }
 
-        Set<Value> hand1Values = handUtils.getPairValues(hand1);
-        Set<Value> hand2Values = handUtils.getPairValues(hand2);
+        Value[] hand1Values = handUtils.getPairValues(hand1);
+        Value[] hand2Values = handUtils.getPairValues(hand2);
 
-        Iterator<Value> hand1Iterator = hand1Values.iterator();
-        Iterator<Value> hand2Iterator = hand2Values.iterator();
-
-        Value pair1Value = hand1Iterator.next();
-        Value pair2Value = hand2Iterator.next();
+        Value pair1Value = hand1Values[0];
+        Value pair2Value = hand2Values[0];
 
         if (pair1Value != pair2Value) {
             return pair1Value.compareTo(pair2Value);
         }
 
-        Value secondPair1Value = hand1Iterator.next();
-        Value secondPair2Value = hand2Iterator.next();
+        Value secondPair1Value = hand1Values[1];
+        Value secondPair2Value = hand2Values[1];
 
         if (secondPair1Value != secondPair2Value) {
             return secondPair1Value.compareTo(secondPair2Value);
@@ -157,10 +136,10 @@ public class Poker5CardAceHighLowComparator implements Comparator<Hand5Card> {
             return threeOfAKindValue1.compareTo(threeOfAKindValue2);
         }
 
-        SortedSet<Value> highCardValues1 = handUtils.getSingleCards(hand1);
-        SortedSet<Value> highCardValues2 = handUtils.getSingleCards(hand2);
+        Value[] highestValue1 = handUtils.getSingleCards(hand1);
+        Value[] highestValue2 = handUtils.getSingleCards(hand2);
 
-        return valueSortedSetComparator.compare(highCardValues1, highCardValues2);
+        return Arrays.compare(highestValue1, highestValue2);
     }
 
     private int compareStraight(Hand5Card hand1, Hand5Card hand2) {
@@ -168,15 +147,10 @@ public class Poker5CardAceHighLowComparator implements Comparator<Hand5Card> {
             throw new RuntimeException("Hand is not a straight, A = " + hand1 + " , B = " + hand2);
         }
 
-        SortedSet<Value> hand1Values = handUtils.getSingleCards(hand1);
-        Iterator<Value> hand1Iterator = hand1Values.iterator();
-        hand1Iterator.next();
+        Value[] highestValue1 = handUtils.getSingleCards(hand1);
+        Value[] highestValue2 = handUtils.getSingleCards(hand2);
 
-        SortedSet<Value> hand2Values = handUtils.getSingleCards(hand2);
-        Iterator<Value> hand2Iterator = hand2Values.iterator();
-        hand2Iterator.next();
-
-        return hand1Iterator.next().compareTo(hand2Iterator.next());
+        return highestValue1[1].compareTo(highestValue2[1]);
     }
 
     private int compareFlush(Hand5Card hand1, Hand5Card hand2) {
@@ -184,10 +158,10 @@ public class Poker5CardAceHighLowComparator implements Comparator<Hand5Card> {
             throw new RuntimeException("Hand is not a flush, A = " + hand1 + " , B = " + hand2);
         }
 
-        SortedSet<Value> hand1Values = handUtils.getSingleCards(hand1);
-        SortedSet<Value> hand2Values = handUtils.getSingleCards(hand2);
+        Value[] highestValue1 = handUtils.getSingleCards(hand1);
+        Value[] highestValue2 = handUtils.getSingleCards(hand2);
 
-        return valueSortedSetComparator.compare(hand1Values, hand2Values);
+        return Arrays.compare(highestValue1, highestValue2);
     }
 
     private int compareFullHouse(Hand5Card hand1, Hand5Card hand2) {
@@ -195,14 +169,14 @@ public class Poker5CardAceHighLowComparator implements Comparator<Hand5Card> {
             throw new RuntimeException("Hand is not a full house, A = " + hand1 + " , B = " + hand2);
         }
 
-        Set<Value> hand1Values = handUtils.getPairValues(hand1);
-        Set<Value> hand2Values = handUtils.getPairValues(hand2);
+        Value[] hand1Values = handUtils.getPairValues(hand1);
+        Value[] hand2Values = handUtils.getPairValues(hand2);
 
-        if (hand1Values.size() != 1 || hand2Values.size() != 1) {
+        if (ArrayUtils.indexesOf(hand1Values, hand1Values[0]).cardinality() != 1 || ArrayUtils.indexesOf(hand2Values, hand2Values[0]).cardinality() != 1){
             throw new RuntimeException("Internal Error - either hand does not contain a single pair, A = " + hand1 + " , B = " + hand2);
         }
 
-        return hand1Values.iterator().next().compareTo(hand2Values.iterator().next());
+        return hand1Values[0].compareTo(hand2Values[0]);
     }
 
     private int compareFourOfAKind(Hand5Card hand1, Hand5Card hand2) {
@@ -229,14 +203,9 @@ public class Poker5CardAceHighLowComparator implements Comparator<Hand5Card> {
             throw new RuntimeException("Hand is not a straight flush, A = " + hand1 + " , B = " + hand2);
         }
 
-        SortedSet<Value> hand1Values = handUtils.getSingleCards(hand1);
-        Iterator<Value> hand1Iterator = hand1Values.iterator();
-        hand1Iterator.next();
+        Value[] highestValue1 = handUtils.getSingleCards(hand1);
+        Value[] highestValue2 = handUtils.getSingleCards(hand2);
 
-        SortedSet<Value> hand2Values = handUtils.getSingleCards(hand2);
-        Iterator<Value> hand2Iterator = hand2Values.iterator();
-        hand2Iterator.next();
-
-        return hand1Iterator.next().compareTo(hand2Iterator.next());
+        return highestValue1[1].compareTo(highestValue2[1]);
     }
 }

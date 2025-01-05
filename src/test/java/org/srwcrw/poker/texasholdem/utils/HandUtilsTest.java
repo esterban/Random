@@ -1,5 +1,6 @@
 package org.srwcrw.poker.texasholdem.utils;
 
+import org.apache.commons.lang3.ArrayUtils;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -94,10 +95,10 @@ class HandUtilsTest {
                 0,0,0,0,
                 2};
 
-        Set<Value> valueSet = handUtils.getPairValuesArray(valueCounts);
+        Value[] valueSet = handUtils.getPairValuesArray(valueCounts);
 
-        assertThat(valueSet.size()).isEqualTo(1);
-        assertThat(valueSet).containsOnly(Value.Ace);
+        assertThat(ArrayUtils.indexesOf(valueSet, null).cardinality()).isEqualTo(valueSet.length - 1);
+        assertThat(valueSet).contains(Value.Ace);
     }
 
     @Test

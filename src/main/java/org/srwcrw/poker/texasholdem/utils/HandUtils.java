@@ -1,5 +1,6 @@
 package org.srwcrw.poker.texasholdem.utils;
 
+import org.apache.commons.lang3.ArrayUtils;
 import org.srwcrw.poker.texasholdem.collections.Hand5Card;
 import org.srwcrw.poker.texasholdem.collections.IPack;
 import org.srwcrw.poker.texasholdem.comparator.ValueComparatorAceHigh;
@@ -8,7 +9,6 @@ import org.srwcrw.poker.texasholdem.entities.Value;
 
 import java.util.*;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 public class HandUtils implements IHandUtils {
     private final Map<Value, Integer> valueCounts = new HashMap<>();
@@ -323,52 +323,48 @@ public class HandUtils implements IHandUtils {
         valueCounts.replaceAll((k, v) -> 0);
     }
 
-    public Set<Value> getPairValues(IPack hand) {
-//        Map<Value, Integer> valueMap = countMatchingValues(hand);
+    public Value[] getPairValues(IPack hand) {
         int[] valueCounts = countMatchingValuesArray(hand);
         return getPairValuesArray(valueCounts);
     }
 
-    //    public Set<Value> getThreeOfAKindValues(IPack hand) {
+    public Value[] getPairValues(Hand5Card hand) {
+        int[] valueCounts = countMatchingValuesArray(hand);
+        return getPairValuesArray(valueCounts, 5);
+    }
+
     public Set<Value> getThreeOfAKindValues(Hand5Card hand) {
         Map<Value, Integer> valueMap = countMatchingValues(hand);
         return getThreeOfAKindValues(valueMap);
     }
-
-//    public Set<Value> getFourOfAKindValues(IPack hand) {
-//        Map<Value, Integer> valueMap = countMatchingValues(hand);
-//        return getFourOfAKindValues(valueMap);
-//    }
 
     public Set<Value> getFourOfAKindValues(Hand5Card hand) {
         Map<Value, Integer> valueMap = countMatchingValues(hand);
         return getFourOfAKindValues(valueMap);
     }
 
-    //    public Set<Value> getPairValues(Map<Value, Integer> valueMap) {
-//        @SuppressWarnings("UnnecessaryLocalVariable")
-//        var pairValues = valueMap.entrySet().stream().filter(e -> e.getValue() == 2).map(Map.Entry::getKey).collect(Collectors.toSet());
-//        return pairValues;
-//    }
-    public Set<Value> getPairValuesArray(int[] valueCounts) {
-        @SuppressWarnings("UnnecessaryLocalVariable")
-//        var pairValues = IntStream.range(0, 13).boxed()
-//                .filter(e -> valueCounts[e] == 2)
-//                .map(e -> Value.values()[e])
-//                    .collect(Collectors.toCollection(TreeSet::new));
+    public Value[] getPairValuesArray(int[] valueCounts) {
+        return getPairValuesArray(valueCounts, Value.values().length);
+    }
 
-        SortedSet<Value> pairValues = new TreeSet<>();
+    public Value[] getPairValuesArray(int[] valueCounts, int numberOfCards) {
+        @SuppressWarnings("UnnecessaryLocalVariable")
+        Value[] pairValues = new Value[numberOfCards];
+        int pairIndex = 0;
 
         int valueIndex = 0;
 
         for (int count : valueCounts) {
             if (count == 2) {
                 Value cardValue = Value.values()[valueIndex];
-                pairValues.add(cardValue);
+                pairValues[pairIndex] = cardValue;
+                ++pairIndex;
             }
 
             ++valueIndex;
         }
+
+        Arrays.sort(pairValues, Comparator.nullsLast(Comparator.reverseOrder()));
 
         return pairValues;
     }
@@ -392,8 +388,6 @@ public class HandUtils implements IHandUtils {
         return pairValues;
     }
 
-
-    //    public Value getHighestSingleCardAceHigh(IPack hand) {
     public Value getHighestSingleCardAceHigh(Hand5Card hand) {
         Value highestValue = Value.Two;
 
@@ -410,38 +404,31 @@ public class HandUtils implements IHandUtils {
         return highestValue;
     }
 
-    //    public SortedSet<Value> getSingleCards(IPack hand) {
-    public SortedSet<Value> getSingleCards(Hand5Card hand) {
-        SortedSet<Value> singleValues = new TreeSet<>();
-        HashSet<Value> nonSingleValues = new HashSet<>();
+    public Value[] getSingleCards(Hand5Card hand) {
+        Value[] singleValues = new Value[5];
+        Value[] nonSingleValues = new Value[5];
+
+        int singleIndex = 0;
+        int nonSingleIndex = 0;
 
         for (int cardIndex = 0; cardIndex < 5; ++cardIndex) {
             Card card = hand.getNthCard(cardIndex);
 
-            if (!singleValues.contains(card.getValue())) {
-                if (!nonSingleValues.contains(card.getValue())) {
-                    singleValues.add(card.getValue());
+            if (!ArrayUtils.contains(singleValues, card.getValue())) {
+                if (!ArrayUtils.contains(nonSingleValues, card.getValue())) {
+                    singleValues[singleIndex] = card.getValue();
+                    ++singleIndex;
                 }
             } else {
-                singleValues.remove(card.getValue());
-                nonSingleValues.add(card.getValue());
+                int findSingleIndex = ArrayUtils.indexOf(singleValues, card.getValue());
+                singleValues[findSingleIndex] = null;
+
+                nonSingleValues[nonSingleIndex] = card.getValue();
             }
         }
 
+        Arrays.sort(singleValues, Comparator.nullsLast(Comparator.reverseOrder()));
+
         return singleValues;
-//        for (Hand5Card hand5Card : hand.getNthCard())
-
-//        Map<Value, Integer> valueMap = countMatchingValues(hand);
-//
-//        Set<Value> singleCards = valueMap.entrySet().stream()
-//                .filter(e -> e.getValue() == 1)
-//                .map(Map.Entry::getKey)
-//                            .collect(Collectors.toCollection(TreeSet::new));
-//
-//        SortedSet<Value> sortedSingleCards = new TreeSet<>(new ValueComparatorAceHigh());
-//        sortedSingleCards.addAll(singleCards);
-
-//        return sortedSingleCards;
     }
-
 }

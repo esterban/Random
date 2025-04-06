@@ -10,17 +10,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StopWatch;
 import org.srwcrw.poker.texasholdem.collections.Hand2Card;
-import org.srwcrw.poker.texasholdem.collections.Hand5Card;
+import org.srwcrw.poker.texasholdem.collections.HandProbability;
 import org.srwcrw.poker.texasholdem.collections.IPack;
 import org.srwcrw.poker.texasholdem.comparator.Poker5CardAceHighLowComparator;
+import org.srwcrw.poker.texasholdem.components.generators.ConverterHand2Card;
+import org.srwcrw.poker.texasholdem.components.generators.ConverterHand5Card;
+import org.srwcrw.poker.texasholdem.components.generators.HandGenerator;
 import org.srwcrw.poker.texasholdem.entities.HandType5Cards;
 import org.srwcrw.poker.texasholdem.entities.Suit;
 import org.srwcrw.poker.texasholdem.entities.Value;
-import org.srwcrw.poker.texasholdem.generators.ConverterHand2Card;
-import org.srwcrw.poker.texasholdem.generators.ConverterHand5Card;
-import org.srwcrw.poker.texasholdem.generators.HandGenerator;
-import org.srwcrw.poker.texasholdem.handclassifer.Poker5CardHandClassifier;
-import org.srwcrw.poker.texasholdem.utils.PokerTexasHoldemUtils;
 
 import java.io.IOException;
 import java.io.StringWriter;
@@ -33,47 +31,60 @@ public class TexasHoldemComponent {
 
     private static final Poker5CardAceHighLowComparator POKER_5_CARD_ACE_HIGH_LOW_COMPARATOR = new Poker5CardAceHighLowComparator();
 
+    @org.springframework.beans.factory.annotation.Value("#{${texasholdemcomponent.matchingSuit}}")
+    private boolean matchingSuit;
+
     @org.springframework.beans.factory.annotation.Value("#{${texasholdemcomponent.handCount}}")
     private Integer handCount;
+
+    @org.springframework.beans.factory.annotation.Value("#{${texasholdemcomponent.opponentCount}}")
+    private Integer opponentCount;
 
     @Autowired
     private PackGenerator packGenerator;
 
+    @Autowired
+    private CardFactoryImmutable cardFactoryImmutable;
+
+    @Autowired
+    private ConverterHand5Card converterHand5Card;
+
     private static final HandGenerator HAND_GENERATOR = new HandGenerator();
-    private static final Poker5CardHandClassifier POKER_5_CARD_HAND_CLASSIFIER = new Poker5CardHandClassifier();
-    private static final PokerTexasHoldemUtils POKER_TEXAS_HOLDEM_UTILS = new PokerTexasHoldemUtils();
-    private static final ConverterHand5Card CONVERTER_HAND_5_CARD = new ConverterHand5Card();
+
+    @Autowired
+    private PokerTexasHoldemUtils pokerTexasHoldemUtils;
     private static final ConverterHand2Card CONVERTER_HAND_2_CARD = new ConverterHand2Card();
 
-    private static final int countByHandValues = 5;
-    private final int handLoopCounter = 0;
+    private final List<HandProbability> handProbabilityList = new ArrayList<>();
 
+    private final int handLoopCounter = 1;
+
+    public List<HandProbability> getHandProbabilityList() {
+        return handProbabilityList;
+    }
 
     @SuppressWarnings("unused")
     public double monteCarloOneOpponent() {
-        Double durationMs;
+        double durationMs;
 
         AbstractMap.SimpleEntry<IPack, IPack> handPair;
 
-        final int opponentCount = 4;
 
-        Value firstPlayerCard = Value.Two;
+        Value firstPlayerCardValue = Value.Two;
 
-        boolean matchingSuit = false;
-//        boolean matchingSuit = true;
         List<Value> valueList = List.of(Value.values());
 
         List<Hand5Card> twoPairDrawCommunityList = new ArrayList<>();
         List<List<Hand2Card>> twoPairDrawPlayerList = new ArrayList<>();
         List<List<Hand5Card>> twoPairDrawList = new ArrayList<>();
 
-        LOGGER.info("Number of opponents = " + opponentCount);
+        LOGGER.info("Number of opponents = {}", opponentCount);
 
         final StopWatch stopWatch = new StopWatch();
         stopWatch.start();
 
         for (Value kickerValue : valueList) {
-            for (int loopCounter = 1; loopCounter <= 1; ++loopCounter) {
+            for (int loopCounter = 1; loopCounter <= handLoopCounter; ++loopCounter) {
 
                 int handsWonCount = 0;
                 int handsDrawnCount = 0;
@@ -81,7 +92,7 @@ public class TexasHoldemComponent {
 
 
                 IPack fullPack = packGenerator.generateFullPack();
-                Map.Entry<IPack, Hand2Card> packPlayerHandPair = createPlayerHand2(fullPack, firstPlayerCard, kickerValue, matchingSuit);
+                Map.Entry<IPack, Hand2Card> packPlayerHandPair = createPlayerHand2(fullPack, firstPlayerCardValue, kickerValue, matchingSuit);
 
                 if (packPlayerHandPair == null) {
                     continue;
@@ -112,15 +123,6 @@ public class TexasHoldemComponent {
                         pack48 = handPair.getKey();
 
                         opponentHandList.add(handPair.getValue());
-
-//                    if (pack50.getSize() != 50) {
-//                        throw new RuntimeException("EEEKKKK!! remaining pack size is not 50");
-//                    }
-
-//                    pack48 = handPair.getKey();
-//                    if (pack48.getSize() != 48) {
-//                        throw new RuntimeException("EEEKKKK!! remaining pack size is not 48");
-//                    }
                     }
 
                     if (pack48.getSize() != 50 - (opponentCount * 2)) {
@@ -128,16 +130,16 @@ public class TexasHoldemComponent {
                     }
 
                     IPack communityCards = HAND_GENERATOR.generateHandAndRemoveImmutable(pack48, 5).getValue();
-                    Hand5Card communityCardsHand = CONVERTER_HAND_5_CARD.convert(communityCards);
+                    Hand5Card communityCardsHand = converterHand5Card.convert(communityCards);
 
-                    List<Hand5Card> playerAllPossibleHands = POKER_TEXAS_HOLDEM_UTILS.generateAllPossibleHands(communityCardsHand, playerHand2Card);
+                    List<Hand5Card> playerAllPossibleHands = pokerTexasHoldemUtils.generateAllPossibleHands(communityCardsHand, playerHand2Card);
 
-                    Hand5Card playerBestHand = POKER_TEXAS_HOLDEM_UTILS.findBestHandWithCommunityCards(communityCardsHand, playerHand2Card);
+                    Hand5Card playerBestHand = pokerTexasHoldemUtils.findBestHandWithCommunityCards(communityCardsHand, playerHand2Card);
 
                     int winLoseComparison = 0;
 
                     for (int opponentIndex = 0; opponentIndex < opponentCount; ++opponentIndex) {
-                        Hand5Card opponentBestHand = POKER_TEXAS_HOLDEM_UTILS.findBestHandWithCommunityCards(communityCardsHand, CONVERTER_HAND_2_CARD.convert(opponentHandList.get(opponentIndex)));
+                        Hand5Card opponentBestHand = pokerTexasHoldemUtils.findBestHandWithCommunityCards(communityCardsHand, CONVERTER_HAND_2_CARD.convert(opponentHandList.get(opponentIndex)));
                         winLoseComparison = POKER_5_CARD_ACE_HIGH_LOW_COMPARATOR.compare(playerBestHand, opponentBestHand);
 
                         if (winLoseComparison < 0) {
@@ -156,10 +158,6 @@ public class TexasHoldemComponent {
                     }
                 }
 
-
-//                LOGGER.info(String.format("Execution time = %4.3f", stopWatch.getTotalTimeSeconds()));
-//                LOGGER.warn(String.format("Execution time = %4.3f", durationMs));
-
                 double handsWonRatio = (double) handsWonCount / ((double) handCount);
                 double handsDrawnRatio = (double) handsDrawnCount / ((double) handCount);
                 double handsLostRatio = (double) handsLostCount / ((double) handCount);
@@ -168,13 +166,20 @@ public class TexasHoldemComponent {
                     throw new RuntimeException("EEEEKKEKEKKEK!!!!");
                 }
 
-                Double handsWonPercentage = handsWonRatio * 100;
-                Double handsDrawnPercentage = handsDrawnRatio * 100;
-                Double handsLostPercentage = handsLostRatio * 100;
+                double handsWonPercentage = handsWonRatio * 100;
+                double handsDrawnPercentage = handsDrawnRatio * 100;
+                double handsLostPercentage = handsLostRatio * 100;
 
-                LOGGER.info(String.format("Player win/draw/lose percentages = %2.1f%% / %2.1f%% / %2.1f%% (%d iterations)", handsWonPercentage, handsDrawnPercentage, handsLostPercentage, handCount));
+                LOGGER.info("{}", String.format("Player win/draw/lose percentages = %2.1f%% / %2.1f%% / %2.1f%% (%d iterations)", handsWonPercentage, handsDrawnPercentage, handsLostPercentage, handCount));
 
                 LOGGER.info("Card constructor count = {} ", Card.constructorCount);
+
+
+                Set<Card> playerCards = Set.of(cardFactoryImmutable.createCard(Suit.Spades, firstPlayerCardValue),
+                        cardFactoryImmutable.createCard(matchingSuit ? Suit.Spades : Suit.Clubs, kickerValue));
+
+                HandProbability handProbability = new HandProbability(playerCards, opponentCount, handsWonPercentage / 100.0, handsDrawnPercentage / 100.0, handsLostPercentage / 100.0, handCount);
+                handProbabilityList.add(handProbability);
             }
         }
 
@@ -190,14 +195,14 @@ public class TexasHoldemComponent {
             return null;
         }
 
-        Card playerCard1 = new Card(Suit.Spades, firstPlayerCardValue);
-        Card playerCard2 = new Card(Suit.Clubs, kickerValue);
+        Card playerCard1 = cardFactoryImmutable.createCard(Suit.Spades, firstPlayerCardValue);
+        Card playerCard2 = cardFactoryImmutable.createCard(Suit.Clubs, kickerValue);
 
         if (matchingSuit) {
-            playerCard2 = new Card(Suit.Spades, kickerValue);
+            playerCard2 = cardFactoryImmutable.createCard(Suit.Spades, kickerValue);
         }
 
-        LOGGER.info("Player hand = " + playerCard1 + " , " + playerCard2);
+        LOGGER.info("Player hand = {} , {}", playerCard1, playerCard2);
 
         fullPack = fullPack.removeCard(playerCard1);
         fullPack = fullPack.removeCard(playerCard2);
@@ -307,6 +312,7 @@ public class TexasHoldemComponent {
                     printer.printRecord(author, title);
                 } catch (IOException e) {
                     e.printStackTrace();
+                    LOGGER.error("", e);
                 }
             });
         } catch (IOException e) {

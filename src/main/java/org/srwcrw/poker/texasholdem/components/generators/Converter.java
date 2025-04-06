@@ -1,4 +1,4 @@
-package org.srwcrw.poker.texasholdem.generators;
+package org.srwcrw.poker.texasholdem.components.generators;
 
 import org.srwcrw.poker.texasholdem.collections.IPack;
 

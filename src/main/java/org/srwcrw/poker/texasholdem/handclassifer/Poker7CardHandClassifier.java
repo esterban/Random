@@ -1,6 +1,6 @@
 package org.srwcrw.poker.texasholdem.handclassifer;
 
-import org.srwcrw.poker.texasholdem.collections.Hand5Card;
+import org.srwcrw.poker.texasholdem.components.Hand5Card;
 import org.srwcrw.poker.texasholdem.collections.Hand7Card;
 import org.srwcrw.poker.texasholdem.comparator.ValueComparatorAceHigh;
 import org.srwcrw.poker.texasholdem.comparator.ValueComparatorAceLow;
@@ -12,7 +12,6 @@ import org.srwcrw.poker.texasholdem.utils.HandUtils;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.SortedSet;
 
 public class Poker7CardHandClassifier implements PokerCardClassifier<Hand7Card> {
     private static final ThreadLocal<Map<Value, Integer>> tripleMapThreadLocal = ThreadLocal.withInitial(HashMap::new);

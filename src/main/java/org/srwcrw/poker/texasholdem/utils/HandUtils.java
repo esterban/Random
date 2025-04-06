@@ -1,7 +1,7 @@
 package org.srwcrw.poker.texasholdem.utils;
 
 import org.apache.commons.lang3.ArrayUtils;
-import org.srwcrw.poker.texasholdem.collections.Hand5Card;
+import org.srwcrw.poker.texasholdem.components.Hand5Card;
 import org.srwcrw.poker.texasholdem.collections.IPack;
 import org.srwcrw.poker.texasholdem.comparator.ValueComparatorAceHigh;
 import org.srwcrw.poker.texasholdem.components.Card;

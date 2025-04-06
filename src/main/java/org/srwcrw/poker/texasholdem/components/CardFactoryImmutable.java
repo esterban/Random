@@ -1,5 +1,6 @@
 package org.srwcrw.poker.texasholdem.components;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 import org.srwcrw.poker.texasholdem.entities.*;
@@ -12,20 +13,22 @@ import static org.springframework.beans.factory.config.BeanDefinition.SCOPE_SING
 @Component
 @Scope(SCOPE_SINGLETON)
 public class CardFactoryImmutable implements ICardFactory {
-    Map<Suit, Map<Value, Card>> cardLookupMap = new HashMap<>();
+    @Autowired
+    private CardOrdinalFactory cardOrdinalFactory;
+
+    private Card[] cardLookUp = new Card[52];
 
     private CardFactoryImmutable() {
-        for (Suit suit : Suit.values()) {
-            for (Value value : Value.values()) {
-                Card card = new Card(suit, value);
-                cardLookupMap.putIfAbsent(suit, new HashMap<>());
-                cardLookupMap.get(suit).put(value, card);
-            }
-        }
     }
 
     @Override
     public Card createCard(Suit suit, Value value) {
-        return cardLookupMap.get(suit).get(value);
+        CardOrdinal cardOrdinal = cardOrdinalFactory.create(suit, value);
+
+        if (cardLookUp[cardOrdinal.getValue()] == null) {
+            cardLookUp[cardOrdinal.getValue()] = new Card(suit, value, cardOrdinal);
+        }
+
+        return cardLookUp[cardOrdinal.getValue()];
     }
 }

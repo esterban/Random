@@ -1,14 +1,12 @@
 package org.srwcrw.poker.texasholdem.handclassifer;
 
-import org.srwcrw.poker.texasholdem.collections.Hand5Card;
+import org.srwcrw.poker.texasholdem.components.Hand5Card;
 import org.srwcrw.poker.texasholdem.comparator.ValueComparatorAceLow;
 import org.srwcrw.poker.texasholdem.components.Card;
 import org.srwcrw.poker.texasholdem.entities.HandType5Cards;
 import org.srwcrw.poker.texasholdem.entities.Suit;
 import org.srwcrw.poker.texasholdem.entities.Value;
 import org.srwcrw.poker.texasholdem.utils.HandUtils;
-
-import java.util.SortedSet;
 
 public class Poker5CardHandClassifier implements PokerCardClassifier<Hand5Card> {
     private final HandUtils handUtils = new HandUtils();

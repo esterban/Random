@@ -1,17 +1,25 @@
 package org.srwcrw.poker.texasholdem.components;
 
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.srwcrw.poker.texasholdem.entities.Suit;
 import org.srwcrw.poker.texasholdem.entities.Value;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class CardOrdinalUtilsTest {
+@SpringBootTest(classes = {CardOrdinalFactory.class, CardFactoryImmutable.class, CardOrdinalUtils.class, })
+public class CardOrdinalUtilsTest {
+    @Autowired
+    private CardOrdinalUtils cardOrdinalUtils;
+
+    @Autowired
+    private CardFactoryImmutable cardFactoryImmutable;
+
     @Test
     public void testOrdinalToSuitA() {
-        Card card = new Card(Suit.Hearts, Value.Ace);
+        Card card = cardFactoryImmutable.createCard(Suit.Hearts, Value.Ace);
 
-        CardOrdinalUtils cardOrdinalUtils = new CardOrdinalUtils();
         Suit suit = cardOrdinalUtils.ordinalToSuit(card.getCardOrdinal());
 
         assertThat(suit).isEqualTo(Suit.Hearts);
@@ -19,9 +27,8 @@ class CardOrdinalUtilsTest {
 
     @Test
     public void testOrdinalToSuitB() {
-        Card card = new Card(Suit.Spades, Value.Two);
-
-        CardOrdinalUtils cardOrdinalUtils = new CardOrdinalUtils();
+        Card card = cardFactoryImmutable.createCard(Suit.Spades, Value.Two);
+         
         Suit suit = cardOrdinalUtils.ordinalToSuit(card.getCardOrdinal());
 
         assertThat(suit).isEqualTo(Suit.Spades);
@@ -29,9 +36,8 @@ class CardOrdinalUtilsTest {
 
     @Test
     public void testOrdinalToValueA() {
-        Card card = new Card(Suit.Spades, Value.Two);
+        Card card = cardFactoryImmutable.createCard(Suit.Spades, Value.Two);
 
-        CardOrdinalUtils cardOrdinalUtils = new CardOrdinalUtils();
         Value value = cardOrdinalUtils.ordinalToValue(card.getCardOrdinal());
 
         assertThat(value).isEqualTo(Value.Two);
@@ -39,9 +45,8 @@ class CardOrdinalUtilsTest {
 
     @Test
     public void testOrdinalToValueB() {
-        Card card = new Card(Suit.Diamonds, Value.Jack);
-
-        CardOrdinalUtils cardOrdinalUtils = new CardOrdinalUtils();
+        Card card = cardFactoryImmutable.createCard(Suit.Diamonds, Value.Jack);
+         
         Value value = cardOrdinalUtils.ordinalToValue(card.getCardOrdinal());
 
         assertThat(value).isEqualTo(Value.Jack);

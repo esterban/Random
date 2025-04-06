@@ -3,14 +3,14 @@ package org.srwcrw.poker.texasholdem.components;
 import org.srwcrw.poker.texasholdem.entities.Suit;
 import org.srwcrw.poker.texasholdem.entities.Value;
 
-public class CardOrdinal {
-    private final long value;
+public final class CardOrdinal {
+    private final byte value;
 
     public CardOrdinal(Suit suit, Value value) {
-        this.value = (long)suit.ordinal() * 13l + (long)value.ordinal();
+        this.value = (byte) (suit.ordinal() + value.ordinal() * Suit.values().length);
     }
 
-    public long getValue() {
+    public byte getValue() {
         return value;
     }
 }

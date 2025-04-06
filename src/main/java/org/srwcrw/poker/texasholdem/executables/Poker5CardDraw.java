@@ -1,11 +1,11 @@
 package org.srwcrw.poker.texasholdem.executables;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.srwcrw.poker.texasholdem.collections.Hand5Card;
+import org.srwcrw.poker.texasholdem.components.Hand5Card;
 import org.srwcrw.poker.texasholdem.collections.IPack;
 import org.srwcrw.poker.texasholdem.entities.HandType5Cards;
-import org.srwcrw.poker.texasholdem.generators.ConverterHand5Card;
-import org.srwcrw.poker.texasholdem.generators.HandGenerator;
+import org.srwcrw.poker.texasholdem.components.generators.ConverterHand5Card;
+import org.srwcrw.poker.texasholdem.components.generators.HandGenerator;
 import org.srwcrw.poker.texasholdem.components.PackGenerator;
 import org.srwcrw.poker.texasholdem.handclassifer.Poker5CardHandClassifier;
 
@@ -22,17 +22,12 @@ public class Poker5CardDraw {
 
     public final Poker5CardHandClassifier poker5CardHandClassifier = new Poker5CardHandClassifier();
 
-    public final ConverterHand5Card converterHand5Card = new ConverterHand5Card();
+    @Autowired
+    public ConverterHand5Card converterHand5Card;
 
     public int onePairCount = 0;
 
-//    private static final int iterationCount = 100 * 1000 * 1000;
     private static final int iterationCount = 10 * 1000 * 1000;
-//    private static final int iterationCount = 1 * 1000 * 1000;
-//    private static final int iterationCount = 100 * 1000;
-//    private static final int iterationCount = 10 * 1000;
-//    private static final int iterationCount = 1000;
-
 
     public static void main(String[] args) {
         long nanoStart = System.nanoTime();

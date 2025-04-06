@@ -3,26 +3,26 @@ package org.srwcrw.poker.texasholdem.collections;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.srwcrw.poker.texasholdem.components.CardFactoryImmutable;
-import org.srwcrw.poker.texasholdem.components.PackGenerator;
+import org.srwcrw.poker.texasholdem.components.*;
 import org.srwcrw.poker.texasholdem.test.TestUtils;
 import org.srwcrw.poker.texasholdem.test.TestUtilsTexasHoldem;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@SpringBootTest(classes = {CardFactoryImmutable.class, TestUtilsTexasHoldem.class, TestUtils.class, PackGenerator.class})
+@SpringBootTest(classes = {CardOrdinalFactory.class, CardFactoryImmutable.class, TestUtilsTexasHoldem.class, TestUtils.class, PackGenerator.class, HandFactoryHand5.class, Hand5OrdinalFactoryFast.class})
 class Hand5OrdinalFactoryFastTest {
     @Autowired
     private TestUtils testUtils;
 
+    @Autowired
+    private HandFactoryHand5 handFactoryHand5;
 
     @Test
     public void testCreate() {
-//    Card card1, Card card2, Card card3, Card card4, Card card5) {
         Hand5OrdinalFactoryFast hand5OrdinalFactoryFast = new Hand5OrdinalFactoryFast();
         Hand5Card hand5CardA = testUtils.createOnePair();
 
-        Hand5Card hand5CardB = new Hand5Card(
+        Hand5Card hand5CardB = handFactoryHand5.create(
                 hand5CardA.getNthCard(1),
                 hand5CardA.getNthCard(2),
                 hand5CardA.getNthCard(3),

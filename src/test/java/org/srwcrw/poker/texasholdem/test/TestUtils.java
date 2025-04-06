@@ -2,7 +2,8 @@ package org.srwcrw.poker.texasholdem.test;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.srwcrw.poker.texasholdem.collections.Hand5Card;
+import org.srwcrw.poker.texasholdem.components.Hand5Card;
+import org.srwcrw.poker.texasholdem.components.HandFactoryHand5;
 import org.srwcrw.poker.texasholdem.collections.IPack;
 import org.srwcrw.poker.texasholdem.components.Card;
 import org.srwcrw.poker.texasholdem.components.CardFactoryImmutable;
@@ -21,6 +22,9 @@ public class TestUtils {
     @Autowired
     private CardFactoryImmutable cardFactoryImmutable;
 
+    @Autowired
+    private HandFactoryHand5 handFactoryHand5;
+
     private TestUtils() {}
 
     public Hand5Card createRoyalFlushA() {
@@ -30,7 +34,7 @@ public class TestUtils {
         Card card4 = cardFactoryImmutable.createCard(Suit.Diamonds, Value.King);
         Card card5 = cardFactoryImmutable.createCard(Suit.Diamonds, Value.Ace);
 
-        Hand5Card hand5Card = new Hand5Card(card1, card2, card3, card4, card5);
+        Hand5Card hand5Card = handFactoryHand5.create(card1, card2, card3, card4, card5);
 
         return hand5Card;
     }
@@ -42,7 +46,7 @@ public class TestUtils {
         Card card4 = cardFactoryImmutable.createCard(Suit.Clubs, Value.King);
         Card card5 = cardFactoryImmutable.createCard(Suit.Clubs, Value.Ace);
 
-        Hand5Card hand5Card = new Hand5Card(card1, card2, card3, card4, card5);
+        Hand5Card hand5Card = handFactoryHand5.create(card1, card2, card3, card4, card5);
 
         return hand5Card;
     }
@@ -54,7 +58,7 @@ public class TestUtils {
         Card card4 = cardFactoryImmutable.createCard(Suit.Clubs, Value.Four);
         Card card5 = cardFactoryImmutable.createCard(Suit.Clubs, Value.Five);
 
-        Hand5Card hand5Card = new Hand5Card(card1, card2, card3, card4, card5);
+        Hand5Card hand5Card = handFactoryHand5.create(card1, card2, card3, card4, card5);
 
         return hand5Card;
     }
@@ -66,7 +70,7 @@ public class TestUtils {
         Card card4 = cardFactoryImmutable.createCard(Suit.Clubs, Value.Queen);
         Card card5 = cardFactoryImmutable.createCard(Suit.Clubs, Value.King);
 
-        Hand5Card hand5Card = new Hand5Card(card1, card2, card3, card4, card5);
+        Hand5Card hand5Card = handFactoryHand5.create(card1, card2, card3, card4, card5);
 
         return hand5Card;
     }
@@ -78,7 +82,7 @@ public class TestUtils {
         Card card4 = cardFactoryImmutable.createCard(Suit.Clubs, Value.Queen);
         Card card5 = cardFactoryImmutable.createCard(Suit.Clubs, Value.King);
 
-        Hand5Card hand5Card = new Hand5Card(card1, card2, card3, card4, card5);
+        Hand5Card hand5Card = handFactoryHand5.create(card1, card2, card3, card4, card5);
 
         return hand5Card;
     }
@@ -90,7 +94,7 @@ public class TestUtils {
         Card card3 = cardFactoryImmutable.createCard(Suit.Clubs, Value.Jack);
         Card card4 = cardFactoryImmutable.createCard(Suit.Clubs, Value.Queen);
 
-        Hand5Card hand5Card = new Hand5Card(card1, card2, card3, card4, card5);
+        Hand5Card hand5Card = handFactoryHand5.create(card1, card2, card3, card4, card5);
 
         return hand5Card;
     }
@@ -102,7 +106,7 @@ public class TestUtils {
         Card card4 = cardFactoryImmutable.createCard(Suit.Diamonds, Value.Ace);
         Card card5 = cardFactoryImmutable.createCard(Suit.Clubs, Value.Seven);
 
-        Hand5Card hand5Card = new Hand5Card(card1, card2, card3, card4, card5);
+        Hand5Card hand5Card = handFactoryHand5.create(card1, card2, card3, card4, card5);
 
         return hand5Card;
     }
@@ -114,7 +118,7 @@ public class TestUtils {
         Card card4 = cardFactoryImmutable.createCard(Suit.Diamonds, Value.Two);
         Card card5 = cardFactoryImmutable.createCard(Suit.Clubs, Value.Seven);
 
-        Hand5Card hand5Card = new Hand5Card(card1, card2, card3, card4, card5);
+        Hand5Card hand5Card = handFactoryHand5.create(card1, card2, card3, card4, card5);
 
         return hand5Card;
     }
@@ -126,7 +130,7 @@ public class TestUtils {
         Card card4 = cardFactoryImmutable.createCard(Suit.Clubs, Value.Six);
         Card card5 = cardFactoryImmutable.createCard(Suit.Diamonds, Value.Six);
 
-        Hand5Card hand5Card = new Hand5Card(card1, card2, card3, card4, card5);
+        Hand5Card hand5Card = handFactoryHand5.create(card1, card2, card3, card4, card5);
 
         return hand5Card;
     }
@@ -138,7 +142,7 @@ public class TestUtils {
         Card card4 = cardFactoryImmutable.createCard(Suit.Clubs, Value.Six);
         Card card5 = cardFactoryImmutable.createCard(Suit.Diamonds, Value.Six);
 
-        Hand5Card hand5Card = new Hand5Card(card1, card2, card3, card4, card5);
+        Hand5Card hand5Card = handFactoryHand5.create(card1, card2, card3, card4, card5);
 
         return hand5Card;
     }
@@ -150,7 +154,7 @@ public class TestUtils {
         Card card4 = cardFactoryImmutable.createCard(Suit.Clubs, Value.Six);
         Card card5 = cardFactoryImmutable.createCard(Suit.Clubs, Value.Seven);
 
-        Hand5Card hand5Card = new Hand5Card(card1, card2, card3, card4, card5);
+        Hand5Card hand5Card = handFactoryHand5.create(card1, card2, card3, card4, card5);
 
         return hand5Card;
     }
@@ -162,7 +166,7 @@ public class TestUtils {
         Card card4 = cardFactoryImmutable.createCard(Suit.Clubs, Value.Six);
         Card card5 = cardFactoryImmutable.createCard(Suit.Clubs, Value.Seven);
 
-        Hand5Card hand5Card = new Hand5Card(card1, card2, card3, card4, card5);
+        Hand5Card hand5Card = handFactoryHand5.create(card1, card2, card3, card4, card5);
 
         return hand5Card;
     }
@@ -175,7 +179,7 @@ public class TestUtils {
         Card card4 = cardFactoryImmutable.createCard(Suit.Hearts, Value.Six);
         Card card5 = cardFactoryImmutable.createCard(Suit.Hearts, Value.Seven);
 
-        Hand5Card hand5Card = new Hand5Card(card1, card2, card3, card4, card5);
+        Hand5Card hand5Card = handFactoryHand5.create(card1, card2, card3, card4, card5);
 
         return hand5Card;
     }
@@ -187,7 +191,7 @@ public class TestUtils {
         Card card4 = cardFactoryImmutable.createCard(Suit.Hearts, Value.Six);
         Card card5 = cardFactoryImmutable.createCard(Suit.Hearts, Value.Seven);
 
-        Hand5Card hand5Card = new Hand5Card(card1, card2, card3, card4, card5);
+        Hand5Card hand5Card = handFactoryHand5.create(card1, card2, card3, card4, card5);
 
         return hand5Card;
     }
@@ -199,7 +203,7 @@ public class TestUtils {
         Card card4 = cardFactoryImmutable.createCard(Suit.Hearts, Value.Four);
         Card card5 = cardFactoryImmutable.createCard(Suit.Hearts, Value.Five);
 
-        Hand5Card hand5Card = new Hand5Card(card1, card2, card3, card4, card5);
+        Hand5Card hand5Card = handFactoryHand5.create(card1, card2, card3, card4, card5);
 
         return hand5Card;
     }
@@ -211,7 +215,7 @@ public class TestUtils {
         Card card4 = cardFactoryImmutable.createCard(Suit.Hearts, Value.King);
         Card card5 = cardFactoryImmutable.createCard(Suit.Hearts, Value.Ace);
 
-        Hand5Card hand5Card = new Hand5Card(card1, card2, card3, card4, card5);
+        Hand5Card hand5Card = handFactoryHand5.create(card1, card2, card3, card4, card5);
 
         return hand5Card;
     }
@@ -223,7 +227,7 @@ public class TestUtils {
         Card card4 = cardFactoryImmutable.createCard(Suit.Hearts, Value.King);
         Card card5 = cardFactoryImmutable.createCard(Suit.Hearts, Value.Two);
 
-        Hand5Card hand5Card = new Hand5Card(card1, card2, card3, card4, card5);
+        Hand5Card hand5Card = handFactoryHand5.create(card1, card2, card3, card4, card5);
 
         return hand5Card;
     }
@@ -235,7 +239,7 @@ public class TestUtils {
         Card card4 = cardFactoryImmutable.createCard(Suit.Hearts, Value.Ace);
         Card card5 = cardFactoryImmutable.createCard(Suit.Hearts, Value.Three);
 
-        Hand5Card hand5Card = new Hand5Card(card1, card2, card3, card4, card5);
+        Hand5Card hand5Card = handFactoryHand5.create(card1, card2, card3, card4, card5);
 
         return hand5Card;
     }
@@ -247,7 +251,7 @@ public class TestUtils {
         Card card4 = cardFactoryImmutable.createCard(Suit.Clubs, Value.Ten);
         Card card5 = cardFactoryImmutable.createCard(Suit.Hearts, Value.Two);
 
-        Hand5Card hand5Card = new Hand5Card(card1, card2, card3, card4, card5);
+        Hand5Card hand5Card = handFactoryHand5.create(card1, card2, card3, card4, card5);
 
         return hand5Card;
     }
@@ -259,7 +263,7 @@ public class TestUtils {
         Card card4 = cardFactoryImmutable.createCard(Suit.Clubs, Value.Ten);
         Card card5 = cardFactoryImmutable.createCard(Suit.Hearts, Value.Two);
 
-        Hand5Card hand5Card = new Hand5Card(card1, card2, card3, card4, card5);
+        Hand5Card hand5Card = handFactoryHand5.create(card1, card2, card3, card4, card5);
 
         return hand5Card;
     }
@@ -271,7 +275,7 @@ public class TestUtils {
         Card card4 = cardFactoryImmutable.createCard(Suit.Clubs, Value.Five);
         Card card5 = cardFactoryImmutable.createCard(Suit.Hearts, Value.Two);
 
-        Hand5Card hand5Card = new Hand5Card(card1, card2, card3, card4, card5);
+        Hand5Card hand5Card = handFactoryHand5.create(card1, card2, card3, card4, card5);
 
         return hand5Card;
     }
@@ -283,7 +287,7 @@ public class TestUtils {
         Card card4 = cardFactoryImmutable.createCard(Suit.Spades, Value.Three);
         Card card5 = cardFactoryImmutable.createCard(Suit.Hearts, Value.Seven);
 
-        Hand5Card hand5Card = new Hand5Card(card1, card2, card3, card4, card5);
+        Hand5Card hand5Card = handFactoryHand5.create(card1, card2, card3, card4, card5);
 
         return hand5Card;
     }
@@ -295,7 +299,7 @@ public class TestUtils {
         Card card4 = cardFactoryImmutable.createCard(Suit.Spades, Value.Jack);
         Card card5 = cardFactoryImmutable.createCard(Suit.Hearts, Value.Two);
 
-        Hand5Card hand5Card = new Hand5Card(card1, card2, card3, card4, card5);
+        Hand5Card hand5Card = handFactoryHand5.create(card1, card2, card3, card4, card5);
 
         return hand5Card;
     }
@@ -308,7 +312,7 @@ public class TestUtils {
         Card card4 = cardFactoryImmutable.createCard(Suit.Spades, Value.Jack);
         Card card5 = cardFactoryImmutable.createCard(Suit.Hearts, Value.Ace);
 
-        Hand5Card hand5Card = new Hand5Card(card1, card2, card3, card4, card5);
+        Hand5Card hand5Card = handFactoryHand5.create(card1, card2, card3, card4, card5);
 
         return hand5Card;
     }
@@ -320,7 +324,7 @@ public class TestUtils {
         Card card4 = cardFactoryImmutable.createCard(Suit.Spades, Value.Jack);
         Card card5 = cardFactoryImmutable.createCard(Suit.Hearts, Value.Ten);
 
-        Hand5Card hand5Card = new Hand5Card(card1, card2, card3, card4, card5);
+        Hand5Card hand5Card = handFactoryHand5.create(card1, card2, card3, card4, card5);
 
         return hand5Card;
     }
@@ -332,7 +336,7 @@ public class TestUtils {
         Card card4 = cardFactoryImmutable.createCard(Suit.Spades, Value.Jack);
         Card card5 = cardFactoryImmutable.createCard(Suit.Hearts, Value.Seven);
 
-        Hand5Card hand5Card = new Hand5Card(card1, card2, card3, card4, card5);
+        Hand5Card hand5Card = handFactoryHand5.create(card1, card2, card3, card4, card5);
 
         return hand5Card;
     }
@@ -344,7 +348,7 @@ public class TestUtils {
         Card card4 = cardFactoryImmutable.createCard(Suit.Hearts, Value.Queen);
         Card card5 = cardFactoryImmutable.createCard(Suit.Hearts, Value.King);
 
-        Hand5Card hand5Card = new Hand5Card(card1, card2, card3, card4, card5);
+        Hand5Card hand5Card = handFactoryHand5.create(card1, card2, card3, card4, card5);
 
         return hand5Card;
     }
@@ -356,7 +360,7 @@ public class TestUtils {
         Card card4 = cardFactoryImmutable.createCard(Suit.Hearts, Value.Ten);
         Card card2 = cardFactoryImmutable.createCard(Suit.Clubs, Value.Four);
 
-        Hand5Card hand5Card = new Hand5Card(card1, card2, card3, card4, card5);
+        Hand5Card hand5Card = handFactoryHand5.create(card1, card2, card3, card4, card5);
 
         return hand5Card;
     }
@@ -368,7 +372,7 @@ public class TestUtils {
         Card card2 = cardFactoryImmutable.createCard(Suit.Clubs, Value.Nine);
         Card card5 = cardFactoryImmutable.createCard(Suit.Hearts, Value.Two);
 
-        Hand5Card hand5Card = new Hand5Card(card1, card2, card3, card4, card5);
+        Hand5Card hand5Card = handFactoryHand5.create(card1, card2, card3, card4, card5);
 
         return hand5Card;
     }
@@ -380,7 +384,7 @@ public class TestUtils {
         Card card4 = cardFactoryImmutable.createCard(Suit.Hearts, Value.Queen);
         Card card5 = cardFactoryImmutable.createCard(Suit.Hearts, Value.King);
 
-        Hand5Card hand5Card = new Hand5Card(card1, card2, card3, card4, card5);
+        Hand5Card hand5Card = handFactoryHand5.create(card1, card2, card3, card4, card5);
 
         return hand5Card;
     }
@@ -392,7 +396,7 @@ public class TestUtils {
         Card card3 = cardFactoryImmutable.createCard(Suit.Hearts, Value.Nine);
         Card card4 = cardFactoryImmutable.createCard(Suit.Hearts, Value.Queen);
 
-        Hand5Card hand5Card = new Hand5Card(card1, card2, card3, card4, card5);
+        Hand5Card hand5Card = handFactoryHand5.create(card1, card2, card3, card4, card5);
 
         return hand5Card;
     }
@@ -405,7 +409,7 @@ public class TestUtils {
         Card card4 = cardFactoryImmutable.createCard(Suit.Hearts, Value.Queen);
         Card card5 = cardFactoryImmutable.createCard(Suit.Hearts, Value.King);
 
-        Hand5Card hand5Card = new Hand5Card(card1, card2, card3, card4, card5);
+        Hand5Card hand5Card = handFactoryHand5.create(card1, card2, card3, card4, card5);
 
         return hand5Card;
     }
@@ -417,7 +421,7 @@ public class TestUtils {
         Card card4 = cardFactoryImmutable.createCard(Suit.Hearts, Value.Six);
         Card card5 = cardFactoryImmutable.createCard(Suit.Hearts, Value.Seven);
 
-        Hand5Card hand5Card = new Hand5Card(card1, card2, card3, card4, card5);
+        Hand5Card hand5Card = handFactoryHand5.create(card1, card2, card3, card4, card5);
 
         return hand5Card;
     }
@@ -429,7 +433,7 @@ public class TestUtils {
         Card card4 = cardFactoryImmutable.createCard(Suit.Hearts, Value.Queen);
         Card card5 = cardFactoryImmutable.createCard(Suit.Hearts, Value.King);
 
-        Hand5Card hand5Card = new Hand5Card(card1, card2, card3, card4, card5);
+        Hand5Card hand5Card = handFactoryHand5.create(card1, card2, card3, card4, card5);
 
         return hand5Card;
     }
@@ -441,7 +445,7 @@ public class TestUtils {
         Card card4 = cardFactoryImmutable.createCard(Suit.Hearts, Value.Queen);
         Card card5 = cardFactoryImmutable.createCard(Suit.Hearts, Value.Two);
 
-        Hand5Card hand5Card = new Hand5Card(card1, card2, card3, card4, card5);
+        Hand5Card hand5Card = handFactoryHand5.create(card1, card2, card3, card4, card5);
 
         return hand5Card;
     }

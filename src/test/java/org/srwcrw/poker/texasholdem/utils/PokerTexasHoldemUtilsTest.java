@@ -1,15 +1,11 @@
 package org.srwcrw.poker.texasholdem.utils;
 
 import org.junit.jupiter.api.Test;
-import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.srwcrw.poker.texasholdem.collections.Hand2Card;
-import org.srwcrw.poker.texasholdem.collections.Hand5Card;
+import org.srwcrw.poker.texasholdem.components.*;
 import org.srwcrw.poker.texasholdem.comparator.Poker5CardAceHighLowComparator;
-import org.srwcrw.poker.texasholdem.components.Card;
-import org.srwcrw.poker.texasholdem.components.CardFactoryImmutable;
-import org.srwcrw.poker.texasholdem.components.PackGenerator;
 import org.srwcrw.poker.texasholdem.entities.Suit;
 import org.srwcrw.poker.texasholdem.entities.Value;
 import org.srwcrw.poker.texasholdem.test.TestUtils;
@@ -27,10 +23,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 // 2024-05-19 SWright - This is an experiment for testing private methods, although at the time of writing I have moved
 // the private method from PokerTexasHoldemClassifier to PokerTexasHoldemUtils as public utility method??!? (I don't like moving the implementation out.
 // Will leave for the time being.
-@PrepareForTest(PokerTexasHoldemUtils.class)
-@SpringBootTest(classes = {CardFactoryImmutable.class, TestUtilsTexasHoldem.class, TestUtils.class, PackGenerator.class})
+@SpringBootTest(classes = {CardFactoryImmutable.class, TestUtilsTexasHoldem.class, TestUtils.class, PackGenerator.class, CardOrdinalFactory.class, HandFactoryHand5.class, Hand5OrdinalFactoryFast.class, PokerTexasHoldemUtils.class})
 class PokerTexasHoldemUtilsTest {
-    private final PokerTexasHoldemUtils pokerTexasHoldemUtils = new PokerTexasHoldemUtils();
+    @Autowired
+    private PokerTexasHoldemUtils pokerTexasHoldemUtils;
 
     private final Poker5CardAceHighLowComparator poker5CardAceHighLowComparator = new Poker5CardAceHighLowComparator();
 
@@ -42,6 +38,9 @@ class PokerTexasHoldemUtilsTest {
 
     @Autowired
     private CardFactoryImmutable cardFactoryImmutable;
+
+    @Autowired
+    private HandFactoryHand5 handFactoryHand5;
 
     @Test
     public void testCreateHand5From3CommunityCardsA() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
@@ -453,13 +452,13 @@ class PokerTexasHoldemUtilsTest {
 
     @Test
     void testTwoPlayersHighestCard() {
-        Hand5Card communityHighestCard = new Hand5Card(
+        Hand5Card communityHighestCard = handFactoryHand5.create(
                 cardFactoryImmutable.createCard(Suit.Hearts, Value.Five),
                 cardFactoryImmutable.createCard(Suit.Clubs, Value.Six),
                 cardFactoryImmutable.createCard(Suit.Hearts, Value.Nine),
                 cardFactoryImmutable.createCard(Suit.Spades, Value.Ten),
                 cardFactoryImmutable.createCard(Suit.Clubs, Value.Ace)
-                );
+        );
 
         Hand2Card playerHand2Card = new Hand2Card(
                 cardFactoryImmutable.createCard(Suit.Clubs, Value.Two),

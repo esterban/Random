@@ -12,11 +12,10 @@ public final class Card implements Comparable<Card> {
 
     public static long constructorCount = 0;
 
-    Card(Suit suit, Value value) {
+    public Card(Suit suit, Value value, CardOrdinal cardOrdinal) {
         this.suit = suit;
         this.value = value;
-
-        cardOrdinal = new CardOrdinal(suit, value);
+        this.cardOrdinal = cardOrdinal;
 
         ++constructorCount;
     }

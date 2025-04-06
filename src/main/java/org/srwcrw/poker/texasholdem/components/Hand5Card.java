@@ -1,14 +1,14 @@
-package org.srwcrw.poker.texasholdem.collections;
+package org.srwcrw.poker.texasholdem.components;
 
-import org.srwcrw.poker.texasholdem.components.Card;
+import org.srwcrw.poker.texasholdem.collections.*;
 
 import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
 
 public final class Hand5Card implements IPack {
-//    private final CollectionUtils collectionUtils = new CollectionUtils();
     private static final CollectionUtils collectionUtils = new CollectionUtils();
-    private static final Hand5OrdinalFactory HAND_5_ORDINAL_FACTORY = new Hand5OrdinalFactoryFast();
+
+    private Hand5OrdinalFactory hand5OrdinalFactory;
 
     private final Card card1;
     private final Card card2;
@@ -17,9 +17,10 @@ public final class Hand5Card implements IPack {
     private final Card card5;
     private final Card[] cardArray = new Card[5];
 
-    private final Hand5Ordinal hand5Ordinal;
+    private Hand5Ordinal hand5Ordinal;
 
-    public Hand5Card(Card card1, Card card2, Card card3, Card card4, Card card5) {
+    public Hand5Card(Hand5OrdinalFactory hand5OrdinalFactory, Card card1, Card card2, Card card3, Card card4, Card card5) {
+        this.hand5OrdinalFactory = hand5OrdinalFactory;
         this.card1 = card1;
         this.card2 = card2;
         this.card3 = card3;
@@ -31,8 +32,6 @@ public final class Hand5Card implements IPack {
         cardArray[2] = card3;
         cardArray[3] = card4;
         cardArray[4] = card5;
-
-        this.hand5Ordinal = HAND_5_ORDINAL_FACTORY.create(card1, card2, card3, card4, card5);
     }
 
     @Override
@@ -92,7 +91,7 @@ public final class Hand5Card implements IPack {
         if (o == null || getClass() != o.getClass()) return false;
         Hand5Card hand5Card = (Hand5Card) o;
 
-        return  Objects.equals(card1, hand5Card.card1) &&
+        return Objects.equals(card1, hand5Card.card1) &&
                 Objects.equals(card2, hand5Card.card2) &&
                 Objects.equals(card3, hand5Card.card3) &&
                 Objects.equals(card4, hand5Card.card4) &&
@@ -134,6 +133,10 @@ public final class Hand5Card implements IPack {
     }
 
     public Hand5Ordinal getHand5Ordinal() {
+        if (hand5Ordinal == null) {
+            hand5Ordinal = hand5OrdinalFactory.create(card1, card2, card3, card4, card5);
+        }
+
         return hand5Ordinal;
     }
 }

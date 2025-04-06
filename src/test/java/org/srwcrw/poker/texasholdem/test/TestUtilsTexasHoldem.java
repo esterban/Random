@@ -3,7 +3,8 @@ package org.srwcrw.poker.texasholdem.test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.srwcrw.poker.texasholdem.collections.Hand2Card;
-import org.srwcrw.poker.texasholdem.collections.Hand5Card;
+import org.srwcrw.poker.texasholdem.components.Hand5Card;
+import org.srwcrw.poker.texasholdem.components.HandFactoryHand5;
 import org.srwcrw.poker.texasholdem.comparator.Poker5CardAceHighLowComparator;
 import org.srwcrw.poker.texasholdem.components.Card;
 import org.srwcrw.poker.texasholdem.entities.ICardFactory;
@@ -12,10 +13,14 @@ import org.srwcrw.poker.texasholdem.entities.Value;
 
 import java.util.*;
 
+@SuppressWarnings("UnnecessaryLocalVariable")
 @Component
 public class TestUtilsTexasHoldem {
     @Autowired
     private ICardFactory cardFactory;
+    
+    @Autowired
+    private HandFactoryHand5 handFactoryHand5;
 
     public Map.Entry<Hand5Card, Hand2Card> createOnePairA() {
         SortedSet<Card> hand5CardSet = new TreeSet<>();
@@ -33,7 +38,7 @@ public class TestUtilsTexasHoldem {
 
         Iterator<Card> hand5Iterator = hand5CardSet.iterator();
 
-        Hand5Card hand5Card = new Hand5Card(
+        Hand5Card hand5Card = handFactoryHand5.create(
                 hand5Iterator.next(),
                 hand5Iterator.next(),
                 hand5Iterator.next(),
@@ -63,7 +68,7 @@ public class TestUtilsTexasHoldem {
 
         Iterator<Card> hand5Iterator = hand5CardSet.iterator();
 
-        Hand5Card hand5Card = new Hand5Card(
+        Hand5Card hand5Card = handFactoryHand5.create(
                 hand5Iterator.next(),
                 hand5Iterator.next(),
                 hand5Iterator.next(),
@@ -93,7 +98,7 @@ public class TestUtilsTexasHoldem {
 
         Iterator<Card> hand5Iterator = hand5CardSet.iterator();
 
-        Hand5Card hand5Card = new Hand5Card(
+        Hand5Card hand5Card = handFactoryHand5.create(
                 hand5Iterator.next(),
                 hand5Iterator.next(),
                 hand5Iterator.next(),
@@ -119,7 +124,7 @@ public class TestUtilsTexasHoldem {
 
         Iterator<Card> hand5Iterator = hand5CardSet.iterator();
 
-        Hand5Card hand5Card = new Hand5Card(
+        Hand5Card hand5Card = handFactoryHand5.create(
                 hand5Iterator.next(),
                 hand5Iterator.next(),
                 hand5Iterator.next(),
@@ -132,7 +137,6 @@ public class TestUtilsTexasHoldem {
         hand2CardSet.add(cardFactory.createCard(Suit.Clubs, Value.Ace));
         hand2CardSet.add(cardFactory.createCard(Suit.Diamonds, Value.Five));
 
-//        Hand5Card hand5Card = new Hand5Card(hand5CardSet);
         Hand2Card hand2Card = new Hand2Card(hand2CardSet);
 
         Map.Entry<Hand5Card, Hand2Card> result = new AbstractMap.SimpleEntry<>(hand5Card, hand2Card);
@@ -152,7 +156,7 @@ public class TestUtilsTexasHoldem {
 
         Iterator<Card> hand5Iterator = hand5CardSet.iterator();
 
-        Hand5Card hand5Card = new Hand5Card(
+        Hand5Card hand5Card = handFactoryHand5.create(
                 hand5Iterator.next(),
                 hand5Iterator.next(),
                 hand5Iterator.next(),
@@ -187,8 +191,7 @@ public class TestUtilsTexasHoldem {
 
         Iterator<Card> hand5Iterator = hand5CardSet.iterator();
 
-//        Hand5Card hand5Card = new Hand5Card(hand5CardSet);
-        Hand5Card hand5Card = new Hand5Card(
+        Hand5Card hand5Card = handFactoryHand5.create(
                 hand5Iterator.next(),
                 hand5Iterator.next(),
                 hand5Iterator.next(),
@@ -218,8 +221,7 @@ public class TestUtilsTexasHoldem {
 
         Iterator<Card> hand5Iterator = hand5CardSet.iterator();
 
-//        Hand5Card hand5Card = new Hand5Card(hand5CardSet);
-        Hand5Card hand5Card = new Hand5Card(
+        Hand5Card hand5Card = handFactoryHand5.create(
                 hand5Iterator.next(),
                 hand5Iterator.next(),
                 hand5Iterator.next(),
@@ -249,8 +251,7 @@ public class TestUtilsTexasHoldem {
 
         Iterator<Card> hand5Iterator = hand5CardSet.iterator();
 
-//        Hand5Card hand5Card = new Hand5Card(hand5CardSet);
-        Hand5Card hand5Card = new Hand5Card(
+        Hand5Card hand5Card = handFactoryHand5.create(
                 hand5Iterator.next(),
                 hand5Iterator.next(),
                 hand5Iterator.next(),
@@ -280,8 +281,7 @@ public class TestUtilsTexasHoldem {
 
         Iterator<Card> hand5Iterator = hand5CardSet.iterator();
 
-//        Hand5Card hand5Card = new Hand5Card(hand5CardSet);
-        Hand5Card hand5Card = new Hand5Card(
+        Hand5Card hand5Card = handFactoryHand5.create(
                 hand5Iterator.next(),
                 hand5Iterator.next(),
                 hand5Iterator.next(),
@@ -311,8 +311,7 @@ public class TestUtilsTexasHoldem {
 
         Iterator<Card> hand5Iterator = hand5CardSet.iterator();
 
-//        Hand5Card hand5Card = new Hand5Card(hand5CardSet);
-        Hand5Card hand5Card = new Hand5Card(
+        Hand5Card hand5Card = handFactoryHand5.create(
                 hand5Iterator.next(),
                 hand5Iterator.next(),
                 hand5Iterator.next(),
@@ -342,8 +341,7 @@ public class TestUtilsTexasHoldem {
 
         Iterator<Card> hand5Iterator = hand5CardSet.iterator();
 
-//        Hand5Card hand5Card = new Hand5Card(hand5CardSet);
-        Hand5Card hand5Card = new Hand5Card(
+        Hand5Card hand5Card = handFactoryHand5.create(
                 hand5Iterator.next(),
                 hand5Iterator.next(),
                 hand5Iterator.next(),

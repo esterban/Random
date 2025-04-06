@@ -2,7 +2,7 @@ package org.srwcrw.poker.texasholdem.comparator;
 
 import org.apache.commons.lang3.ArrayUtils;
 import org.srwcrw.comparator.SortedSetComparator;
-import org.srwcrw.poker.texasholdem.collections.Hand5Card;
+import org.srwcrw.poker.texasholdem.components.Hand5Card;
 import org.srwcrw.poker.texasholdem.entities.HandType5Cards;
 import org.srwcrw.poker.texasholdem.entities.Value;
 import org.srwcrw.poker.texasholdem.handclassifer.Poker5CardHandClassifier;

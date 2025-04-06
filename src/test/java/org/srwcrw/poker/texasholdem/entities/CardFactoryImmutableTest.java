@@ -5,10 +5,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.srwcrw.poker.texasholdem.components.CardFactoryImmutable;
 import org.srwcrw.poker.texasholdem.components.Card;
+import org.srwcrw.poker.texasholdem.components.CardOrdinalFactory;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@SpringBootTest(classes = {CardFactoryImmutable.class})
+@SpringBootTest(classes = {CardOrdinalFactory.class, CardFactoryImmutable.class})
 class CardFactoryImmutableTest {
     @Autowired
     private CardFactoryImmutable cardFactoryImmutable;

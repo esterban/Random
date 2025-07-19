@@ -69,8 +69,8 @@ public class TexasHoldemComponent {
 
         AbstractMap.SimpleEntry<IPack, IPack> handPair;
 
-
-        Value firstPlayerCardValue = Value.Two;
+//        Value firstPlayerCardValue = Value.Two;
+        Value firstPlayerCardValue = Value.Ace;
 
         List<Value> valueList = List.of(Value.values());
 
@@ -92,7 +92,8 @@ public class TexasHoldemComponent {
 
 
                 IPack fullPack = packGenerator.generateFullPack();
-                Map.Entry<IPack, Hand2Card> packPlayerHandPair = createPlayerHand2(fullPack, firstPlayerCardValue, kickerValue, matchingSuit);
+//                Map.Entry<IPack, Hand2Card> packPlayerHandPair = createPlayerHand2(fullPack, firstPlayerCardValue, kickerValue, matchingSuit);
+                Map.Entry<IPack, Hand2Card> packPlayerHandPair = createPlayerHand2Pair(fullPack, kickerValue);
 
                 if (packPlayerHandPair == null) {
                     continue;
@@ -201,6 +202,24 @@ public class TexasHoldemComponent {
         if (matchingSuit) {
             playerCard2 = cardFactoryImmutable.createCard(Suit.Spades, kickerValue);
         }
+
+        LOGGER.info("Player hand = {} , {}", playerCard1, playerCard2);
+
+        fullPack = fullPack.removeCard(playerCard1);
+        fullPack = fullPack.removeCard(playerCard2);
+
+        SortedSet<Card> playerCardSortedSet = new TreeSet<>();
+        playerCardSortedSet.add(playerCard1);
+        playerCardSortedSet.add(playerCard2);
+
+        Hand2Card playerHand2Card = new Hand2Card(playerCardSortedSet);
+
+        return new AbstractMap.SimpleEntry<>(fullPack, playerHand2Card);
+    }
+
+    private Map.Entry<IPack, Hand2Card> createPlayerHand2Pair(IPack fullPack, Value firstPlayerCardValue) {
+        Card playerCard1 = cardFactoryImmutable.createCard(Suit.Spades, firstPlayerCardValue);
+        Card playerCard2 = cardFactoryImmutable.createCard(Suit.Clubs, firstPlayerCardValue);
 
         LOGGER.info("Player hand = {} , {}", playerCard1, playerCard2);
 

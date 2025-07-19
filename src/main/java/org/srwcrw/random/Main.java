@@ -36,7 +36,7 @@ public class Main {
         runBenchmark();
     }
 
-    @Benchmark
+//    @Benchmark
 //    private static void runBenchmark(Map<String, String> map) {
     private static void runBenchmark() {
         Map<String, String> map = generateMapOfRandomStrings();

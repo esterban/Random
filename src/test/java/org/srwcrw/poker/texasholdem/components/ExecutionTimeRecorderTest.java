@@ -98,6 +98,4 @@ public class ExecutionTimeRecorderTest {
         assertThatCode(() -> LocalDateTime.parse(endTime, formatter))
                 .doesNotThrowAnyException();
     }
-
-    // ... rest of the test methods remain the same
 }

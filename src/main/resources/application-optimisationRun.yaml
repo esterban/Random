@@ -1,0 +1,19 @@
+app:
+  execution-time:
+    output-dir: src/main/docs/optimisationrecord
+    file-prefix: execution_time
+    date-format: yyyyMMdd_HHmmss.SSS
+    time-format: yyyy-MM-dd HH:mm:ss.SSS
+
+texasholdemmain:
+  loopCount: 1
+
+texasholdemcomponent:
+  matchingSuit: false
+  opponentCount: 3
+  handCount: 10*1000
+
+#logging:
+#  config: classpath:log4j2-profiling.xml
+#  file: log4j2-profiling.xml
+#  file: log4j2.xml

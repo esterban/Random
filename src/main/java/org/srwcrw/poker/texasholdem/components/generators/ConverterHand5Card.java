@@ -3,6 +3,7 @@ package org.srwcrw.poker.texasholdem.components.generators;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.srwcrw.poker.texasholdem.components.Hand5Card;
+import org.srwcrw.poker.texasholdem.components.HandFactoryFast;
 import org.srwcrw.poker.texasholdem.components.HandFactoryHand5;
 import org.srwcrw.poker.texasholdem.collections.IPack;
 import org.srwcrw.poker.texasholdem.components.Card;
@@ -16,6 +17,9 @@ public class ConverterHand5Card implements Converter<Hand5Card> {
 
     @Autowired
     private HandFactoryHand5 handFactoryHand5;
+
+//    @Autowired
+//    private HandFactoryFast handFactoryHand5;
 
     private ConverterHand5Card() {
     }

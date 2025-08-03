@@ -1,0 +1,47 @@
+2025-07-23 00:25:56,452 org.srwcrw.poker.texasholdem.executables.TexasHoldemMain [main] Starting TexasHoldemMain using Java 17.0.2 with PID 8496 (C:\Users\FiercePC\IdeaProjects\Random\out\production\classes started by FiercePC in C:\Users\FiercePC\IdeaProjects\Random)
+2025-07-23 00:25:56,456 org.srwcrw.poker.texasholdem.executables.TexasHoldemMain [main] No active profile set, falling back to 1 default profile: "default"
+2025-07-23 00:25:58,206 org.srwcrw.poker.texasholdem.components.TexasHoldemComponent [main] Number of opponents = 3
+2025-07-23 00:25:58,208 org.srwcrw.poker.texasholdem.components.TexasHoldemComponent [main] Player hand = Card{suit=Spades, value=Three} , Card{suit=Clubs, value=Two}
+2025-07-23 00:26:55,398 org.srwcrw.poker.texasholdem.components.TexasHoldemComponent [main] Player win/draw/lose percentages = 14.2% / 1.3% / 84.4% (1000000 iterations)
+2025-07-23 00:26:55,399 org.srwcrw.poker.texasholdem.components.TexasHoldemComponent [main] Card constructor count = 52
+2025-07-23 00:26:55,399 org.srwcrw.poker.texasholdem.components.TexasHoldemComponent [main] Player hand = Card{suit=Spades, value=Three} , Card{suit=Clubs, value=Three}
+2025-07-23 00:28:01,627 org.srwcrw.poker.texasholdem.components.TexasHoldemComponent [main] Player win/draw/lose percentages = 24.2% / 0.7% / 75.1% (1000000 iterations)
+2025-07-23 00:28:01,628 org.srwcrw.poker.texasholdem.components.TexasHoldemComponent [main] Card constructor count = 52
+2025-07-23 00:28:01,628 org.srwcrw.poker.texasholdem.components.TexasHoldemComponent [main] Player hand = Card{suit=Spades, value=Three} , Card{suit=Clubs, value=Four}
+2025-07-23 00:29:01,904 org.srwcrw.poker.texasholdem.components.TexasHoldemComponent [main] Player win/draw/lose percentages = 16.7% / 1.4% / 81.8% (1000000 iterations)
+2025-07-23 00:29:01,905 org.srwcrw.poker.texasholdem.components.TexasHoldemComponent [main] Card constructor count = 52
+2025-07-23 00:29:01,905 org.srwcrw.poker.texasholdem.components.TexasHoldemComponent [main] Player hand = Card{suit=Spades, value=Three} , Card{suit=Clubs, value=Five}
+2025-07-23 00:30:03,544 org.srwcrw.poker.texasholdem.components.TexasHoldemComponent [main] Player win/draw/lose percentages = 17.5% / 1.5% / 81.0% (1000000 iterations)
+2025-07-23 00:30:03,544 org.srwcrw.poker.texasholdem.components.TexasHoldemComponent [main] Card constructor count = 52
+2025-07-23 00:30:03,544 org.srwcrw.poker.texasholdem.components.TexasHoldemComponent [main] Player hand = Card{suit=Spades, value=Three} , Card{suit=Clubs, value=Six}
+2025-07-23 00:31:08,121 org.srwcrw.poker.texasholdem.components.TexasHoldemComponent [main] Player win/draw/lose percentages = 16.6% / 1.5% / 81.9% (1000000 iterations)
+2025-07-23 00:31:08,121 org.srwcrw.poker.texasholdem.components.TexasHoldemComponent [main] Card constructor count = 52
+2025-07-23 00:31:08,122 org.srwcrw.poker.texasholdem.components.TexasHoldemComponent [main] Player hand = Card{suit=Spades, value=Three} , Card{suit=Clubs, value=Seven}
+2025-07-23 00:32:14,546 org.srwcrw.poker.texasholdem.components.TexasHoldemComponent [main] Player win/draw/lose percentages = 16.2% / 1.5% / 82.3% (1000000 iterations)
+2025-07-23 00:32:14,547 org.srwcrw.poker.texasholdem.components.TexasHoldemComponent [main] Card constructor count = 52
+2025-07-23 00:32:14,547 org.srwcrw.poker.texasholdem.components.TexasHoldemComponent [main] Player hand = Card{suit=Spades, value=Three} , Card{suit=Clubs, value=Eight}
+2025-07-23 00:33:20,921 org.srwcrw.poker.texasholdem.components.TexasHoldemComponent [main] Player win/draw/lose percentages = 15.9% / 1.5% / 82.6% (1000000 iterations)
+2025-07-23 00:33:20,921 org.srwcrw.poker.texasholdem.components.TexasHoldemComponent [main] Card constructor count = 52
+2025-07-23 00:33:20,921 org.srwcrw.poker.texasholdem.components.TexasHoldemComponent [main] Player hand = Card{suit=Spades, value=Three} , Card{suit=Clubs, value=Nine}
+2025-07-23 00:34:28,456 org.srwcrw.poker.texasholdem.components.TexasHoldemComponent [main] Player win/draw/lose percentages = 17.0% / 1.5% / 81.5% (1000000 iterations)
+2025-07-23 00:34:28,456 org.srwcrw.poker.texasholdem.components.TexasHoldemComponent [main] Card constructor count = 52
+2025-07-23 00:34:28,456 org.srwcrw.poker.texasholdem.components.TexasHoldemComponent [main] Player hand = Card{suit=Spades, value=Three} , Card{suit=Clubs, value=Ten}
+2025-07-23 00:35:36,884 org.srwcrw.poker.texasholdem.components.TexasHoldemComponent [main] Player win/draw/lose percentages = 18.4% / 1.6% / 80.0% (1000000 iterations)
+2025-07-23 00:35:36,885 org.srwcrw.poker.texasholdem.components.TexasHoldemComponent [main] Card constructor count = 52
+2025-07-23 00:35:36,885 org.srwcrw.poker.texasholdem.components.TexasHoldemComponent [main] Player hand = Card{suit=Spades, value=Three} , Card{suit=Clubs, value=Jack}
+2025-07-23 00:36:47,136 org.srwcrw.poker.texasholdem.components.TexasHoldemComponent [main] Player win/draw/lose percentages = 19.6% / 1.6% / 78.8% (1000000 iterations)
+2025-07-23 00:36:47,136 org.srwcrw.poker.texasholdem.components.TexasHoldemComponent [main] Card constructor count = 52
+2025-07-23 00:36:47,136 org.srwcrw.poker.texasholdem.components.TexasHoldemComponent [main] Player hand = Card{suit=Spades, value=Three} , Card{suit=Clubs, value=Queen}
+2025-07-23 00:37:57,608 org.srwcrw.poker.texasholdem.components.TexasHoldemComponent [main] Player win/draw/lose percentages = 21.3% / 1.6% / 77.1% (1000000 iterations)
+2025-07-23 00:37:57,608 org.srwcrw.poker.texasholdem.components.TexasHoldemComponent [main] Card constructor count = 52
+2025-07-23 00:37:57,608 org.srwcrw.poker.texasholdem.components.TexasHoldemComponent [main] Player hand = Card{suit=Spades, value=Three} , Card{suit=Clubs, value=King}
+2025-07-23 00:39:09,296 org.srwcrw.poker.texasholdem.components.TexasHoldemComponent [main] Player win/draw/lose percentages = 23.2% / 1.7% / 75.1% (1000000 iterations)
+2025-07-23 00:39:09,296 org.srwcrw.poker.texasholdem.components.TexasHoldemComponent [main] Card constructor count = 52
+2025-07-23 00:39:09,297 org.srwcrw.poker.texasholdem.components.TexasHoldemComponent [main] Player hand = Card{suit=Spades, value=Three} , Card{suit=Clubs, value=Ace}
+2025-07-23 00:40:21,518 org.srwcrw.poker.texasholdem.components.TexasHoldemComponent [main] Player win/draw/lose percentages = 27.0% / 1.8% / 71.2% (1000000 iterations)
+2025-07-23 00:40:21,518 org.srwcrw.poker.texasholdem.components.TexasHoldemComponent [main] Card constructor count = 52
+2025-07-23 00:40:21,519 org.srwcrw.poker.texasholdem.executables.TexasHoldemMain [main] Number of outer iterations 1, inner iterations 1000000
+2025-07-23 00:40:21,520 org.srwcrw.poker.texasholdem.executables.TexasHoldemMain [main] Mean exection Execution time = 863.311 , standard deviation Execution time = 0.000
+2025-07-23 00:40:22,100 org.srwcrw.poker.texasholdem.executables.TexasHoldemMain [main] Started TexasHoldemMain in 866.076 seconds (process running for 866.979)
+
+Process finished with exit code 0

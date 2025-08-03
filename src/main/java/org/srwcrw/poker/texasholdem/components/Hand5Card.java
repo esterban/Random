@@ -9,6 +9,7 @@ public final class Hand5Card implements IPack {
     private static final CollectionUtils collectionUtils = new CollectionUtils();
 
     private Hand5OrdinalFactory hand5OrdinalFactory;
+//    private HandFactoryHand5 handFactoryHand5 = new HandFactoryHand5();
 
     private final Card card1;
     private final Card card2;

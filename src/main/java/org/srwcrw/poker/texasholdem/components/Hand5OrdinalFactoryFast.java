@@ -39,6 +39,15 @@ public class Hand5OrdinalFactoryFast implements Hand5OrdinalFactory {
         return hand5Ordinal;
     }
 
+    @Override
+    public int createIndex(Card card1, Card card2, Card card3, Card card4, Card card5) {
+        return card1.getCardOrdinal().getValue()
+                + card2.getCardOrdinal().getValue() * 52
+                + card3.getCardOrdinal().getValue() * 52 * 52
+                + card4.getCardOrdinal().getValue() * 52 * 52 * 52
+                + card5.getCardOrdinal().getValue() * 52 * 52 * 52 * 52;
+    }
+
     private long calculateOrdinalValue(Card card1, Card card2, Card card3, Card card4, Card card5) {
         return 0l;
     }

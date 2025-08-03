@@ -31,14 +31,14 @@ public class TexasHoldemComponent {
 
     private static final Poker5CardAceHighLowComparator POKER_5_CARD_ACE_HIGH_LOW_COMPARATOR = new Poker5CardAceHighLowComparator();
 
-    @org.springframework.beans.factory.annotation.Value("#{${texasholdemcomponent.matchingSuit}}")
+    @org.springframework.beans.factory.annotation.Value("${texasholdemcomponent.matchingSuit}")
     private boolean matchingSuit;
 
     @org.springframework.beans.factory.annotation.Value("#{${texasholdemcomponent.handCount}}")
-    private Integer handCount;
+    private int handCount;
 
-    @org.springframework.beans.factory.annotation.Value("#{${texasholdemcomponent.opponentCount}}")
-    private Integer opponentCount;
+    @org.springframework.beans.factory.annotation.Value("${texasholdemcomponent.opponentCount}")
+    private int opponentCount;
 
     @Autowired
     private PackGenerator packGenerator;
@@ -69,8 +69,8 @@ public class TexasHoldemComponent {
 
         AbstractMap.SimpleEntry<IPack, IPack> handPair;
 
-//        Value firstPlayerCardValue = Value.Two;
-        Value firstPlayerCardValue = Value.Ace;
+//        Value firstPlayerCardValue = Value.King;
+        Value firstPlayerCardValue = Value.Three;
 
         List<Value> valueList = List.of(Value.values());
 

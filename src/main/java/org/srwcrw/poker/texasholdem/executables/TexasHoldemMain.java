@@ -8,13 +8,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Profile;
+import org.srwcrw.poker.texasholdem.components.ExecutionTimeRecorder;
 import org.srwcrw.poker.texasholdem.components.TexasHoldemComponent;
 
 
 @SpringBootApplication(scanBasePackages = {"org/srwcrw/poker/texasholdem/components"})
-//@Profile()
-public class TexasHoldemMain {
+public class TexasHoldemMain extends SpringApplication {
     private static final Logger LOGGER = LoggerFactory.getLogger(TexasHoldemMain.class);
 
     @Autowired
@@ -26,8 +25,18 @@ public class TexasHoldemMain {
     @Value("${texasholdemmain.loopCount}")
     private int loopCount;
 
+    @Autowired
+    private final ExecutionTimeRecorder executionTimeRecorder;
+
+
+    public TexasHoldemMain(ExecutionTimeRecorder executionTimeRecorder) {
+        this.executionTimeRecorder = executionTimeRecorder;
+    }
+
     @PostConstruct
     private void init() {
+        executionTimeRecorder.startTiming(); // Start timing before the Monte Carlo simulation
+
         DescriptiveStatistics descriptiveStatistics = new DescriptiveStatistics();
 
         for (int loopCounter = 1; loopCounter <= loopCount; ++loopCounter) {
@@ -35,8 +44,10 @@ public class TexasHoldemMain {
             descriptiveStatistics.addValue(executionTime);
         }
 
+        executionTimeRecorder.stopTiming(); // Stop timing after the Monte Carlo simulation
+
         LOGGER.warn("Number of outer iterations {}, inner iterations {}", loopCount, handCount);
-        LOGGER.warn("Mean exection {} , standard deviation {}",
+        LOGGER.warn("Mean execution {} , standard deviation {}",
                 String.format("Execution time = %4.3f", descriptiveStatistics.getMean()),
                 String.format("Execution time = %4.3f", descriptiveStatistics.getStandardDeviation()));
     }

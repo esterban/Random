@@ -1,0 +1,14 @@
+texasholdemcomponent:
+  matchingSuit: true
+  opponentCount: 3
+  handCount: 10000
+
+texasholdemmain:
+  loopCount: 1
+
+app:
+  execution-time:
+    output-dir: src/main/docs/optimisationrecord
+    file-prefix: execution_time
+    date-format: yyyyMMdd_HHmmss
+    time-format: yyyy-MM-dd HH:mm:ss.SSS

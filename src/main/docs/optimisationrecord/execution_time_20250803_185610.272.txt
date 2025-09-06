@@ -1,0 +1,9 @@
+Application Execution Time:
+Start Time: 20250803_185559.692
+End Time: 20250803_185610.272
+Total Duration: 10580 ms (10.58 seconds)
+
+Texas Holdem Configuration:
+Matching Suit Enabled: false
+Hand Count: 10000
+Opponent Count: 3

@@ -1,11 +1,10 @@
 package org.srwcrw.poker.texasholdem.components;
 
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVPrinter;
 import org.apache.commons.lang3.StringUtils;
 import org.aspectj.lang.annotation.Aspect;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StopWatch;
@@ -26,9 +25,8 @@ import java.util.*;
 
 @Aspect
 @Component
+@Slf4j
 public class TexasHoldemComponent {
-    private static final Logger LOGGER = LoggerFactory.getLogger(TexasHoldemComponent.class);
-
     private static final Poker5CardAceHighLowComparator POKER_5_CARD_ACE_HIGH_LOW_COMPARATOR = new Poker5CardAceHighLowComparator();
 
     @org.springframework.beans.factory.annotation.Value("${texasholdemcomponent.matchingSuit}")
@@ -70,7 +68,8 @@ public class TexasHoldemComponent {
         AbstractMap.SimpleEntry<IPack, IPack> handPair;
 
 //        Value firstPlayerCardValue = Value.King;
-        Value firstPlayerCardValue = Value.Three;
+//        Value firstPlayerCardValue = Value.Three;
+        Value firstPlayerCardValue = Value.Ace;
 
         List<Value> valueList = List.of(Value.values());
 
@@ -78,7 +77,7 @@ public class TexasHoldemComponent {
         List<List<Hand2Card>> twoPairDrawPlayerList = new ArrayList<>();
         List<List<Hand5Card>> twoPairDrawList = new ArrayList<>();
 
-        LOGGER.info("Number of opponents = {}", opponentCount);
+        log.info("Number of opponents = {}", opponentCount);
 
         final StopWatch stopWatch = new StopWatch();
         stopWatch.start();
@@ -171,13 +170,20 @@ public class TexasHoldemComponent {
                 double handsDrawnPercentage = handsDrawnRatio * 100;
                 double handsLostPercentage = handsLostRatio * 100;
 
-                LOGGER.info("{}", String.format("Player win/draw/lose percentages = %2.1f%% / %2.1f%% / %2.1f%% (%d iterations)", handsWonPercentage, handsDrawnPercentage, handsLostPercentage, handCount));
+                log.info("{}", String.format("Player win/draw/lose percentages = %2.1f%% / %2.1f%% / %2.1f%% (%d iterations)", handsWonPercentage, handsDrawnPercentage, handsLostPercentage, handCount));
 
-                LOGGER.info("Card constructor count = {} ", Card.constructorCount);
+                log.info("Card constructor count = {} ", Card.constructorCount);
 
-
-                Set<Card> playerCards = Set.of(cardFactoryImmutable.createCard(Suit.Spades, firstPlayerCardValue),
-                        cardFactoryImmutable.createCard(matchingSuit ? Suit.Spades : Suit.Clubs, kickerValue));
+                Set<Card> playerCards;
+                if (firstPlayerCardValue == kickerValue) {
+                    // This handles pocket pairs, e.g., (Ace, Ace). They must be off-suit.
+                    playerCards = Set.of(cardFactoryImmutable.createCard(Suit.Spades, firstPlayerCardValue),
+                                         cardFactoryImmutable.createCard(Suit.Clubs, kickerValue));
+                } else {
+                    // This handles non-paired hands, which can be suited or off-suit based on matchingSuit
+                    playerCards = Set.of(cardFactoryImmutable.createCard(Suit.Spades, firstPlayerCardValue),
+                                         cardFactoryImmutable.createCard(matchingSuit ? Suit.Spades : Suit.Clubs, kickerValue));
+                }
 
                 HandProbability handProbability = new HandProbability(playerCards, opponentCount, handsWonPercentage / 100.0, handsDrawnPercentage / 100.0, handsLostPercentage / 100.0, handCount);
                 handProbabilityList.add(handProbability);
@@ -203,7 +209,7 @@ public class TexasHoldemComponent {
             playerCard2 = cardFactoryImmutable.createCard(Suit.Spades, kickerValue);
         }
 
-        LOGGER.info("Player hand = {} , {}", playerCard1, playerCard2);
+        log.info("Player hand = {} , {}", playerCard1, playerCard2);
 
         fullPack = fullPack.removeCard(playerCard1);
         fullPack = fullPack.removeCard(playerCard2);
@@ -221,7 +227,7 @@ public class TexasHoldemComponent {
         Card playerCard1 = cardFactoryImmutable.createCard(Suit.Spades, firstPlayerCardValue);
         Card playerCard2 = cardFactoryImmutable.createCard(Suit.Clubs, firstPlayerCardValue);
 
-        LOGGER.info("Player hand = {} , {}", playerCard1, playerCard2);
+        log.info("Player hand = {} , {}", playerCard1, playerCard2);
 
         fullPack = fullPack.removeCard(playerCard1);
         fullPack = fullPack.removeCard(playerCard2);
@@ -251,7 +257,7 @@ public class TexasHoldemComponent {
     }
 
     @SuppressWarnings("unused")
-    private String formatHandTypePercentageString(double playerPercentage, Double opponentPercentage, HandType5Cards handType5Card) {
+    private String formatHandTypePercentageString(double playerPercentage, Double opponentPercentage, HandType5Cards handType5Cards) {
         Formatter formatter = new Formatter();
         String playerPercentageString = formatter.format("%2.2f", playerPercentage).toString();
 
@@ -269,7 +275,7 @@ public class TexasHoldemComponent {
         formatter = new Formatter();
         //noinspection UnnecessaryLocalVariable
         String result = formatter.format("%20s Player = %s%% %5s %s",
-                handType5Card,
+                handType5Cards,
                 StringUtils.leftPad(playerPercentageString, 5),
                 " ",
                 opponentPercentageString
@@ -278,6 +284,7 @@ public class TexasHoldemComponent {
         return result;
     }
 
+    @SuppressWarnings("unused")
     private void debugInfo() {
         //                    HandType5Cards playerHandType5Cards = POKER_5_CARD_HAND_CLASSIFIER.classify(playerBestHand);
 //
@@ -285,10 +292,10 @@ public class TexasHoldemComponent {
 //                    if (playerHandType5Cards == HandType5Cards.Flush && playerBestHand.getNthCard (0).getSuit() == Suit.Clubs && (opponentHandList.get(0).getNthCard(0).getSuit() == Suit.Clubs || opponentHandList.get(0).getNthCard(1).getSuit() == Suit.Clubs)) {
 //                    if (playerHandType5Cards == HandType5Cards.Flush && playerBestHand.getNthCard(0).getSuit() == Suit.Spades && (opponentHandList.get(0).getNthCard(0).getSuit() == Suit.Spades || opponentHandList.get(0).getNthCard(1).getSuit() == Suit.Spades)) {
 //                    if (playerHandType5Cards == HandType5Cards.Flush && playerBestHand.getNthCard(0).getSuit() == Suit.Spades) {
-//                        LOGGER.info("*** DRAWING HAND *** DRAWING HAND *** - Player / Opponent hole cards are : " + playerHand2Card + " -> " + opponentHandList.get(0));
-//                        LOGGER.info("*** DRAWING HAND *** DRAWING HAND *** - Community cards are : " + communityCards);
-//                        LOGGER.info("*** DRAWING HAND *** DRAWING HAND *** - Hand type = " + playerHandType5Cards);
-//                        LOGGER.info();
+//                        log.info("*** DRAWING HAND *** DRAWING HAND *** - Player / Opponent hole cards are : " + playerHand2Card + " -> " + opponentHandList.get(0));
+//                        log.info("*** DRAWING HAND *** DRAWING HAND *** - Community cards are : " + communityCards);
+//                        log.info("*** DRAWING HAND *** DRAWING HAND *** - Hand type = " + playerHandType5Cards);
+//                        log.info();
 //                    }
 //
 //                    if (playerHandType5Cards == HandType5Cards.ThreeOfAKind) {
@@ -330,8 +337,7 @@ public class TexasHoldemComponent {
                 try {
                     printer.printRecord(author, title);
                 } catch (IOException e) {
-                    e.printStackTrace();
-                    LOGGER.error("", e);
+                    log.error("IOException", e);
                 }
             });
         } catch (IOException e) {

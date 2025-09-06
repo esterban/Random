@@ -27,4 +27,25 @@ class HandFactoryHand5MutableTest {
 
         assertThat(hand5CardMutable).isNotNull();
     }
+
+    @Test
+    public void testCreate2Hand() {
+        IHand5Card hand5CardA = testUtils.createOnePair();
+        IHand5Card hand5CardB = testUtils.createOnePair();
+
+        Hand5CardMutable hand5CardMutableA = handFactoryHand5Mutable.create(hand5CardA.getCardsArray());
+        Hand5CardMutable hand5CardMutableB = handFactoryHand5Mutable.create(hand5CardB.getCardsArray());
+
+        assertThat(hand5CardMutableA).isNotNull();
+        assertThat(hand5CardMutableB).isNotNull();
+
+        assertThat(areEqual(hand5CardA, hand5CardMutableA)).isTrue();
+        assertThat(areEqual(hand5CardB, hand5CardMutableB)).isTrue();
+        assertThat(hand5CardMutableA).isEqualTo(hand5CardMutableB);
+        assertThat(hand5CardMutableB).isEqualTo(hand5CardMutableA);
+        assertThat(hand5CardMutableA).isNotSameAs(hand5CardMutableB);
+
+
+    }
+
 }

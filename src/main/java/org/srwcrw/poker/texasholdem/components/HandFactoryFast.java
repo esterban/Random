@@ -8,9 +8,7 @@ import org.srwcrw.poker.texasholdem.collections.HandFactory;
 public class HandFactoryFast implements HandFactory<Hand5Card> {
     private final Hand5OrdinalFactoryFast hand5OrdinalFactoryFast;
 
-//    private Hand5Card[] cardRepository = new Hand5Card[52 * 52 * 52 * 52 * 52];
-private Hand5Card[] cardRepository = new Hand5Card[52];
-
+    private Hand5Card[] cardRepository = new Hand5Card[52];
 
     @Autowired
     public HandFactoryFast(Hand5OrdinalFactoryFast hand5OrdinalFactoryFast) {
@@ -33,5 +31,10 @@ private Hand5Card[] cardRepository = new Hand5Card[52];
         }
 
         return hand5Card;
+    }
+
+    @Override
+    public void markAllHandsAsProcessed() {
+
     }
 }

@@ -1,10 +1,10 @@
 texasholdemcomponent:
   matchingSuit: true
-  opponentCount: 3
-  handCount: 10000
+  opponentCount: 1
+  handCount: 100000
 
 texasholdemmain:
-  loopCount: 1
+  loopCount: 3
 
 app:
   execution-time:

@@ -4,6 +4,7 @@ import org.srwcrw.poker.texasholdem.collections.*;
 
 import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
+import java.util.concurrent.atomic.AtomicLong;
 
 public final class Hand5Card implements IHand5Card {
     private static final CollectionUtils collectionUtils = new CollectionUtils();
@@ -14,6 +15,8 @@ public final class Hand5Card implements IHand5Card {
     private final Card card4;
     private final Card card5;
     private final Card[] cardArray = new Card[5];
+
+    private static final AtomicLong constructorCallCount = new AtomicLong(0);
 
     public Hand5Card(Card card1, Card card2, Card card3, Card card4, Card card5) {
         this.card1 = card1;
@@ -27,6 +30,8 @@ public final class Hand5Card implements IHand5Card {
         cardArray[2] = card3;
         cardArray[3] = card4;
         cardArray[4] = card5;
+
+        constructorCallCount.incrementAndGet();
     }
 
     @Override

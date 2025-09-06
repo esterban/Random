@@ -7,9 +7,11 @@ import org.apache.commons.csv.CSVPrinter;
 import org.apache.commons.lang3.StringUtils;
 import org.aspectj.lang.annotation.Aspect;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StopWatch;
 import org.srwcrw.poker.texasholdem.collections.Hand2Card;
+import org.srwcrw.poker.texasholdem.collections.HandFactory;
 import org.srwcrw.poker.texasholdem.collections.HandProbability;
 import org.srwcrw.poker.texasholdem.collections.IPack;
 import org.srwcrw.poker.texasholdem.comparator.Poker5CardAceHighLowComparator;
@@ -47,6 +49,10 @@ public class TexasHoldemComponent {
 
     @Autowired
     private ConverterHand5Card converterHand5Card;
+
+    @Autowired
+    @Qualifier("handFactoryHand5Mutable")
+    private HandFactory<? extends IHand5Card> handFactory;
 
     private static final HandGenerator HAND_GENERATOR = new HandGenerator();
 
@@ -154,6 +160,8 @@ public class TexasHoldemComponent {
                     } else {
                         ++handsLostCount;
                     }
+
+                    handFactory.markAllHandsAsProcessed();
                 }
 
                 double handsWonRatio = (double) handsWonCount / ((double) handCount);
@@ -185,6 +193,8 @@ public class TexasHoldemComponent {
 
                 HandProbability handProbability = new HandProbability(playerCards, opponentCount, handsWonPercentage / 100.0, handsDrawnPercentage / 100.0, handsLostPercentage / 100.0, handCount);
                 handProbabilityList.add(handProbability);
+
+                handFactory.markAllHandsAsProcessed();
             }
         }
 

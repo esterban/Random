@@ -23,7 +23,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 // 2024-05-19 SWright - This is an experiment for testing private methods, although at the time of writing I have moved
 // the private method from PokerTexasHoldemClassifier to PokerTexasHoldemUtils as public utility method??!? (I don't like moving the implementation out.
 // Will leave for the time being.
-@SpringBootTest(classes = {CardFactoryImmutable.class, TestUtilsTexasHoldem.class, TestUtils.class, PackGenerator.class, CardOrdinalFactory.class, HandFactoryHand5.class, Hand5OrdinalFactoryFast.class, PokerTexasHoldemUtils.class})
+@SpringBootTest(classes = {CardFactoryImmutable.class, TestUtilsTexasHoldem.class, TestUtils.class, PackGenerator.class, CardOrdinalFactory.class, HandFactoryHand5Mutable.class, HandFactoryHand5.class, Hand5OrdinalFactoryFast.class, PokerTexasHoldemUtils.class})
 class PokerTexasHoldemUtilsTest {
     @Autowired
     private PokerTexasHoldemUtils pokerTexasHoldemUtils;

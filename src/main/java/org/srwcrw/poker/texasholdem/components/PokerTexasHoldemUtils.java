@@ -3,8 +3,10 @@ package org.srwcrw.poker.texasholdem.components;
 
 import org.apache.commons.collections4.IteratorUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 import org.srwcrw.poker.texasholdem.collections.Hand2Card;
+import org.srwcrw.poker.texasholdem.collections.HandFactory;
 import org.srwcrw.poker.texasholdem.comparator.Poker5CardAceHighLowComparator;
 
 import java.util.ArrayList;
@@ -16,7 +18,8 @@ public class PokerTexasHoldemUtils {
     private static final Poker5CardAceHighLowComparator poker5CardAceHighLowComparator = new Poker5CardAceHighLowComparator();
 
     @Autowired
-    private HandFactoryHand5 handFactoryHand5;
+    @Qualifier("handFactoryHand5Mutable")
+    private HandFactory<? extends IHand5Card> handFactoryHand5;
 
     private PokerTexasHoldemUtils() {
     }

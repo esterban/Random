@@ -3,7 +3,7 @@ package org.srwcrw.poker.texasholdem.comparator;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.srwcrw.poker.texasholdem.components.Hand5Card;
+import org.srwcrw.poker.texasholdem.components.IHand5Card;
 import org.srwcrw.poker.texasholdem.components.Hand5OrdinalFactoryFast;
 import org.srwcrw.poker.texasholdem.components.HandFactoryHand5;
 import org.srwcrw.poker.texasholdem.components.CardFactoryImmutable;
@@ -22,8 +22,8 @@ class Poker5CardAceHighLowComparatorTest {
 
     @Test
     void testCompareOnePairA() {
-        Hand5Card hand5CardA = testUtils.createOnePairRank1KickerTen();
-        Hand5Card hand5CardB = testUtils.createOnePairRank1KickerNine();
+        IHand5Card hand5CardA = testUtils.createOnePairRank1KickerTen();
+        IHand5Card hand5CardB = testUtils.createOnePairRank1KickerNine();
 
         assertThat(poker5CardAceHighLowComparator.compare(hand5CardA, hand5CardB)).isGreaterThan(0);
         assertThat(poker5CardAceHighLowComparator.compare(hand5CardB, hand5CardA)).isLessThan(0);
@@ -34,8 +34,8 @@ class Poker5CardAceHighLowComparatorTest {
 
     @Test
     void testCompareTwoPairA() {
-        Hand5Card hand5CardA = testUtils.createTwoPairBKickerTen();
-        Hand5Card hand5CardB = testUtils.createTwoPairBKickerSeven();
+        IHand5Card hand5CardA = testUtils.createTwoPairBKickerTen();
+        IHand5Card hand5CardB = testUtils.createTwoPairBKickerSeven();
 
         assertThat(poker5CardAceHighLowComparator.compare(hand5CardA, hand5CardB)).isGreaterThan(0);
         assertThat(poker5CardAceHighLowComparator.compare(hand5CardB, hand5CardA)).isLessThan(0);
@@ -46,8 +46,8 @@ class Poker5CardAceHighLowComparatorTest {
 
     @Test
     void testCompareTwoPairB() {
-        Hand5Card hand5CardA = testUtils.createTwoPairBKickerTwo();
-        Hand5Card hand5CardB = testUtils.createTwoPairBKickerAce();
+        IHand5Card hand5CardA = testUtils.createTwoPairBKickerTwo();
+        IHand5Card hand5CardB = testUtils.createTwoPairBKickerAce();
 
         assertThat(poker5CardAceHighLowComparator.compare(hand5CardB, hand5CardA)).isGreaterThan(0);
         assertThat(poker5CardAceHighLowComparator.compare(hand5CardA, hand5CardB)).isLessThan(0);
@@ -58,11 +58,11 @@ class Poker5CardAceHighLowComparatorTest {
 
     @Test
     void testCompareThreeOfAKindA() {
-        Hand5Card hand5CardA = testUtils.createThreeOfAKindA();
-        Hand5Card hand5CardB = testUtils.createThreeOfAKindB();
-        Hand5Card hand5CardC = testUtils.createThreeOfAKindC();
+        IHand5Card hand5CardA = testUtils.createThreeOfAKindA();
+        IHand5Card hand5CardB = testUtils.createThreeOfAKindB();
+        IHand5Card hand5CardC = testUtils.createThreeOfAKindC();
 
-        Hand5Card hand5CardOnePair = testUtils.createOnePair();
+        IHand5Card hand5CardOnePair = testUtils.createOnePair();
 
         assertThat(poker5CardAceHighLowComparator.compare(hand5CardA, hand5CardB)).isGreaterThan(0);
         assertThat(poker5CardAceHighLowComparator.compare(hand5CardB, hand5CardA)).isLessThan(0);
@@ -88,11 +88,11 @@ class Poker5CardAceHighLowComparatorTest {
 
     @Test
     void testCompareStraightA() {
-        Hand5Card hand5CardStraight = testUtils.createStraight();
-        Hand5Card hand5CardStraightAceLow = testUtils.createStraightAceLow();
-        Hand5Card hand5CardStraightAceHigh = testUtils.createStraightAceHigh();
+        IHand5Card hand5CardStraight = testUtils.createStraight();
+        IHand5Card hand5CardStraightAceLow = testUtils.createStraightAceLow();
+        IHand5Card hand5CardStraightAceHigh = testUtils.createStraightAceHigh();
 
-        Hand5Card hand5CardOnePair = testUtils.createOnePair();
+        IHand5Card hand5CardOnePair = testUtils.createOnePair();
 
         assertThat(poker5CardAceHighLowComparator.compare(hand5CardStraight, hand5CardOnePair)).isGreaterThan(0);
         assertThat(poker5CardAceHighLowComparator.compare(hand5CardStraightAceLow, hand5CardOnePair)).isGreaterThan(0);
@@ -114,10 +114,10 @@ class Poker5CardAceHighLowComparatorTest {
 
     @Test
     void testCompareFlushA() {
-        Hand5Card hand5CardFlushA = testUtils.createFlushA();
-        Hand5Card hand5CardFlushB = testUtils.createFlushB();
+        IHand5Card hand5CardFlushA = testUtils.createFlushA();
+        IHand5Card hand5CardFlushB = testUtils.createFlushB();
 
-        Hand5Card hand5CardOnePair = testUtils.createOnePair();
+        IHand5Card hand5CardOnePair = testUtils.createOnePair();
 
         assertThat(poker5CardAceHighLowComparator.compare(hand5CardFlushA, hand5CardOnePair)).isGreaterThan(0);
         assertThat(poker5CardAceHighLowComparator.compare(hand5CardFlushB, hand5CardOnePair)).isGreaterThan(0);
@@ -131,10 +131,10 @@ class Poker5CardAceHighLowComparatorTest {
 
     @Test
     void testCompareFlushB() {
-        Hand5Card hand5CardFlushA = testUtils.createFlushA();
-        Hand5Card hand5CardFlushB = testUtils.createFlushAA();
+        IHand5Card hand5CardFlushA = testUtils.createFlushA();
+        IHand5Card hand5CardFlushB = testUtils.createFlushAA();
 
-        Hand5Card hand5CardOnePair = testUtils.createOnePair();
+        IHand5Card hand5CardOnePair = testUtils.createOnePair();
 
         assertThat(poker5CardAceHighLowComparator.compare(hand5CardFlushA, hand5CardOnePair)).isGreaterThan(0);
         assertThat(poker5CardAceHighLowComparator.compare(hand5CardFlushB, hand5CardOnePair)).isGreaterThan(0);
@@ -154,14 +154,14 @@ class Poker5CardAceHighLowComparatorTest {
 
 //    @Test
 //    void testCompareFlushC() {
-//        Hand5Card hand5CardFlushA = new Hand5Card(
+//        IHand5Card hand5CardFlushA = new IHand5Card(
 //                cardFactoryImmutable.createCard(Clubs, ),
 //                cardFactoryImmutable.createCard(Clubs, ),
 //                cardFactoryImmutable.createCard(Clubs, ),
 //                cardFactoryImmutable.createCard(Clubs, ),
 //                cardFactoryImmutable.createCard(Clubs,)
 //        );
-//        Hand5Card hand5CardFlushB  = new Hand5Card(
+//        IHand5Card hand5CardFlushB  = new IHand5Card(
 //                cardFactoryImmutable.createCard(Clubs, ),
 //                cardFactoryImmutable.createCard(Clubs, ),
 //                cardFactoryImmutable.createCard(Clubs, ),
@@ -169,7 +169,7 @@ class Poker5CardAceHighLowComparatorTest {
 //                cardFactoryImmutable.createCard(Clubs,)
 //        );
 //
-//        Hand5Card hand5CardOnePair = testUtils.createOnePair();
+//        IHand5Card hand5CardOnePair = testUtils.createOnePair();
 //
 //        assertThat(poker5CardAceHighLowComparator.compare(hand5CardFlushA, hand5CardOnePair)).isGreaterThan(0);
 //        assertThat(poker5CardAceHighLowComparator.compare(hand5CardFlushB, hand5CardOnePair)).isGreaterThan(0);
@@ -184,10 +184,10 @@ class Poker5CardAceHighLowComparatorTest {
 
     @Test
     void testCompareFullHouse() {
-        Hand5Card hand5CardFullHouseA = testUtils.createFullHouseA();
-        Hand5Card hand5CardFullHouseB = testUtils.createFullHouseB();
+        IHand5Card hand5CardFullHouseA = testUtils.createFullHouseA();
+        IHand5Card hand5CardFullHouseB = testUtils.createFullHouseB();
 
-        Hand5Card hand5CardOnePair = testUtils.createOnePair();
+        IHand5Card hand5CardOnePair = testUtils.createOnePair();
 
         assertThat(poker5CardAceHighLowComparator.compare(hand5CardFullHouseA, hand5CardOnePair)).isGreaterThan(0);
         assertThat(poker5CardAceHighLowComparator.compare(hand5CardFullHouseA, hand5CardOnePair)).isGreaterThan(0);
@@ -201,10 +201,10 @@ class Poker5CardAceHighLowComparatorTest {
 
     @Test
     void testCompareFourOfAKind() {
-        Hand5Card hand5CardFourOfAKindA = testUtils.createFourOfAKindA();
-        Hand5Card hand5CardFourOfAKindB = testUtils.createFourOfAKindB();
+        IHand5Card hand5CardFourOfAKindA = testUtils.createFourOfAKindA();
+        IHand5Card hand5CardFourOfAKindB = testUtils.createFourOfAKindB();
 
-        Hand5Card hand5CardOnePair = testUtils.createOnePair();
+        IHand5Card hand5CardOnePair = testUtils.createOnePair();
 
         assertThat(poker5CardAceHighLowComparator.compare(hand5CardFourOfAKindA, hand5CardOnePair)).isGreaterThan(0);
         assertThat(poker5CardAceHighLowComparator.compare(hand5CardFourOfAKindA, hand5CardOnePair)).isGreaterThan(0);
@@ -218,10 +218,10 @@ class Poker5CardAceHighLowComparatorTest {
 
     @Test
     void testCompareStraightFlush() {
-        Hand5Card hand5CardStraightFlushA = testUtils.createStraightFlushA();
-        Hand5Card hand5CardStraightFlushB = testUtils.createStraightFlushB();
+        IHand5Card hand5CardStraightFlushA = testUtils.createStraightFlushA();
+        IHand5Card hand5CardStraightFlushB = testUtils.createStraightFlushB();
 
-        Hand5Card hand5CardOnePair = testUtils.createOnePair();
+        IHand5Card hand5CardOnePair = testUtils.createOnePair();
 
         assertThat(poker5CardAceHighLowComparator.compare(hand5CardStraightFlushA, hand5CardOnePair)).isGreaterThan(0);
         assertThat(poker5CardAceHighLowComparator.compare(hand5CardStraightFlushA, hand5CardOnePair)).isGreaterThan(0);
@@ -235,10 +235,10 @@ class Poker5CardAceHighLowComparatorTest {
 
     @Test
     void testCompareRoyalFlush() {
-        Hand5Card hand5CardStraightFlushA = testUtils.createRoyalFlushA();
-        Hand5Card hand5CardStraightFlushB = testUtils.createRoyalFlushB();
+        IHand5Card hand5CardStraightFlushA = testUtils.createRoyalFlushA();
+        IHand5Card hand5CardStraightFlushB = testUtils.createRoyalFlushB();
 
-        Hand5Card hand5CardOnePair = testUtils.createOnePair();
+        IHand5Card hand5CardOnePair = testUtils.createOnePair();
 
         assertThat(poker5CardAceHighLowComparator.compare(hand5CardStraightFlushA, hand5CardOnePair)).isGreaterThan(0);
 
@@ -251,10 +251,10 @@ class Poker5CardAceHighLowComparatorTest {
 
     @Test
     void testCompareHighestCardA() {
-        Hand5Card hand5CardHighestCardA = testUtils.createHighestCardA();
-        Hand5Card hand5CardHighestCardB = testUtils.createHighestCardB();
+        IHand5Card hand5CardHighestCardA = testUtils.createHighestCardA();
+        IHand5Card hand5CardHighestCardB = testUtils.createHighestCardB();
 
-        Hand5Card hand5CardOnePair = testUtils.createOnePair();
+        IHand5Card hand5CardOnePair = testUtils.createOnePair();
 
         assertThat(poker5CardAceHighLowComparator.compare(hand5CardHighestCardA, hand5CardOnePair)).isLessThan(0);
         assertThat(poker5CardAceHighLowComparator.compare(hand5CardHighestCardB, hand5CardOnePair)).isLessThan(0);
@@ -268,10 +268,10 @@ class Poker5CardAceHighLowComparatorTest {
 
     @Test
     void testCompareHighestCardB() {
-        Hand5Card hand5CardHighestCardA = testUtils.createHighestCardA();
-        Hand5Card hand5CardHighestCardAA = testUtils.createHighestCardAA();
+        IHand5Card hand5CardHighestCardA = testUtils.createHighestCardA();
+        IHand5Card hand5CardHighestCardAA = testUtils.createHighestCardAA();
 
-        Hand5Card hand5CardOnePair = testUtils.createOnePair();
+        IHand5Card hand5CardOnePair = testUtils.createOnePair();
 
         assertThat(poker5CardAceHighLowComparator.compare(hand5CardHighestCardA, hand5CardOnePair)).isLessThan(0);
         assertThat(poker5CardAceHighLowComparator.compare(hand5CardHighestCardAA, hand5CardOnePair)).isLessThan(0);
@@ -285,10 +285,10 @@ class Poker5CardAceHighLowComparatorTest {
 
     @Test
     void testCompareThreeOfAKindB() {
-        Hand5Card threeOfAKindA = testUtils.createThreeOfAKindA();
-        Hand5Card threeOfAKindAA = testUtils.createThreeOfAKindAA();
+        IHand5Card threeOfAKindA = testUtils.createThreeOfAKindA();
+        IHand5Card threeOfAKindAA = testUtils.createThreeOfAKindAA();
 
-        Hand5Card hand5CardOnePair = testUtils.createOnePair();
+        IHand5Card hand5CardOnePair = testUtils.createOnePair();
 
         assertThat(poker5CardAceHighLowComparator.compare(threeOfAKindA, hand5CardOnePair)).isGreaterThan(0);
         assertThat(poker5CardAceHighLowComparator.compare(hand5CardOnePair, threeOfAKindA)).isLessThan(0);

@@ -21,8 +21,8 @@ public class PokerTexasHoldemUtils {
     private PokerTexasHoldemUtils() {
     }
 
-    public List<Hand5Card> createHand5From3CommunityCards(Hand5Card communityCards, Hand2Card hand2Card) {
-        List<Hand5Card> possibleHandList = new ArrayList<>();
+    public List<IHand5Card> createHand5From3CommunityCards(IHand5Card communityCards, Hand2Card hand2Card) {
+        List<IHand5Card> possibleHandList = new ArrayList<>();
 
         for (int communityIgnoreIndexA = 0; communityIgnoreIndexA < 4; ++communityIgnoreIndexA) {
             for (int communityIgnoreIndexB = communityIgnoreIndexA + 1; communityIgnoreIndexB < 5; ++communityIgnoreIndexB) {
@@ -44,7 +44,7 @@ public class PokerTexasHoldemUtils {
 
                 Iterator<Card> permutationCardSetIterator = permutationCardSet.iterator();
 
-                Hand5Card permutationHand = handFactoryHand5.create(
+                IHand5Card permutationHand = handFactoryHand5.create(
                         permutationCardSetIterator.next(),
                         permutationCardSetIterator.next(),
                         permutationCardSetIterator.next(),
@@ -58,18 +58,18 @@ public class PokerTexasHoldemUtils {
         return possibleHandList;
     }
 
-    public List<Hand5Card> generateAllPossibleHands(Hand5Card communityCards, Hand2Card hand2Card) {
-        List<Hand5Card> allPossibleHandList = new ArrayList<>();
+    public List<IHand5Card> generateAllPossibleHands(IHand5Card communityCards, Hand2Card hand2Card) {
+        List<IHand5Card> allPossibleHandList = new ArrayList<>();
 
         allPossibleHandList.add(communityCards);
 
-        List<Hand5Card> firstCardHand5Permutations = createHand5From4CommunityCards(communityCards, IteratorUtils.get(hand2Card.getCards().iterator(), 0));
-        List<Hand5Card> secondCardHand5Permutations = createHand5From4CommunityCards(communityCards, IteratorUtils.get(hand2Card.getCards().iterator(), 1));
+        List<IHand5Card> firstCardHand5Permutations = createHand5From4CommunityCards(communityCards, IteratorUtils.get(hand2Card.getCards().iterator(), 0));
+        List<IHand5Card> secondCardHand5Permutations = createHand5From4CommunityCards(communityCards, IteratorUtils.get(hand2Card.getCards().iterator(), 1));
 
         allPossibleHandList.addAll(firstCardHand5Permutations);
         allPossibleHandList.addAll(secondCardHand5Permutations);
 
-        List<Hand5Card> twoHoleCardsPermutations = createHand5From3CommunityCards(communityCards, hand2Card);
+        List<IHand5Card> twoHoleCardsPermutations = createHand5From3CommunityCards(communityCards, hand2Card);
 
         allPossibleHandList.addAll(twoHoleCardsPermutations);
 
@@ -77,17 +77,17 @@ public class PokerTexasHoldemUtils {
     }
 
     @SuppressWarnings("UnnecessaryLocalVariable")
-    public Hand5Card findBestHandWithCommunityCards(Hand5Card communityCards, Hand2Card hand2Card) {
-        List<Hand5Card> possibleHands = generateAllPossibleHands(communityCards, hand2Card);
-        Hand5Card bestHand = findBestHand(possibleHands);
+    public IHand5Card findBestHandWithCommunityCards(IHand5Card communityCards, Hand2Card hand2Card) {
+        List<IHand5Card> possibleHands = generateAllPossibleHands(communityCards, hand2Card);
+        IHand5Card bestHand = findBestHand(possibleHands);
 
         return bestHand;
     }
 
-    public Hand5Card findBestHand(List<Hand5Card> hand5CardList) {
-        Hand5Card bestHand = null;
+    public IHand5Card findBestHand(List<IHand5Card> hand5CardList) {
+        IHand5Card bestHand = null;
 
-        for (Hand5Card hand5Card : hand5CardList) {
+        for (IHand5Card hand5Card : hand5CardList) {
             if (bestHand == null) {
                 bestHand = hand5Card;
             } else if (poker5CardAceHighLowComparator.compare(hand5Card, bestHand) > 0) {
@@ -98,8 +98,8 @@ public class PokerTexasHoldemUtils {
         return bestHand;
     }
 
-    public List<Hand5Card> createHand5From4CommunityCards(Hand5Card communityCards, Card otherCard) {
-        List<Hand5Card> possibleHandList = new ArrayList<>();
+    public List<IHand5Card> createHand5From4CommunityCards(IHand5Card communityCards, Card otherCard) {
+        List<IHand5Card> possibleHandList = new ArrayList<>();
 
         for (int communityIgnoreIndex = 0; communityIgnoreIndex < 5; ++communityIgnoreIndex) {
             List<Card> permutationCardSet = new ArrayList<>();
@@ -117,7 +117,7 @@ public class PokerTexasHoldemUtils {
 
             Iterator<Card> permutationCardSetIterator = permutationCardSet.iterator();
 
-            Hand5Card permutationHand = handFactoryHand5.create(
+            IHand5Card permutationHand = handFactoryHand5.create(
                     permutationCardSetIterator.next(),
                     permutationCardSetIterator.next(),
                     permutationCardSetIterator.next(),

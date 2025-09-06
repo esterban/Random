@@ -37,6 +37,19 @@ public class ExecutionTimeRecorderTest {
     @Autowired
     private ExecutionTimeProperties properties;
 
+    // Autowire the values directly to be able to assert them
+    @org.springframework.beans.factory.annotation.Value("${texasholdemcomponent.matchingSuit}")
+    private boolean matchingSuit;
+
+    @org.springframework.beans.factory.annotation.Value("#{${texasholdemcomponent.handCount}}")
+    private int handCount;
+
+    @org.springframework.beans.factory.annotation.Value("${texasholdemcomponent.opponentCount}")
+    private int opponentCount;
+
+    @org.springframework.beans.factory.annotation.Value("${texasholdemmain.loopCount}")
+    private int loopCount;
+
     @BeforeEach
     void setup() {
         // Set the output directory for the properties to the temporary directory
@@ -82,11 +95,21 @@ public class ExecutionTimeRecorderTest {
         assertThat(files).hasSize(1);
 
         List<String> lines = Files.readAllLines(files[0]);
-        assertThat(lines).hasSize(9);
+        assertThat(lines).hasSize(13);
         assertThat(lines.get(0)).isEqualTo("Application Execution Time:");
         assertThat(lines.get(1)).startsWith("Start Time: ");
         assertThat(lines.get(2)).startsWith("End Time: ");
         assertThat(lines.get(3)).matches("Total Duration: \\d+ ms \\(\\d+\\.\\d{2} seconds\\)");
+        assertThat(lines.get(4)).isEqualTo(""); // Empty line
+        assertThat(lines.get(5)).startsWith("Mean Execution Time: "); // Check this line
+        assertThat(lines.get(6)).startsWith("Standard Deviation of Execution Time: "); // Check this line
+        assertThat(lines.get(7)).isEqualTo(""); // Empty line
+        assertThat(lines.get(8)).isEqualTo("Texas Holdem Configuration:");
+        assertThat(lines.get(9)).isEqualTo("Matching Suit Enabled: " + matchingSuit);
+        assertThat(lines.get(10)).isEqualTo("Hand Count: " + handCount);
+        assertThat(lines.get(11)).isEqualTo("Opponent Count: " + opponentCount);
+        assertThat(lines.get(12)).isEqualTo("Loop Count: " + loopCount);
+
 
         // Verify timestamps are properly formatted
         String startTime = lines.get(1).substring("Start Time: ".length());

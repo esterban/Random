@@ -18,9 +18,9 @@ class HandFactoryHand5Test {
 
     @Test
     public void testCreate() {
-        Hand5Card hand5Card = testUtils.createOnePair();
+        IHand5Card hand5Card = testUtils.createOnePair();
 
-        Hand5Card hand5 = handFactoryHand5.create(hand5Card.getCardsArray());
+        IHand5Card hand5 = handFactoryHand5.create(hand5Card.getCardsArray());
         assertThat(hand5).isNotNull();
     }
 }

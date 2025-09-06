@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.srwcrw.poker.texasholdem.collections.Hand;
-import org.srwcrw.poker.texasholdem.components.Hand5Card;
+import org.srwcrw.poker.texasholdem.components.IHand5Card;
 import org.srwcrw.poker.texasholdem.components.Hand5OrdinalFactoryFast;
 import org.srwcrw.poker.texasholdem.components.HandFactoryHand5;
 import org.srwcrw.poker.texasholdem.components.Card;
@@ -36,13 +36,13 @@ class ConverterHand5CardTest {
         SortedSet<Card> cardSortedSet = convertHandToSortedSet(testUtils.createStraight());
         Hand hand = new Hand(cardSortedSet);
 
-        Hand5Card hand5CardConverted = card.convert(hand);
+        IHand5Card hand5CardConverted = card.convert(hand);
         SortedSet<Card> cardSortedSetConverted = convertHandToSortedSet(hand5CardConverted);
 
         assertThat(cardSortedSetConverted).containsOnly(cardSortedSet.toArray(new Card[]{}));
     }
 
-    private SortedSet<Card> convertHandToSortedSet(Hand5Card hand5Card) {
+    private SortedSet<Card> convertHandToSortedSet(IHand5Card hand5Card) {
         SortedSet<Card> cardSortedSetConverted = IntStream.range(0, 5).boxed().map(e -> hand5Card.getNthCard(e)).collect(Collectors.toCollection(TreeSet::new));
 
         return cardSortedSetConverted;

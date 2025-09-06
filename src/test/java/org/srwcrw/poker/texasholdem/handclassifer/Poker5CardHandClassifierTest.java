@@ -3,7 +3,7 @@ package org.srwcrw.poker.texasholdem.handclassifer;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.srwcrw.poker.texasholdem.components.Hand5Card;
+import org.srwcrw.poker.texasholdem.components.IHand5Card;
 import org.srwcrw.poker.texasholdem.components.Hand5OrdinalFactoryFast;
 import org.srwcrw.poker.texasholdem.components.HandFactoryHand5;
 import org.srwcrw.poker.texasholdem.components.CardFactoryImmutable;
@@ -24,7 +24,7 @@ class Poker5CardHandClassifierTest {
 
     @Test
     public void testClassifyStraightFlush() {
-        Hand5Card straightFlush = testUtils.createStraightFlushAceLow();
+        IHand5Card straightFlush = testUtils.createStraightFlushAceLow();
 
         HandType5Cards handType5Cards = poker5CardHandClassifier.classify(straightFlush);
 
@@ -33,7 +33,7 @@ class Poker5CardHandClassifierTest {
 
     @Test
     public void testClassifyRoyalFlush() {
-        Hand5Card royalFlush = testUtils.createStraightFlushAceHigh();
+        IHand5Card royalFlush = testUtils.createStraightFlushAceHigh();
 
         HandType5Cards handType5Cards = poker5CardHandClassifier.classify(royalFlush);
 
@@ -42,7 +42,7 @@ class Poker5CardHandClassifierTest {
 
     @Test
     public void testClassifyFourOfAKind() {
-        Hand5Card fourOfAKind = testUtils.createFourOfAKindA();
+        IHand5Card fourOfAKind = testUtils.createFourOfAKindA();
 
         HandType5Cards handType5Cards = poker5CardHandClassifier.classify(fourOfAKind);
 
@@ -51,8 +51,8 @@ class Poker5CardHandClassifierTest {
 
     @Test
     public void testClassifyFlush() {
-        Hand5Card flushHandA = testUtils.createFlushA();
-        Hand5Card flushHandB = testUtils.createFlushB();
+        IHand5Card flushHandA = testUtils.createFlushA();
+        IHand5Card flushHandB = testUtils.createFlushB();
 
         HandType5Cards handType5CardsA = poker5CardHandClassifier.classify(flushHandA);
         HandType5Cards handType5CardsB = poker5CardHandClassifier.classify(flushHandB);
@@ -64,7 +64,7 @@ class Poker5CardHandClassifierTest {
 
     @Test
     public void testClassifyFullHouse() {
-        Hand5Card fullHouseHand = testUtils.createFullHouseA();
+        IHand5Card fullHouseHand = testUtils.createFullHouseA();
 
         HandType5Cards handType5CardsA = poker5CardHandClassifier.classify(fullHouseHand);
 
@@ -73,7 +73,7 @@ class Poker5CardHandClassifierTest {
 
     @Test
     public void testClassifyStraight() {
-        Hand5Card straightHand = testUtils.createStraight();
+        IHand5Card straightHand = testUtils.createStraight();
 
         HandType5Cards handType5CardsA = poker5CardHandClassifier.classify(straightHand);
 
@@ -82,7 +82,7 @@ class Poker5CardHandClassifierTest {
 
     @Test
     public void testClassifyStraightAceLow() {
-        Hand5Card hand5CardStraightAceLow = testUtils.createStraightAceLow();
+        IHand5Card hand5CardStraightAceLow = testUtils.createStraightAceLow();
 
         HandType5Cards handType5CardsA = poker5CardHandClassifier.classify(hand5CardStraightAceLow);
 
@@ -91,7 +91,7 @@ class Poker5CardHandClassifierTest {
 
     @Test
     public void testClassifyThreeOfAKind() {
-        Hand5Card threeOfAKindHand = testUtils.createThreeOfAKind();
+        IHand5Card threeOfAKindHand = testUtils.createThreeOfAKind();
 
         HandType5Cards handType5CardsA = poker5CardHandClassifier.classify(threeOfAKindHand);
 
@@ -100,7 +100,7 @@ class Poker5CardHandClassifierTest {
 
     @Test
     public void testClassifyTwoPair() {
-        Hand5Card twoPairHand = testUtils.createTwoPairA();
+        IHand5Card twoPairHand = testUtils.createTwoPairA();
 
         HandType5Cards handType5CardsA = poker5CardHandClassifier.classify(twoPairHand);
 
@@ -109,7 +109,7 @@ class Poker5CardHandClassifierTest {
 
     @Test
     public void testClassifyTwoPairB() {
-        Hand5Card twoPairHand = testUtils.createTwoPairBKickerTen();
+        IHand5Card twoPairHand = testUtils.createTwoPairBKickerTen();
 
         HandType5Cards handType5CardsA = poker5CardHandClassifier.classify(twoPairHand);
 
@@ -118,7 +118,7 @@ class Poker5CardHandClassifierTest {
 
     @Test
     public void testClassifyOnePair() {
-        Hand5Card onePairHand = testUtils.createOnePair();
+        IHand5Card onePairHand = testUtils.createOnePair();
 
         HandType5Cards handType5CardsA = poker5CardHandClassifier.classify(onePairHand);
 
@@ -127,7 +127,7 @@ class Poker5CardHandClassifierTest {
 
     @Test
     public void testClassifyHighestCard() {
-        Hand5Card highestCardHand = testUtils.createHighestCardA();
+        IHand5Card highestCardHand = testUtils.createHighestCardA();
 
         HandType5Cards handType5CardsA = poker5CardHandClassifier.classify(highestCardHand);
 

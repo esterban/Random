@@ -3,31 +3,31 @@ package org.srwcrw.poker.texasholdem.handclassifer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.srwcrw.poker.texasholdem.collections.Hand2Card;
-import org.srwcrw.poker.texasholdem.components.Hand5Card;
-import org.srwcrw.poker.texasholdem.entities.HandType5Cards;
+import org.srwcrw.poker.texasholdem.components.IHand5Card;
 import org.srwcrw.poker.texasholdem.components.PokerTexasHoldemUtils;
+import org.srwcrw.poker.texasholdem.entities.HandType5Cards;
 
 import java.util.List;
 
 // TODO 2024-05-26 SWright create unit test
 @Component
 public class PokerTexasHoldemClassifier implements PokerCardClassifier<Hand2Card> {
-    private final Hand5Card communityCards;
+    private final IHand5Card communityCards;
 
     @Autowired
     private PokerTexasHoldemUtils pokerTexasHoldemUtils;
 
     private final Poker5CardHandClassifier poker5CardHandClassifier;
 
-    public PokerTexasHoldemClassifier(Hand5Card communityCards) {
+    public PokerTexasHoldemClassifier(IHand5Card communityCards) {
         this.communityCards = communityCards;
         poker5CardHandClassifier = new Poker5CardHandClassifier();
     }
 
     @Override
     public HandType5Cards classify(Hand2Card hand2Card) {
-        List<Hand5Card> possibleHandList = pokerTexasHoldemUtils.generateAllPossibleHands(communityCards, hand2Card);
-        Hand5Card bestHand = pokerTexasHoldemUtils.findBestHand(possibleHandList);
+        List<IHand5Card> possibleHandList = pokerTexasHoldemUtils.generateAllPossibleHands(communityCards, hand2Card);
+        IHand5Card bestHand = pokerTexasHoldemUtils.findBestHand(possibleHandList);
 
         return poker5CardHandClassifier.classify(bestHand);
     }

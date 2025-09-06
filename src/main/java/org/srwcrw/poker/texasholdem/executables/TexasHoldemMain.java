@@ -1,7 +1,6 @@
 package org.srwcrw.poker.texasholdem.executables;
 
 import jakarta.annotation.PostConstruct;
-import org.apache.commons.math3.stat.descriptive.DescriptiveStatistics;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +8,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.srwcrw.poker.texasholdem.components.ExecutionTimeRecorder;
+import org.srwcrw.poker.texasholdem.components.ExecutionTimeProperties;
 import org.srwcrw.poker.texasholdem.components.TexasHoldemComponent;
 
 
@@ -28,6 +28,8 @@ public class TexasHoldemMain extends SpringApplication {
     @Autowired
     private final ExecutionTimeRecorder executionTimeRecorder;
 
+    @Autowired
+    private ExecutionTimeProperties executionTimeProperties;
 
     public TexasHoldemMain(ExecutionTimeRecorder executionTimeRecorder) {
         this.executionTimeRecorder = executionTimeRecorder;
@@ -35,21 +37,19 @@ public class TexasHoldemMain extends SpringApplication {
 
     @PostConstruct
     private void init() {
-        executionTimeRecorder.startTiming(); // Start timing before the Monte Carlo simulation
-
-        DescriptiveStatistics descriptiveStatistics = new DescriptiveStatistics();
+        executionTimeRecorder.startTiming();
 
         for (int loopCounter = 1; loopCounter <= loopCount; ++loopCounter) {
             double executionTime = texasHoldemComponent.monteCarloOneOpponent();
-            descriptiveStatistics.addValue(executionTime);
+            executionTimeProperties.addExecutionTimeValue(executionTime);
         }
 
-        executionTimeRecorder.stopTiming(); // Stop timing after the Monte Carlo simulation
+        executionTimeRecorder.stopTiming();
 
         LOGGER.warn("Number of outer iterations {}, inner iterations {}", loopCount, handCount);
         LOGGER.warn("Mean execution {} , standard deviation {}",
-                String.format("Execution time = %4.3f", descriptiveStatistics.getMean()),
-                String.format("Execution time = %4.3f", descriptiveStatistics.getStandardDeviation()));
+                String.format("Execution time = %4.3f", executionTimeProperties.getMeanExecutionTime()),
+                String.format("Execution time = %4.3f", executionTimeProperties.getStandardDeviationExecutionTime()));
     }
 
     public static void main(String[] args) {

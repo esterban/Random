@@ -3,7 +3,7 @@ package org.srwcrw.poker.texasholdem.test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.srwcrw.poker.texasholdem.collections.Hand2Card;
-import org.srwcrw.poker.texasholdem.components.Hand5Card;
+import org.srwcrw.poker.texasholdem.components.IHand5Card;
 import org.srwcrw.poker.texasholdem.components.HandFactoryHand5;
 import org.srwcrw.poker.texasholdem.comparator.Poker5CardAceHighLowComparator;
 import org.srwcrw.poker.texasholdem.components.Card;
@@ -22,7 +22,7 @@ public class TestUtilsTexasHoldem {
     @Autowired
     private HandFactoryHand5 handFactoryHand5;
 
-    public Map.Entry<Hand5Card, Hand2Card> createOnePairA() {
+    public Map.Entry<IHand5Card, Hand2Card> createOnePairA() {
         SortedSet<Card> hand5CardSet = new TreeSet<>();
 
         hand5CardSet.add(cardFactory.createCard(Suit.Hearts, Value.Ace));
@@ -38,7 +38,7 @@ public class TestUtilsTexasHoldem {
 
         Iterator<Card> hand5Iterator = hand5CardSet.iterator();
 
-        Hand5Card hand5Card = handFactoryHand5.create(
+        IHand5Card hand5Card = handFactoryHand5.create(
                 hand5Iterator.next(),
                 hand5Iterator.next(),
                 hand5Iterator.next(),
@@ -47,12 +47,12 @@ public class TestUtilsTexasHoldem {
 
         Hand2Card hand2Card = new Hand2Card(hand2CardSet);
 
-        Map.Entry<Hand5Card, Hand2Card> result = new AbstractMap.SimpleEntry<>(hand5Card, hand2Card);
+        Map.Entry<IHand5Card, Hand2Card> result = new AbstractMap.SimpleEntry<>(hand5Card, hand2Card);
 
         return result;
     }
 
-    public Map.Entry<Hand5Card, Hand2Card> createOnePairB() {
+    public Map.Entry<IHand5Card, Hand2Card> createOnePairB() {
         SortedSet<Card> hand5CardSet = new TreeSet<>();
 
         hand5CardSet.add(cardFactory.createCard(Suit.Hearts, Value.Ace));
@@ -68,7 +68,7 @@ public class TestUtilsTexasHoldem {
 
         Iterator<Card> hand5Iterator = hand5CardSet.iterator();
 
-        Hand5Card hand5Card = handFactoryHand5.create(
+        IHand5Card hand5Card = handFactoryHand5.create(
                 hand5Iterator.next(),
                 hand5Iterator.next(),
                 hand5Iterator.next(),
@@ -77,12 +77,12 @@ public class TestUtilsTexasHoldem {
 
         Hand2Card hand2Card = new Hand2Card(hand2CardSet);
 
-        Map.Entry<Hand5Card, Hand2Card> result = new AbstractMap.SimpleEntry<>(hand5Card, hand2Card);
+        Map.Entry<IHand5Card, Hand2Card> result = new AbstractMap.SimpleEntry<>(hand5Card, hand2Card);
 
         return result;
     }
 
-    public Map.Entry<Hand5Card, Hand2Card> createOnePairC() {
+    public Map.Entry<IHand5Card, Hand2Card> createOnePairC() {
         SortedSet<Card> hand5CardSet = new TreeSet<>();
 
         hand5CardSet.add(cardFactory.createCard(Suit.Hearts, Value.Two));
@@ -98,7 +98,7 @@ public class TestUtilsTexasHoldem {
 
         Iterator<Card> hand5Iterator = hand5CardSet.iterator();
 
-        Hand5Card hand5Card = handFactoryHand5.create(
+        IHand5Card hand5Card = handFactoryHand5.create(
                 hand5Iterator.next(),
                 hand5Iterator.next(),
                 hand5Iterator.next(),
@@ -107,13 +107,13 @@ public class TestUtilsTexasHoldem {
 
         Hand2Card hand2Card = new Hand2Card(hand2CardSet);
 
-        Map.Entry<Hand5Card, Hand2Card> result = new AbstractMap.SimpleEntry<>(hand5Card, hand2Card);
+        Map.Entry<IHand5Card, Hand2Card> result = new AbstractMap.SimpleEntry<>(hand5Card, hand2Card);
 
         return result;
     }
 
-    public Map.Entry<Hand5Card, Hand2Card> createTwoPairA() {
-        // SWright TODO - Remove using a SortedSet in Hand5Card constructor,
+    public Map.Entry<IHand5Card, Hand2Card> createTwoPairA() {
+        // SWright TODO - Remove using a SortedSet in IHand5Card constructor,
         SortedSet<Card> hand5CardSet = new TreeSet<>();
 
         hand5CardSet.add(cardFactory.createCard(Suit.Hearts, Value.Ace));
@@ -124,7 +124,7 @@ public class TestUtilsTexasHoldem {
 
         Iterator<Card> hand5Iterator = hand5CardSet.iterator();
 
-        Hand5Card hand5Card = handFactoryHand5.create(
+        IHand5Card hand5Card = handFactoryHand5.create(
                 hand5Iterator.next(),
                 hand5Iterator.next(),
                 hand5Iterator.next(),
@@ -139,13 +139,13 @@ public class TestUtilsTexasHoldem {
 
         Hand2Card hand2Card = new Hand2Card(hand2CardSet);
 
-        Map.Entry<Hand5Card, Hand2Card> result = new AbstractMap.SimpleEntry<>(hand5Card, hand2Card);
+        Map.Entry<IHand5Card, Hand2Card> result = new AbstractMap.SimpleEntry<>(hand5Card, hand2Card);
 
         return result;
     }
 
-    public Map.Entry<Hand5Card, Hand2Card> createOnePairD() {
-        // SWright TODO - Remove using a SortedSet in Hand5Card constructor,
+    public Map.Entry<IHand5Card, Hand2Card> createOnePairD() {
+        // SWright TODO - Remove using a SortedSet in IHand5Card constructor,
         List<Card> hand5CardSet = new ArrayList<>();
 
         hand5CardSet.add(cardFactory.createCard(Suit.Clubs, Value.Queen));
@@ -156,7 +156,7 @@ public class TestUtilsTexasHoldem {
 
         Iterator<Card> hand5Iterator = hand5CardSet.iterator();
 
-        Hand5Card hand5Card = handFactoryHand5.create(
+        IHand5Card hand5Card = handFactoryHand5.create(
                 hand5Iterator.next(),
                 hand5Iterator.next(),
                 hand5Iterator.next(),
@@ -170,12 +170,12 @@ public class TestUtilsTexasHoldem {
 
         Hand2Card hand2Card = new Hand2Card(hand2CardSet);
 
-        Map.Entry<Hand5Card, Hand2Card> result = new AbstractMap.SimpleEntry<>(hand5Card, hand2Card);
+        Map.Entry<IHand5Card, Hand2Card> result = new AbstractMap.SimpleEntry<>(hand5Card, hand2Card);
 
         return result;
     }
 
-    public Map.Entry<Hand5Card, Hand2Card> createThreeAcesA() {
+    public Map.Entry<IHand5Card, Hand2Card> createThreeAcesA() {
         SortedSet<Card> hand5CardSet = new TreeSet<>();
 
         hand5CardSet.add(cardFactory.createCard(Suit.Hearts, Value.Ace));
@@ -191,7 +191,7 @@ public class TestUtilsTexasHoldem {
 
         Iterator<Card> hand5Iterator = hand5CardSet.iterator();
 
-        Hand5Card hand5Card = handFactoryHand5.create(
+        IHand5Card hand5Card = handFactoryHand5.create(
                 hand5Iterator.next(),
                 hand5Iterator.next(),
                 hand5Iterator.next(),
@@ -200,12 +200,12 @@ public class TestUtilsTexasHoldem {
 
         Hand2Card hand2Card = new Hand2Card(hand2CardSet);
 
-        Map.Entry<Hand5Card, Hand2Card> result = new AbstractMap.SimpleEntry<>(hand5Card, hand2Card);
+        Map.Entry<IHand5Card, Hand2Card> result = new AbstractMap.SimpleEntry<>(hand5Card, hand2Card);
 
         return result;
     }
 
-    public Map.Entry<Hand5Card, Hand2Card> createStraightA() {
+    public Map.Entry<IHand5Card, Hand2Card> createStraightA() {
         SortedSet<Card> hand5CardSet = new TreeSet<>();
 
         hand5CardSet.add(cardFactory.createCard(Suit.Hearts, Value.Ace));
@@ -221,7 +221,7 @@ public class TestUtilsTexasHoldem {
 
         Iterator<Card> hand5Iterator = hand5CardSet.iterator();
 
-        Hand5Card hand5Card = handFactoryHand5.create(
+        IHand5Card hand5Card = handFactoryHand5.create(
                 hand5Iterator.next(),
                 hand5Iterator.next(),
                 hand5Iterator.next(),
@@ -230,12 +230,12 @@ public class TestUtilsTexasHoldem {
 
         Hand2Card hand2Card = new Hand2Card(hand2CardSet);
 
-        Map.Entry<Hand5Card, Hand2Card> result = new AbstractMap.SimpleEntry<>(hand5Card, hand2Card);
+        Map.Entry<IHand5Card, Hand2Card> result = new AbstractMap.SimpleEntry<>(hand5Card, hand2Card);
 
         return result;
     }
 
-    public Map.Entry<Hand5Card, Hand2Card> createFlushA() {
+    public Map.Entry<IHand5Card, Hand2Card> createFlushA() {
         SortedSet<Card> hand5CardSet = new TreeSet<>();
 
         hand5CardSet.add(cardFactory.createCard(Suit.Hearts, Value.Ace));
@@ -251,7 +251,7 @@ public class TestUtilsTexasHoldem {
 
         Iterator<Card> hand5Iterator = hand5CardSet.iterator();
 
-        Hand5Card hand5Card = handFactoryHand5.create(
+        IHand5Card hand5Card = handFactoryHand5.create(
                 hand5Iterator.next(),
                 hand5Iterator.next(),
                 hand5Iterator.next(),
@@ -260,12 +260,12 @@ public class TestUtilsTexasHoldem {
 
         Hand2Card hand2Card = new Hand2Card(hand2CardSet);
 
-        Map.Entry<Hand5Card, Hand2Card> result = new AbstractMap.SimpleEntry<>(hand5Card, hand2Card);
+        Map.Entry<IHand5Card, Hand2Card> result = new AbstractMap.SimpleEntry<>(hand5Card, hand2Card);
 
         return result;
     }
 
-    public Map.Entry<Hand5Card, Hand2Card> createFullhouseA() {
+    public Map.Entry<IHand5Card, Hand2Card> createFullhouseA() {
         SortedSet<Card> hand5CardSet = new TreeSet<>();
 
         hand5CardSet.add(cardFactory.createCard(Suit.Hearts, Value.Six));
@@ -281,7 +281,7 @@ public class TestUtilsTexasHoldem {
 
         Iterator<Card> hand5Iterator = hand5CardSet.iterator();
 
-        Hand5Card hand5Card = handFactoryHand5.create(
+        IHand5Card hand5Card = handFactoryHand5.create(
                 hand5Iterator.next(),
                 hand5Iterator.next(),
                 hand5Iterator.next(),
@@ -290,12 +290,12 @@ public class TestUtilsTexasHoldem {
 
         Hand2Card hand2Card = new Hand2Card(hand2CardSet);
 
-        Map.Entry<Hand5Card, Hand2Card> result = new AbstractMap.SimpleEntry<>(hand5Card, hand2Card);
+        Map.Entry<IHand5Card, Hand2Card> result = new AbstractMap.SimpleEntry<>(hand5Card, hand2Card);
 
         return result;
     }
 
-    public Map.Entry<Hand5Card, Hand2Card> createFourKings() {
+    public Map.Entry<IHand5Card, Hand2Card> createFourKings() {
         SortedSet<Card> hand5CardSet = new TreeSet<>();
 
         hand5CardSet.add(cardFactory.createCard(Suit.Hearts, Value.King));
@@ -311,7 +311,7 @@ public class TestUtilsTexasHoldem {
 
         Iterator<Card> hand5Iterator = hand5CardSet.iterator();
 
-        Hand5Card hand5Card = handFactoryHand5.create(
+        IHand5Card hand5Card = handFactoryHand5.create(
                 hand5Iterator.next(),
                 hand5Iterator.next(),
                 hand5Iterator.next(),
@@ -320,12 +320,12 @@ public class TestUtilsTexasHoldem {
 
         Hand2Card hand2Card = new Hand2Card(hand2CardSet);
 
-        Map.Entry<Hand5Card, Hand2Card> result = new AbstractMap.SimpleEntry<>(hand5Card, hand2Card);
+        Map.Entry<IHand5Card, Hand2Card> result = new AbstractMap.SimpleEntry<>(hand5Card, hand2Card);
 
         return result;
     }
 
-    public Map.Entry<Hand5Card, Hand2Card> createStraightFlush() {
+    public Map.Entry<IHand5Card, Hand2Card> createStraightFlush() {
         SortedSet<Card> hand5CardSet = new TreeSet<>();
 
         hand5CardSet.add(cardFactory.createCard(Suit.Hearts, Value.Ace));
@@ -341,7 +341,7 @@ public class TestUtilsTexasHoldem {
 
         Iterator<Card> hand5Iterator = hand5CardSet.iterator();
 
-        Hand5Card hand5Card = handFactoryHand5.create(
+        IHand5Card hand5Card = handFactoryHand5.create(
                 hand5Iterator.next(),
                 hand5Iterator.next(),
                 hand5Iterator.next(),
@@ -350,16 +350,16 @@ public class TestUtilsTexasHoldem {
 
         Hand2Card hand2Card = new Hand2Card(hand2CardSet);
 
-        Map.Entry<Hand5Card, Hand2Card> result = new AbstractMap.SimpleEntry<>(hand5Card, hand2Card);
+        Map.Entry<IHand5Card, Hand2Card> result = new AbstractMap.SimpleEntry<>(hand5Card, hand2Card);
 
         return result;
     }
 
-    public Hand5Card getBestHand(List<Hand5Card> hand5CardList) {
+    public IHand5Card getBestHand(List<IHand5Card> hand5CardList) {
         Poker5CardAceHighLowComparator poker5CardAceHighLowComparator = new Poker5CardAceHighLowComparator();
-        Hand5Card bestHand5Card = null;
+        IHand5Card bestHand5Card = null;
 
-        for (Hand5Card hand5Card : hand5CardList) {
+        for (IHand5Card hand5Card : hand5CardList) {
             if (bestHand5Card == null) {
                 bestHand5Card = hand5Card;
             } else if (poker5CardAceHighLowComparator.compare(hand5Card, bestHand5Card) > 0) {

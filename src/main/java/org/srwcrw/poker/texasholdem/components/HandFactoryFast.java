@@ -26,7 +26,7 @@ private Hand5Card[] cardRepository = new Hand5Card[52];
         Hand5Card hand5Card = null;
 
         if (cardRepository[cardIndex] == null) {
-            hand5Card = new Hand5Card(hand5OrdinalFactoryFast, cards[0], cards[1], cards[2], cards[3], cards[4]);
+            hand5Card = new Hand5Card(cards[0], cards[1], cards[2], cards[3], cards[4]);
             cardRepository[cardIndex] = hand5Card;
         } else {
             hand5Card = cardRepository[cardIndex];

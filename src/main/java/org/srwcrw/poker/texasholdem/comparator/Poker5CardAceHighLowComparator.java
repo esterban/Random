@@ -2,21 +2,24 @@ package org.srwcrw.poker.texasholdem.comparator;
 
 import org.apache.commons.lang3.ArrayUtils;
 import org.srwcrw.comparator.SortedSetComparator;
-import org.srwcrw.poker.texasholdem.components.Hand5Card;
+import org.srwcrw.poker.texasholdem.components.IHand5Card;
 import org.srwcrw.poker.texasholdem.entities.HandType5Cards;
 import org.srwcrw.poker.texasholdem.entities.Value;
 import org.srwcrw.poker.texasholdem.handclassifer.Poker5CardHandClassifier;
 import org.srwcrw.poker.texasholdem.utils.HandUtils;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.Iterator;
+import java.util.Set;
 
-public class Poker5CardAceHighLowComparator implements Comparator<Hand5Card> {
+public class Poker5CardAceHighLowComparator implements Comparator<IHand5Card> {
     private static final Poker5CardHandClassifier poker5CardHandClassifier = new Poker5CardHandClassifier();
     private static final HandUtils handUtils = new HandUtils();
     private static final SortedSetComparator<Value> valueSortedSetComparator = new SortedSetComparator<>();
 
     @Override
-    public int compare(Hand5Card o1, Hand5Card o2) {
+    public int compare(IHand5Card o1, IHand5Card o2) {
         HandType5Cards handType1 = poker5CardHandClassifier.classify(o1);
         HandType5Cards handType2 = poker5CardHandClassifier.classify(o2);
 
@@ -58,7 +61,7 @@ public class Poker5CardAceHighLowComparator implements Comparator<Hand5Card> {
         }
     }
 
-    private int compareHighestCard(Hand5Card hand1, Hand5Card hand2) {
+    private int compareHighestCard(IHand5Card hand1, IHand5Card hand2) {
         if (poker5CardHandClassifier.classify(hand1) != HandType5Cards.HighestCard || poker5CardHandClassifier.classify(hand2) != HandType5Cards.HighestCard) {
             throw new RuntimeException("Hand is highest card, A = " + hand1 + " , B = " + hand2);
         }
@@ -69,7 +72,7 @@ public class Poker5CardAceHighLowComparator implements Comparator<Hand5Card> {
         return Arrays.compare(highestValue1, highestValue2);
     }
 
-    private int compareOnePair(Hand5Card hand1, Hand5Card hand2) {
+    private int compareOnePair(IHand5Card hand1, IHand5Card hand2) {
         if (poker5CardHandClassifier.classify(hand1) != HandType5Cards.OnePair || poker5CardHandClassifier.classify(hand2) != HandType5Cards.OnePair) {
             throw new RuntimeException("Hand is not of one pair, A = " + hand1 + " , B = " + hand2);
         }
@@ -90,7 +93,7 @@ public class Poker5CardAceHighLowComparator implements Comparator<Hand5Card> {
         return Arrays.compare(highestValue1, highestValue2);
     }
 
-    private int compareTwoPair(Hand5Card hand1, Hand5Card hand2) {
+    private int compareTwoPair(IHand5Card hand1, IHand5Card hand2) {
         if (poker5CardHandClassifier.classify(hand1) != HandType5Cards.TwoPair || poker5CardHandClassifier.classify(hand2) != HandType5Cards.TwoPair) {
             throw new RuntimeException("Hand is not of one pair, A = " + hand1 + " , B = " + hand2);
         }
@@ -118,7 +121,7 @@ public class Poker5CardAceHighLowComparator implements Comparator<Hand5Card> {
         return highestValue1.compareTo(highestValue2);
     }
 
-    private int compareThreeOfAKind(Hand5Card hand1, Hand5Card hand2) {
+    private int compareThreeOfAKind(IHand5Card hand1, IHand5Card hand2) {
         if (poker5CardHandClassifier.classify(hand1) != HandType5Cards.ThreeOfAKind || poker5CardHandClassifier.classify(hand2) != HandType5Cards.ThreeOfAKind) {
             throw new RuntimeException("Hand is not of three of a kind, A = " + hand1 + " , B = " + hand2);
         }
@@ -142,7 +145,7 @@ public class Poker5CardAceHighLowComparator implements Comparator<Hand5Card> {
         return Arrays.compare(highestValue1, highestValue2);
     }
 
-    private int compareStraight(Hand5Card hand1, Hand5Card hand2) {
+    private int compareStraight(IHand5Card hand1, IHand5Card hand2) {
         if (poker5CardHandClassifier.classify(hand1) != HandType5Cards.Straight || poker5CardHandClassifier.classify(hand2) != HandType5Cards.Straight) {
             throw new RuntimeException("Hand is not a straight, A = " + hand1 + " , B = " + hand2);
         }
@@ -153,7 +156,7 @@ public class Poker5CardAceHighLowComparator implements Comparator<Hand5Card> {
         return highestValue1[1].compareTo(highestValue2[1]);
     }
 
-    private int compareFlush(Hand5Card hand1, Hand5Card hand2) {
+    private int compareFlush(IHand5Card hand1, IHand5Card hand2) {
         if (poker5CardHandClassifier.classify(hand1) != HandType5Cards.Flush || poker5CardHandClassifier.classify(hand2) != HandType5Cards.Flush) {
             throw new RuntimeException("Hand is not a flush, A = " + hand1 + " , B = " + hand2);
         }
@@ -164,7 +167,7 @@ public class Poker5CardAceHighLowComparator implements Comparator<Hand5Card> {
         return Arrays.compare(highestValue1, highestValue2);
     }
 
-    private int compareFullHouse(Hand5Card hand1, Hand5Card hand2) {
+    private int compareFullHouse(IHand5Card hand1, IHand5Card hand2) {
         if (poker5CardHandClassifier.classify(hand1) != HandType5Cards.FullHouse || poker5CardHandClassifier.classify(hand2) != HandType5Cards.FullHouse) {
             throw new RuntimeException("Hand is not a full house, A = " + hand1 + " , B = " + hand2);
         }
@@ -179,7 +182,7 @@ public class Poker5CardAceHighLowComparator implements Comparator<Hand5Card> {
         return hand1Values[0].compareTo(hand2Values[0]);
     }
 
-    private int compareFourOfAKind(Hand5Card hand1, Hand5Card hand2) {
+    private int compareFourOfAKind(IHand5Card hand1, IHand5Card hand2) {
         if (poker5CardHandClassifier.classify(hand1) != HandType5Cards.FourOfAKind || poker5CardHandClassifier.classify(hand2) != HandType5Cards.FourOfAKind) {
             throw new RuntimeException("Hand is not four of a kind, A = " + hand1 + " , B = " + hand2);
         }
@@ -194,7 +197,7 @@ public class Poker5CardAceHighLowComparator implements Comparator<Hand5Card> {
         return hand1Values.iterator().next().compareTo(hand2Values.iterator().next());
     }
 
-    private int compareStraightFlush(Hand5Card hand1, Hand5Card hand2) {
+    private int compareStraightFlush(IHand5Card hand1, IHand5Card hand2) {
         HandType5Cards hand1Type = poker5CardHandClassifier.classify(hand1);
         HandType5Cards hand2Type = poker5CardHandClassifier.classify(hand2);
 

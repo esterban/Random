@@ -4,7 +4,7 @@ import org.apache.commons.lang3.ArrayUtils;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.srwcrw.poker.texasholdem.components.Hand5Card;
+import org.srwcrw.poker.texasholdem.components.IHand5Card;
 import org.srwcrw.poker.texasholdem.components.Hand5OrdinalFactoryFast;
 import org.srwcrw.poker.texasholdem.components.HandFactoryHand5;
 import org.srwcrw.poker.texasholdem.components.CardFactoryImmutable;
@@ -31,7 +31,7 @@ class HandUtilsTest {
 
     @Test
     void areValuesConsecutiveAceLowA() {
-        Hand5Card straightFlushAceLow = testUtils.createStraightFlushAceLow();
+        IHand5Card straightFlushAceLow = testUtils.createStraightFlushAceLow();
         Value[] straightFlushAceLowValues = handUtils.getValueSetSorted(straightFlushAceLow, valueComparatorAceLow);
 
         assertThat(handUtils.areValuesConsecutive(straightFlushAceLow));
@@ -40,7 +40,7 @@ class HandUtilsTest {
 
     @Test
     void areValuesConsecutiveAceLowB() {
-        Hand5Card straightFlushAceLow = testUtils.createStraightFlushAceHigh();
+        IHand5Card straightFlushAceLow = testUtils.createStraightFlushAceHigh();
         Value[] straightFlushAceLowValues = handUtils.getValueSetSorted(straightFlushAceLow, valueComparatorAceLow);
 
         assertThat(handUtils.areValuesConsecutive(straightFlushAceLowValues)).isFalse();
@@ -48,7 +48,7 @@ class HandUtilsTest {
 
     @Test
     void areValuesConsecutiveAceHighA() {
-        Hand5Card straightFlushAceHigh = testUtils.createStraightFlushAceLow();
+        IHand5Card straightFlushAceHigh = testUtils.createStraightFlushAceLow();
         Value[] straightFlushAceHighValues = handUtils.getValueSetSorted(straightFlushAceHigh, valueComparatorAceHigh);
 
         assertThat(handUtils.areValuesConsecutive(straightFlushAceHighValues)).isFalse();
@@ -56,7 +56,7 @@ class HandUtilsTest {
 
     @Test
     void areValuesConsecutiveAceHighB() {
-        Hand5Card straightFlushAceHigh = testUtils.createStraightFlushAceHigh();
+        IHand5Card straightFlushAceHigh = testUtils.createStraightFlushAceHigh();
         Value[] straightFlushAceLowValues = handUtils.getValueSetSorted(straightFlushAceHigh, valueComparatorAceHigh);
 
         assertThat(handUtils.areValuesConsecutive(straightFlushAceLowValues)).isTrue();
@@ -64,7 +64,7 @@ class HandUtilsTest {
 
     @Test
     void areValuesNotConsecutive() {
-        Hand5Card onePairHand = testUtils.createOnePair();
+        IHand5Card onePairHand = testUtils.createOnePair();
         Value[] onePairValues = handUtils.getValueSetSorted(onePairHand, valueComparatorAceLow);
 
         assertThat(handUtils.areValuesConsecutive(onePairValues)).isFalse();
@@ -72,7 +72,7 @@ class HandUtilsTest {
 
     @Test
     void testGetHighestSingleCardA() {
-        Hand5Card hand = testUtils.createOnePair();
+        IHand5Card hand = testUtils.createOnePair();
 
         Value highestValue = handUtils.getHighestSingleCardAceHigh(hand);
 
@@ -81,7 +81,7 @@ class HandUtilsTest {
 
     @Test
     void testGetHighestSingleCardB() {
-        Hand5Card hand = testUtils.createHighestCardA();
+        IHand5Card hand = testUtils.createHighestCardA();
 
         Value highestValue = handUtils.getHighestSingleCardAceHigh(hand);
 
@@ -104,11 +104,11 @@ class HandUtilsTest {
 
     @Test
     void testCountThrees() {
-        Hand5Card handA = testUtils.createThreeOfAKindA();
-        Hand5Card handAA = testUtils.createThreeOfAKindAA();
-        Hand5Card handB = testUtils.createThreeOfAKindB();
-        Hand5Card handC = testUtils.createThreeOfAKindC();
-        Hand5Card hand4OfKind = testUtils.createFourOfAKindA();
+        IHand5Card handA = testUtils.createThreeOfAKindA();
+        IHand5Card handAA = testUtils.createThreeOfAKindAA();
+        IHand5Card handB = testUtils.createThreeOfAKindB();
+        IHand5Card handC = testUtils.createThreeOfAKindC();
+        IHand5Card hand4OfKind = testUtils.createFourOfAKindA();
 
         int threeOfKindCountA = handUtils.countThrees(handA);
         int threeOfKindCountAA = handUtils.countThrees(handAA);

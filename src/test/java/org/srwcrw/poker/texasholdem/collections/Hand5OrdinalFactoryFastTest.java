@@ -20,9 +20,9 @@ class Hand5OrdinalFactoryFastTest {
     @Test
     public void testCreate() {
         Hand5OrdinalFactoryFast hand5OrdinalFactoryFast = new Hand5OrdinalFactoryFast();
-        Hand5Card hand5CardA = testUtils.createOnePair();
+        IHand5Card hand5CardA = testUtils.createOnePair();
 
-        Hand5Card hand5CardB = handFactoryHand5.create(
+        IHand5Card hand5CardB = handFactoryHand5.create(
                 hand5CardA.getNthCard(1),
                 hand5CardA.getNthCard(2),
                 hand5CardA.getNthCard(3),

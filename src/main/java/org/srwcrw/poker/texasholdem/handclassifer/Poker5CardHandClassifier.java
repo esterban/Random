@@ -1,17 +1,17 @@
 package org.srwcrw.poker.texasholdem.handclassifer;
 
-import org.srwcrw.poker.texasholdem.components.Hand5Card;
 import org.srwcrw.poker.texasholdem.comparator.ValueComparatorAceLow;
 import org.srwcrw.poker.texasholdem.components.Card;
+import org.srwcrw.poker.texasholdem.components.IHand5Card;
 import org.srwcrw.poker.texasholdem.entities.HandType5Cards;
 import org.srwcrw.poker.texasholdem.entities.Suit;
 import org.srwcrw.poker.texasholdem.entities.Value;
 import org.srwcrw.poker.texasholdem.utils.HandUtils;
 
-public class Poker5CardHandClassifier implements PokerCardClassifier<Hand5Card> {
+public class Poker5CardHandClassifier implements PokerCardClassifier<IHand5Card> {
     private final HandUtils handUtils = new HandUtils();
 
-    public HandType5Cards classify(Hand5Card hand5Card) {
+    public HandType5Cards classify(IHand5Card hand5Card) {
         int pairsCount = handUtils.countPairs(hand5Card);
         int threesCount = handUtils.countThrees(hand5Card);
         int foursCount = handUtils.countFours(hand5Card);
@@ -66,7 +66,7 @@ public class Poker5CardHandClassifier implements PokerCardClassifier<Hand5Card> 
         return HandType5Cards.HighestCard;
     }
 
-    private boolean isFlush(Hand5Card hand5Card) {
+    private boolean isFlush(IHand5Card hand5Card) {
         Suit firstSuit = null;
 
         for (int index =0; index < 5; ++index) {
@@ -86,7 +86,7 @@ public class Poker5CardHandClassifier implements PokerCardClassifier<Hand5Card> 
         return true;
     }
 
-    private boolean isStraight(Hand5Card hand5Card) {
+    private boolean isStraight(IHand5Card hand5Card) {
         Value[] cards = handUtils.getValueSetSorted(hand5Card, new ValueComparatorAceLow());
 
         if (cards.length < 5) {

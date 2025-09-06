@@ -1,10 +1,11 @@
 package org.srwcrw.poker.texasholdem.utils;
 
 import org.apache.commons.lang3.ArrayUtils;
-import org.srwcrw.poker.texasholdem.components.Hand5Card;
 import org.srwcrw.poker.texasholdem.collections.IPack;
 import org.srwcrw.poker.texasholdem.comparator.ValueComparatorAceHigh;
 import org.srwcrw.poker.texasholdem.components.Card;
+import org.srwcrw.poker.texasholdem.components.Hand5CardMutable;
+import org.srwcrw.poker.texasholdem.components.IHand5Card;
 import org.srwcrw.poker.texasholdem.entities.Value;
 
 import java.util.*;
@@ -65,7 +66,7 @@ public class HandUtils implements IHandUtils {
         return true;
     }
 
-    public boolean areValuesConsecutive(Hand5Card hand5Card) {
+    public boolean areValuesConsecutive(IHand5Card hand5Card) {
 //        SortedSet<Value> sortedSet = IntStream.range(0, 5).boxed()
 //                .map(e -> hand5Card.getNthCard(e))
 //                .map(e -> e.getValue())
@@ -82,7 +83,7 @@ public class HandUtils implements IHandUtils {
         return areValuesConsecutive(valueArray);
     }
 
-    public boolean areValuesConsecutiveAceHigh(Hand5Card hand5Card) {
+    public boolean areValuesConsecutiveAceHigh(IHand5Card hand5Card) {
 //        SortedSet<Value> valueSortedSet = getValueSetSorted(hand5Card, new ValueComparatorAceHigh());
         Value[] valueSortedSet = getValueSetSorted(hand5Card, new ValueComparatorAceHigh());
 
@@ -102,7 +103,7 @@ public class HandUtils implements IHandUtils {
         return pairCount;
     }
 
-    public int countPairs(Hand5Card hand) {
+    public int countPairs(IHand5Card hand) {
         int pairCount = 0;
         int[] valueCounts = countMatchingValuesArray(hand);
 
@@ -129,7 +130,7 @@ public class HandUtils implements IHandUtils {
         return threesCount;
     }
 
-//    public int countThrees(Hand5Card hand5Card) {
+//    public int countThrees(IHand5Card hand5Card) {
 //        int threesCount = 0;
 //        int[] valueCounts = countMatchingValuesArray(hand5Card);
 //
@@ -142,7 +143,7 @@ public class HandUtils implements IHandUtils {
 //        return threesCount;
 //    }
 
-    public int countThrees(Hand5Card hand5Card) {
+    public int countThrees(IHand5Card hand5Card) {
         Value value1 = hand5Card.getCardsArray()[0].getValue();
         Value value2 = hand5Card.getCardsArray()[1].getValue();
         Value value3 = hand5Card.getCardsArray()[2].getValue();
@@ -192,7 +193,7 @@ public class HandUtils implements IHandUtils {
 
     // SWright 2024-12-29 Note : The implementation of countThrees below DOES allocate memory on heap, not sure why
     // as the allocated memory doesn't escape
-//    public int countThrees(Hand5Card hand5Card) {
+//    public int countThrees(IHand5Card hand5Card) {
 //        Card[] cardArray = hand5Card.getCardsArray();
 //
 //        int[] valueCounts = new int[Value.values().length];
@@ -224,7 +225,7 @@ public class HandUtils implements IHandUtils {
 //        return foursCount;
 //    }
 
-//    public int countFours(Hand5Card pack) {
+//    public int countFours(IHand5Card pack) {
 //        int foursCount = 0;
 //        int[] fourCountArray = countMatchingValuesArray(pack);
 //
@@ -237,7 +238,7 @@ public class HandUtils implements IHandUtils {
 //        return foursCount;
 //    }
 
-    public int countFours(Hand5Card pack) {
+    public int countFours(IHand5Card pack) {
         Value firstValue = pack.getCardsArray()[0].getValue();
         int firstValueCount = 1;
         Value nextValue = null;
@@ -272,7 +273,7 @@ public class HandUtils implements IHandUtils {
 //        return valueCounts;
 //    }
 
-    public Map<Value, Integer> countMatchingValues(Hand5Card hand) {
+    public Map<Value, Integer> countMatchingValues(IHand5Card hand) {
         zeroValueCounts();
 
 //        for (Card card : hand.getCards()) {
@@ -296,7 +297,7 @@ public class HandUtils implements IHandUtils {
         return counts;
     }
 
-    public int[] countMatchingValuesArray(Hand5Card hand) {
+    public int[] countMatchingValuesArray(IHand5Card hand) {
         int[] counts = new int[Value.values().length];
 
 //        for (Card card : hand.getCards()) {
@@ -314,7 +315,7 @@ public class HandUtils implements IHandUtils {
 //        return null;
     }
 
-//    private int[] createValuesArray(Hand5Card hand5Card) {
+//    private int[] createValuesArray(IHand5Card hand5Card) {
 //        int[] counts = new int[Value.values().length];
 //    }
 
@@ -328,17 +329,17 @@ public class HandUtils implements IHandUtils {
         return getPairValuesArray(valueCounts);
     }
 
-    public Value[] getPairValues(Hand5Card hand) {
+    public Value[] getPairValues(IHand5Card hand) {
         int[] valueCounts = countMatchingValuesArray(hand);
         return getPairValuesArray(valueCounts, 5);
     }
 
-    public Set<Value> getThreeOfAKindValues(Hand5Card hand) {
+    public Set<Value> getThreeOfAKindValues(IHand5Card hand) {
         Map<Value, Integer> valueMap = countMatchingValues(hand);
         return getThreeOfAKindValues(valueMap);
     }
 
-    public Set<Value> getFourOfAKindValues(Hand5Card hand) {
+    public Set<Value> getFourOfAKindValues(IHand5Card hand) {
         Map<Value, Integer> valueMap = countMatchingValues(hand);
         return getFourOfAKindValues(valueMap);
     }
@@ -388,7 +389,7 @@ public class HandUtils implements IHandUtils {
         return pairValues;
     }
 
-    public Value getHighestSingleCardAceHigh(Hand5Card hand) {
+    public Value getHighestSingleCardAceHigh(IHand5Card hand) {
         Value highestValue = Value.Two;
 
         Map<Value, Integer> valueMap = countMatchingValues(hand);
@@ -404,7 +405,7 @@ public class HandUtils implements IHandUtils {
         return highestValue;
     }
 
-    public Value[] getSingleCards(Hand5Card hand) {
+    public Value[] getSingleCards(IHand5Card hand) {
         Value[] singleValues = new Value[5];
         Value[] nonSingleValues = new Value[5];
 
@@ -431,4 +432,13 @@ public class HandUtils implements IHandUtils {
 
         return singleValues;
     }
+
+    public static boolean areEqual(IHand5Card hand5Card, Hand5CardMutable hand5CardMutable) {
+        return Arrays.equals(hand5Card.getCardsArray(), hand5CardMutable.getCardsArray());
+    }
+
+    public static boolean areEqual(Hand5CardMutable hand5CardMutable, IHand5Card hand5Card) {
+        return Arrays.equals(hand5Card.getCardsArray(), hand5CardMutable.getCardsArray());
+    }
+
 }

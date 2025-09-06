@@ -1,7 +1,7 @@
 package org.srwcrw.poker.texasholdem.executables;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.srwcrw.poker.texasholdem.components.Hand5Card;
+import org.srwcrw.poker.texasholdem.components.IHand5Card;
 import org.srwcrw.poker.texasholdem.collections.IPack;
 import org.srwcrw.poker.texasholdem.entities.HandType5Cards;
 import org.srwcrw.poker.texasholdem.components.generators.ConverterHand5Card;
@@ -40,7 +40,7 @@ public class Poker5CardDraw {
 
         for (int counter = 1; counter <= iterationCount; ++counter) {
             IPack iPack5Card = poker5CardDraw.handGenerator.generateHandPackNoModify(fullPack, 5);
-            Hand5Card hand5Card = poker5CardDraw.converterHand5Card.convert(iPack5Card);
+            IHand5Card hand5Card = poker5CardDraw.converterHand5Card.convert(iPack5Card);
             HandType5Cards handType5Cards = poker5CardDraw.poker5CardHandClassifier.classify(hand5Card);
 
             handType5CardsCount.compute(handType5Cards, (k, v) -> v == null ? 1 : v + 1);

@@ -2,7 +2,7 @@ package org.srwcrw.poker.texasholdem.test;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.srwcrw.poker.texasholdem.components.Hand5Card;
+import org.srwcrw.poker.texasholdem.components.IHand5Card;
 import org.srwcrw.poker.texasholdem.components.HandFactoryHand5;
 import org.srwcrw.poker.texasholdem.collections.IPack;
 import org.srwcrw.poker.texasholdem.components.Card;
@@ -27,425 +27,425 @@ public class TestUtils {
 
     private TestUtils() {}
 
-    public Hand5Card createRoyalFlushA() {
+    public IHand5Card createRoyalFlushA() {
         Card card1 = cardFactoryImmutable.createCard(Suit.Diamonds, Value.Ten);
         Card card2 = cardFactoryImmutable.createCard(Suit.Diamonds, Value.Jack);
         Card card3 = cardFactoryImmutable.createCard(Suit.Diamonds, Value.Queen);
         Card card4 = cardFactoryImmutable.createCard(Suit.Diamonds, Value.King);
         Card card5 = cardFactoryImmutable.createCard(Suit.Diamonds, Value.Ace);
 
-        Hand5Card hand5Card = handFactoryHand5.create(card1, card2, card3, card4, card5);
+        IHand5Card hand5Card = handFactoryHand5.create(card1, card2, card3, card4, card5);
 
         return hand5Card;
     }
 
-    public Hand5Card createRoyalFlushB() {
+    public IHand5Card createRoyalFlushB() {
         Card card1 = cardFactoryImmutable.createCard(Suit.Clubs, Value.Ten);
         Card card2 = cardFactoryImmutable.createCard(Suit.Clubs, Value.Jack);
         Card card3 = cardFactoryImmutable.createCard(Suit.Clubs, Value.Queen);
         Card card4 = cardFactoryImmutable.createCard(Suit.Clubs, Value.King);
         Card card5 = cardFactoryImmutable.createCard(Suit.Clubs, Value.Ace);
 
-        Hand5Card hand5Card = handFactoryHand5.create(card1, card2, card3, card4, card5);
+        IHand5Card hand5Card = handFactoryHand5.create(card1, card2, card3, card4, card5);
 
         return hand5Card;
     }
 
-    public Hand5Card createStraightFlushAceLow() {
+    public IHand5Card createStraightFlushAceLow() {
         Card card1 = cardFactoryImmutable.createCard(Suit.Clubs, Value.Ace);
         Card card2 = cardFactoryImmutable.createCard(Suit.Clubs, Value.Two);
         Card card3 = cardFactoryImmutable.createCard(Suit.Clubs, Value.Three);
         Card card4 = cardFactoryImmutable.createCard(Suit.Clubs, Value.Four);
         Card card5 = cardFactoryImmutable.createCard(Suit.Clubs, Value.Five);
 
-        Hand5Card hand5Card = handFactoryHand5.create(card1, card2, card3, card4, card5);
+        IHand5Card hand5Card = handFactoryHand5.create(card1, card2, card3, card4, card5);
 
         return hand5Card;
     }
 
-    public Hand5Card createStraightFlushAceHigh() {
+    public IHand5Card createStraightFlushAceHigh() {
         Card card1 = cardFactoryImmutable.createCard(Suit.Clubs, Value.Ace);
         Card card2 = cardFactoryImmutable.createCard(Suit.Clubs, Value.Ten);
         Card card3 = cardFactoryImmutable.createCard(Suit.Clubs, Value.Jack);
         Card card4 = cardFactoryImmutable.createCard(Suit.Clubs, Value.Queen);
         Card card5 = cardFactoryImmutable.createCard(Suit.Clubs, Value.King);
 
-        Hand5Card hand5Card = handFactoryHand5.create(card1, card2, card3, card4, card5);
+        IHand5Card hand5Card = handFactoryHand5.create(card1, card2, card3, card4, card5);
 
         return hand5Card;
     }
 
-    public Hand5Card createStraightFlushA() {
+    public IHand5Card createStraightFlushA() {
         Card card1 = cardFactoryImmutable.createCard(Suit.Clubs, Value.Nine);
         Card card2 = cardFactoryImmutable.createCard(Suit.Clubs, Value.Ten);
         Card card3 = cardFactoryImmutable.createCard(Suit.Clubs, Value.Jack);
         Card card4 = cardFactoryImmutable.createCard(Suit.Clubs, Value.Queen);
         Card card5 = cardFactoryImmutable.createCard(Suit.Clubs, Value.King);
 
-        Hand5Card hand5Card = handFactoryHand5.create(card1, card2, card3, card4, card5);
+        IHand5Card hand5Card = handFactoryHand5.create(card1, card2, card3, card4, card5);
 
         return hand5Card;
     }
 
-    public Hand5Card createStraightFlushB() {
+    public IHand5Card createStraightFlushB() {
         Card card5 = cardFactoryImmutable.createCard(Suit.Clubs, Value.Eight);
         Card card1 = cardFactoryImmutable.createCard(Suit.Clubs, Value.Nine);
         Card card2 = cardFactoryImmutable.createCard(Suit.Clubs, Value.Ten);
         Card card3 = cardFactoryImmutable.createCard(Suit.Clubs, Value.Jack);
         Card card4 = cardFactoryImmutable.createCard(Suit.Clubs, Value.Queen);
 
-        Hand5Card hand5Card = handFactoryHand5.create(card1, card2, card3, card4, card5);
+        IHand5Card hand5Card = handFactoryHand5.create(card1, card2, card3, card4, card5);
 
         return hand5Card;
     }
 
-    public Hand5Card createFourOfAKindA() {
+    public IHand5Card createFourOfAKindA() {
         Card card1 = cardFactoryImmutable.createCard(Suit.Clubs, Value.Ace);
         Card card2 = cardFactoryImmutable.createCard(Suit.Hearts, Value.Ace);
         Card card3 = cardFactoryImmutable.createCard(Suit.Spades, Value.Ace);
         Card card4 = cardFactoryImmutable.createCard(Suit.Diamonds, Value.Ace);
         Card card5 = cardFactoryImmutable.createCard(Suit.Clubs, Value.Seven);
 
-        Hand5Card hand5Card = handFactoryHand5.create(card1, card2, card3, card4, card5);
+        IHand5Card hand5Card = handFactoryHand5.create(card1, card2, card3, card4, card5);
 
         return hand5Card;
     }
 
-    public Hand5Card createFourOfAKindB() {
+    public IHand5Card createFourOfAKindB() {
         Card card1 = cardFactoryImmutable.createCard(Suit.Clubs, Value.Two);
         Card card2 = cardFactoryImmutable.createCard(Suit.Hearts, Value.Two);
         Card card3 = cardFactoryImmutable.createCard(Suit.Spades, Value.Two);
         Card card4 = cardFactoryImmutable.createCard(Suit.Diamonds, Value.Two);
         Card card5 = cardFactoryImmutable.createCard(Suit.Clubs, Value.Seven);
 
-        Hand5Card hand5Card = handFactoryHand5.create(card1, card2, card3, card4, card5);
+        IHand5Card hand5Card = handFactoryHand5.create(card1, card2, card3, card4, card5);
 
         return hand5Card;
     }
 
-    public Hand5Card createFullHouseA() {
+    public IHand5Card createFullHouseA() {
         Card card1 = cardFactoryImmutable.createCard(Suit.Clubs, Value.Ace);
         Card card2 = cardFactoryImmutable.createCard(Suit.Hearts, Value.Ace);
         Card card3 = cardFactoryImmutable.createCard(Suit.Spades, Value.Six);
         Card card4 = cardFactoryImmutable.createCard(Suit.Clubs, Value.Six);
         Card card5 = cardFactoryImmutable.createCard(Suit.Diamonds, Value.Six);
 
-        Hand5Card hand5Card = handFactoryHand5.create(card1, card2, card3, card4, card5);
+        IHand5Card hand5Card = handFactoryHand5.create(card1, card2, card3, card4, card5);
 
         return hand5Card;
     }
 
-    public Hand5Card createFullHouseB() {
+    public IHand5Card createFullHouseB() {
         Card card1 = cardFactoryImmutable.createCard(Suit.Clubs, Value.Ace);
         Card card2 = cardFactoryImmutable.createCard(Suit.Hearts, Value.Ace);
         Card card3 = cardFactoryImmutable.createCard(Suit.Spades, Value.Ace);
         Card card4 = cardFactoryImmutable.createCard(Suit.Clubs, Value.Six);
         Card card5 = cardFactoryImmutable.createCard(Suit.Diamonds, Value.Six);
 
-        Hand5Card hand5Card = handFactoryHand5.create(card1, card2, card3, card4, card5);
+        IHand5Card hand5Card = handFactoryHand5.create(card1, card2, card3, card4, card5);
 
         return hand5Card;
     }
 
-    public Hand5Card createFlushA() {
+    public IHand5Card createFlushA() {
         Card card1 = cardFactoryImmutable.createCard(Suit.Clubs, Value.Ace);
         Card card2 = cardFactoryImmutable.createCard(Suit.Clubs, Value.Three);
         Card card3 = cardFactoryImmutable.createCard(Suit.Clubs, Value.Five);
         Card card4 = cardFactoryImmutable.createCard(Suit.Clubs, Value.Six);
         Card card5 = cardFactoryImmutable.createCard(Suit.Clubs, Value.Seven);
 
-        Hand5Card hand5Card = handFactoryHand5.create(card1, card2, card3, card4, card5);
+        IHand5Card hand5Card = handFactoryHand5.create(card1, card2, card3, card4, card5);
 
         return hand5Card;
     }
 
-    public Hand5Card createFlushAA() {
+    public IHand5Card createFlushAA() {
         Card card1 = cardFactoryImmutable.createCard(Suit.Clubs, Value.Ace);
         Card card2 = cardFactoryImmutable.createCard(Suit.Clubs, Value.Three);
         Card card3 = cardFactoryImmutable.createCard(Suit.Clubs, Value.Four);
         Card card4 = cardFactoryImmutable.createCard(Suit.Clubs, Value.Six);
         Card card5 = cardFactoryImmutable.createCard(Suit.Clubs, Value.Seven);
 
-        Hand5Card hand5Card = handFactoryHand5.create(card1, card2, card3, card4, card5);
+        IHand5Card hand5Card = handFactoryHand5.create(card1, card2, card3, card4, card5);
 
         return hand5Card;
     }
 
 
-    public Hand5Card createFlushB() {
+    public IHand5Card createFlushB() {
         Card card1 = cardFactoryImmutable.createCard(Suit.Hearts, Value.Ten);
         Card card2 = cardFactoryImmutable.createCard(Suit.Hearts, Value.Three);
         Card card3 = cardFactoryImmutable.createCard(Suit.Hearts, Value.Jack);
         Card card4 = cardFactoryImmutable.createCard(Suit.Hearts, Value.Six);
         Card card5 = cardFactoryImmutable.createCard(Suit.Hearts, Value.Seven);
 
-        Hand5Card hand5Card = handFactoryHand5.create(card1, card2, card3, card4, card5);
+        IHand5Card hand5Card = handFactoryHand5.create(card1, card2, card3, card4, card5);
 
         return hand5Card;
     }
 
-    public Hand5Card createStraight() {
+    public IHand5Card createStraight() {
         Card card1 = cardFactoryImmutable.createCard(Suit.Clubs, Value.Four);
         Card card2 = cardFactoryImmutable.createCard(Suit.Hearts, Value.Three);
         Card card3 = cardFactoryImmutable.createCard(Suit.Hearts, Value.Five);
         Card card4 = cardFactoryImmutable.createCard(Suit.Hearts, Value.Six);
         Card card5 = cardFactoryImmutable.createCard(Suit.Hearts, Value.Seven);
 
-        Hand5Card hand5Card = handFactoryHand5.create(card1, card2, card3, card4, card5);
+        IHand5Card hand5Card = handFactoryHand5.create(card1, card2, card3, card4, card5);
 
         return hand5Card;
     }
 
-    public Hand5Card createStraightAceLow() {
+    public IHand5Card createStraightAceLow() {
         Card card1 = cardFactoryImmutable.createCard(Suit.Clubs, Value.Ace);
         Card card2 = cardFactoryImmutable.createCard(Suit.Hearts, Value.Two);
         Card card3 = cardFactoryImmutable.createCard(Suit.Hearts, Value.Three);
         Card card4 = cardFactoryImmutable.createCard(Suit.Hearts, Value.Four);
         Card card5 = cardFactoryImmutable.createCard(Suit.Hearts, Value.Five);
 
-        Hand5Card hand5Card = handFactoryHand5.create(card1, card2, card3, card4, card5);
+        IHand5Card hand5Card = handFactoryHand5.create(card1, card2, card3, card4, card5);
 
         return hand5Card;
     }
 
-    public Hand5Card createStraightAceHigh() {
+    public IHand5Card createStraightAceHigh() {
         Card card1 = cardFactoryImmutable.createCard(Suit.Clubs, Value.Ten);
         Card card2 = cardFactoryImmutable.createCard(Suit.Hearts, Value.Jack);
         Card card3 = cardFactoryImmutable.createCard(Suit.Hearts, Value.Queen);
         Card card4 = cardFactoryImmutable.createCard(Suit.Hearts, Value.King);
         Card card5 = cardFactoryImmutable.createCard(Suit.Hearts, Value.Ace);
 
-        Hand5Card hand5Card = handFactoryHand5.create(card1, card2, card3, card4, card5);
+        IHand5Card hand5Card = handFactoryHand5.create(card1, card2, card3, card4, card5);
 
         return hand5Card;
     }
 
-    public Hand5Card createThreeOfAKind() {
+    public IHand5Card createThreeOfAKind() {
         Card card1 = cardFactoryImmutable.createCard(Suit.Hearts, Value.Ten);
         Card card2 = cardFactoryImmutable.createCard(Suit.Diamonds, Value.Ten);
         Card card3 = cardFactoryImmutable.createCard(Suit.Clubs, Value.Ten);
         Card card4 = cardFactoryImmutable.createCard(Suit.Hearts, Value.King);
         Card card5 = cardFactoryImmutable.createCard(Suit.Hearts, Value.Two);
 
-        Hand5Card hand5Card = handFactoryHand5.create(card1, card2, card3, card4, card5);
+        IHand5Card hand5Card = handFactoryHand5.create(card1, card2, card3, card4, card5);
 
         return hand5Card;
     }
 
-    public Hand5Card createThreeOfAKindA() {
+    public IHand5Card createThreeOfAKindA() {
         Card card1 = cardFactoryImmutable.createCard(Suit.Hearts, Value.Ten);
         Card card2 = cardFactoryImmutable.createCard(Suit.Diamonds, Value.Ten);
         Card card3 = cardFactoryImmutable.createCard(Suit.Clubs, Value.Ten);
         Card card4 = cardFactoryImmutable.createCard(Suit.Hearts, Value.Ace);
         Card card5 = cardFactoryImmutable.createCard(Suit.Hearts, Value.Three);
 
-        Hand5Card hand5Card = handFactoryHand5.create(card1, card2, card3, card4, card5);
+        IHand5Card hand5Card = handFactoryHand5.create(card1, card2, card3, card4, card5);
 
         return hand5Card;
     }
 
-    public Hand5Card createThreeOfAKindAA() {
+    public IHand5Card createThreeOfAKindAA() {
         Card card1 = cardFactoryImmutable.createCard(Suit.Hearts, Value.Ace);
         Card card2 = cardFactoryImmutable.createCard(Suit.Hearts, Value.Ten);
         Card card3 = cardFactoryImmutable.createCard(Suit.Diamonds, Value.Ten);
         Card card4 = cardFactoryImmutable.createCard(Suit.Clubs, Value.Ten);
         Card card5 = cardFactoryImmutable.createCard(Suit.Hearts, Value.Two);
 
-        Hand5Card hand5Card = handFactoryHand5.create(card1, card2, card3, card4, card5);
+        IHand5Card hand5Card = handFactoryHand5.create(card1, card2, card3, card4, card5);
 
         return hand5Card;
     }
 
-    public Hand5Card createThreeOfAKindB() {
+    public IHand5Card createThreeOfAKindB() {
         Card card1 = cardFactoryImmutable.createCard(Suit.Hearts, Value.Ten);
         Card card2 = cardFactoryImmutable.createCard(Suit.Diamonds, Value.Ten);
         Card card3 = cardFactoryImmutable.createCard(Suit.Hearts, Value.King);
         Card card4 = cardFactoryImmutable.createCard(Suit.Clubs, Value.Ten);
         Card card5 = cardFactoryImmutable.createCard(Suit.Hearts, Value.Two);
 
-        Hand5Card hand5Card = handFactoryHand5.create(card1, card2, card3, card4, card5);
+        IHand5Card hand5Card = handFactoryHand5.create(card1, card2, card3, card4, card5);
 
         return hand5Card;
     }
 
-    public Hand5Card createThreeOfAKindC() {
+    public IHand5Card createThreeOfAKindC() {
         Card card1 = cardFactoryImmutable.createCard(Suit.Hearts, Value.Five);
         Card card2 = cardFactoryImmutable.createCard(Suit.Hearts, Value.King);
         Card card3 = cardFactoryImmutable.createCard(Suit.Diamonds, Value.Five);
         Card card4 = cardFactoryImmutable.createCard(Suit.Clubs, Value.Five);
         Card card5 = cardFactoryImmutable.createCard(Suit.Hearts, Value.Two);
 
-        Hand5Card hand5Card = handFactoryHand5.create(card1, card2, card3, card4, card5);
+        IHand5Card hand5Card = handFactoryHand5.create(card1, card2, card3, card4, card5);
 
         return hand5Card;
     }
 
-    public Hand5Card createTwoPairA() {
+    public IHand5Card createTwoPairA() {
         Card card1 = cardFactoryImmutable.createCard(Suit.Hearts, Value.Ten);
         Card card2 = cardFactoryImmutable.createCard(Suit.Clubs, Value.Ten);
         Card card3 = cardFactoryImmutable.createCard(Suit.Diamonds, Value.Three);
         Card card4 = cardFactoryImmutable.createCard(Suit.Spades, Value.Three);
         Card card5 = cardFactoryImmutable.createCard(Suit.Hearts, Value.Seven);
 
-        Hand5Card hand5Card = handFactoryHand5.create(card1, card2, card3, card4, card5);
+        IHand5Card hand5Card = handFactoryHand5.create(card1, card2, card3, card4, card5);
 
         return hand5Card;
     }
 
-    public Hand5Card createTwoPairBKickerTwo() {
+    public IHand5Card createTwoPairBKickerTwo() {
         Card card1 = cardFactoryImmutable.createCard(Suit.Hearts, Value.Queen);
         Card card2 = cardFactoryImmutable.createCard(Suit.Clubs, Value.Queen);
         Card card3 = cardFactoryImmutable.createCard(Suit.Diamonds, Value.Jack);
         Card card4 = cardFactoryImmutable.createCard(Suit.Spades, Value.Jack);
         Card card5 = cardFactoryImmutable.createCard(Suit.Hearts, Value.Two);
 
-        Hand5Card hand5Card = handFactoryHand5.create(card1, card2, card3, card4, card5);
+        IHand5Card hand5Card = handFactoryHand5.create(card1, card2, card3, card4, card5);
 
         return hand5Card;
     }
 
 
-    public Hand5Card createTwoPairBKickerAce() {
+    public IHand5Card createTwoPairBKickerAce() {
         Card card1 = cardFactoryImmutable.createCard(Suit.Hearts, Value.Queen);
         Card card2 = cardFactoryImmutable.createCard(Suit.Clubs, Value.Queen);
         Card card3 = cardFactoryImmutable.createCard(Suit.Diamonds, Value.Jack);
         Card card4 = cardFactoryImmutable.createCard(Suit.Spades, Value.Jack);
         Card card5 = cardFactoryImmutable.createCard(Suit.Hearts, Value.Ace);
 
-        Hand5Card hand5Card = handFactoryHand5.create(card1, card2, card3, card4, card5);
+        IHand5Card hand5Card = handFactoryHand5.create(card1, card2, card3, card4, card5);
 
         return hand5Card;
     }
 
-    public Hand5Card createTwoPairBKickerTen() {
+    public IHand5Card createTwoPairBKickerTen() {
         Card card1 = cardFactoryImmutable.createCard(Suit.Hearts, Value.Queen);
         Card card2 = cardFactoryImmutable.createCard(Suit.Clubs, Value.Queen);
         Card card3 = cardFactoryImmutable.createCard(Suit.Diamonds, Value.Jack);
         Card card4 = cardFactoryImmutable.createCard(Suit.Spades, Value.Jack);
         Card card5 = cardFactoryImmutable.createCard(Suit.Hearts, Value.Ten);
 
-        Hand5Card hand5Card = handFactoryHand5.create(card1, card2, card3, card4, card5);
+        IHand5Card hand5Card = handFactoryHand5.create(card1, card2, card3, card4, card5);
 
         return hand5Card;
     }
 
-    public Hand5Card createTwoPairBKickerSeven() {
+    public IHand5Card createTwoPairBKickerSeven() {
         Card card1 = cardFactoryImmutable.createCard(Suit.Hearts, Value.Queen);
         Card card2 = cardFactoryImmutable.createCard(Suit.Clubs, Value.Queen);
         Card card3 = cardFactoryImmutable.createCard(Suit.Diamonds, Value.Jack);
         Card card4 = cardFactoryImmutable.createCard(Suit.Spades, Value.Jack);
         Card card5 = cardFactoryImmutable.createCard(Suit.Hearts, Value.Seven);
 
-        Hand5Card hand5Card = handFactoryHand5.create(card1, card2, card3, card4, card5);
+        IHand5Card hand5Card = handFactoryHand5.create(card1, card2, card3, card4, card5);
 
         return hand5Card;
     }
 
-    public Hand5Card createOnePair() {
+    public IHand5Card createOnePair() {
         Card card1 = cardFactoryImmutable.createCard(Suit.Clubs, Value.Ace);
         Card card2 = cardFactoryImmutable.createCard(Suit.Clubs, Value.Ten);
         Card card3 = cardFactoryImmutable.createCard(Suit.Hearts, Value.Ace);
         Card card4 = cardFactoryImmutable.createCard(Suit.Hearts, Value.Queen);
         Card card5 = cardFactoryImmutable.createCard(Suit.Hearts, Value.King);
 
-        Hand5Card hand5Card = handFactoryHand5.create(card1, card2, card3, card4, card5);
+        IHand5Card hand5Card = handFactoryHand5.create(card1, card2, card3, card4, card5);
 
         return hand5Card;
     }
 
-    public Hand5Card createOnePairRank1KickerTen() {
+    public IHand5Card createOnePairRank1KickerTen() {
         Card card1 = cardFactoryImmutable.createCard(Suit.Clubs, Value.Ace);
         Card card3 = cardFactoryImmutable.createCard(Suit.Hearts, Value.Ace);
         Card card5 = cardFactoryImmutable.createCard(Suit.Hearts, Value.King);
         Card card4 = cardFactoryImmutable.createCard(Suit.Hearts, Value.Ten);
         Card card2 = cardFactoryImmutable.createCard(Suit.Clubs, Value.Four);
 
-        Hand5Card hand5Card = handFactoryHand5.create(card1, card2, card3, card4, card5);
+        IHand5Card hand5Card = handFactoryHand5.create(card1, card2, card3, card4, card5);
 
         return hand5Card;
     }
 
-    public Hand5Card createOnePairRank1KickerNine() {
+    public IHand5Card createOnePairRank1KickerNine() {
         Card card1 = cardFactoryImmutable.createCard(Suit.Clubs, Value.Ace);
         Card card3 = cardFactoryImmutable.createCard(Suit.Hearts, Value.Ace);
         Card card4 = cardFactoryImmutable.createCard(Suit.Hearts, Value.King);
         Card card2 = cardFactoryImmutable.createCard(Suit.Clubs, Value.Nine);
         Card card5 = cardFactoryImmutable.createCard(Suit.Hearts, Value.Two);
 
-        Hand5Card hand5Card = handFactoryHand5.create(card1, card2, card3, card4, card5);
+        IHand5Card hand5Card = handFactoryHand5.create(card1, card2, card3, card4, card5);
 
         return hand5Card;
     }
 
-    public Hand5Card createHighestCardA() {
+    public IHand5Card createHighestCardA() {
         Card card1 = cardFactoryImmutable.createCard(Suit.Clubs, Value.Ace);
         Card card2 = cardFactoryImmutable.createCard(Suit.Clubs, Value.Ten);
         Card card3 = cardFactoryImmutable.createCard(Suit.Hearts, Value.Nine);
         Card card4 = cardFactoryImmutable.createCard(Suit.Hearts, Value.Queen);
         Card card5 = cardFactoryImmutable.createCard(Suit.Hearts, Value.King);
 
-        Hand5Card hand5Card = handFactoryHand5.create(card1, card2, card3, card4, card5);
+        IHand5Card hand5Card = handFactoryHand5.create(card1, card2, card3, card4, card5);
 
         return hand5Card;
     }
 
-    public Hand5Card createHighestCardAA() {
+    public IHand5Card createHighestCardAA() {
         Card card1 = cardFactoryImmutable.createCard(Suit.Clubs, Value.Ace);
         Card card5 = cardFactoryImmutable.createCard(Suit.Hearts, Value.Two);
         Card card2 = cardFactoryImmutable.createCard(Suit.Clubs, Value.Ten);
         Card card3 = cardFactoryImmutable.createCard(Suit.Hearts, Value.Nine);
         Card card4 = cardFactoryImmutable.createCard(Suit.Hearts, Value.Queen);
 
-        Hand5Card hand5Card = handFactoryHand5.create(card1, card2, card3, card4, card5);
+        IHand5Card hand5Card = handFactoryHand5.create(card1, card2, card3, card4, card5);
 
         return hand5Card;
     }
 
 
-    public Hand5Card createHighestCardB() {
+    public IHand5Card createHighestCardB() {
         Card card1 = cardFactoryImmutable.createCard(Suit.Clubs, Value.Two);
         Card card2 = cardFactoryImmutable.createCard(Suit.Clubs, Value.Ten);
         Card card3 = cardFactoryImmutable.createCard(Suit.Hearts, Value.Nine);
         Card card4 = cardFactoryImmutable.createCard(Suit.Hearts, Value.Queen);
         Card card5 = cardFactoryImmutable.createCard(Suit.Hearts, Value.King);
 
-        Hand5Card hand5Card = handFactoryHand5.create(card1, card2, card3, card4, card5);
+        IHand5Card hand5Card = handFactoryHand5.create(card1, card2, card3, card4, card5);
 
         return hand5Card;
     }
 
-    public Hand5Card createHighestCardC() {
+    public IHand5Card createHighestCardC() {
         Card card1 = cardFactoryImmutable.createCard(Suit.Clubs, Value.Two);
         Card card2 = cardFactoryImmutable.createCard(Suit.Hearts, Value.Three);
         Card card3 = cardFactoryImmutable.createCard(Suit.Hearts, Value.Five);
         Card card4 = cardFactoryImmutable.createCard(Suit.Hearts, Value.Six);
         Card card5 = cardFactoryImmutable.createCard(Suit.Hearts, Value.Seven);
 
-        Hand5Card hand5Card = handFactoryHand5.create(card1, card2, card3, card4, card5);
+        IHand5Card hand5Card = handFactoryHand5.create(card1, card2, card3, card4, card5);
 
         return hand5Card;
     }
 
-    public Hand5Card createOnePairA() {
+    public IHand5Card createOnePairA() {
         Card card1 = cardFactoryImmutable.createCard(Suit.Clubs, Value.Ace);
         Card card3 = cardFactoryImmutable.createCard(Suit.Hearts, Value.Ace);
         Card card2 = cardFactoryImmutable.createCard(Suit.Clubs, Value.Ten);
         Card card4 = cardFactoryImmutable.createCard(Suit.Hearts, Value.Queen);
         Card card5 = cardFactoryImmutable.createCard(Suit.Hearts, Value.King);
 
-        Hand5Card hand5Card = handFactoryHand5.create(card1, card2, card3, card4, card5);
+        IHand5Card hand5Card = handFactoryHand5.create(card1, card2, card3, card4, card5);
 
         return hand5Card;
     }
 
-    public Hand5Card createOnePairB() {
+    public IHand5Card createOnePairB() {
         Card card1 = cardFactoryImmutable.createCard(Suit.Clubs, Value.Ace);
         Card card3 = cardFactoryImmutable.createCard(Suit.Hearts, Value.Ace);
         Card card2 = cardFactoryImmutable.createCard(Suit.Clubs, Value.Ten);
         Card card4 = cardFactoryImmutable.createCard(Suit.Hearts, Value.Queen);
         Card card5 = cardFactoryImmutable.createCard(Suit.Hearts, Value.Two);
 
-        Hand5Card hand5Card = handFactoryHand5.create(card1, card2, card3, card4, card5);
+        IHand5Card hand5Card = handFactoryHand5.create(card1, card2, card3, card4, card5);
 
         return hand5Card;
     }
@@ -454,7 +454,7 @@ public class TestUtils {
         return packGenerator.generateFullPack();
     }
 
-    public SortedSet<Card> convertHand5ToSortedSet(Hand5Card hand5Card) {
+    public SortedSet<Card> convertHand5ToSortedSet(IHand5Card hand5Card) {
         SortedSet<Card> sortedSet = new TreeSet<>();
 
         for (int index = 0; index < 5; ++index) {

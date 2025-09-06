@@ -5,11 +5,8 @@ import org.srwcrw.poker.texasholdem.collections.*;
 import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
 
-public final class Hand5Card implements IPack {
+public final class Hand5Card implements IHand5Card {
     private static final CollectionUtils collectionUtils = new CollectionUtils();
-
-    private Hand5OrdinalFactory hand5OrdinalFactory;
-//    private HandFactoryHand5 handFactoryHand5 = new HandFactoryHand5();
 
     private final Card card1;
     private final Card card2;
@@ -18,10 +15,7 @@ public final class Hand5Card implements IPack {
     private final Card card5;
     private final Card[] cardArray = new Card[5];
 
-    private Hand5Ordinal hand5Ordinal;
-
-    public Hand5Card(Hand5OrdinalFactory hand5OrdinalFactory, Card card1, Card card2, Card card3, Card card4, Card card5) {
-        this.hand5OrdinalFactory = hand5OrdinalFactory;
+    public Hand5Card(Card card1, Card card2, Card card3, Card card4, Card card5) {
         this.card1 = card1;
         this.card2 = card2;
         this.card3 = card3;
@@ -131,13 +125,5 @@ public final class Hand5Card implements IPack {
     @Override
     public int getSize() {
         return 5;
-    }
-
-    public Hand5Ordinal getHand5Ordinal() {
-        if (hand5Ordinal == null) {
-            hand5Ordinal = hand5OrdinalFactory.create(card1, card2, card3, card4, card5);
-        }
-
-        return hand5Ordinal;
     }
 }

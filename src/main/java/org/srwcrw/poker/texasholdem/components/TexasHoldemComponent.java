@@ -1,5 +1,6 @@
 package org.srwcrw.poker.texasholdem.components;
 
+import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVPrinter;
@@ -53,13 +54,10 @@ public class TexasHoldemComponent {
     private PokerTexasHoldemUtils pokerTexasHoldemUtils;
     private static final ConverterHand2Card CONVERTER_HAND_2_CARD = new ConverterHand2Card();
 
+    @Getter
     private final List<HandProbability> handProbabilityList = new ArrayList<>();
 
     private final int handLoopCounter = 1;
-
-    public List<HandProbability> getHandProbabilityList() {
-        return handProbabilityList;
-    }
 
     @SuppressWarnings("unused")
     public double monteCarloOneOpponent() {
@@ -130,16 +128,16 @@ public class TexasHoldemComponent {
                     }
 
                     IPack communityCards = HAND_GENERATOR.generateHandAndRemoveImmutable(pack48, 5).getValue();
-                    Hand5Card communityCardsHand = converterHand5Card.convert(communityCards);
+                    IHand5Card communityCardsHand = converterHand5Card.convert(communityCards);
 
-                    List<Hand5Card> playerAllPossibleHands = pokerTexasHoldemUtils.generateAllPossibleHands(communityCardsHand, playerHand2Card);
+                    List<IHand5Card> playerAllPossibleHands = pokerTexasHoldemUtils.generateAllPossibleHands(communityCardsHand, playerHand2Card);
 
-                    Hand5Card playerBestHand = pokerTexasHoldemUtils.findBestHandWithCommunityCards(communityCardsHand, playerHand2Card);
+                    IHand5Card playerBestHand = pokerTexasHoldemUtils.findBestHandWithCommunityCards(communityCardsHand, playerHand2Card);
 
                     int winLoseComparison = 0;
 
                     for (int opponentIndex = 0; opponentIndex < opponentCount; ++opponentIndex) {
-                        Hand5Card opponentBestHand = pokerTexasHoldemUtils.findBestHandWithCommunityCards(communityCardsHand, CONVERTER_HAND_2_CARD.convert(opponentHandList.get(opponentIndex)));
+                        IHand5Card opponentBestHand = pokerTexasHoldemUtils.findBestHandWithCommunityCards(communityCardsHand, CONVERTER_HAND_2_CARD.convert(opponentHandList.get(opponentIndex)));
                         winLoseComparison = POKER_5_CARD_ACE_HIGH_LOW_COMPARATOR.compare(playerBestHand, opponentBestHand);
 
                         if (winLoseComparison < 0) {
@@ -178,11 +176,11 @@ public class TexasHoldemComponent {
                 if (firstPlayerCardValue == kickerValue) {
                     // This handles pocket pairs, e.g., (Ace, Ace). They must be off-suit.
                     playerCards = Set.of(cardFactoryImmutable.createCard(Suit.Spades, firstPlayerCardValue),
-                                         cardFactoryImmutable.createCard(Suit.Clubs, kickerValue));
+                            cardFactoryImmutable.createCard(Suit.Clubs, kickerValue));
                 } else {
                     // This handles non-paired hands, which can be suited or off-suit based on matchingSuit
                     playerCards = Set.of(cardFactoryImmutable.createCard(Suit.Spades, firstPlayerCardValue),
-                                         cardFactoryImmutable.createCard(matchingSuit ? Suit.Spades : Suit.Clubs, kickerValue));
+                            cardFactoryImmutable.createCard(matchingSuit ? Suit.Spades : Suit.Clubs, kickerValue));
                 }
 
                 HandProbability handProbability = new HandProbability(playerCards, opponentCount, handsWonPercentage / 100.0, handsDrawnPercentage / 100.0, handsLostPercentage / 100.0, handCount);
